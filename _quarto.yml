@@ -46,43 +46,15 @@ website:
     left:
       - text: Home  
         href: index.qmd
-      - text: Lessons
-        menu: 
-          - text: Course Overview
-            href: index.qmd
-          - text: Files and Directories
-            href: docs/lesson01-files-and-directories/index.qmd
-          - text: Using the Command Line
-            href: docs/lesson02-using-the-command-line/index.qmd
-          - text: "QC & Assembly"
-            href: docs/lesson03-qc-assembly/index.qmd
-          - text: Polishing
-            href: docs/lesson04-polishing/index.qmd
-          - text: Binning and Functional Annotation
-            href: docs/lesson05-binning-functional-annotation/index.qmd
-          - text: Taxonomic Annotations
-            href: docs/lesson06-taxonomic-annotations/index.qmd
-          - text: Automating Analyses with Bash Scripts
-            href: docs/lesson07-automation-bash-scripts/index.qmd
-      - text: Setup
-        href: docs/miscellanea/setup.qmd
-      - text: Extras
-        menu: 
-          - text: Reference
-            href: docs/miscellanea/reference.qmd
-          - text: About
-            href: docs/miscellanea/about.qmd
-          - text: Data
-            href: docs/miscellanea/data.qmd
-          - text: Frequently Asked Questions
-            href: docs/miscellanea/faq.qmd
-          - text: Instructor Notes
-            href: docs/miscellanea/instructornotes.qmd          
-      - text: License
-        href: docs/miscellanea/license.qmd
-      - text: Code of Conduct
-        href: docs/miscellanea/codeofconduct.qmd
-#      - text: Help
+      - text: Precourse Instructions
+        href: docs/miscellanea/precourse-instructions.qmd
+      - text: About
+        href: docs/miscellanea/about.qmd
+#       - text: License
+#         href: docs/miscellanea/license.qmd
+#       - text: Code of Conduct
+#         href: docs/miscellanea/codeofconduct.qmd
+#       - text: Help
 #        menu:
 #          - text: "Report a Bug"
 #            icon: "bug"
@@ -139,6 +111,14 @@ website:
         contents: 
           - docs/lesson07-automation-bash-scripts/01-scripting-intro.qmd
           - docs/lesson07-automation-bash-scripts/02-base-automation-script.qmd
+      - section: "Extras"
+        contents: 
+          - docs/miscellanea/extras/data.qmd
+          - docs/miscellanea/extras/glossary.qmd
+          - docs/miscellanea/extras/workflow03.qmd
+          - docs/miscellanea/extras/workflow04.qmd
+          - docs/miscellanea/extras/workflow05.qmd
+          - docs/miscellanea/extras/workflow06.qmd          
 
 format:
   html:

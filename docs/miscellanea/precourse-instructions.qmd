@@ -1,5 +1,5 @@
 ---
-title: "[Metagenomics](/index.qmd): Setup"
+title: "[Metagenomics](/index.qmd): Precourse Instructions"
 page-navigation: false
 #sidebar: false
 ---
@@ -21,7 +21,7 @@ Before the course you will receive via email the information that you will need 
 ::: {.callout-caution collapse="true"}
 ## Install Git Bash (Git for Windows) 
 
-The steps below correspond to the installation of Git for Windows version 2.33.1 from scratch. The ins tallation of a more recent version, or updating a previously installed version, may show different wording in the screen messages mentioned below or may vary slightly in the number of steps to follow. Choose as many of the options below as possible.
+The steps below correspond to the installation of Git for Windows version 2.33.1 from scratch. The installation of a more recent version, or updating a previously installed version, may show different wording in the screen messages mentioned below or may vary slightly in the number of steps to follow. Choose as many of the options below as possible.
 
 - Click on this link: [Git for Windows download page](https://gitforwindows.org/)
 - Once in that page, click on **Download** to download the installer.
@@ -47,11 +47,10 @@ The steps below correspond to the installation of Git for Windows version 2.33.1
 - *Choosing the default editor used by Git*
   - select **Use the nano editor by default** and click on **Next**.
   - **NB**: you may need to click on the dropdown menu and to **scroll up** with the mouse to see this option -- see the figure:
+  
+  ![.](/images/git-installation-nano-option.png){width="500" fig-alt="GIT installation nano option"}
 
-   <img src="/images/git-installation-nano-option.png" alt="GIT installation nano option" width="600"/>
-<!-- THIS DIDN'T WORK: > ![Figure of window showing Git for Windows installation nano editor option.](ht
-tps://github.com/Cloud-SPAN/cloud-admin-guide-theme/blob/main/_includes/cs-common-content/git-installati
-on-nano-option.png){: width="500px"} -->
+  <!-- OLD <img src="/images/git-installation-nano-option.png" alt="GIT installation nano option" width="600"/> -->
 
 - *Adjusting the name of the initial branch in new repositories*
   - keep the selected (or select the) option  **Let Git decide** and click on **Next**.
@@ -80,7 +79,9 @@ on **Next**.
 
 **Run** Git Bash by double clicking on the Git Bash icon in your Desktop screen.
 
-<img src="/images/gitbash-launch-icon.png" alt="Git Bash launch icon" width="200"/>
+   ![.](/images/gitbash-launch-icon.png){width="150" fig-alt="Git Bash launch icon"}
+
+<!-- OLD <img src="/images/gitbash-launch-icon.png" alt="Git Bash launch icon" width="200"/> -->
 
 **Exit** Git Bash by pressing the keys `Ctrl` and `d` (`Ctrl-d`) simultaneously.
 :::
