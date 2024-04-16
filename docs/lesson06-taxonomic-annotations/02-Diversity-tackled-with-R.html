@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Diversity Tackled With R</title>
+<title>Cloud-SPAN Metagenomics - Diversity Tackled With R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html" rel="next">
 <link href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  </head><body class="nav-sidebar docked nav-fixed">yes
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -99,9 +134,9 @@ window.Quarto = {
 </script>
 
 <link rel="stylesheet" href="../../styles.css">
+</head>
 
-
-
+<body class="nav-sidebar docked nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -153,7 +188,7 @@ window.Quarto = {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -424,10 +459,10 @@ window.Quarto = {
   <li><a href="#beta-diversity" id="toc-beta-diversity" class="nav-link" data-scroll-target="#beta-diversity">Beta diversity</a></li>
   <li><a href="#reading" id="toc-reading" class="nav-link" data-scroll-target="#reading">Reading</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></li><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html">Diversity Tackled With R</a></li></ol></nav>
 <div class="quarto-title">
@@ -436,7 +471,7 @@ window.Quarto = {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -449,7 +484,7 @@ window.Quarto = {
 
 
 <p>Once we know the taxonomic composition of our metagenomic sequencing data we can characterise them by their diversity. In this episode we will first define what we mean by diversity and then calculate the α diversity in our sample. We will also calculate the diversity of another sample.</p>
-<section id="what-is-diversity" class="level2">
+<section id="what-is-diversity" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="what-is-diversity">What is diversity?</h2>
 <p>Species diversity is the number of species in a system and the relative abundance of each of those species. It can be defined on three different scales (Whittaker, 1960).</p>
 <ol type="1">
@@ -458,15 +493,16 @@ window.Quarto = {
 <li>the difference in diversity between local sites, known as <strong>beta (β) diversity</strong></li>
 </ol>
 <p>A metagenome can be considered a local site. In this episode we will calculate α diversity (that within a metagenome) and β diversity (that between metagenomes).</p>
-<section id="alpha-α-diversity" class="level3">
+<section id="alpha-α-diversity" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="alpha-α-diversity">Alpha (α) diversity</h3>
 <p>The simplest measure of α diversity is the number of species, or species <strong>richness</strong>. However, most indices of α diversity take into account both the number of species and their relative abundances, or species <strong>evenness</strong>. Different diversity indices weight these two components differently.</p>
+<div class="column-body-outset">
 <table class="table">
 <colgroup>
-<col style="width: 35%">
-<col style="width: 26%">
-<col style="width: 24%">
-<col style="width: 13%">
+<col style="width: 15%">
+<col style="width: 31%">
+<col style="width: 17%">
+<col style="width: 34%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -480,32 +516,42 @@ window.Quarto = {
 <tr class="odd">
 <td>Shannon (H)</td>
 <td>Estimation of species richness and species evenness. More weight on richness.</td>
-<td><span class="math display">\[H = - \sum_{i=1}^{S} p_{i} \ln{p_{i}}\]</span></td>
-<td><span class="math display">\[S\]</span> is the number of OTUs and <span class="math display">\[p_{i}\]</span> is the proportion of the community represented by OTU</td>
+<td><span class="math inline">\(H = - \sum_{i=1}^{S} p_{i} \ln{p_{i}}\)</span></td>
+<td><span class="math inline">\(S\)</span> is the number of OTUs and <span class="math inline">\(p_{i}\)</span> is the proportion of the community represented by OTU</td>
 </tr>
 <tr class="even">
 <td>Simpson’s (D)</td>
 <td>Estimation of species richness and species evenness. More weight on evenness.</td>
-<td><span class="math display">\[D = \frac{1}{\sum_{i=1}^{S} p_{i}^{2}}\]</span></td>
-<td><span class="math display">\[S\]</span> is Total number of the species in the community and <span class="math display">\[p_{i}\]</span> is the proportion of community represented by OTU i</td>
+<td><span class="math inline">\(D = \frac{1}{\sum_{i=1}^{S} p_{i}^{2}}\)</span></td>
+<td><span class="math inline">\(S\)</span> is Total number of the species in the community and <span class="math inline">\(p_{i}\)</span> is the proportion of community represented by OTU i</td>
 </tr>
 <tr class="odd">
 <td>Chao1</td>
 <td>Abundance based on species represented by a single individual (singletons) and two individuals (doubletons).</td>
-<td><span class="math display">\[S_{chao1} = S_{Obs} + \frac{F_{1} \times (F_{1} - 1)}{2 \times (F_{2} + 1)}\]</span></td>
-<td><span class="math display">\[F_{1}\]</span> and <span class="math display">\[F_{2}\]</span> are the counts of singletons and doubletons respectively and <span class="math display">\[S_{chao1}=S_{Obs}\]</span> is the number of observed species</td>
+<td><span class="math inline">\(S_{chao1} = S_{Obs} + \frac{F_{1} \times (F_{1} - 1)}{2 \times (F_{2} + 1)}\)</span></td>
+<td><span class="math inline">\(F_{1}\)</span> and <span class="math inline">\(F_{2}\)</span> are the counts of singletons and doubletons respectively and <span class="math inline">\(S_{chao1}=S_{Obs}\)</span> is the number of observed species</td>
 </tr>
 </tbody>
 </table>
-<p><a href="{{ page.root }}/fig/03-07-01.png"> <img src="{{ page.root }}/fig/03-07-01.png" alt="Diagram to demonstratealpha diversity. Three lakes are shown, A, B and C. In lake A, we have three fishes, each one of a different species. In lake B, we have two fishes each one of a different species.And in lake C we have four fishes, each one of different species."> </a> <em> Figure 1. Alpha diversity represented by fish in a pond. Here, alpha diversity is measured in the simplest way using species richness. </em></p>
+</div>
+<!-- <a href="{{ page.root }}/fig/03-07-01.png">
+  <img src="{{ page.root }}/fig/03-07-01.png" alt="Diagram to demonstratealpha diversity. Three lakes are shown, A, B and C. In lake A, we have three fishes, each one of a different species. In lake B, we have two fishes each one of a different species.And in lake C we have four fishes, each one of different species." />
+</a>
+<em> Figure 1. Alpha diversity represented by fish in a pond. Here, alpha diversity is measured in the simplest way using species richness. </em> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03-07-01.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1. Alpha diversity represented by fish in a pond. Here, alpha diversity is measured in the simplest way using species richness.</figcaption>
+</figure>
+</div>
 </section>
 <section id="beta-β-diversity" class="level3">
-<h3 class="anchored">Beta (β) diversity</h3>
+<h3 class="anchored" data-anchor-id="beta-β-diversity">Beta (β) diversity</h3>
 <p>β diversity measures how different two or more communities are in their richness, evenness or both.</p>
 <table class="table">
 <colgroup>
-<col style="width: 57%">
-<col style="width: 42%">
+<col style="width: 19%">
+<col style="width: 80%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -529,18 +575,57 @@ window.Quarto = {
 </tbody>
 </table>
 <p>Figure 2 shows α and the β diversity for three lakes. The most simple way to calculate the β diversity is to calculate the number of species that are unique in two lakes. For example, the number of species in Lake A (the α diversity) is 3 and 1 of these is also found in Lake C; the number of species in Lake C is 2 and 1 of these is also in Lake A. The β diversity between A and C is calculated as (3 - 1) + (2 - 1) = 3</p>
-<p><a href="{{ page.root }}/fig/03-07-02.png"> <img src="{{ page.root }}/fig/03-07-02.png" alt="Alpha and Beta diversity diagram: Each lake has a different number of species. The number of species in Lake A (the α diversity) is 3 and 1 of these is also found in Lake C; the number of species in Lake C is 2 and 1 of these is also in Lake A. The β diversity between A and C is calculated as (3 - 1) + (2 - 1) = 3. The number of species in Lake B (the α diversity) is 3 and 2 of these is also found in Lake A; the number of species in Lake A is 3 and 2 of these is also in Lake B. The β diversity between A and B is calculated as (3 - 2) + (3 - 2) = 2"> </a> <em> Figure 2. Alpha and Beta diversity represented by fishes in a pond.<em></em></em></p><em><em>
-<blockquote class="blockquote">
-<h2 id="exercise-1" class="anchored" data-anchor-id="beta-β-diversity">Exercise 1:</h2>
-<p>In the next picture there are two lakes with different fish species: <a href="{{ page.root }}/fig/03-07-01e.png"> <img src="{{ page.root }}/fig/03-07-01e.png" alt="In lake A, we have four different species, two of these species have 3 specimens each one. This lake also have two specimens of another species and only one specimen of the other specie. We got nine fishes total. On the other hand, lake B has only three different species, the most populated species has five specimens and we have only one specimen of the other two species. We got seven species total in lake B "> </a> Which of the options below is true: 1. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 1 2. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 5 3. α diversity of A = 9, α diversity of B = 7, β diversity between A and B= 16</p>
+<!-- <a href="{{ page.root }}/fig/03-07-02.png">
+  <img src="{{ page.root }}/fig/03-07-02.png" alt="Alpha and Beta diversity diagram: Each lake has a different number of species. The number of species in Lake A (the α diversity) is 3 and 1 of these is also found in Lake C; the number of species in Lake C is 2 and 1 of these is also in Lake A. The β diversity between A and C is calculated as (3 - 1) + (2 - 1) = 3. The number of species in Lake B (the α diversity) is 3 and 2 of these is also found in Lake A; the number of species in Lake A is 3 and 2 of these is also in Lake B. The β diversity between A and B is calculated as (3 - 2) + (3 - 2) = 2" />
+</a>
+<em> Figure 2. Alpha and Beta diversity represented by fishes in a pond.<em/> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03-07-02.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 2. Alpha and Beta diversity represented by fishes in a pond.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In the next picture there are two lakes with different fish species: <!-- <a href="{{ page.root }}/fig/03-07-01e.png">
+<img src="{{ page.root }}/fig/03-07-01e.png" alt="In lake A, we have four different species, two of these species have 3 specimens each one. This lake also have two specimens of another species and only one specimen of the other specie. We got nine fishes total. On the other hand, lake B has only three different species, the most populated species has five specimens and we have only one specimen of the other two species. We got seven species total in lake B " />
+</a> --></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03-07-01e.png" class="img-fluid figure-img"></p>
+<figcaption>.</figcaption>
+</figure>
+</div>
+<p>Which of the options below is true: 1. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 1 2. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 5 3. α diversity of A = 9, α diversity of B = 7, β diversity between A and B= 16</p>
 <p>Please, paste your result on the collaborative document provided by instructors.</p>
-<blockquote class="blockquote">
-<h2 id="solution" class="anchored">Solution</h2>
-<p>Answer: 2. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 5 The number of species in Lake A (the α diversity) is 4 and 1 of these is also found in Lake B; the number of species in Lake B is 3 and 1 of these is also in Lake A. The β diversity between A and C is calculated as (4 - 1) + (3 - 1) = 5. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
-</em></em></section><em><em>
-</em></em></section><em><em>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Answer: 2. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 5 The number of species in Lake A (the α diversity) is 4 and 1 of these is also found in Lake B; the number of species in Lake B is 3 and 1 of these is also in Lake A. The β diversity between A and C is calculated as (4 - 1) + (3 - 1) = 5.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="how-do-we-calculate-diversity-from-metagenomic-samples" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-we-calculate-diversity-from-metagenomic-samples">How do we calculate diversity from metagenomic samples?</h2>
 <p>We will calculate the diversity in our heathland sample <code>ERR4998593</code> and compare it with data from another site from the same study: <code>ERR4998600</code>. This is a fenland site (so lower and wetter than our heathland site).</p>
@@ -553,107 +638,176 @@ window.Quarto = {
 <section id="what-part-of-the-kraken-output-do-we-need" class="level2">
 <h2 class="anchored" data-anchor-id="what-part-of-the-kraken-output-do-we-need">What part of the Kraken output do we need?</h2>
 <p>We will use a command-line program called <a href="https://github.com/smdabdoub/kraken-biom"><code>kraken-biom</code></a> to convert our Kraken output into a BIOM table. <code>kraken-biom</code> takes the <code>.report</code> output of Kraken and creates a BIOM table in <a href="https://biom-format.org/"><code>.biom</code></a> format.</p>
-<p>Move in to your <code>taxonomy</code> folder ~~~ cd ~/cs_course/analysis/taxonomy ~~~~ {: .bash}</p>
-<p>List the files ~~~ ls -l ~~~~ {: .bash}</p>
-<pre><code>-rw-rw-r-- 1 csuser csuser 3935007137 Apr  9 09:16 ERR4998593.kraken
--rw-rw-r-- 1 csuser csuser     424101 Apr  9 09:16 ERR4998593.report</code></pre>
-<p>{: .output}</p>
+<p>Move in to your <code>taxonomy</code> folder</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> ~/cs_course/analysis/taxonomy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>List the files</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser 3935007137 Apr  9 09:16 ERR4998593.kraken</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser     424101 Apr  9 09:16 ERR4998593.report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>As we saw in the previous episode, <code>.kraken</code> and <code>.report</code> are the output files generated by Kraken.</p>
 <p>We will also need the <code>ERR4998600</code> Kraken report. We have put this in our GitHub repo and it can be copied into your <code>taxonomy</code> directory on the instance using <code>wget</code>. This is a useful command for retrieving files from web servers and simply requires <code>wget</code> followed by the web address the file is stored at.</p>
-<pre><code>wget https://cloud-span.github.io/nerc-metagenomics06-taxonomic-anno/files/ERR4998600.report</code></pre>
-<p>{: .bash}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://cloud-span.github.io/nerc-metagenomics06-taxonomic-anno/files/ERR4998600.report</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>You should <code>ls</code> to check that this file has been downloaded.</p>
 </section>
 <section id="create-the-biom-table" class="level2">
 <h2 class="anchored" data-anchor-id="create-the-biom-table">Create the BIOM table</h2>
 <p><code>kraken-biom</code> has many options which you can see with the help command. However, we only need to specify an output format <code>--fmt</code> of <code>json</code> to use the file in the next step.</p>
-<blockquote class="blockquote">
-<h2 id="kraken-biom--h-output" class="anchored"><code>kraken-biom -h</code> output</h2>
-<pre><code>usage: kraken-biom [-h] [--max {D,P,C,O,F,G,S}] [--min {D,P,C,O,F,G,S}] [-o OUTPUT_FP] [--otu_fp OTU_FP] [--fmt {hdf5,json,tsv}] [--gzip] [--version] [-v]
-                   kraken_reports [kraken_reports ...]
-                        Set the output format of the BIOM table. Default is HDF5.
-Create BIOM-format tables (http://biom-format.org) from Kraken output  BIOM (v2.x) files are internally compressed by default, so this option is not needed when
-(http://ccb.jhu.edu/software/kraken/).mt hdf5.
-  --version             show program's version number and exit
-The program takes as input, one or more files output from the kraken-report
-tool. Each file is parsed and the counts for each OTU (operational taxonomic
-unit) are recorded, along with database ID (e.g. NCBI), and lineage. The
-extracted data are then stored in a BIOM table where each count is linked
-to the Sample and OTU it belongs to. Sample IDs are extracted from the input
-filenames (everything up to the '.').
-
-OTUs are defined by the --max and --min arguments. By default these are
-set to Order and Species respectively. This means that counts assigned
-directly to an Order, Family, or Genus are recorded under the associated
-OTU ID, and counts assigned at or below the Species level are assigned to
-the OTU ID for the species. Setting a minimum rank below Species is not yet
-available.
-
-The BIOM format currently has two major versions. Version 1.0 uses the
-JSON (JavaScript Object Notation) format as a base. Version 2.x uses the
-HDF5 (Hierarchical Data Format v5) as a base. The output format can be
-specified with the --fmt option. Note that a tab-separated (tsv) output
-format is also available. The resulting file will not contain most of the
-metadata, but can be opened by spreadsheet programs.
-
-Version 2 of the BIOM format is used by default for output, but requires the
-Python library 'h5py'. If the library is not installed, kraken-biom will
-automatically switch to using version 1.0. Note that the output can
-optionally be compressed with gzip (--gzip) for version 1.0 and TSV files.
-Version 2 files are automatically compressed.
-
-Usage examples
---------------
-1. Basic usage with default parameters:
-
-$ kraken-biom.py S1.txt S2.txt
-
-  This produces a compressed BIOM 2.1 file: table.biom
-
-2. BIOM v1.0 output:
-
-$ kraken-biom.py S1.txt S2.txt --fmt json
-
-  Produces a BIOM 1.0 file: table.biom
-
-3. Compressed TSV output:
-
-$ kraken-biom.py S1.txt S2.txt --fmt tsv --gzip -o table.tsv
-
-  Produces a TSV file: table.tsv.gz
-
-4. Change the max and min OTU levels to Class and Genus:
-
-$ kraken-biom.py S1.txt S2.txt --max C --min G
-
-Program arguments
------------------
-
-positional arguments:
-  kraken_reports        Results files from the kraken-report tool.
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --max {D,P,C,O,F,G,S}
-                        Assigned reads will be recorded only if they are at or below max rank. Default: O.
-  --min {D,P,C,O,F,G,S}
-                        Reads assigned at and below min rank will be recorded as being assigned to the min rank level. Default: S.
-  -o OUTPUT_FP, --output_fp OUTPUT_FP
-                        Path to the BIOM-format file. By default, the table will be in the HDF5 BIOM 2.x format. Users can output to a different format using the --fmt option. The output can also be gzipped using the --gzip option. Default path is: ./table.biom
-  --otu_fp OTU_FP       Create a file containing just the (NCBI) OTU IDs for use with a service such as phyloT (http://phylot.biobyte.de/) to generate a phylogenetic tree for use in downstream analysis such as UniFrac, iTol (itol.embl.de), or PhyloToAST (phylotoast.org).
-  --fmt {hdf5,json,tsv}      Set the output format of the BIOM table. Default is HDF5.
-  --gzip                Compress the output BIOM table with gzip. HDF5 BIOM (v2.x) files are internally compressed by default, so this option is not needed when specifying --fmt hdf5.
-  --version             show program's version number and exit
-  -v, --verbose         Prints status messages during program execution.</code></pre>
-<p>{: .output} {: .solution}</p>
-</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>kraken-biom -h</code> output
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usage: kraken-biom [-h] [--max {D,P,C,O,F,G,S}] [--min {D,P,C,O,F,G,S}] [-o OUTPUT_FP] [--otu_fp OTU_FP] [--fmt {hdf5,json,tsv}] [--gzip] [--version] [-v]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    kraken_reports [kraken_reports ...]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                         Set the output format of the BIOM table. Default is HDF5.</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Create BIOM-format tables (http://biom-format.org) from Kraken output  BIOM (v2.x) files are internally compressed by default, so this option is not needed when</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>(http://ccb.jhu.edu/software/kraken/).mt hdf5.</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>   --version             show program's version number and exit</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>The program takes as input, one or more files output from the kraken-report</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>tool. Each file is parsed and the counts for each OTU (operational taxonomic</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>unit) are recorded, along with database ID (e.g. NCBI), and lineage. The</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>extracted data are then stored in a BIOM table where each count is linked</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>to the Sample and OTU it belongs to. Sample IDs are extracted from the input</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>filenames (everything up to the '.').</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>OTUs are defined by the --max and --min arguments. By default these are</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>set to Order and Species respectively. This means that counts assigned</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>directly to an Order, Family, or Genus are recorded under the associated</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>OTU ID, and counts assigned at or below the Species level are assigned to</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>the OTU ID for the species. Setting a minimum rank below Species is not yet</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>available.</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>The BIOM format currently has two major versions. Version 1.0 uses the</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>JSON (JavaScript Object Notation) format as a base. Version 2.x uses the</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>HDF5 (Hierarchical Data Format v5) as a base. The output format can be</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>specified with the --fmt option. Note that a tab-separated (tsv) output</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>format is also available. The resulting file will not contain most of the</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>metadata, but can be opened by spreadsheet programs.</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>Version 2 of the BIOM format is used by default for output, but requires the</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>Python library 'h5py'. If the library is not installed, kraken-biom will</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>automatically switch to using version 1.0. Note that the output can</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>optionally be compressed with gzip (--gzip) for version 1.0 and TSV files.</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>Version 2 files are automatically compressed.</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>Usage examples</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>--------------</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>1. Basic usage with default parameters:</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>$ kraken-biom.py S1.txt S2.txt</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>   This produces a compressed BIOM 2.1 file: table.biom</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>2. BIOM v1.0 output:</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>$ kraken-biom.py S1.txt S2.txt --fmt json</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>   Produces a BIOM 1.0 file: table.biom</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>3. Compressed TSV output:</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>$ kraken-biom.py S1.txt S2.txt --fmt tsv --gzip -o table.tsv</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>   Produces a TSV file: table.tsv.gz</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>4. Change the max and min OTU levels to Class and Genus:</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>$ kraken-biom.py S1.txt S2.txt --max C --min G</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>Program arguments</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>-----------------</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>positional arguments:</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>   kraken_reports        Results files from the kraken-report tool.</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>optional arguments:</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>   -h, --help            show this help message and exit</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>   --max {D,P,C,O,F,G,S}</span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>                         Assigned reads will be recorded only if they are at or below max rank.</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>                         Default: O.</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>   --min {D,P,C,O,F,G,S}</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>                         Reads assigned at and below min rank will be recorded as being assigned</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>                         to the min rank level. Default: S.</span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>   -o OUTPUT_FP, --output_fp OUTPUT_FP</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>                         Path to the BIOM-format file. By default, the table will be in the HDF5 </span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>                         BIOM 2.x format. Users can output to a different format using the --fmt </span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>                         option. The output can also be gzipped using the --gzip option. Default </span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>                         path is: ./table.biom</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>   --otu_fp OTU_FP       Create a file containing just the (NCBI) OTU IDs for use with a service</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>                         such as phyloT (http://phylot.biobyte.de/) to generate a phylogenetic </span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a>                         tree for use in downstream analysis such as UniFrac, iTol (itol.embl.</span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a>                         de), or PhyloToAST (phylotoast.org).</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a>   --fmt {hdf5,json,tsv} Set the output format of the BIOM table. Default is HDF5.</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a>   --gzip                Compress the output BIOM table with gzip. HDF5 BIOM (v2.x) files are </span>
+<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a>                         internally compressed by default, so this option is not needed when </span>
+<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a>                         specifying --fmt hdf5.</span>
+<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a>   --version             show program's version number and exit</span>
+<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a>   -v, --verbose         Prints status messages during program execution.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
 <p>With the next command, we are going to create a table in <a href="https://biom-format.org/">Biom</a> format from our two Kraken reports: <code>ERR4998593.report</code> and <code>ERR4998600.report</code>.</p>
-<p>We customise the command with a couple of flags: - <code>--fmt json</code> tells kraken-biom that we want the output table to be in JSON format as opposed to the default HDF5 BIOM2.x format - <code>-o metagenome.biom</code> means our output table will be named <code>metagenome.biom</code></p>
-<pre><code> kraken-biom ERR4998593.report ERR4998600.report --fmt json -o metagenome.biom</code></pre>
-<p>{: .bash}</p>
-<p><code>kraken-biom</code> uses both reports to generate the BIOM table. The BIOM table is in a file called <code>metagenome.biom</code>. ~~~ ls -l ~~~ {: .bash} ~~~ -rw-rw-r– 1 csuser csuser 3935007137 Apr 9 09:16 ERR4998593.kraken -rw-rw-r– 1 csuser csuser 424101 Apr 9 09:16 ERR4998593.report -rw-rw-r– 1 csuser csuser 404232 Apr 9 09:30 ERR4998600.report -rw-rw-r– 1 csuser csuser 741259 Apr 9 10:22 metagenome.biom ~~~ {: .output}</p>
+<p>We customise the command with a couple of flags:</p>
+<ul>
+<li><code>--fmt json</code> tells kraken-biom that we want the output table to be in JSON format as opposed to the default HDF5 BIOM2.x format</li>
+<li><code>-o metagenome.biom</code> means our output table will be named <code>metagenome.biom</code></li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">kraken-biom</span> ERR4998593.report ERR4998600.report <span class="at">--fmt</span> json <span class="at">-o</span> metagenome.biom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><code>kraken-biom</code> uses both reports to generate the BIOM table. The BIOM table is in a file called <code>metagenome.biom</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser 3935007137 Apr  9 09:16 ERR4998593.kraken</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser     424101 Apr  9 09:16 ERR4998593.report</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser     404232 Apr  9 09:30 ERR4998600.report</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>-rw-rw-r-- 1 csuser csuser     741259 Apr  9 10:22 metagenome.biom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="analyse-the-biom-table-using-r" class="level2">
+<section id="analyse-the-biom-table-using-r" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="analyse-the-biom-table-using-r">Analyse the BIOM table using R</h2>
 <p>We will be using an <code>R</code> package called <a href="https://joey711.github.io/phyloseq/"><code>phyloseq</code></a> to analyse our biom file. Other software for analyses of diversity include <a href="https://qiime2.org/">Qiime2</a>, <a href="https://www.wsi.uni-tuebingen.de/lehrstuehle/algorithms-in-bioinformatics/software/megan6/">MEGAN</a> and the <code>R</code> package <a href="https://vegandevs.github.io/vegan/"><code>Vegan</code></a></p>
 <p>If you are very familiar with R and RStudio and already have them on your machine, you may want to install the packages needed and download the <code>metagenome.biom</code> file to do the analysis on your own computer. However, you do not need prior experience with R and RStudio for this part of the course: we have set up the analysis in RStudio Cloud, an online version of RStudio which has everything you need, including the code. We have given instructions for both options.</p>
@@ -661,15 +815,31 @@ optional arguments:
 <h3 class="anchored" data-anchor-id="option-a-i-know-r-and-rstudio.">Option A: I know R and RStudio.</h3>
 <p>If you know R and RStudio and already have them on your machine you may want to use this option.</p>
 <ol type="1">
-<li>Open RStudio<br>
-</li>
-<li>Install the packages<br>
-You will need <code>phyloseq</code>, a Bioconductor package, and the <code>tidyverse</code> and <code>ggvenn</code> packages. Bioconductor packages are installed using the <code>install()</code> function from the <code>BioManager</code> package so we first install that, then <code>phyloseq</code>, <code>tidyverse</code> and <code>ggvenn</code>: ~~~ &gt; install.packages(“BiocManager”) &gt; BiocManager::install(“phyloseq”) &gt; install.packages(“tidyverse”) &gt; install.packages(“ggvenn”) ~~~ {: .language-r}</li>
-<li>Make an RStudio project<br>
-Make an RStudio project workshop by clicking on the drop-down menu on top right where it says Project: (None) and choosing New Project and then New Directory, then New Project. In the “Create project as a subdirectory” box, use Browse to navigate to the “cloudspan” folder. Name the RStudio Project ‘diversity’.</li>
-<li>Download the <code>metagenome.biom</code> file to the project folder<br>
-Download the file to the project folder using <code>scp</code>. Use a terminal that is <strong><em>not</em></strong> logged into the cloud instance and ensure you are in your <code>cloudspan</code> directory. Use <code>scp</code> to copy the file to the <code>diversity</code> folder - the command will look something like: ~~~ scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/taxonomy/metagenome.biom diversity ~~~ {: .bash} Remember to replace NNN with the instance number specific to you.</li>
-<li>Open a new script.</li>
+<li><p>Open RStudio<br>
+</p></li>
+<li><p>Install the packages<br>
+You will need <code>phyloseq</code>, a Bioconductor package, and the <code>tidyverse</code> and <code>ggvenn</code> packages. Bioconductor packages are installed using the <code>install()</code> function from the <code>BioManager</code> package so we first install that, then <code>phyloseq</code>, <code>tidyverse</code> and <code>ggvenn</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">"BiocManager"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> BiocManager<span class="sc">::</span><span class="fu">install</span>(<span class="st">"phyloseq"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">install.packages</span>(<span class="st">"ggvenn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></li>
+<li><p>Make an RStudio project<br>
+Make an RStudio project workshop by clicking on the drop-down menu on top right where it says Project: (None) and choosing New Project and then New Directory, then New Project. In the “Create project as a subdirectory” box, use Browse to navigate to the “cloudspan” folder. Name the RStudio Project ‘diversity’.</p></li>
+<li><p>Download the <code>metagenome.biom</code> file to the project folder<br>
+Download the file to the project folder using <code>scp</code>. Use a terminal that is <strong><em>not</em></strong> logged into the cloud instance and ensure you are in your <code>cloudspan</code> directory. Use <code>scp</code> to copy the file to the <code>diversity</code> folder - the command will look something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/taxonomy/metagenome.biom diversity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remember to replace NNN with the instance number specific to you.</p></li>
+<li><p>Open a new script.</p></li>
 </ol>
 <p>Now go to <strong>Start the analysis</strong>.</p>
 </section>
@@ -686,130 +856,429 @@ Open the project we have set up: <a href="https://posit.cloud/content/5663744">c
 <li>Open <code>analysis.R</code> from the Files pane on the bottom right of the display.</li>
 </ol>
 </section>
-<section id="start-the-analysis" class="level3">
-<h3 class="anchored">Start the Analysis</h3>
-<p>If you are using RStudio Cloud, we will run through the code in <code>analysis.R</code> line by line. If you are using RStudio on your own machine you can type in the commands or copy them from <a href="../files/analysis.R">analysis.R</a></p>
-<p>First load the packages we need. Put your cursor on the line you want to run and press <kbd>CTRL</kbd><kbd>ENTER</kbd><br>
-~~~ library(“phyloseq”) library(“tidyverse”) library(“ggvenn”) ~~~ {: .language-r}</p>
-<p>Now import the data in <code>metagenome.biom</code> into R using the <code>import_biom()</code> function from <code>phyloseq</code> ~~~ biom_metagenome &lt;- import_biom(“metagenome.biom”) ~~~ {: .language-r}</p>
+<section id="start-the-analysis" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="start-the-analysis">Start the Analysis</h3>
+<p>If you are using RStudio Cloud, we will run through the code in <code>analysis.R</code> line by line. If you are using RStudio on your own machine you can type in the commands or copy them from <a href="../../docs/miscellanea/files/analysis.R">analysis.R</a></p>
+<p>First load the packages we need. Put your cursor on the line you want to run and press <kbd>CTRL</kbd><kbd>ENTER</kbd></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"phyloseq"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyverse"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggvenn"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now import the data in <code>metagenome.biom</code> into R using the <code>import_biom()</code> function from <code>phyloseq</code></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome <span class="ot">&lt;-</span> <span class="fu">import_biom</span>(<span class="st">"metagenome.biom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This command produces no output in the console but created a special class of R object which is defined by the <code>phyloseq</code> package and called it <code>biom_metagenome</code>. Click on the object name, biom_metagenome, in the Environment pane (top right), see the screenshot below. This will open a view of the object in the same pane as your script.</p>
 <p>A phyloseq object is a special object in R. It has five parts, called ‘slots’ which you can see listed in the object view. These are <code>otu_table</code>, <code>tax_table</code>, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code>. In our case, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code> are empty. The useful data are in otu_table<code>and</code>tax_table`.</p>
-<p><a href="{{ page.root }}/fig/r-phyloseq-obj.png"> <img src="{{ page.root }}/fig/r-phyloseq-obj.png" alt="Screenshot of RStudio showing the bio_metagenome object in the environment window which has been clicked on to open a view of the object. The five slots are listed in that view."> </a></p>
-<p>Return to your script (click on the tab). Typing <code>biom_metagenome</code> will give some summary information about the <code>biom_metagenome</code> object:<br>
-~~~ biom_metagenome ~~~ {: .language-r}</p>
-<pre><code>phyloseq-class experiment-level object
-otu_table()   OTU Table:         [ 7637 taxa and 2 samples ]
-tax_table()   Taxonomy Table:    [ 7637 taxa by 7 taxonomic ranks ]</code></pre>
-<p>{: .output}</p>
+<!-- <a href="{{ page.root }}/fig/r-phyloseq-obj.png">
+  <img src="{{ page.root }}/fig/r-phyloseq-obj.png" alt="Screenshot of RStudio showing the bio_metagenome object in the environment window which has been clicked on to open a view of the object. The five slots are listed in that view." />
+</a> -->
+<div class="column-body-outset">
+<p><a href="../../images/r-phyloseq-obj.png"> <img src="../../images/r-phyloseq-obj.png" class="img-fluid" alt="Screenshot of RStudio showing the bio_metagenome object in the environment window which has been clicked on to open a view of the object. The five slots are listed in that view."> </a></p>
+</div>
+<p>Return to your script (click on the tab). Typing <code>biom_metagenome</code> will give some summary information about the <code>biom_metagenome</code> object:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>phyloseq-class experiment-level object</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>otu_table()   OTU Table:         [ 7637 taxa and 2 samples ]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tax_table()   Taxonomy Table:    [ 7637 taxa by 7 taxonomic ranks ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The line starting <code>otu_table</code> tells us we have two samples - these are ERR4998593 and ERR4998600 - with a total of 7637 taxa. The <code>tax_table</code> again tells us how many taxa we have. The seven ranks indicates that we have some identifications down to species level. The taxonomic ranks are from the classification system of taxa from the most general (kingdom) to the most specific (species): kingdom/domain, phylum, class, order, family, genus, species.</p>
-<p>We can view the <code>tax_table</code> with: ~~~ View(biom_metagenome@tax_table) ~~~ {: .language-r}</p>
+<p>We can view the <code>tax_table</code> with:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb15" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(biom_metagenome<span class="sc">@</span>tax_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This table has the OTU identity in the row names and the samples in the columns. The values in the columns are the abundance of that OTU in that sample.</p>
-<p><img src="{{ page.root }}/fig/03_02_phyloseq_taxtab.png" alt="A table where the taxonomic identification information of all OTUs is displayed. Each row represent one OTU and the columns its identification at different levels in the taxonomic taxonomic classification ranks, beginning with Kingdom until we reach Species in the seventh column "> <em> Figure 3. Table of the OTU data from our <code>biom_metagenome</code> object. <em></em></em></p><em><em>
+<!-- <img src="{{ page.root }}/fig/03_02_phyloseq_taxtab.png" alt="A table where the taxonomic identification information of all OTUs is displayed. Each row represent one OTU and the columns its identification at different levels in the taxonomic taxonomic classification ranks, beginning with Kingdom until we reach Species in the seventh column " />
+<em> Figure 3. Table of the OTU data from our `biom_metagenome` object. <em/> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03_02_phyloseq_taxtab.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 3. Table of the OTU data from our <code>biom_metagenome</code> object.</figcaption>
+</figure>
+</div>
 <p>To make downstream analysis easier for us we will remove the prefix (e.g.&nbsp;<code>f__</code>) on each item. This contains information about the rank of the assigned taxonomy, we don’t want to lose this information so will and instead rename the header of each column of the DataFrame to contain this information.</p>
 <p>To remove unnecessary characters we are going to use command <code>substring()</code>.</p>
 <p>This command is useful to extract or replace characters in a vector. To use the command, we have to indicate the vector (x) followed by the first element to replace or extract (first) and the last element to be replaced (last). For instance: <code>substring (x, first, last)</code>. If a last position is not used it will be set to the end of the string.</p>
 <p>The prefix for each item in <code>biom_metagenome</code> is made up of a letter and two underscores, for example: <code>o__Bacillales</code>. In this case “Bacillales” starts at position 4 with a B. So to remove the unnecessary characters we will use the following code:</p>
-<pre><code>biom_metagenome@tax_table &lt;- substring(biom_metagenome@tax_table, 4)</code></pre>
-<p>{: .language-r}</p>
-<p>Let’s change the names of the columns too: ~~~<br>
-colnames(biom_metagenome@tax_table) &lt;- c(“Kingdom”, “Phylum”, “Class”, “Order”, “Family”, “Genus”, “Species”) ~~~ {: .language-r}</p>
-<p>Check it worked: ~~~<br>
-View(biom_metagenome@tax_table) ~~~ {: .language-r}</p>
-<p><img src="{{ page.root }}/fig/03_02_phyloseq_taxtab_e.png" alt="The same table we saw in Figure 3 but with informative headers in each of the columns. Now, we can see which of the columns are associated with which taxonomic classification rank"> <em> Figure 4. Table of the OTU data from our <code>biom_metagenome</code> object. With corrections. <em></em></em></p><em><em>
-<p>How many OTUs are in each kingdom? We can find out by combining some commands. We need to: - turn the tax_table into a data frame (a useful data structure in R) - group by the Kingdom column - summarise by counting the number of rows for each Kingdom</p>
-<p>This can be achieved with the following command: ~~~ biom_metagenome@tax_table %&gt;% data.frame() %&gt;% group_by(Kingdom) %&gt;% summarise(n = length(Kingdom)) ~~~ {: .language-r}</p>
-<pre><code># A tibble: 4 × 2
-  Kingdom       n
-  &lt;chr&gt;     &lt;int&gt;
-1 Archaea     339
-2 Bacteria   7231
-3 Eukaryota     1
-4 Viruses      66</code></pre>
-<p>{: .output} Most things are bacteria!</p>
-<p>We can explore how many phlya we have and how many OTU there are in each phlya in a similar way. This time we will use View() to see the whole table because it won’t all print to the console - turn the tax_table into a data frame (a useful data structure in R) - group by the Phylum column - summarise by counting the number of rows for each phylum - viewing the result</p>
-<p>This can be achieved with the following command: ~~~ biom_metagenome@tax_table %&gt;% data.frame() %&gt;% group_by(Phylum) %&gt;% summarise(n = length(Phylum)) %&gt;% View() ~~~ {: .language-r}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb16" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome<span class="sc">@</span>tax_table <span class="ot">&lt;-</span> <span class="fu">substring</span>(biom_metagenome<span class="sc">@</span>tax_table, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Let’s change the names of the columns too:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb17" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(biom_metagenome<span class="sc">@</span>tax_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Kingdom"</span>,</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Phylum"</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Class"</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Order"</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Family"</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Genus"</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>           <span class="st">"Species"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check it worked:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb18" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">View</span>(biom_metagenome<span class="sc">@</span>tax_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- <img src="{{ page.root }}/fig/03_02_phyloseq_taxtab_e.png" alt="The same table we saw in Figure 3 but with informative headers in each of the columns. Now, we can see which of the columns are associated with which taxonomic classification rank" /> -->
+<!-- <em> Figure 4. Table of the OTU data from our `biom_metagenome` object. With corrections. <em/> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03_02_phyloseq_taxtab_e.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 4. Table of the OTU data from our <code>biom_metagenome</code> object. With corrections.</figcaption>
+</figure>
+</div>
+<p>How many OTUs are in each kingdom? We can find out by combining some commands. We need to:</p>
+<ul>
+<li>turn the tax_table into a data frame (a useful data structure in R)</li>
+<li>group by the Kingdom column</li>
+<li>summarise by counting the number of rows for each Kingdom</li>
+</ul>
+<p>This can be achieved with the following command:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb19" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome<span class="sc">@</span>tax_table <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Kingdom) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Kingdom)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb20" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a># A tibble: 4 × 2</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  Kingdom       n</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  &lt;chr&gt;     &lt;int&gt;</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>1 Archaea     339</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>2 Bacteria   7231</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>3 Eukaryota     1</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>4 Viruses      66</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Most things are bacteria!</p>
+<p>We can explore how many phlya we have and how many OTU there are in each phlya in a similar way. This time we will use View() to see the whole table because it won’t all print to the console</p>
+<ul>
+<li>turn the tax_table into a data frame (a useful data structure in R)</li>
+<li>group by the Phylum column</li>
+<li>summarise by counting the number of rows for each phylum</li>
+<li>viewing the result</li>
+</ul>
+<p>This can be achieved with the following command:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb21" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome<span class="sc">@</span>tax_table <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">group_by</span>(Phylum) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Phylum)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">View</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This shows us a table with a phylum, and the number times it appeared, in each row. The number of phyla is given by the number of rows in this table. By defualt, the table is sorted alphabetically by phylum. We can sort by frequency by clicking on the ‘n’ column. There are 3471 Proteobacteria and 1571 Actinobacteria for example.</p>
-<p><img src="{{ page.root }}/fig/03_02_phyla_freq_table.png" alt="Two views of the phyla frequency table: sorted alphabetically by phylum on the left and by the number of OTUs (n) in each phylum on the right"></p>
-<blockquote class="blockquote">
-<h2 id="exercise-2-explore-the-orders" class="anchored" data-anchor-id="start-the-analysis">Exercise 2: Explore the Orders</h2>
+<!-- <img src="{{ page.root }}/fig/03_02_phyla_freq_table.png" alt="Two views of the phyla frequency table: sorted alphabetically by phylum on the left and by the number of OTUs (n) in each phylum on the right" />  -->
+<p><img src="../../images/03_02_phyla_freq_table.png" class="img-fluid" data-fig-all="Two views of the phyla frequency table: sorted alphabetically by phylum on the left and by the number of OTUs (n) in each phylum on the right"></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2: Explore the Orders
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Adapt the code to explore how many Orders we have and how many OTU there are in each order.<br>
 a) How many orders are there?<br>
 b) What is the most common order?<br>
-c) How many OTUs did not get down to order level?<br>
-&gt; ## Solution &gt; You should the use the column name ‘Order’ instead of ‘Phylum’ in the code &gt; &gt; ~~~ &gt; biom_metagenome@tax_table %&gt;% &gt; data.frame() %&gt;% &gt; group_by(Order) %&gt;% &gt; summarise(n = length(Order)) %&gt;% &gt; View() &gt; ~~~ &gt; {: .language-r} &gt;<br>
-&gt; a) 229. This is the number of rows in the table<br>
-&gt; b) Hyphomicrobiales. Sorting the column n will bring this to the top. Hyphomicrobiales appears 480 times<br>
-&gt; c) 66. If an OTU has not been identified to order level the order column will be blank. The table shows there were 66 such cases (you can find this more easily by sorting the column Order).<br>
-&gt; {: .solution} {: .challenge}</p>
-</blockquote>
-</em></em></em></em></section><em><em><em>
-</em></em></em></section><em><em><em>
+c) How many OTUs did not get down to order level?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You should the use the column name ‘Order’ instead of ‘Phylum’ in the code</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb22" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome<span class="sc">@</span>tax_table <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">data.frame</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>   <span class="fu">group_by</span>(Order) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>   <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">length</span>(Order)) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">View</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><ol start="229" type="1">
+<li>This is the number of rows in the table<br>
+</li>
+</ol></li>
+<li>Hyphomicrobiales. Sorting the column n will bring this to the top. Hyphomicrobiales appears 480 times<br>
+</li>
+<li><ol start="66" type="1">
+<li>If an OTU has not been identified to order level the order column will be blank. The table shows there were 66 such cases (you can find this more easily by sorting the column Order).<br>
+</li>
+</ol></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="plot-alpha-diversity" class="level2">
 <h2 class="anchored" data-anchor-id="plot-alpha-diversity">Plot alpha diversity</h2>
-<p>We want to explore the bacterial diversity of our samples, so we will remove all of the non-bacterial organisms. To do this we will generate a subset of all bacterial groups and save them. ~~~ bac_biom_metagenome &lt;- subset_taxa(biom_metagenome, Kingdom == “Bacteria”) ~~~ {: .language-r}</p>
+<p>We want to explore the bacterial diversity of our samples, so we will remove all of the non-bacterial organisms. To do this we will generate a subset of all bacterial groups and save them.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb23" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>bac_biom_metagenome <span class="ot">&lt;-</span> <span class="fu">subset_taxa</span>(biom_metagenome, Kingdom <span class="sc">==</span> <span class="st">"Bacteria"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now let’s look at some statistics of our bacterial metagenomes:</p>
-<pre><code>bac_biom_metagenome</code></pre>
-<p>{: .language-r} ~~~ phyloseq-class experiment-level object otu_table() OTU Table: [ 7231 taxa and 2 samples ] tax_table() Taxonomy Table: [ 7231 taxa by 7 taxonomic ranks ] ~~~ {: .output}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>bac_biom_metagenome</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>phyloseq-class experiment-level object</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>otu_table()   OTU Table:         [ 7231 taxa and 2 samples ]</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>tax_table()   Taxonomy Table:    [ 7231 taxa by 7 taxonomic ranks ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><code>phyloseq</code> includes a function to find the sample names and one to count the number of reads in each sample.</p>
-<p>Find the sample names with <code>sample_names()</code>:<br>
-~~~ sample_names(bac_biom_metagenome) ~~~ {: .language-r} ~~~ “ERR4998593” “ERR4998600”<br>
-~~~ {: .output}</p>
-<p>Count the number of reads with <code>sample_sums()</code>:<br>
-~~~ sample_sums(bac_biom_metagenome) ~~~ {: .language-r} ~~~ ERR4998593 ERR4998600 442490 305135 ~~~ {: .output}</p>
-<p>The <code>summary()</code> function can give us an indication of species evenness<br>
-~~~ summary(bac_biom_metagenome@otu_table) ~~~ {: .language-r} ~~~ ERR4998593 ERR4998600<br>
-Min. : 0.00 Min. : 0.0<br>
-1st Qu.: 1.00 1st Qu.: 2.0<br>
-Median : 6.00 Median : 11.0<br>
-Mean : 61.19 Mean : 42.2<br>
-3rd Qu.: 31.50 3rd Qu.: 38.0<br>
-Max. :60679.00 Max. :38768.0<br>
-~~~ {: .output}</p>
+<p>Find the sample names with <code>sample_names()</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb26" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_names</span>(bac_biom_metagenome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb27" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>"ERR4998593" "ERR4998600"  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Count the number of reads with <code>sample_sums()</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb28" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample_sums</span>(bac_biom_metagenome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb29" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>ERR4998593 ERR4998600 </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    442490     305135</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>summary()</code> function can give us an indication of species evenness</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb30" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(bac_biom_metagenome<span class="sc">@</span>otu_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb31" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a> ERR4998593         ERR4998600     </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>Min.   :    0.00   Min.   :    0.0  </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>1st Qu.:    1.00   1st Qu.:    2.0  </span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>Median :    6.00   Median :   11.0  </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>Mean   :   61.19   Mean   :   42.2  </span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>3rd Qu.:   31.50   3rd Qu.:   38.0  </span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>Max.   :60679.00   Max.   :38768.0   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The median in sample ERR4998593 is 6, meaning many of OTU occur six times. The maximum is very high so at least one OTU is very abundant.</p>
-<p>The <code>plot_richness()</code> command will give us a visual representation of the diversity inside the samples (i.e.&nbsp;α diversity): ~~~ plot_richness(physeq = biom_metagenome, measures = c(“Observed”,“Chao1”,“Shannon”)) ~~~ {: .language-r}</p>
-<p><a href="{{ page.root }}/fig/03_02_plot_rich.png"> <img src="{{ page.root }}/fig/03_02_plot_rich.png" alt="A figure divided in three
+<p>The <code>plot_richness()</code> command will give us a visual representation of the diversity inside the samples (i.e.&nbsp;α diversity):</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb32" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_richness</span>(<span class="at">physeq =</span> biom_metagenome,</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">measures =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>,<span class="st">"Chao1"</span>,<span class="st">"Shannon"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<!-- <a href="{{ page.root }}/fig/03_02_plot_rich.png">
+  <img src="{{ page.root }}/fig/03_02_plot_rich.png" alt="A figure divided in three
   sections. Each of these sections represent a diferent alpha diversity index.
   Inside this sections, each point represent the value assigned on this index to
   the three different samples. We can see how the different indexes gives
-  different values to the same sample."> </a> <em> Figure 5. Alpha diversity indexes for both samples. <em></em></em></p><em><em>
+  different values to the same sample." />
+</a>
+<em> Figure 5. Alpha diversity indexes for both samples. <em/> -->
+<p><a href="../../images/03_02_plot_rich.png"> <img src="../../images/03_02_plot_rich.png" class="img-fluid" alt="A figure divided in three sections. Each of these sections represent a diferent alpha diversity index. Inside this sections, each point represent the value assigned on this index to the three different samples. We can see how the different indexes gives different values to the same sample."> </a></p>
 <p>Each of these metrics can give insight of the distribution of the OTUs inside our samples. For example Chao1 diversity index gives more weight to singletons and doubletons observed in our samples, while the Shannon is a measure of species richness and species evenness with more weigth on richness.</p>
-<p>Use the following to open the manual page for plot_richness ~~~ ?plot_richness ~~~ {: .language-r}</p>
-<blockquote class="blockquote">
-<h2 id="exercise-3" class="anchored">Exercise 3:</h2>
-<p>While using the help provided explore these options available for the function in <code>plot_richness()</code>: 1. <code>nrow</code> 2. <code>sortby</code> 3. <code>title</code></p>
+<p>Use the following to open the manual page for plot_richness</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb33" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>?plot_richness</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 3:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While using the help provided explore these options available for the function in <code>plot_richness()</code>:</p>
+<ol type="1">
+<li><code>nrow</code></li>
+<li><code>sortby</code></li>
+<li><code>title</code></li>
+</ol>
 <p>Use these options to generate new figures that show you other ways to present the data.</p>
-<blockquote class="blockquote">
-<h2 id="solution-1" class="anchored">Solution</h2>
-<p>The code and the plot using the three options will look as follows: The “title” option adds a title to the figure. ~~~ plot_richness(physeq = biom_metagenome, title = “Alpha diversity indexes for both metagenomic samples”, measures = c(“Observed”,“Chao1”,“Shannon”)) ~~~ {: .language-r}</p>
-<p><a href="{{ page.root }}/fig/03_02_plot_rich2.png"> <img src="{{ page.root }}/fig/03_02_plot_rich2.png" alt="Alpha diversity indexes for both samples with title"> </a></p>
-<p>The “nrow” option arranges the graphics horizontally. ~~~ plot_richness(physeq = biom_metagenome, title = “Alpha diversity indexes for both metagenomic samples”, measures = c(“Observed”,“Chao1”,“Shannon”), nrow=3) ~~~ {: .language-r}</p>
-<p><a href="{{ page.root }}/fig/03_02_plot_rich3.png"> <img src="{{ page.root }}/fig/03_02_plot_rich3.png" alt="Alpha diversity indexes for both samples horizontal with title"> </a></p>
-<p>The “sortby” option orders the samples from least to greatest diversity depending on the parameter. In this case, it is ordered by “Shannon” and tells us that the ERR4998593 sample has the lowest diversity and the ERR4998600 sample the highest. ~~~ plot_richness(physeq = bac_biom_metagenome, title = “Alpha diversity indexes for both metagenomic samples”, measures = c(“Observed”,“Chao1”,“Shannon”), sortby = “Shannon”) ~~~ {: .language-r}</p>
-<p><a href="{{ page.root }}/fig/03_02_plot_rich4.png"> <img src="{{ page.root }}/fig/03_02_plot_rich4.png" alt="Alpha diversity indexes for both samples with title sort by Shannon"> </a></p>
-<p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
-</em></em></section><em><em>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>The code and the plot using the three options will look as follows: The “title” option adds a title to the figure.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb34" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_richness</span>(<span class="at">physeq =</span> biom_metagenome,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Alpha diversity indexes for both metagenomic samples"</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">measures =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>,<span class="st">"Chao1"</span>,<span class="st">"Shannon"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="{{ page.root }}/fig/03_02_plot_rich2.png"> <!-- <img src="{{ page.root }}/fig/03_02_plot_rich2.png" alt="Alpha diversity indexes for both samples with title" /> --> <img src="../../images/03_02_plot_rich2.png" class="img-fluid" alt="Alpha diversity indexes for both samples with title."> </a></p>
+<p>The “nrow” option arranges the graphics horizontally.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb35" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_richness</span>(<span class="at">physeq =</span> biom_metagenome,</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Alpha diversity indexes for both metagenomic samples"</span>,</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">measures =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>,<span class="st">"Chao1"</span>,<span class="st">"Shannon"</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">nrow=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="{{ page.root }}/fig/03_02_plot_rich3.png"> <!-- <img src="{{ page.root }}/fig/03_02_plot_rich3.png" alt="Alpha diversity indexes for both samples horizontal with title" /> --> <img src="../../images/03_02_plot_rich3.png" class="img-fluid" alt="Alpha diversity indexes for both samples horizontal with title."> </a></p>
+<p>The “sortby” option orders the samples from least to greatest diversity depending on the parameter. In this case, it is ordered by “Shannon” and tells us that the ERR4998593 sample has the lowest diversity and the ERR4998600 sample the highest.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb36" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_richness</span>(<span class="at">physeq =</span> bac_biom_metagenome,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>              <span class="at">title =</span> <span class="st">"Alpha diversity indexes for both metagenomic samples"</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">measures =</span> <span class="fu">c</span>(<span class="st">"Observed"</span>,<span class="st">"Chao1"</span>,<span class="st">"Shannon"</span>),</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">sortby =</span> <span class="st">"Shannon"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><a href="../../images/03_02_plot_rich4.png"> <!-- <img src="{{ page.root }}/fig/03_02_plot_rich4.png" alt="Alpha diversity indexes for both samples with title sort by Shannon" /> --> <img src="../../images/03_02_plot_rich4.png" class="img-fluid" alt="Alpha diversity indexes for both samples with title sort by Shannon."> </a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
 <section id="beta-diversity" class="level2">
 <h2 class="anchored" data-anchor-id="beta-diversity">Beta diversity</h2>
-<p>The β diversity between ERR4998593 and ERR4998600 can be calculated with the <code>distance()</code> function. For example, we can find the Bray–Curtis dissimilarity with: ~~~ distance(bac_biom_metagenome, method=“bray”) ~~~ {: .language-r} ~~~ ERR4998593 ERR4998600 0.5438328 ~~~ {: .output}</p>
-<p>There are other methods of determining distance and we can view our options with: ~~~ distanceMethodList$vegdist ~~~ {: .language-r} ~~~ [1] “manhattan” “euclidean” “canberra” “bray” “kulczynski” “jaccard” “gower”<br>
-[8] “altGower” “morisita” “horn” “mountford” “raup” “binomial” “chao”<br>
-[15] “cao” ~~~ {: .output}</p>
-<p>Any of these methods can be used in the same way used above, e.g. ~~~ distance(bac_biom_metagenome, method=“jaccard”) ~~~ {: .language-r} ~~~ ERR4998593 ERR4998600 0.7045229 ~~~ {: .output}</p>
+<p>The β diversity between ERR4998593 and ERR4998600 can be calculated with the <code>distance()</code> function. For example, we can find the Bray–Curtis dissimilarity with:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb37" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distance</span>(bac_biom_metagenome, <span class="at">method=</span><span class="st">"bray"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb38" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>           ERR4998593</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>ERR4998600  0.5438328</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are other methods of determining distance and we can view our options with:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb39" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>distanceMethodList<span class="sc">$</span>vegdist</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb40" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>[1] "manhattan"  "euclidean"  "canberra"   "bray"       "kulczynski" "jaccard"    "gower"     </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>[8] "altGower"   "morisita"   "horn"       "mountford"  "raup"       "binomial"   "chao"      </span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>[15] "cao"</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Any of these methods can be used in the same way used above, e.g.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code (R)</strong></pre>
+</div>
+<div class="sourceCode" id="cb41" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">distance</span>(bac_biom_metagenome, <span class="at">method=</span><span class="st">"jaccard"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb42" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>           ERR4998593</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>ERR4998600  0.7045229</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The output of this function is a distance matrix. When we have just two samples there is only one distance to calculate. If we had many samples, the output would have the pairwise distances between all of them</p>
 </section>
 <section id="reading" class="level2">
 <h2 class="anchored" data-anchor-id="reading">Reading</h2>
 <p>Tuomisto, H. A consistent terminology for quantifying species diversity? Yes, it does exist. Oecologia 164, 853–860 (2010). <a href="https://doi.org/10.1007/s00442-010-1812-0">https://doi.org/10.1007/s00442-010-1812-0</a></p>
 <p>Whittaker, R. H. (1960) Vegetation of the Siskiyou Mountains, Oregon and California. Ecological Monographs, 30, 279–338</p>
-<p>{% include links.md %}</p>
-
 
 
 </section>
 
-</em></em></em></em></em></em></em><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main><em><em><em> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1219,7 +1688,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html" class="pagination-link" aria-label="Taxonomic Assignment">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Taxonomic Assignment</span>
@@ -1231,7 +1700,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav>
-</em></em></em></div><em><em><em> <!-- /content -->
+</div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
@@ -1239,7 +1708,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
@@ -1262,4 +1731,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-</em></em></em></body></html>
+</body></html>

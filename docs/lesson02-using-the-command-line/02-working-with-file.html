@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Working with Files and Directories</title>
+<title>Cloud-SPAN Metagenomics - Working with Files and Directories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson02-using-the-command-line/03-redirection.html" rel="next">
 <link href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -396,10 +431,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#removing-files-and-directories" id="toc-removing-files-and-directories" class="nav-link" data-scroll-target="#removing-files-and-directories">Removing files and directories</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/02-working-with-file.html">Working with Files and Directories</a></li></ol></nav>
 <div class="quarto-title">
@@ -408,7 +443,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -427,30 +462,67 @@ ul.task-list li input[type="checkbox"] {
 <p>Now that we know how to navigate around our directory structure, let’s start working with our sequencing files. We are looking at the results from a short-read sequencing experiment, which are stored in our <code>illumina_fastq</code> directory.</p>
 </section>
 <section id="wildcards" class="level3">
-<h3 class="anchored">Wildcards</h3>
+<h3 class="anchored" data-anchor-id="wildcards">Wildcards</h3>
 <p>Navigate to your <code>illumina_fastq</code> directory:</p>
-<pre><code>$ cd ~/cs_course/data/illumina_fastq</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/cs_course/data/illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>We are interested in looking at the fastq files in this directory. We can list all files with the .fastq extension using the command:</p>
-<pre><code>$ ls *.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="pp">*</span>.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
+</div>
+</div>
 <p>The <code>*</code> character is a special type of character called a wildcard, which can be used to represent any number of any type of character. Thus, <code>*.fastq</code> matches every file that ends with <code>.fastq</code>.</p>
 <p>This command:</p>
-<pre><code>$ ls *_2.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_2.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="pp">*</span>_2.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_2.fastq</code></pre>
+</div>
+</div>
 <p>lists only the file that ends with <code>_2.fastq</code>.</p>
 <p>This command:</p>
-<pre><code>$ ls /usr/bin/*.sh</code></pre>
-<p>{: .bash}</p>
-<pre><code>/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls /usr/bin/<span class="pp">*</span>.sh</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>/usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh</code></pre>
+</div>
+</div>
 <p>Lists every file in <code>/usr/bin</code> that ends in the characters <code>.sh</code>. Note that the output displays <strong>full</strong> paths to files, since each result starts with <code>/</code>.</p>
-<blockquote class="blockquote">
-<h2 id="exercise" class="anchored" data-anchor-id="wildcards">Exercise</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>What command would you use for each of the following tasks? Start from your current directory using a single&nbsp;<code>ls</code>&nbsp;command for each:</p>
 <ol type="1">
 <li>List all of the files in <code>/usr/bin</code> that start with the letter ‘c’.</li>
@@ -460,8 +532,18 @@ ul.task-list li input[type="checkbox"] {
 </ol>
 <p>Bonus: What would the output look like if a wildcard could <em>not</em> be matched? Try listing all files that start with ‘missing’.</p>
 <p>Hint: Question 4 requires a Unix wildcard that we haven’t talked about yet. Try searching the internet for information about Unix wildcards to find what you need to solve the bonus problem.</p>
-<blockquote class="blockquote">
-<h2 id="solution" class="anchored">Solution</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><code>ls /usr/bin/c*</code></li>
 <li><code>ls /usr/bin/*a*</code></li>
@@ -469,9 +551,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
 <li><code>ls /usr/bin/*[ac]*</code></li>
 </ol>
-<p>Bonus: <code>ls: cannot access 'missing*': No such file or directory</code> {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+<p>Bonus: <code>ls: cannot access 'missing*': No such file or directory</code></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="command-history" class="level2">
@@ -484,17 +569,26 @@ ul.task-list li input[type="checkbox"] {
 <li><kbd>Ctrl</kbd>+<kbd>L</kbd> or the <code>clear</code> command will clear your screen.</li>
 </ul>
 <p>You can also review your recent commands with the <code>history</code> command, by entering:</p>
-<pre><code>$ history</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to see a numbered list of recent commands. You can reuse one of these commands directly by referring to the number of that command.</p>
 <p>For example, if your history looked like this:</p>
-<pre><code>259  ls *
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>259  ls *
 260  ls /usr/bin/*.sh
 261  ls *R1*fastq</code></pre>
-<p>{: .output}</p>
+</div>
+</div>
 <p>then you could repeat command #260 by entering:</p>
-<pre><code>$ !260</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> !260</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Type <code>!</code> (exclamation point) and then the number of the command from your history. You will be glad you learned this when you need to re-run very complicated commands. For more information on advanced usage of <code>history</code>, read section 9.3 of <a href="https://www.gnu.org/software/bash/manual/html_node/index.html">Bash manual</a>.</p>
 </section>
 <section id="examining-files-the-less-program" class="level2">
@@ -532,13 +626,21 @@ ul.task-list li input[type="checkbox"] {
 </tbody>
 </table>
 <p>Enter the following command from within the <code>illumina_fastq</code> directory:</p>
-<pre><code>$ cd ~/cs_course/data/illumina_fastq
-$ less ERR4998593_1.fastq</code></pre>
-<p>{: .bash}</p>
-<blockquote class="blockquote">
-<h2 id="fastq-format" class="anchored">FASTQ format</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ~/cs_course/data/illumina_fastq</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> less ERR4998593_1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+FASTQ format
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>The contents might look a bit confusing. That’s because they are in FASTQ format, a popular way to store sequencing data in text-based format. These files contain both sequences and information about each sequence’s read accuracy.</p>
-<p><img src="../fig/fasta_file_format_l2.png" class="img-fluid">{:width=“600px”}</p>
+<!-- ![](../fig/fasta_file_format_l2.png){:width="600px"} -->
+<p><img src="../../images/fasta_file_format_l2.png" class="img-fluid" width="600"></p>
 <p>Each sequence is described in four lines:</p>
 <table class="table">
 <colgroup>
@@ -570,40 +672,90 @@ $ less ERR4998593_1.fastq</code></pre>
 </tr>
 </tbody>
 </table>
-<h2 id="phred-score" class="anchored">PHRED score</h2>
-<pre><code>Quality encoding: !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJ
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+PHRED score
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>Quality encoding: !"#$%&amp;'()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJ
                   |         |         |         |         |
 Quality score:    01........11........21........31........41   </code></pre>
-<p>{: .output}</p>
-<p>Quality is interpreted as the probability of an incorrect base call. To make it possible to line up each individual nucleotide with its quality score, the numerical score is encoded by a single character. The quality score represents the probability that the corresponding nucleotide call is incorrect. It is a logarithmic scale so a quality score of 10 reflects a base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%.<br>
-{: .callout}</p>
-</blockquote>
-<blockquote class="blockquote">
-<h2 id="exercise-1" class="anchored">Exercise</h2>
+<p>Quality is interpreted as the probability of an incorrect base call. To make it possible to line up each individual nucleotide with its quality score, the numerical score is encoded by a single character. The quality score represents the probability that the corresponding nucleotide call is incorrect. It is a logarithmic scale so a quality score of 10 reflects a base call accuracy of 90%, but a quality score of 20 reflects a base call accuracy of 99%.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>Open the <code>~/cs_course/data/illumina_fastq/ERR4998593_1.fastq</code> file in <code>less</code>. What is the last line of the file? (Hint: use the shortcuts above to speed things up)</li>
 </ol>
-<blockquote class="blockquote">
-<h2 id="solution-1" class="anchored">Solution</h2>
-<ol type="1">
-<li><code>:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code> {: .solution} {: .challenge}</li>
-</ol>
-</blockquote>
-</blockquote>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<pre class="text"><code>1. :FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 <section id="some-navigation-commands-in-less" class="level3">
-<h3 class="anchored">Some navigation commands in <code>less</code>:</h3>
+<h3 class="anchored" data-anchor-id="some-navigation-commands-in-less">Some navigation commands in <code>less</code>:</h3>
 <p><code>less</code> also gives you a way of searching through files. Use the “/” key to begin a search. Enter the word you would like to search for and press <code>enter</code>. The screen will jump to the next location where that word is found.</p>
 <p><strong>Shortcut:</strong> If you hit “/” then “enter”, <code>less</code> will repeat the previous search. <code>less</code> searches from the current location and works its way forward. Scroll up a couple lines on your terminal to verify you are at the beginning of the file. Note, if you are at the end of the file and search for the sequence “CAA”, <code>less</code> will not find it. You either need to go to the beginning of the file (by typing <code>g</code>) and search again using <code>/</code> or you can use <code>?</code> to search backwards in the same way you used <code>/</code> previously.</p>
 <p>For instance, let’s search forward for the sequence <code>TTTTT</code> in our file. You can see that we go right to that sequence, what it looks like, and where it is in the file. If you continue to type <code>/</code> and hit return, you will move forward to the next instance of this sequence motif. If you instead type <code>?</code> and hit return, you will search backwards and move up the file to previous examples of this motif.</p>
-<blockquote class="blockquote">
-<h2 id="exercise-2" class="anchored" data-anchor-id="some-navigation-commands-in-less">Exercise</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>What are the next three nucleotides (characters) after the first instance of the sequence quoted above (<code>TTTTT</code>)?</p>
 <p>Share your answer to o see if it matches everyone else’s!</p>
-<blockquote class="blockquote">
-<h2 id="solution-2" class="anchored">Solution</h2>
-<p><code>CTT</code> {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p><code>CTT</code></p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>Remember, the <code>man</code> program actually uses <code>less</code> internally and therefore uses the same commands, so you can search documentation using “/” as well!</p>
 </section>
 <section id="other-programs-to-look-into-files-cat-more-head-and-tail" class="level3">
@@ -612,9 +764,18 @@ Quality score:    01........11........21........31........41   </code></pre>
 <p>The <code>more</code> command prints to the console only as much content of a file as it fits in the screen, and waits for you to press the space bar to print the following portion of the file likweise, and so on until either the last portion of the file is printed or you press the <code>q</code> key (for quit) to exit <code>more</code>.</p>
 <p>There’s another final way that we can look at files, and in this case, just look at part of them. This can be particularly useful if we just want to see the beginning or end of the file, or see how it’s formatted.</p>
 <p>The commands are <code>head</code> and <code>tail</code> and they let you look at the beginning and end of a file, respectively.</p>
-<pre><code>$ head ERR4998593_1.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>@ERR4998593.40838091 40838091 length=151
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> head ERR4998593_1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>@ERR4998593.40838091 40838091 length=151
 CCACATGCTTTAAGTGCATGTGGTACTGCTCCAGGACCAGCATTGTAGGTCGCCAATGCTTTGGCGTAGGTGCCATCAAACATATTCGTGTAATGAGCCATGAGATGGGCTGCTCCCTTCAATGCATCAACCGGATTCCACGGATCAATGC
 +
 :FFFFFFF:,FFF:FFFFFFFFFFFFFFFFFFFF:FFFF:FFFFFFFFFFF:FFFFFFFFF:FFFF:FFFFFFFFFFFFFFFFFFF:FFFF,FFFFFFF,FFF:FF,FFFFFFF::FF::FFFF:FFFFF:,:FFFFF,,FFFFFFFF,,F
@@ -624,10 +785,20 @@ CCTTACCACACCGGGGCTGTGGCGTTCGACCCCATCGGCAAGGCACTCTGGGTTTCCGATAGCTCGCACCATCGGCTGCT
 FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFF
 @ERR4998593.3 3 length=151
 GNGGTGCTCGACGGTGGCTCGGCGGATGCGCATGGCGTCGGGCCTGCGGTCCAGCCGCTCCCGCATGGCGTCGATCACCGCCTCATGCTCCCAGCGTTTGATGCGGCGCTCCTTGCCGCTCGTACACCGGCTCTTCAGCGGGCAGCCGGCGta</code></pre>
-<p>{: .output}</p>
-<pre><code>$ tail ERR4998593_1.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>+
+</div>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tail ERR4998593_1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>+
 FFF:F,FF:FFFFFF:F,:FFF,FF:FF,FFF::F:F,FF,FF,FFF,FFFFFF:FFFFFFF,F,,FFF:FFFF:,FFFF:FF::F:FFF,F:FFFF,:FFFFF,F:F:FF,FF:F:FFFF:FFF:FFF::FF:FF:,::FF,FF:,F,FF
 @ERR4998593.55595926 55595926 length=151
 CAGTACAACGTTCGCTCCCTGAATTTCTGTTTCTCGGCCGGCGAAGCAATTGCTGTGGCTATCCAGGAGCGGTTCAAGCGGATGTTCGGCGTCGAAATTACGGAAGGCTGCGGGATGACCGAACTGCAAATTTACTCCATGAATCCGCCAT
@@ -637,16 +808,37 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFFFFFF
 ACGCCCCACAGGGCGGCACCGACGCCGCCGCCCGGGCCCGCCGGCCCGCCCCGGTGGGCACCGGTTGCCACTGCGGCTTGCTCGGCCGTCTCACTCACTTGGACACACTTCCGTTCTTCACCGTCTCCACTGGCCGGCTAGACCGGTCCCG
 +
 FFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFF,FFFF:FFFFFFFF,FFFFFF::F:F,FFFFFF,FFFFFFFFFFFFF,F:F:FF,FFFF</code></pre>
-<p>{: .output}</p>
+</div>
+</div>
 <p>The <code>-n</code> option to either of these commands can be used to print the first or last <code>n</code> lines of a file.</p>
-<pre><code>$ head -n 1 ERR4998593_1.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>@ERR4998593.40838091 40838091 length=151</code></pre>
-<p>{: .output}</p>
-<pre><code>$ tail -n 1 ERR4998593_1.fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>F:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> head <span class="at">-n</span> 1 ERR4998593_1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>@ERR4998593.40838091 40838091 length=151</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> tail <span class="at">-n</span> 1 ERR4998593_1.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>F:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF</code></pre>
+</div>
+</div>
 </section>
 </section>
 <section id="creating-moving-copying-and-removing-files" class="level2">
@@ -658,53 +850,105 @@ FFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 <p>When working with computational data, it’s important to keep a safe copy of that data that can’t be accidentally overwritten or deleted. For this lesson, our raw data is our FASTQ files.</p>
 <p>First, let’s make a copy of one of our FASTQ files using the <code>cp</code> command.</p>
 <p>Navigate to the <code>cs_course/data/illumina_fastq</code> directory and enter:</p>
-<pre><code>$ cp ERR4998593_1.fastq ERR4998593_1_copy.fastq
-$ ls -F</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1.fastq  ERR4998593_1_copy.fastq  ERR4998593_2.fastq</code></pre>
-<p>{: .output} The prompt will disappear for up to two minutes and reappear when the command is completed and the backup is made.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cp ERR4998593_1.fastq ERR4998593_1_copy.fastq</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1.fastq  ERR4998593_1_copy.fastq  ERR4998593_2.fastq</code></pre>
+</div>
+</div>
+<p>The prompt will disappear for up to two minutes and reappear when the command is completed and the backup is made.</p>
 <p>We now have two copies of the <code>ERR4998593_1.fastq</code> file, one of them named <code>ERR4998593_1_copy.fastq</code>. We’ll move this file to a new directory called <code>backup</code> where we’ll store our backup data files.</p>
 </section>
 <section id="creating-directories" class="level3">
 <h3 class="anchored" data-anchor-id="creating-directories">Creating Directories</h3>
 <p>The <code>mkdir</code> command is used to make a directory. Enter <code>mkdir</code>followed by a space, then the directory name you want to create:</p>
-<pre><code>$ mkdir backup</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mkdir backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="moving-renaming-files-and-directories" class="level3">
 <h3 class="anchored" data-anchor-id="moving-renaming-files-and-directories">Moving / Renaming files and directories</h3>
 <p>We can now move our backup file to this directory. We can move files around using the command <code>mv</code>:</p>
-<pre><code>$ mv ERR4998593_1_copy.fastq backup
-$ ls backup</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1_copy.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv ERR4998593_1_copy.fastq backup</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1_copy.fastq</code></pre>
+</div>
+</div>
 <p>The <code>mv</code> command is also how you rename files. Let’s rename this file to make it clear that this is a backup:</p>
-<pre><code>$ cd backup
-$ mv ERR4998593_1_copy.fastq ERR4998593_1_backup.fastq
-$ ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1_backup.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd backup</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> mv ERR4998593_1_copy.fastq ERR4998593_1_backup.fastq</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1_backup.fastq</code></pre>
+</div>
+</div>
 </section>
 <section id="removing-files-and-directories" class="level3">
-<h3 class="anchored">Removing files and directories</h3>
+<h3 class="anchored" data-anchor-id="removing-files-and-directories">Removing files and directories</h3>
 <p>You can delete or remove files with the <code>rm</code> command:</p>
-<pre><code>$ rm ERR4998593_1_backup.fastq</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rm ERR4998593_1_backup.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><strong>Important</strong>: The <code>rm</code> command permanently removes the file. Be careful with this command. It doesn’t just nicely put the files in the recycling. They’re really gone.</p>
 <p>By default, <code>rm</code> will not delete directories. You can tell <code>rm</code> to delete a directory using the <code>-r</code> (recursive) option. Let’s delete the backup directory we just made:</p>
-<pre><code>$ cd ..
-$ rm -r backup</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ..</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> rm <span class="at">-r</span> backup</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will delete not only the directory, but all files within the directory.</p>
-<blockquote class="blockquote">
-<h2 id="exercise-3" class="anchored" data-anchor-id="removing-files-and-directories">Exercise</h2>
-<p>Starting in the <code>illumina_fastq</code> directory, do the following: 1. Make sure that you have deleted your backup directory and all files it contains.<br>
-2. Create a backup of each of your FASTQ files using <code>cp</code>. (Note: You’ll need to do this individually for each of the two FASTQ files. We haven’t learned yet how to do this with a wildcard.)<br>
-3. Use a wildcard to move all of your backup files to a new backup directory. 4. It doesn’t make sense to keep our backup directory inside the directory it is backing up. What if we accidentally delete the <code>illumina_fastq</code> directory? To fix this, move your new backup directory out of <code>illumina_fastq</code> and into the parent folder, <code>data</code>.</p>
-<blockquote class="blockquote">
-<h2 id="solution-3" class="anchored">Solution</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Starting in the <code>illumina_fastq</code> directory, do the following:</p>
+<ol type="1">
+<li>Make sure that you have deleted your backup directory and all files it contains.<br>
+</li>
+<li>Create a backup of each of your FASTQ files using <code>cp</code>. (Note: You’ll need to do this individually for each of the two FASTQ files. We haven’t learned yet how to do this with a wildcard.)<br>
+</li>
+<li>Use a wildcard to move all of your backup files to a new backup directory.</li>
+<li>It doesn’t make sense to keep our backup directory inside the directory it is backing up. What if we accidentally delete the <code>illumina_fastq</code> directory? To fix this, move your new backup directory out of <code>illumina_fastq</code> and into the parent folder, <code>data</code>.</li>
+</ol>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li><code>rm -r backup</code><br>
 </li>
@@ -713,11 +957,33 @@ $ rm -r backup</code></pre>
 <li><code>mkdir backup</code> and <code>mv *_backup.fastq backup</code></li>
 <li><code>mv backup ..</code> or <code>mv backup ~/cs_course/data/</code> (note that you do not need to use the -r flag to move directories like you do when deleting them)</li>
 </ol>
-<p>It’s always a good idea to check your work. Move to the <code>data</code> folder with <code>cd ..</code> and then list the contents of <code>backup</code> with <code>ls -l backup</code>. You should see something like: ~~~ -rw-rw-r– 1 csuser csuser 2811886584 Feb 22 11:25 ERR4998593_1_backup.fastq -rw-rw-r– 1 csuser csuser 2302264784 Feb 22 11:29 ERR4998593_2_backup.fastq</p>
-<p>~~~ {: .output} {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
-<p>Here is what your file structure should look like at the end of this episode: <img src="../fig/file_tree_02_ep2.png" class="img-fluid" alt="A file hierarchy tree">{:width=“500px”}</p>
+<p>It’s always a good idea to check your work. Move to the <code>data</code> folder with <code>cd ..</code> and then list the contents of <code>backup</code> with <code>ls -l backup</code>. You should see something like:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>-rw-rw-r-- 1 csuser csuser 2811886584 Feb 22 11:25 ERR4998593_1_backup.fastq
+-rw-rw-r-- 1 csuser csuser 2302264784 Feb 22 11:29 ERR4998593_2_backup.fastq</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>Here is what your file structure should look like at the end of this episode: <!-- ![A file hierarchy tree](../fig/file_tree_02_ep2.png){:width="500px"} --></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/file_tree_02_ep2.png" class="img-fluid figure-img" width="450"></p>
+<figcaption>A file hierarchy tree.</figcaption>
+</figure>
+</div>
 
 
 </section>
@@ -1133,7 +1399,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html" class="pagination-link" aria-label="Navigating Files and Directories">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Navigating Files and Directories</span>
@@ -1153,7 +1419,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson02-using-the-command-line/02-working-with-file.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

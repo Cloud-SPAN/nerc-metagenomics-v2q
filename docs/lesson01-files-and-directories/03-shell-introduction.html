@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Introducing the Shell</title>
+<title>Cloud-SPAN Metagenomics - Introducing the Shell</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson02-using-the-command-line/index.html" rel="next">
 <link href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -386,10 +421,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#moving-around-the-file-system" id="toc-moving-around-the-file-system" class="nav-link" data-scroll-target="#moving-around-the-file-system">Moving around the file system</a></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/03-shell-introduction.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson01-files-and-directories/03-shell-introduction.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/index.html">Files and Directories</a></li><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/03-shell-introduction.html">Introducing the Shell</a></li></ol></nav>
 <div class="quarto-title">
@@ -398,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -427,10 +462,19 @@ ul.task-list li input[type="checkbox"] {
 <p>We have already accessed the shell in the previous episode, when we logged onto the Cloud instance.</p>
 <p>We will spend most of our time learning about the basics of the shell by manipulating some experimental data. Some of the data we’re going to be working with is quite large, and we’re also going to be using several bioinformatic packages in later lessons to work with this data. To avoid having to spend time downloading the data and downloading and installing all of the software, we’re going to continue using our Cloud instance.</p>
 <p>As a reminder, we log in by launching Git Bash or Terminal from the <code>cloudspan</code> folder we made in today’s first episode, and then using our <code>ssh</code> command.</p>
-<pre><code>$ ssh -i login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-i</span> login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After logging in, you will see a screen showing something like this:</p>
-<pre><code>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-84-generic x86_64)
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-84-generic x86_64)
 
  * Documentation:  https://help.ubuntu.com
  * Management:     https://landscape.canonical.com
@@ -477,190 +521,402 @@ applicable law.
 
 
 Last login: Thu Oct 14 11:13:28 2021 from xxxxxxx</code></pre>
-<p>{: .output}</p>
+</div>
+</div>
 </section>
 <section id="navigating-your-file-system" class="level2">
 <h2 class="anchored" data-anchor-id="navigating-your-file-system">Navigating your file system</h2>
 <p>Now we have logged into our Cloud instance, we have access to a new file directory. This instance has been set up with some existing files and directories for you, and we will also be adding some new ones later in the course.</p>
 <p>Several commands are frequently used to create, inspect, rename, and delete files and directories.</p>
-<pre><code>$</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The dollar sign is a <strong>prompt</strong>, which shows us that the shell is waiting for input; your shell may use a different character as a prompt and may add information before the prompt. When typing commands, either from these lessons or from other sources, do not type the prompt, only the commands that follow it.</p>
 <p>Let’s find out where we are by running a command called <code>pwd</code>(which stands for “print working directory”). At any moment, our <strong>current working directory</strong> is our current default directory, i.e., the directory that the computer assumes we want to run commands in,unless we explicitly specify something else. Here, the computer’s response is <code>/home/csuser</code>:</p>
-<pre><code>$ pwd</code></pre>
-<p>{: .bash}</p>
-<pre><code>/home/csuser</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pwd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>/home/csuser</code></pre>
+</div>
+</div>
 <p>This <code>csuser</code> directory is our <strong>home directory</strong> within our cloud system.</p>
 <p>Let’s look at how our file system is organised. We can see what files and subdirectories are in this directory by running <code>ls</code>, which stands for “listing”:</p>
-<pre><code>$ ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>bin  cs_course  software</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>bin  cs_course  software</code></pre>
+</div>
+</div>
 <p><code>ls</code> prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We’ll be working within the <code>cs_course</code> subdirectory, and creating new subdirectories, throughout this workshop.</p>
 <p>The command to change locations in our file system is <code>cd</code>, followed by a directory name to change our working directory. <code>cd</code> stands for “change directory”.</p>
 <p>Let’s say we want to navigate to the <code>cs_course</code> directory we saw above. We can use the following command to get there:</p>
-<pre><code>$ cd cs_course</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Let’s look at what is in this directory:</p>
-<pre><code>$ ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>data   databases</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>data   databases</code></pre>
+</div>
+</div>
 <p>We can make the <code>ls</code> output easier to understand by using the <strong>flag</strong> <code>-F</code>, which tells <code>ls</code> to add a trailing <code>/</code> to the names of directories:</p>
-<pre><code>$ ls -F</code></pre>
-<p>{: .bash}</p>
-<pre><code>data/   databases/</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>data/   databases/</code></pre>
+</div>
+</div>
 <p>Anything with a <code>/</code> after it is a directory. Things with a <code>*</code> after them are programs. If there are no decorations, it’s a file.</p>
 <p><code>ls</code> has lots of other options. To find out what they are, we can type:</p>
-<pre><code>$ man ls</code></pre>
-<p>{: .bash}</p>
-<p><code>man</code> (short for manual) displays detailed documentation (also referred as man page or man file) for <code>bash</code> commands. It is a powerful resource to explore <code>bash</code> commands, understand their usage and flags. Some manual files are very long. You can scroll through the file using your keyboard’s down arrow or use the <kbd>Space</kbd> key to go forward one page and the <kbd>b</kbd> key to go backwards one page. When you are done reading, hit <kbd>q</kbd> to quit.</p>
-<blockquote class="blockquote">
-<h2 id="challenge" class="anchored">Challenge</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> man ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>man</code> (short for manual) displays detailed documentation (also referred as man page or man file) for <code>bash</code> commands. It is a powerful resource to explore <code>bash</code> commands, understand their usage and flags. Some manual files are very long. You can scroll through the file using your keyboard’s down arrow or use the <kbd>Spacebq</kbd> to quit.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Use the <code>-l</code> option for the <code>ls</code> command to display more information for each item in the directory. What is one piece of additional information this long format gives you that you don’t see with the bare <code>ls</code> command?</p>
 <p>Share your answer on the forum.</p>
-<blockquote class="blockquote">
-<h2 id="solution" class="anchored">Solution</h2>
-<pre><code>$ ls -l</code></pre>
-<p>{: .bash}</p>
-<pre><code>total 12
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<pre class="text"><code>total 12
 drwxrwxr-x 4 csuser csuser 4096 Oct 22 09:04 data
 drwxrwxr-x 3 csuser csuser 4096 Oct  6 13:08 databases</code></pre>
-<p>{: .output}</p>
 <p>The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.</p>
-<p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+</div>
+</div>
 <p>No one can possibly learn all of these arguments - that’s what the manual page is for! It does take practice to get used to using and understanding the information in the manual. Often, you don’t need to understand completely what it is saying to be able to guess what to try.</p>
 <p>Let’s go into the <code>data</code> directory and see what is in there using the <code>cd</code> and <code>ls</code> commands.</p>
-<pre><code>$ cd data
-$ ls -F</code></pre>
-<p>{: .bash}</p>
-<pre><code>illumina_fastq/   nano_fastq/</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd data</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-F</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>illumina_fastq/   nano_fastq/</code></pre>
+</div>
+</div>
 <p>This directory contains two subdirectories. We can tell they are directories and not files because of the trailing ‘/’. They contain all of the raw data we will need for the rest of the course.</p>
 <p>For now, let’s have a look in <code>illumina_fastq</code>. We can do this without changing directories using the <code>ls</code> command followed by the name of the directory.</p>
-<pre><code>$ ls illumina_fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
+</div>
+</div>
 <p>This directory contains two files with <code>.fastq</code> extensions. FASTQ is a format for storing information about sequencing reads and their quality. We will be learning more about FASTQ files in a later lesson.</p>
 <p>Let’s also have a look in the <code>nano_fastq</code> directory.</p>
-<pre><code>$ ls nano_fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR5000342_sub12.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls nano_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR5000342_sub12.fastq</code></pre>
+</div>
+</div>
 <p>Learning to navigate a new file directory can be confusing at first. To help, here is a tree diagram showing what we have explored so far.</p>
-<p><img src="../fig/blank_instance_file_tree.png" class="img-fluid" alt="A file hierarchy tree">{:width=“400px”}</p>
+<!-- ![A file hierarchy tree](../fig/blank_instance_file_tree.png){:width="400px"} -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/blank_instance_file_tree.png" class="img-fluid figure-img" width="350"></p>
+<figcaption>A file hierarchy tree.</figcaption>
+</figure>
+</div>
 <p>First we moved from our home directory at <code>csuser</code> into the <code>cs_course</code> directory, which is one level down. From there we opened up the <code>data</code> directory, which contains subdirectories - <code>illumina_fastq</code> and <code>nano_fastq</code>. We had a peek inside both of these directories and found that <code>illumina_fastq</code> contained two files, while <code>nano_fastq</code> contained one.</p>
 <section id="shortcut-tab-completion" class="level3">
-<h3 class="anchored">Shortcut: Tab Completion</h3>
-<p>It is very easy to make mistakes typing our filenames and commands. Thankfully, “tab completion” can help us! When you start typing out the name of a directory or file, then hit the <kbd>Tab</kbd> key, the shell will try to fill in the rest of the directory or file name.</p>
+<h3 class="anchored" data-anchor-id="shortcut-tab-completion">Shortcut: Tab Completion</h3>
+<p>It is very easy to make mistakes typing our filenames and commands. Thankfully, “tab completion” can help us! When you start typing out the name of a directory or file, then hit the <kbd>Tab&lt;/kbdkey, the shell will try to fill in the rest of the directory or file name.</kbd></p>
 <p>First of all, typing <code>cd</code> after the prompt and pressing enter will always take you back to your home directory.Let’s do this:</p>
-<pre><code>$ cd</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>then enter:</p>
-<pre><code>$ cd cs&lt;tab&gt;</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs<span class="op">&lt;</span>tab<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The shell will fill in the rest of the directory name for <code>cs_course</code>. Press enter to execute the command and move directories.</p>
 <p>Now change directories again to <code>data</code>.</p>
-<pre><code>$ cd cs_course
-$ cd data</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And again into <code>illumina_fastq</code>.</p>
-<pre><code>$ cd illumina_fastq</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Using tab complete can be very helpful. However, it will only autocomplete a file or directory name if you’ve typed enough characters to provide a unique identifier for the file or directory you are trying to access.</p>
 <p>For example, if we now try to list the files in <code>illumina_fastq</code> with names starting with <code>ERR</code> by using tab complete:</p>
-<pre><code>$ ls ERR&lt;tab&gt;</code></pre>
-<p>{: .bash}</p>
-<p>The shell auto-completes your command to <code>ERR4998593_</code>, because all file names in the directory begin with this prefix. When you hit <kbd>Tab</kbd> again, the shell will list the possible choices.</p>
-<pre><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls ERR<span class="op">&lt;</span>tab<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The shell auto-completes your command to <code>ERR4998593_</code>, because all file names in the directory begin with this prefix. When you hit <kbd>Tab&lt;/kbdagain, the shell will list the possible choices.</kbd></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
+</div>
+</div>
 <p>Tab completion can also fill in the names of programs, which can be useful if you remember the beginning of a program name.</p>
-<pre><code>$ pw&lt;tab&gt;&lt;tab&gt;</code></pre>
-<p>{: .bash}</p>
-<pre><code>pwck      pwconv    pwd       pwdx      pwunconv</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pw<span class="op">&lt;</span>tab<span class="op">&gt;&lt;</span>tab<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>pwck      pwconv    pwd       pwdx      pwunconv</code></pre>
+</div>
+</div>
 <p>Displays the name of every program that starts with <code>pw</code>.</p>
-<blockquote class="blockquote">
-<h2 id="tip" class="anchored" data-anchor-id="shortcut-tab-completion">Tip</h2>
-<p>You might find it useful to keep a note of the commands you learn in this course, so you can easily remember them in future. This will be faster than scrolling through the course each time you forget a command. While using your Cloud-SPAN AWS instance you can also type <code>csguide</code> into the command prompt and hit enter for a text-based guide to the command line, including frequently used commands. {: .callout}</p>
-</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You might find it useful to keep a note of the commands you learn in this course, so you can easily remember them in future. This will be faster than scrolling through the course each time you forget a command. While using your Cloud-SPAN AWS instance you can also type <code>csguide</code> into the command prompt and hit enter for a text-based guide to the command line, including frequently used commands.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="moving-around-the-file-system" class="level2">
 <h2 class="anchored" data-anchor-id="moving-around-the-file-system">Moving around the file system</h2>
 <p>Now we’re going to learn some additional commands for moving around within our file system.</p>
 <p>Use the commands we’ve learned so far to navigate to the <code>illumina_fastq</code> directory from our home:</p>
-<pre><code>$ cd
-$ cd cs_course
-$ cd data
-$ cd illumina_fastq</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd data</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>What if we want to move back up and out of this directory and to our top level directory? Can we type <code>cd data</code>? Try it and see what happens.</p>
-<pre><code>$ cd data</code></pre>
-<p>{: .bash}</p>
-<pre><code>-bash: cd: shell_data: No such file or directory</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>-bash: cd: shell_data: No such file or directory</code></pre>
+</div>
+</div>
 <p>Your computer looked for a directory or file called <code>data</code> within the directory you were already in. It didn’t know you wanted to look at a directory level above the one you were located in.</p>
 <p>We have a special command to tell the computer to move us back or up one directory level.</p>
-<pre><code>$ cd ..</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now we can use <code>pwd</code> to make sure that we are in the directory we intended to navigate to, and <code>ls</code> to check that the contents of the directory are correct.</p>
-<pre><code>$ pwd</code></pre>
-<p>{: .bash}</p>
-<pre><code>/home/csuser/cs_course/data</code></pre>
-<p>{: .output}</p>
-<pre><code>$ ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>illumina_fastq  nano_fastq</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pwd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>/home/csuser/cs_course/data</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>illumina_fastq  nano_fastq</code></pre>
+</div>
+</div>
 <p>From this output, we can see that <code>..</code> did indeed take us back one level in our file system, to <code>data</code>.</p>
 <p>You can chain these together like so:</p>
-<pre><code>$ ls ../../</code></pre>
-<p>{: .bash}</p>
-<pre><code>bin  cs_course  software </code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls ../../</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>bin  cs_course  software </code></pre>
+</div>
+</div>
 <p>This prints the contents of the folder called <code>csuser</code> (our home folder).</p>
-<blockquote class="blockquote">
-<h2 id="finding-hidden-directories" class="anchored">Finding hidden directories</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Finding hidden directories
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>There is a hidden directory inside the <code>cs_course</code> directory. Explore the options for <code>ls</code> in the man page to find out how to see hidden directories. List the contents of the directory and identify the name of the text file in the hidden directory.</p>
 <p>Hint 1: hidden files and folders in Unix start with <code>.</code>, for example <code>.my_hidden_directory</code></p>
 <p>Hint 2: <code>cs_course</code> is one level above <code>data</code>, our current working directory.</p>
-<blockquote class="blockquote">
-<h2 id="solution-1" class="anchored">Solution</h2>
-<p>First use the <code>man</code> command to look at the options for <code>ls</code>. ~~~ $ man ls ~~~ {: .bash}</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-20-contents" aria-controls="callout-20" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-20" class="callout-20-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>First use the <code>man</code> command to look at the options for <code>ls</code>.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> man ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The <code>-a</code> option is short for <code>all</code> and says that it causes <code>ls</code> to “not ignore entries starting with .” This is the option we want.</p>
 <p>We can use <code>..</code> to view the contents of the directory above our current working directory.</p>
-<pre><code>$ ls -a ..</code></pre>
-<p>{: .bash}</p>
-<pre><code>.  ..   data   databases   .hidden</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-a</span> ..</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>.  ..   data   databases   .hidden</code></pre>
+</div>
+</div>
 <p>The name of the hidden directory is <code>.hidden</code>. We can navigate to that directory using <code>cd</code>.</p>
-<pre><code>$ cd ..
-$ cd .hidden</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd ..</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd .hidden</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>And then list the contents of the directory using <code>ls</code>.</p>
-<pre><code>$ ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>youfoundit.txt</code></pre>
-<p>{: .output}</p>
-<p>The name of the text file is <code>youfoundit.txt</code>. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
-<p>In most commands the flags can be combined together in no particular order to obtain the desired results/output. ~~~ $ ls -Fa $ ls -laF ~~~</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>youfoundit.txt</code></pre>
+</div>
+</div>
+<p>The name of the text file is <code>youfoundit.txt</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>In most commands the flags can be combined together in no particular order to obtain the desired results/output.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-Fa</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls <span class="at">-laF</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="summary" class="level2">
 <h2 class="anchored" data-anchor-id="summary">Summary</h2>
 <p>We now know how to move around our file system using the command line. This gives us an advantage over interacting with the file system through a GUI as it allows us to work on a remote server, carry out the same set of operations on a large number of files quickly, and opens up many opportunities for using bioinformatic software that is only available in command line versions.</p>
 <p>In the next few episodes, we’ll be expanding on these skills and seeing how using the command line shell enables us to make our workflow more efficient and reproducible.</p>
 <p>For now, log off using the <code>exit</code> command: This will close the connection, and your terminal will go back to showing your local computer prompt, for example:</p>
-<pre><code>csuser@instanceNNN:~ $ exit</code></pre>
-<p>{: .bash}</p>
-<p>This will close the connection, and your terminal will go back to showing your local computer prompt, for example: ~~~ logout Connection to instanceNNN.cloud-span.aws.york.ac.uk closed. username@machineid $ ~~~ {: .output}</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csuser@instanceNNN:~</span> $ exit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This will close the connection, and your terminal will go back to showing your local computer prompt, for example:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>logout
+Connection to instanceNNN.cloud-span.aws.york.ac.uk closed.
+username@machineid $</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -1075,7 +1331,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" class="pagination-link" aria-label="Logging onto the Cloud">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Logging onto the Cloud</span>
@@ -1095,7 +1351,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/03-shell-introduction.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson01-files-and-directories/03-shell-introduction.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

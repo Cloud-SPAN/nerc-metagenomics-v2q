@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Metagenome Assembly</title>
+<title>Cloud-SPAN Metagenomics - Metagenome Assembly</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson04-polishing/index.html" rel="next">
 <link href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -392,10 +427,10 @@ ul.task-list li input[type="checkbox"] {
   </ul></li>
   <li><a href="#assembly-statistics" id="toc-assembly-statistics" class="nav-link" data-scroll-target="#assembly-statistics">Assembly Statistics</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson03-qc-assembly/02-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson03-qc-assembly/02-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/02-assembly.html">Metagenome Assembly</a></li></ol></nav>
 <div class="quarto-title">
@@ -404,7 +439,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -416,30 +451,72 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<h2 id="important" class="anchored">IMPORTANT</h2>
-<p>The analyses in this lesson will take several hours to complete! You can find some recommended reading at the end of the page that you might want to read whilst you’re waiting. {: .callout}</p>
-</blockquote>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+IMPORTANT
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The analyses in this lesson will take several hours to complete! You can find some recommended reading at the end of the page that you might want to read whilst you’re waiting.</p>
+</div>
+</div>
 <section id="assembling-reads" class="level2">
 <h2 class="anchored" data-anchor-id="assembling-reads">Assembling reads</h2>
-<p><img align="right" width="325" height="316" src="{{ page.root }}/fig/03_short_analysis_flowchart_short_asm.png" alt="Analysis flow diagram that shows the steps: Sequence reads, Quality control and assembly."></p>
-<p>In the last episode, we put both the long and short raw reads through quality control. They are now ready to be assembled into a metagenome. Genomic assembly is the process of joining smaller fragments of DNA (<em>i.e.</em>, reads) to make longer segments to try and reconstruct the original genomes.</p>
-<p><br clear="right"></p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout="[ 40, 60 ]">
+<div class="quarto-layout-row">
+<div id="first-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
+<p>In the last episode, we put both the long and short raw reads through quality control.</p>
+<p>They are now ready to be assembled into a metagenome. Genomic assembly is the process of joining smaller fragments of DNA (<em>i.e.</em>, reads) to make longer segments to try and reconstruct the original genomes.</p>
+</div>
+<div id="second-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
+<!-- <img align="right" width="325" height="316" src="{{ page.root }}/fig/03_short_analysis_flowchart_short_asm.png" alt="Analysis flow diagram that shows the steps: Sequence reads, Quality control and assembly." /> -->
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="../../images/03_short_analysis_flowchart_short_asm.png" width="325" height="316" class="figure-img"></p>
+<figcaption>Analysis flow diagram that shows the steps: Sequence reads, Quality control and assembly.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<!-- <br clear="right"/> -->
 <section id="genomic-assembly" class="level3">
 <h3 class="anchored" data-anchor-id="genomic-assembly">Genomic assembly</h3>
 <p>You can think of Genomic assembly as a jigsaw puzzle: each raw read corresponds to a piece of the puzzle and you are aiming to complete the puzzle by joining these pieces together in the right order.</p>
-<p>There are two main strategies for genome assembly: 1. Mapping to a reference genome - requires that there is a complete genome of the organism you have sequenced, or a closely related organism. This is the approach you would take if you were trying to identify variants for well-characterised species, such as humans. 2. <em>De novo</em> assembly - does not use a reference but instead assembles reads together based on the content of the reads (the specific approach depends on which assembly software you are using). It is commonly used for environmental samples which usually contain many organisms that have not been cultured previously.</p>
+<p>There are two main strategies for genome assembly:</p>
+<ol type="1">
+<li>Mapping to a reference genome - requires that there is a complete genome of the organism you have sequenced, or a closely related organism. This is the approach you would take if you were trying to identify variants for well-characterised species, such as humans.</li>
+<li><em>De novo</em> assembly - does not use a reference but instead assembles reads together based on the content of the reads (the specific approach depends on which assembly software you are using). It is commonly used for environmental samples which usually contain many organisms that have not been cultured previously.</li>
+</ol>
 <p>Continuing the jigsaw analogy, mapping to a reference genome would be equivalent to having an image of the final puzzle to compare your assembly to. In contrast, in <em>de novo</em> assembly you would have to depend entirely on which pieces fit together.</p>
 </section>
 <section id="metagenomic-assembly" class="level3">
 <h3 class="anchored" data-anchor-id="metagenomic-assembly">Metagenomic assembly</h3>
 <p>Metagenomic sequencing adds another layer to the challenge of assembly! Instead of having one organism to assemble you now have many! Depending on the complexity of a metagenome you could have anywhere from a handful of organisms in a community to thousands.</p>
 <p>You no longer have one jigsaw puzzle, but many with all the pieces mixed together.</p>
-<p><img align="center" width="775" height="717" src="{{ page.root }}/fig/03_genomics_v_metagenomics.png" alt="Metagenomic flow diagram with the steps raw reads, assembly and polishing and binning ."></p>
+<!-- <img align="center" width="775" height="717" src="{{ page.root }}/fig/03_genomics_v_metagenomics.png" alt="Metagenomic flow diagram with the steps raw reads, assembly and polishing and binning ." /> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03_genomics_v_metagenomics.png" width="775" height="717" class="figure-img"></p>
+<figcaption>Metagenomic flow diagram with the steps raw reads, assembly and polishing and binning.</figcaption>
+</figure>
+</div>
 <p>Many of the communities sequenced using metagenomics contain previously uncultured microbes (often known as microbial dark matter) so they are unlikely to have reference genomes. In addition, you don’t usually know what you are sequencing - the community of organisms is unknown.</p>
 <p>Assembling our metaphorical jigsaw will be a challenge. We have many, perhaps thousands, of jigsaws to assemble and no pictures</p>
 <p>Luckily there are programs, known as assemblers, that will do this for us!</p>
-<p>Metagenomic assembly faces additional problems, which means we need an assembler built to handle metagenomes. These additional problems include: 1. Differences in coverage between the genomes, due to differences in abundance across the sample. 2. The fact that different species often share conserved regions. 3. The presence of several strains of a single species in the community</p>
+<p>Metagenomic assembly faces additional problems, which means we need an assembler built to handle metagenomes. These additional problems include:</p>
+<ol type="1">
+<li>Differences in coverage between the genomes, due to differences in abundance across the sample.</li>
+<li>The fact that different species often share conserved regions.</li>
+<li>The presence of several strains of a single species in the community</li>
+</ol>
 <p>The assembly strategy also differs based on the sequencing technology used to generate the raw reads. Here we’re using raw data from <a href="https://nanoporetech.com/applications/dna-nanopore-sequencing">Nanopore sequencing</a> as the basis for this metagenome assembly so we need to use a metagenome assembler appropriate for long-read sequencing.</p>
 <p>We will be using <a href="https://github.com/fenderglass/Flye">Flye</a>, which is a <strong>long-read</strong> <em>de novo</em> assembler for assembling large and complex data with a metagenomic mode. Like all our programs, Flye has been pre-installed onto your instance.</p>
 <p><br clear="left"></p>
@@ -447,107 +524,154 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="flye-is-a-long-read-assembler" class="level2">
 <h2 class="anchored" data-anchor-id="flye-is-a-long-read-assembler">Flye is a long-read assembler</h2>
-<blockquote class="blockquote">
-<h2 id="important-1" class="anchored">Important</h2>
-<p>Make sure you’re still logged into your cloud instance. If you can’t remember how to log on, visit <a href="../01-QC-quality-raw-reads#getting-started">the instructions from earlier today</a>. {: .callout}</p>
-</blockquote>
-<p>Navigate to the <code>analysis</code> directory you made in a previous step. ~~~ cd ~ cd cs_course/analysis ~~~ {: .source}</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure you’re still logged into your cloud instance. If you can’t remember how to log on, visit <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html#getting-started">the instructions from earlier today</a>.</p>
+</div>
+</div>
+<p>Navigate to the <code>analysis</code> directory you made in a previous step.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cs_course/analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Run the <code>flye</code> command without any arguments to see a short description of its use:</p>
-<pre><code> flye</code></pre>
-<p>{: .source}</p>
-<pre><code>$ flye
-usage: flye (--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw |
-      --nano-corr | --nano-hq ) file1 [file_2 ...]
-      --out-dir PATH
-
-      [--genome-size SIZE] [--threads int] [--iterations int]
-      [--meta] [--polish-target] [--min-overlap SIZE]
-      [--keep-haplotypes] [--debug] [--version] [--help]
-      [--scaffold] [--resume] [--resume-from] [--stop-after]
-      [--read-error float] [--extra-params]
-flye: error: the following arguments are required: -o/--out-dir</code></pre>
-<p>{: .output}</p>
-<p>A full description can be displayed by using the <code>--help</code> flag: ~~~ flye –help ~~~ {: .bash}</p>
-<blockquote class="blockquote">
-<h2 id="flye-help-documentation" class="anchored"><code>flye</code> help documentation</h2>
-<pre><code>usage: flye (--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw |
-       --nano-corr | --nano-hq ) file1 [file_2 ...]
-       --out-dir PATH
-
-       [--genome-size SIZE] [--threads int] [--iterations int]
-       [--meta] [--polish-target] [--min-overlap SIZE]
-       [--keep-haplotypes] [--debug] [--version] [--help]
-       [--scaffold] [--resume] [--resume-from] [--stop-after]
-       [--read-error float] [--extra-params]
-
-Assembly of long reads with repeat graphs
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --pacbio-raw path [path ...]
-                        PacBio regular CLR reads (&lt;20% error)
-  --pacbio-corr path [path ...]
-                        PacBio reads that were corrected with other methods (&lt;3% error)
-  --pacbio-hifi path [path ...]
-                        PacBio HiFi reads (&lt;1% error)
-  --nano-raw path [path ...]
-                        ONT regular reads, pre-Guppy5 (&lt;20% error)
-  --nano-corr path [path ...]
-                        ONT reads that were corrected with other methods (&lt;3% error)
-  --nano-hq path [path ...]
-                        ONT high-quality reads: Guppy5+ or Q20 (&lt;5% error)
-  --subassemblies path [path ...]
-                        [deprecated] high-quality contigs input
-  -g size, --genome-size size
-                        estimated genome size (for example, 5m or 2.6g)
-  -o path, --out-dir path
-                        Output directory
-  -t int, --threads int
-                        number of parallel threads [1]
-  -i int, --iterations int
-                        number of polishing iterations [1]
-  -m int, --min-overlap int
-                        minimum overlap between reads [auto]
-  --asm-coverage int    reduced coverage for initial disjointig assembly [not set]
-  --hifi-error float    [deprecated] same as --read-error
-  --read-error float    adjust parameters for given read error rate (as fraction e.g. 0.03)
-  --extra-params extra_params
-                        extra configuration parameters list (comma-separated)
-  --plasmids            unused (retained for backward compatibility)
-  --meta                metagenome / uneven coverage mode
-  --keep-haplotypes     do not collapse alternative haplotypes
-  --scaffold            enable scaffolding using graph [disabled by default]
-  --trestle             [deprecated] enable Trestle [disabled by default]
-  --polish-target path  run polisher on the target sequence
-  --resume              resume from the last completed stage
-  --resume-from stage_name
-                        resume from a custom stage
-  --stop-after stage_name
-                        stop after the specified stage completed
-  --debug               enable debug output
-  -v, --version         show program's version number and exit
-
-Input reads can be in FASTA or FASTQ format, uncompressed
-or compressed with gz. Currently, PacBio (CLR, HiFi, corrected)
-and ONT reads (regular, HQ, corrected) are supported. Expected error rates are
-&lt;15% for PB CLR/regular ONT; &lt;5% for ONT HQ, &lt;3% for corrected, and &lt;1% for HiFi. Note that Flye
-was primarily developed to run on uncorrected reads. You may specify multiple
-files with reads (separated by spaces). Mixing different read
-types is not yet supported. The --meta option enables the mode
-for metagenome/uneven coverage assembly.
-
-To reduce memory consumption for large genome assemblies,
-you can use a subset of the longest reads for initial disjointig
-assembly by specifying --asm-coverage and --genome-size options. Typically,
-40x coverage is enough to produce good disjointigs.
-
-You can run Flye polisher as a standalone tool using
---polish-target option.</code></pre>
-<p>{: .output} {: .solution}</p>
-</blockquote>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>$ flye</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>usage: flye (--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw |</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      --nano-corr | --nano-hq ) file1 [file_2 ...]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      --out-dir PATH</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      [--genome-size SIZE] [--threads int] [--iterations int]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      [--meta] [--polish-target] [--min-overlap SIZE]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      [--keep-haplotypes] [--debug] [--version] [--help]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>      [--scaffold] [--resume] [--resume-from] [--stop-after]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      [--read-error float] [--extra-params]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>flye: error: the following arguments are required: -o/--out-dir</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A full description can be displayed by using the <code>--help</code> flag:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>  <span class="ex">flye</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output — <code>flye</code> help documentation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb5"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>usage: flye (--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw |</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>         --nano-corr | --nano-hq ) file1 [file_2 ...]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>         --out-dir PATH</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>         [--genome-size SIZE] [--threads int] [--iterations int]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>         [--meta] [--polish-target] [--min-overlap SIZE]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>         [--keep-haplotypes] [--debug] [--version] [--help]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>         [--scaffold] [--resume] [--resume-from] [--stop-after]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>         [--read-error float] [--extra-params]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>Assembly of long reads with repeat graphs</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>optional arguments:</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>   -h, --help            show this help message and exit</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>   --pacbio-raw path [path ...]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                         PacBio regular CLR reads (&lt;20% error)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>   --pacbio-corr path [path ...]</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>                         PacBio reads that were corrected with other methods (&lt;3% error)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>   --pacbio-hifi path [path ...]</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>                         PacBio HiFi reads (&lt;1% error)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>   --nano-raw path [path ...]</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                         ONT regular reads, pre-Guppy5 (&lt;20% error)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>   --nano-corr path [path ...]</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>                         ONT reads that were corrected with other methods (&lt;3% error)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>   --nano-hq path [path ...]</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>                         ONT high-quality reads: Guppy5+ or Q20 (&lt;5% error)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>   --subassemblies path [path ...]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>                         [deprecated] high-quality contigs input</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>   -g size, --genome-size size</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>                         estimated genome size (for example, 5m or 2.6g)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>   -o path, --out-dir path</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>                         Output directory</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>   -t int, --threads int</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>                         number of parallel threads [1]</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>   -i int, --iterations int</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>                         number of polishing iterations [1]</span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>   -m int, --min-overlap int</span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>                         minimum overlap between reads [auto]</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>   --asm-coverage int    reduced coverage for initial disjointig assembly [not set]</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>   --hifi-error float    [deprecated] same as --read-error</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>   --read-error float    adjust parameters for given read error rate (as fraction e.g. 0.03)</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>   --extra-params extra_params</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>                         extra configuration parameters list (comma-separated)</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>   --plasmids            unused (retained for backward compatibility)</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>   --meta                metagenome / uneven coverage mode</span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>   --keep-haplotypes     do not collapse alternative haplotypes</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>   --scaffold            enable scaffolding using graph [disabled by default]</span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>   --trestle             [deprecated] enable Trestle [disabled by default]</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>   --polish-target path  run polisher on the target sequence</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>   --resume              resume from the last completed stage</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>   --resume-from stage_name</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>                         resume from a custom stage</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>   --stop-after stage_name</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>                         stop after the specified stage completed</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>   --debug               enable debug output</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>   -v, --version         show program's version number and exit</span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>Input reads can be in FASTA or FASTQ format, uncompressed</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a>or compressed with gz. Currently, PacBio (CLR, HiFi, corrected)</span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>and ONT reads (regular, HQ, corrected) are supported. Expected error rates are</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>&lt;15% for PB CLR/regular ONT; &lt;5% for ONT HQ, &lt;3% for corrected, and &lt;1% for HiFi. Note that Flye</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>was primarily developed to run on uncorrected reads. You may specify multiple</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a>files with reads (separated by spaces). Mixing different read</span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a>types is not yet supported. The --meta option enables the mode</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>for metagenome/uneven coverage assembly.</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>To reduce memory consumption for large genome assemblies,</span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>you can use a subset of the longest reads for initial disjointig</span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>assembly by specifying --asm-coverage and --genome-size options. Typically,</span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>40x coverage is enough to produce good disjointigs.</span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>You can run Flye polisher as a standalone tool using</span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>--polish-target option.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>Flye has multiple different options available and we need to work out which ones are appropriate for our dataset.</p>
 <p>The most important thing to know is which program was used to basecall our reads, as this determines which of <code>(--pacbio-raw | --pacbio-corr | --pacbio-hifi | --nano-raw | --nano-corr | --nano-hq )</code> we choose. In the <a href="https://environmentalmicrobiome.biomedcentral.com/articles/10.1186/s40793-022-00424-2#Sec2">Methods section of our source paper</a> the authors state that:</p>
-<p><img src="{{ page.root }}/fig/methods_guppy_version.png" width="700"></p>
+<!-- <img src="{{ page.root }}/fig/methods_guppy_version.png" width="700"/> -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/methods_guppy_version.png" class="img-fluid figure-img" width="700"></p>
+<figcaption>.</figcaption>
+</figure>
+</div>
 <p>This means we should use the <code>--nano-raw</code> option, as the reads were called with a version of Guppy that precedes v5 (Guppy is a program used to convert the signals that come out of a sequencer into an actual string of bases). This option will be followed by the relative path to the long-read .fastq file.</p>
 <p>We also need to choose how many times we want Flye to ‘polish’ the data after assembly. Polishing is a way to improve the accuracy of the assembly. The number of rounds of polishing is specified using <code>-i</code> or <code>--iterations</code>. We will do three rounds of polishing, which is a standard practice (though the default in Flye is one round only).</p>
 <p>The other options are a bit easier:</p>
@@ -556,21 +680,40 @@ You can run Flye polisher as a standalone tool using
 <li>We also use the <code>-t</code> or <code>--threads</code> flag in order to run the assembly on multiple threads (aka running several processes at once) in order to speed it up</li>
 <li>Finally we indicate that the dataset is a metagenome using the <code>--meta</code> option</li>
 </ul>
-<blockquote class="blockquote">
-<h2 id="unused-parameters" class="anchored">Unused parameters</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Unused parameters
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>There are many parameters that we don’t need. Some of these are deprecated and some are only appropriate for certain types of data. Others are useful to allow tweaking to try to further improve an assembly (e.g.&nbsp;<code>--genome-size</code> and <code>--read-error</code>).</p>
-<p>Most bioinformatics programs have an associated website (which is often a GitHub page) with a whole manual to use the program. The <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md">Flye Manual</a> contains a lot of further information about the parameters available. If you’re going to try using Flye on your own long-read dataset this is a good place to start.<br>
-{: .callout}</p>
-</blockquote>
+<p>Most bioinformatics programs have an associated website (which is often a GitHub page) with a whole manual to use the program. The <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md">Flye Manual</a> contains a lot of further information about the parameters available. If you’re going to try using Flye on your own long-read dataset this is a good place to start.</p>
+</div>
+</div>
 <p>Now we’ve worked out what parameters are appropriate for our data we can put them all together in one command. Since the command is quite long, we will use backward slashes to allow it to span several lines. <code>\</code> basically means “start a new line and carry on reading without submitting the command”.</p>
-<p>First let’s make sure we’re in the <code>analysis</code> directory, and make a new directory called <code>assembly</code> for the Flye output. ~~~ cd ~/cs_course/analysis/ mkdir assembly ~~~ {: .bash}</p>
+<p>First let’s make sure we’re in the <code>analysis</code> directory, and make a new directory called <code>assembly</code> for the Flye output.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now we can start constructing our command! You can type/copy this code into your command line but don’t press enter just yet.</p>
-<pre><code> flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq \
-     --out-dir assembly \
-     --threads 8 \
-     --iterations 3 \
-     --meta</code></pre>
-<p>{: .bash}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> assembly <span class="dt">\</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">--threads</span> 8 <span class="dt">\</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--iterations</span> 3 <span class="dt">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
 <li><code>--nano-raw</code> tells Flye that it is receiving pre-Guppy5 reads and that the <strong>input</strong> is found at the path <code>~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq</code> (note that we are using our ‘filtered reads’ - there’d be no point doing quality control and filtering otherwise!)</li>
 <li><code>--out-dir</code> tells Flye that the <strong>output</strong> should be saved in the <code>assembly/</code> directory</li>
@@ -578,32 +721,61 @@ You can run Flye polisher as a standalone tool using
 <li><code>--iterations</code> indicates that the data will be polished <code>3</code> times</li>
 <li><code>--meta</code> indicates that the dataset is a metagenome</li>
 </ul>
-<p><strong><span style="color:red"> Don’t run this command yet! If you have, you can press <kbd>Ctrl</kbd>+<kbd>z</kbd> to stop the command.</span></strong></p>
+<p><strong><span style="color:red"> Don’t run this command yet! — If you have, you can press <kbd>Ctrl</kbd>+<kbd>z</kbd> to stop the command.</span></strong></p>
 <p>Now we’ve built our command we could stop here <strong>but</strong> metagenomic assembly takes a long time. If we were to run this command as is we’d have to stay logged into the instance (aka leaving your computer running) for hours.</p>
 <p>Luckily we don’t have to do that as we’re using a remote computer.</p>
 <section id="running-a-command-in-the-background" class="level3">
-<h3 class="anchored">Running a command in the background</h3>
+<h3 class="anchored" data-anchor-id="running-a-command-in-the-background">Running a command in the background</h3>
 <p>All the commands we have run so far have been in the “foreground”, meaning they’ve been run directly in the terminal window, the prompt disappears and we can’t use the terminal again until the command is finished.</p>
 <p>Commands can also be run in the “background” so the prompt is returned before the command is finished and we can continue using our terminal. Commands run in the background are often called “jobs”. A major advantage of running a long job in the background is that you can log out of your instance without killing the process.</p>
-<blockquote class="blockquote">
-<h2 id="warning" class="anchored" data-anchor-id="running-a-command-in-the-background">Warning</h2>
-<p>If you run the job in the foreground it will stop as soon as you log out of the instance! Running jobs in the background is your friend! {: .callout}</p>
-</blockquote>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you run the job in the foreground it will stop as soon as you log out of the instance! Running jobs in the background is your friend!</p>
+</div>
+</div>
 <p>To run a command in the background, we follow it with an ampersand (<code>&amp;</code>) symbol.</p>
 <p>The final thing to add to our <code>flye</code> command is “redirection”: <code>&amp;&gt; flye_output.txt</code> will send any output that would be sent to the terminal to a file, <code>flye_output.txt</code> instead</p>
-<p>The complete command is: ~~~ flye –nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq<br>
-–out-dir assembly<br>
-–threads 8<br>
-–iterations 3<br>
-–meta &amp;&gt; flye_output.txt &amp; ~~~ {: .bash}</p>
+<p>The complete command is:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> assembly <span class="dt">\</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">--threads</span> 8 <span class="dt">\</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--iterations</span> 3 <span class="dt">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span> <span class="op">&amp;&gt;</span> flye_output.txt <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><code>&amp;&gt;</code> redirects sends information that would normally go to the terminal to a file instead. This means any logging and progress information <code>flye</code> creates will be saved in <code>flye_output.txt</code>. Note the lack of a space between <code>&amp;&gt;</code>. The second <code>&amp;</code> then runs this command in the background.</p>
 <p>We can now press enter to run the command. Your prompt should immediately return. This doesn’t mean that the code has finished already: it is now running in the background.</p>
-<blockquote class="blockquote">
-<h2 id="running-commands-on-different-servers" class="anchored">Running commands on different servers</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Running commands on different servers
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>There are many different ways to run jobs in the background in a terminal.<br>
-How you run these commands will depend on the computing resources (and their fair use policies) you are using The main options include: * <code>&amp;</code>, which we’ve covered here. Depending on the infrastructure you’re running the command on, you may also need to use <a href="https://www.digitalocean.com/community/tutorials/nohup-command-in-linux"><code>nohup</code></a> to prevent the background job from being killed when you close the terminal.<br>
-* The command line program <a href="https://linuxize.com/post/how-to-use-linux-screen/"><code>screen</code></a>, which allows you to create a shell session that can be completely detached from a terminal and re-attached when needed. * Queuing system - many shared computing resources, like the High Performance Computing (HPC) clusters owned by some Universities, operate a queuing system (e.g.&nbsp;SLURM or SGE) so each user gets their fair share of computing resources. With these you submit your command / job to the queueing system, which will then handle when to run the job on the resources available. {: .callout}</p>
-</blockquote>
+How you run these commands will depend on the computing resources (and their fair use policies) you are using. The main options include:</p>
+<ul>
+<li><code>&amp;</code>, which we’ve covered here. Depending on the infrastructure you’re running the command on, you may also need to use <a href="https://www.digitalocean.com/community/tutorials/nohup-command-in-linux"><code>nohup</code></a> to prevent the background job from being killed when you close the terminal.<br>
+</li>
+<li>The command line program <a href="https://linuxize.com/post/how-to-use-linux-screen/"><code>screen</code></a>, which allows you to create a shell session that can be completely detached from a terminal and re-attached when needed.</li>
+<li>Queuing system - many shared computing resources, like the High Performance Computing (HPC) clusters owned by some Universities, operate a queuing system (e.g.&nbsp;SLURM or SGE) so each user gets their fair share of computing resources. With these you submit your command / job to the queueing system, which will then handle when to run the job on the resources available.</li>
+</ul>
+</div>
+</div>
 <p>As we’re running the command in the background we no longer see the output on the terminal but we can still check on the progress of the assembly. There are two options to do this.</p>
 <ol type="1">
 <li>Using the command <code>jobs</code> to view what is running</li>
@@ -612,17 +784,55 @@ How you run these commands will depend on the computing resources (and their fai
 </section>
 <section id="checking-progress-jobs" class="level3">
 <h3 class="anchored" data-anchor-id="checking-progress-jobs">Checking progress: <code>jobs</code></h3>
-<p>Jobs command is used to list the jobs that you are running in the background and in the foreground. If the prompt is returned with no information no commands are being run. ~~~ jobs ~~~ {: .bash} ~~~ [1]+ Running flye –nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq –out-dir assembly –threads 8 –iterations 3 –meta &amp;&gt; flye_output.txt &amp; ~~~ {: .output}</p>
+<p>Jobs command is used to list the jobs that you are running in the background and in the foreground. If the prompt is returned with no information no commands are being run.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[1]+  Running      flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir assembly --threads 8 --iterations 3 --meta &amp;&gt; flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The <code>[1]</code> is the job number. If you need to stop the job running, you can use <code>kill %1</code>, where 1 is the job number.</p>
 </section>
 <section id="checking-progress-the-log-file" class="level3">
-<h3 class="anchored">Checking progress: the log file</h3>
-<p>Flye generates a log file when running, which is stored in the output folder it has generated. Using <code>less</code> we can navigate through this file. ~~~ less assembly/flye.log ~~~ {: .bash}</p>
-<p>The contents of the file will depend on how far through the assembly Flye is. At the start of an assembly you’ll probably see something like this: ~~~ [2022-10-05 17:22:03] INFO: Starting Flye 2.9.1-b1780 [2022-10-05 17:22:03] INFO: &gt;&gt;&gt;STAGE: configure [2022-10-05 17:22:03] INFO: Configuring run [2022-10-05 17:22:17] INFO: Total read length: 3023658929 [2022-10-05 17:22:17] INFO: Reads N50/N90: 5389 / 2607 [2022-10-05 17:22:17] INFO: Minimum overlap set to 3000 [2022-10-05 17:22:17] INFO: &gt;&gt;&gt;STAGE: assembly ~~~ {: .output}</p>
+<h3 class="anchored" data-anchor-id="checking-progress-the-log-file">Checking progress: the log file</h3>
+<p>Flye generates a log file when running, which is stored in the output folder it has generated. Using <code>less</code> we can navigate through this file.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> assembly/flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The contents of the file will depend on how far through the assembly Flye is. At the start of an assembly you’ll probably see something like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:03] INFO: Starting Flye 2.9.1-b1780</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:03] INFO: &gt;&gt;&gt;STAGE: configure</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:03] INFO: Configuring run</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:17] INFO: Total read length: 3023658929</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:17] INFO: Reads N50/N90: 5389 / 2607</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:17] INFO: Minimum overlap set to 3000</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>[2022-10-05 17:22:17] INFO: &gt;&gt;&gt;STAGE: assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Different steps in the assembly process take different amounts of time so it might appear stuck. However, it is almost certainly still running if it was run in the background.</p>
 <p>Note: this log file will contain data similar to the data in the <code>flye_output.txt</code> file we’re generating when redirecting the terminal output. But it’s easier to look at the log file as flye will always generate that even if you’re running the command differently (e.g.&nbsp;in the foreground).</p>
-<blockquote class="blockquote">
-<h2 id="navigation-commands-in-less" class="anchored" data-anchor-id="checking-progress-the-log-file">Navigation commands in <code>less</code>:</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Navigation commands in <code>less</code>:
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <table class="table">
 <thead>
 <tr class="header">
@@ -653,8 +863,9 @@ How you run these commands will depend on the computing resources (and their fai
 </tr>
 </tbody>
 </table>
-<p>See <a href="https://cloud-span.github.io/prenomics02-command-line/02-working-with-file/index.html">Prenomics - Working with Files and Directories</a> for a full overview on using <code>less</code>. {: .callout}</p>
-</blockquote>
+<p>See <a href="https://cloud-span.github.io/prenomics02-command-line/02-working-with-file/index.html">Prenomics - Working with Files and Directories</a> for a full overview on using <code>less</code>.</p>
+</div>
+</div>
 <p>Flye is likely to take <strong>up to 5 hours</strong> to finish assembling - so feel free to leave this running overnight and come back to it tomorrow. You don’t need to remain connected to the instance during this time (and you can turn your computer off!) but once you have disconnected from the instance it does mean you can no longer use <code>jobs</code> to track the job.</p>
 <p>In the meantime, if you wanted to read more about assembly and metagenomics there’s a few papers and resources at the end with recommended reading.</p>
 </section>
@@ -662,26 +873,49 @@ How you run these commands will depend on the computing resources (and their fai
 <h3 class="anchored" data-anchor-id="determining-if-the-assembly-has-finished">Determining if the assembly has finished</h3>
 <p>After leaving it several hours, Flye should have finished assembling.</p>
 <p>If you remained connected to the instance during the process you will be able to tell it has finished because you get the following output in your terminal when the command has finished.</p>
-<pre><code>[2]+  Done      flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir assembly --threads 8 --iterations 3 --meta &amp;&gt; flye_output.txt &amp;</code></pre>
-<p>{: .output}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>[2]+  Done      flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir assembly --threads 8 --iterations 3 --meta &amp;&gt; flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This message won’t be displayed if you disconnected from the instance for whatever reason during the assembly process. However, you can still examine the <code>flye.log</code> file in the <code>assembly</code> directory. If the assembly has finished the log file will have summary statistics and information about the location of the assembly at the end.</p>
-<p>Move to the <code>assembly</code> directory and use <code>less</code> to examine the contents of the log file: ~~~ cd ~/cs_course/analysis/assembly/ less flye.log ~~~ {: .bash}</p>
-<p>Navigate to the end of the file using <kbd>G</kbd>. You should see something like: ~~~ [2023-02-24 14:41:27] root: INFO: Assembly statistics:</p>
-<pre><code>    Total length:   18872828
-    Fragments:      1161
-    Fragments N50:  20921
-    Largest frg:    118427
-    Scaffolds:      0
-    Mean coverage:  7</code></pre>
-<p>[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/analysis/assembly/assembly.fasta ~~~ {: .output}</p>
+<p>Move to the <code>assembly</code> directory and use <code>less</code> to examine the contents of the log file:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/assembly/</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Navigate to the end of the file using <kbd>G</kbd>. You should see something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb15" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Assembly statistics:</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        Total length:   18872828</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        Fragments:      1161</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        Fragments N50:  20921</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        Largest frg:    118427</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        Scaffolds:      0</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        Mean coverage:  7</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/analysis/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>There are some basic statistics about the final assembly created.</p>
 </section>
 <section id="what-is-the-assembly-output" class="level3">
-<h3 class="anchored">What is the Assembly output?</h3>
+<h3 class="anchored" data-anchor-id="what-is-the-assembly-output">What is the Assembly output?</h3>
 <p>If we use <code>ls</code> in the <code>assembly</code> directory we can see the that Flye has created many different files.</p>
-<pre><code>00-assembly   20-repeat     40-polishing    assembly_graph.gfa  assembly_info.txt  params.json
-10-consensus  30-contigger  assembly.fasta  assembly_graph.gv   flye.log</code></pre>
-<p>{: .output}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb16" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>00-assembly   20-repeat     40-polishing    assembly_graph.gfa  assembly_info.txt  params.json</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>10-consensus  30-contigger  assembly.fasta  assembly_graph.gv   flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>One of these is <code>flye.log</code> which we have already looked at.</p>
 <ul>
 <li>Flye generates a directory to contain the output for each step of the assembly process. (These are the <code>00-assembly</code>, <code>10-consensus</code>, <code>20-repeat</code>, <code>30-contigger</code> and <code>40-polishing</code> directories.)<br>
@@ -694,46 +928,110 @@ How you run these commands will depend on the computing resources (and their fai
 <li>Finally we have two files for a repeat graph (<code>assembly_graph.gfa</code> or <code>assembly_graph.gv</code>) which is a visual way to view the assembly.</li>
 </ul>
 <p>You can see more about the output for Flye in the <a href="https://github.com/fenderglass/Flye/blob/flye/docs/USAGE.md#output">documentation on GitHub</a>.</p>
-<blockquote class="blockquote">
-<h2 id="contigs-vs.-reads" class="anchored" data-anchor-id="what-is-the-assembly-output">Contigs vs.&nbsp;reads</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Contigs vs.&nbsp;reads
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>We have seen reads in the raw sequencing data - these are our individual jigsaw pieces.</p>
-<p>Contigs (from the word <em>contiguous</em>) are longer fragments of DNA produced after raw reads are joined together by the assembly process. These are like the chunks of the jigsaw puzzle the assembler has managed to complete. Contigs are usually much longer than raw reads but vary in length and number depending on how successful the assembly has been.<br>
-{: .callout}</p>
-</blockquote>
+<p>Contigs (from the word <em>contiguous</em>) are longer fragments of DNA produced after raw reads are joined together by the assembly process. These are like the chunks of the jigsaw puzzle the assembler has managed to complete.</p>
+<p>Contigs are usually much longer than raw reads but vary in length and number depending on how successful the assembly has been.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="assembly-statistics" class="level2">
 <h2 class="anchored" data-anchor-id="assembly-statistics">Assembly Statistics</h2>
 <p>Flye gave us basic statistics about the size of the assembly but not all assemblers do. We can use <a href="https://bioinf.shenwei.me/seqkit/">Seqkit</a> to calculate summary statistics from the assembly. We previously used another <code>Seqkit</code> command, <code>seq</code> to Filter our Nanopore sequences by quality. This time we will use the command <code>stats</code>.</p>
-<p>Make sure you are in the <code>assembly</code> folder then run <code>seqkit stats</code> on <code>assembly.fasta</code>: ~~~ cd ~/cs_course/analysis/assembly/ seqkit stats assembly.fasta ~~~ {: .bash}</p>
+<p>Make sure you are in the <code>assembly</code> folder then run <code>seqkit stats</code> on <code>assembly.fasta</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/assembly/</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p><code>SeqKit</code> is fast so we have run the command in the terminal foreground. It should take just a couple of seconds to process this assembly. Assemblies with more sequencing data can take a bit longer.</p>
-<p>Once it has finished you should see an output table like this: ~~~ file format type num_seqs sum_len min_len avg_len max_len assembly.fasta FASTA DNA 790 11,957,486 511 15,136.1 95,862</p>
-<p>~~~ {: .output}</p>
+<p>Once it has finished you should see an output table like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>file            format  type  num_seqs     sum_len  min_len   avg_len  max_len</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>assembly.fasta  FASTA   DNA      790    11,957,486      511  15,136.1    95,862</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This table shows the input file, the format of the file, the type of sequence and other statistics. The assembly process introduces small random variations in the assemly so your table will likely differ slightly. However, you should expect the numbers to be very similar.</p>
 <p>Using this table of statistics, answer the questions below.</p>
-<blockquote class="blockquote">
-<h2 id="exercise-1-looking-at-basic-statistics" class="anchored">Exercise 1: Looking at basic statistics</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1: Looking at basic statistics
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Using the output for seqkit stats above, answer the following questions.</p>
 <ol type="a">
 <li>How many contigs are in this assembly?<br>
 </li>
 <li>How many bases in total have been assembled?<br>
 </li>
-<li>What is the shortest and longest contig produced by this assembly?<br>
-&gt; ## Solution &gt; From our table:<br>
-&gt; a) From <code>num_seqs</code> we can see that this assembly is made up of 790 contigs<br>
-&gt; b) Looking at <code>sum_length</code> we can see that the assembly is 11,957,486bp in total (over 11 million bp!)<br>
-&gt; c) From <code>min_length</code> we can see the shortest contig is 511p and from <code>max_length</code> the longest contig is 95,862bp<br>
-{: .solution} {: .challenge}</li>
+<li>What is the shortest and longest contig produced by this assembly?</li>
 </ol>
-</blockquote>
-<blockquote class="blockquote">
-<h2 id="recommended-reading" class="anchored">Recommended reading:</h2>
-<p>While you’re waiting for the assembly to finish here are some things you might want to read about: * An overall background to the history of DNA sequencing in <a href="https://www.nature.com/articles/nature24286">DNA sequencing at 40: past, present and future</a><br>
-* An overview of a metagenomics project <a href="https://www.nature.com/articles/nbt.3935">Shotgun metagenomics, from sampling to analysis</a> - though note this paper is from 2017 so some techniques and software will be different now.<br>
-* The challenges of genomic and metagenomic assembly and the algorithms that have been built to overcome these in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2874646/">Assembly Algorithms for Next-Generation Sequencing Data</a><br>
-* The approach Flye uses to assemble metagenomes is covered in <a href="https://www.nature.com/articles/s41592-020-00971-x">metaFlye: scalable long-read metagenome assembly using repeat graphs</a> * Comparison of genome assembly for bacteria <a href="https://www.mdpi.com/1422-0067/22/14/7668/htm">Comparison of De Novo Assembly Strategies for Bacterial Genomes</a> * Benchmarking of assemblers including flye in prokaryotes <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/">Benchmarking of long-read assemblers for prokaryote whole genome sequencing</a> * Comparison of combined assembly and polishing method <a href="https://link.springer.com/article/10.1186/s13059-021-02483-z">Trycycler: consensus long-read assemblies for bacterial genomes</a> * Using nanopore to produce ultra long reads and contiguous assemblies <a href="https://www.nature.com/articles/nbt.4060">Nanopore sequencing and assembly of a human genome with ultra-long reads</a> {: .callout}</p>
-</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>From our table:<br>
+a) From <code>num_seqs</code> we can see that this assembly is made up of 790 contigs<br>
+b) Looking at <code>sum_length</code> we can see that the assembly is 11,957,486bp in total (over 11 million bp!)<br>
+c) From <code>min_length</code> we can see the shortest contig is 511p and from <code>max_length</code> the longest contig is 95,862bp</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recommended reading:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While you’re waiting for the assembly to finish here are some things you might want to read about:</p>
+<ul>
+<li>An overall background to the history of DNA sequencing in <a href="https://www.nature.com/articles/nature24286">DNA sequencing at 40: past, present and future</a><br>
+</li>
+<li>An overview of a metagenomics project <a href="https://www.nature.com/articles/nbt.3935">Shotgun metagenomics, from sampling to analysis</a> - though note this paper is from 2017 so some techniques and software will be different now.<br>
+</li>
+<li>The challenges of genomic and metagenomic assembly and the algorithms that have been built to overcome these in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2874646/">Assembly Algorithms for Next-Generation Sequencing Data</a><br>
+</li>
+<li>The approach Flye uses to assemble metagenomes is covered in <a href="https://www.nature.com/articles/s41592-020-00971-x">metaFlye: scalable long-read metagenome assembly using repeat graphs</a></li>
+<li>Comparison of genome assembly for bacteria <a href="https://www.mdpi.com/1422-0067/22/14/7668/htm">Comparison of De Novo Assembly Strategies for Bacterial Genomes</a></li>
+<li>Benchmarking of assemblers including flye in prokaryotes <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6966772/">Benchmarking of long-read assemblers for prokaryote whole genome sequencing</a></li>
+<li>Comparison of combined assembly and polishing method <a href="https://link.springer.com/article/10.1186/s13059-021-02483-z">Trycycler: consensus long-read assemblies for bacterial genomes</a></li>
+<li>Using nanopore to produce ultra long reads and contiguous assemblies <a href="https://www.nature.com/articles/nbt.4060">Nanopore sequencing and assembly of a human genome with ultra-long reads</a></li>
+</ul>
+</div>
+</div>
 
 
 </section>
@@ -1148,7 +1446,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html" class="pagination-link" aria-label="Assessing Read Quality, Trimming and Filtering">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Assessing Read Quality, Trimming and Filtering</span>
@@ -1168,7 +1466,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson03-qc-assembly/02-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson03-qc-assembly/02-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

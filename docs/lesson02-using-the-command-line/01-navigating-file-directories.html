@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Navigating Files and Directories</title>
+<title>Cloud-SPAN Metagenomics - Navigating Files and Directories</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson02-using-the-command-line/02-working-with-file.html" rel="next">
 <link href="../../docs/lesson02-using-the-command-line/index.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -385,10 +420,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#navigational-shortcuts" id="toc-navigational-shortcuts" class="nav-link" data-scroll-target="#navigational-shortcuts">Navigational Shortcuts</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/01-navigating-file-directories.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson02-using-the-command-line/01-navigating-file-directories.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/index.html">Using the Command Line</a></li><li class="breadcrumb-item"><a href="../../docs/lesson02-using-the-command-line/01-navigating-file-directories.html">Navigating Files and Directories</a></li></ol></nav>
 <div class="quarto-title">
@@ -397,7 +432,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -412,111 +447,216 @@ ul.task-list li input[type="checkbox"] {
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting started</h2>
 <p>The first thing we need to do is log in to our cloud instance.</p>
-<ol type="1">
-<li><p><strong>Open the <em>cloudspan</em> folder you created for the course</strong></p>
+<section id="open-the-cloudspan-folder-you-created-for-the-course" class="level5">
+<h5 class="anchored" data-anchor-id="open-the-cloudspan-folder-you-created-for-the-course"><strong>1. Open the <em>cloudspan</em> folder you created for the course</strong></h5>
 <p>Open your file manager and navigate to the <code>cloudspan</code> folder (hint: we recommended you make the folder in your <em>Desktop</em> directory - but you might have made it somewhere else). If you cannot find the folder, you can remind yourself where it is stored by looking at the absolute path you wrote down in the previous episode.</p>
-<p>The folder should contain the login key file we downloaded in the previous episode and nothing else.</p></li>
-<li><p><strong>Right-click and open your machine’s command line interface</strong></p>
+<p>The folder should contain the login key file we downloaded in the previous episode and nothing else.</p>
+</section>
+<section id="right-click-and-open-your-machines-command-line-interface" class="level5">
+<h5 class="anchored" data-anchor-id="right-click-and-open-your-machines-command-line-interface"><strong>2. Right-click and open your machine’s command line interface</strong></h5>
 <p>Now we can open the command line.</p>
-<p><strong>Windows users</strong>: right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>.</p>
-<p><strong>Mac users</strong> you have two options:<br>
-EITHER:</p>
+<p><strong>Windows users</strong>:</p>
+<ul>
+<li>right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>.</li>
+</ul>
+<p><strong>Mac users</strong> you have two options:</p>
+<p>EITHER:</p>
 <ul>
 <li>Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space but <strong>don’t press</strong> <code>Enter</code> yet! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</li>
 </ul>
 <p>OR</p>
 <ul>
 <li>Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</li>
-</ul></li>
-<li><p><strong>Login into your instance</strong></p>
-<pre><code>$ ssh -i login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</code></pre>
-<p>{: .bash}</p></li>
-</ol>
+</ul>
+</section>
+<section id="login-into-your-instance" class="level5">
+<h5 class="anchored" data-anchor-id="login-into-your-instance"><strong>3. Login into your instance</strong></h5>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-i</span> login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><em>Be sure to replace NNN with your own number, twice.</em></p>
+</section>
 </section>
 <section id="reminder-our-file-structure" class="level2">
 <h2 class="anchored" data-anchor-id="reminder-our-file-structure">Reminder: our file structure</h2>
-<p>Before we start, here’s a reminder of what our file structure looks like as a hierarchy tree: <img src="../fig/blank_instance_file_tree_with_hidden.png" class="img-fluid" alt="A file hierarchy tree">{:width=“400px”}</p>
+<p>Before we start, here’s a reminder of what our file structure looks like as a hierarchy tree:</p>
+<!-- ![A file hierarchy tree](../fig/blank_instance_file_tree_with_hidden.png){:width="400px"} -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" width="350"></p>
+<figcaption>A file hierarchy tree.</figcaption>
+</figure>
+</div>
 <p>Keep this in mind as we continue to navigate the file system, and don’t hesitate to refer back to it if needed.</p>
 </section>
 <section id="examining-the-contents-of-other-directories" class="level2">
 <h2 class="anchored" data-anchor-id="examining-the-contents-of-other-directories">Examining the contents of other directories</h2>
 <p>In the previous session we learned how to use <code>pwd</code> to find our current location within our file system. We also learned how to use <code>cd</code> to change locations and <code>ls</code> to list the contents of a directory.</p>
 <p>By default, the <code>ls</code> commands lists the contents of the working directory (i.e.&nbsp;the directory you are in). You can always find the directory you are in using the <code>pwd</code> command. However, you can also give <code>ls</code> the names of other directories to view. Navigate to your home directory if you are not already there.</p>
-<pre><code>$ cd</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then enter the command:</p>
-<pre><code>$ ls cs_course</code></pre>
-<p>{: .bash}</p>
-<pre><code>data   databases</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls cs_course</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>data   databases</code></pre>
+</div>
+</div>
 <p>This will list the contents of the <code>cs_course</code> directory without you needing to navigate there.</p>
 <p>The <code>cd</code> command works in a similar way.</p>
 <p>Try entering:</p>
-<pre><code>$ cd
-$ cd cs_course/data/</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course/data/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This will take you to the <code>data</code> directory without having to go through the intermediate <code>cs_course</code> directory.</p>
-<blockquote class="blockquote">
-<h2 id="navigating-practice" class="anchored">Navigating practice</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Navigating practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Navigate to your home directory. From there, list the contents of the <code>illumina_fastq</code> directory.</p>
-<blockquote class="blockquote">
-<h2 id="solution" class="anchored">Solution</h2>
-<pre><code>$ cd
-$ ls cs_course/data/illumina_fastq</code></pre>
-<p>{: .bash}</p>
-<pre><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
-<p>{: .output}</p>
-<p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls cs_course/data/illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR4998593_1.fastq  ERR4998593_2.fastq</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="full-vs.-relative-paths" class="level2">
 <h2 class="anchored" data-anchor-id="full-vs.-relative-paths">Full vs.&nbsp;Relative Paths</h2>
 <p>The <code>cd</code> command takes an argument which is a directory name. Directories can be specified using either a <em>relative</em> path or a full <em>absolute</em> path. The directories on the computer are arranged into a hierarchy. The full path tells you where a directory is in that hierarchy. Navigate to the home directory, then enter the <code>pwd</code> command.</p>
-<pre><code>$ cd  
-$ pwd  </code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd  </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> pwd  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will see:</p>
-<pre><code>/home/csuser</code></pre>
-<p>{: .output}</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>/home/csuser</code></pre>
+</div>
+</div>
 <p>This is the full name of your home directory. This tells you that you are in a directory called <code>csuser</code>, which sits inside a directory called <code>home</code> which sits inside the very top directory in the hierarchy. The very top of the hierarchy is a directory called <code>/</code> which is usually referred to as the <em>root directory</em>. So, to summarize: <code>csuser</code> is a directory in <code>home</code> which is a directory in <code>/</code>. More on <code>root</code> and <code>home</code> in the next section.</p>
 <p>Now enter the following command:</p>
-<pre><code>$ cd /home/csuser/cs_course/.hidden</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd /home/csuser/cs_course/.hidden</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This jumps forward multiple levels to the <code>.hidden</code> directory. Now go back to the home directory.</p>
-<pre><code>$ cd</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can also navigate to the <code>.hidden</code> directory using:</p>
-<pre><code>$ cd cs_course/.hidden</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course/.hidden</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>These two commands have the same effect, they both take us to the <code>.hidden</code> directory. The first uses the absolute path, giving the full address from the root directory <code>/</code>. The second uses a relative path, giving only the address from the working directory. A absolute (full) path always starts with a <code>/</code>. A relative path does not.</p>
 <p>You can usually use either a full path or a relative path depending on what is most convenient. If you want to reach a directory further down the same branch as your current working directory, it’s easiest to use the relative path since it involves less typing. If you’re trying to get to a directory in a different branch, it might be more convenient to use the full path instead of navigating “backwards” and then forwards.</p>
 <p>Over time, it will become easier for you to keep a mental note of the structure of the directories that you are using and how to quickly navigate amongst them. We will be using the same directory structure for this whole course so navigating it should get easier as you progress.</p>
-<blockquote class="blockquote">
-<h2 id="relative-path-resolution" class="anchored">Relative path resolution</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Relative path resolution
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Using the file system diagram below, if <code>pwd</code> displays <code>~/csuser/cs_course/data/illumina_fastq</code>, what will <code>ls ../nano_fastq</code> display?</p>
 <p>Can you explain why?</p>
-<p><img src="../fig/blank_instance_file_tree_with_hidden.png" class="img-fluid" alt="blank instance file tree">{:width=“300px”}</p>
-<blockquote class="blockquote">
-<h2 id="solution-1" class="anchored">Solution</h2>
-<pre><code>ERR5000342_sub12.fastq</code></pre>
-<p>{: .output}</p>
-<p>The command <code>ls ..</code> moves us up a folder level before we list the contents of <code>nano_fastq</code>. {: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+<!-- ![Blank instance file tree.](../fig/blank_instance_file_tree_with_hidden.png){:width="300px"} -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" width="300"></p>
+<figcaption>Blank instance file tree.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>ERR5000342_sub12.fastq</code></pre>
+</div>
+</div>
+<p>The command <code>ls ..</code> moves us up a folder level before we list the contents of <code>nano_fastq</code>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <section id="navigational-shortcuts" class="level3">
 <h3 class="anchored" data-anchor-id="navigational-shortcuts">Navigational Shortcuts</h3>
 <p>The root directory is the highest level directory in your file system and contains files that are important for your computer to perform its daily work. While you will be using the root (<code>/</code>) at the beginning of your absolute paths, it is important that you avoid working with data in these higher-level directories, as your commands can permanently alter files that the operating system needs to function. In many cases, trying to run commands in <code>root</code> directories will require special permissions which are not discussed here, so it’s best to avoid them and work within your home directory. Dealing with your home directory is very common. The tilde character, <code>~</code>, is a shortcut for your home directory. In our case, the <code>root</code> directory is <strong>two</strong> levels above our <code>home</code> directory, so <code>cd</code> or <code>cd ~</code> will take you to<code>/home/csuser</code> and <code>cd /</code> will take you to <code>/</code>.</p>
 <p>Navigate to the <code>illumina_fastq</code> directory:</p>
-<pre><code>$ cd
-$ cd cs_course/data/illumina_fastq</code></pre>
-<p>{: .bash}</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> cd cs_course/data/illumina_fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Then enter the command:</p>
-<pre><code>$ ls ~</code></pre>
-<p>{: .bash}</p>
-<pre><code>bin  cs_course software</code></pre>
-<p>{: .output}</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ls ~</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre class="text"><code>bin  cs_course software</code></pre>
+</div>
+</div>
 <p>This prints the contents of your home directory, without you needing to type the full path.</p>
 <p>The commands <code>cd</code>, and <code>cd ~</code> are very useful for quickly navigating back to your home directory. We will be using the <code>~</code> character in later lessons to specify our home directory.</p>
 
@@ -934,7 +1074,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson02-using-the-command-line/index.html" class="pagination-link" aria-label="Using the Command Line">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Using the Command Line</span>
@@ -954,7 +1094,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson02-using-the-command-line/01-navigating-file-directories.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson02-using-the-command-line/01-navigating-file-directories.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

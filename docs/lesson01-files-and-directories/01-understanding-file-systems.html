@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Understanding your file system</title>
+<title>Cloud-SPAN Metagenomics - Understanding your file system</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html" rel="next">
 <link href="../../docs/lesson01-files-and-directories/index.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -384,10 +385,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#create-a-folder-for-the-course" id="toc-create-a-folder-for-the-course" class="nav-link" data-scroll-target="#create-a-folder-for-the-course">Create a folder for the course</a></li>
   <li><a href="#download-your-login-key-file" id="toc-download-your-login-key-file" class="nav-link" data-scroll-target="#download-your-login-key-file">Download your login key file</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/01-understanding-file-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson01-files-and-directories/01-understanding-file-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/index.html">Files and Directories</a></li><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html">Understanding your file system</a></li></ol></nav>
 <div class="quarto-title">
@@ -396,7 +397,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -416,12 +417,25 @@ ul.task-list li input[type="checkbox"] {
 <p>We will come across various different file types during this course, some of which you may not have seen before. Do not worry. We will introduce them to you and explain how to use them when necessary.</p>
 <p>In a file system, files are organised into <strong>directories</strong>, which can also be called <strong>folders</strong>. Hopefully you will have used folders to organise your files before! Folders can contain sub-folders, which can contain their own sub-folders, and so on almost without limit.</p>
 <p>It is easiest to picture a file system, or part of it, as a tree that starts at a directory and branches out from there. This is called a <strong>hierarchical structure</strong>. The figure below shows an example of a hierarchical file structure that starts at the “<strong>home directory</strong>” of the user named <strong>user1</strong>:</p>
-<p><img src="../fig/prenomics_file_hierarchy.png" class="img-fluid" alt="A file hierarchy containing 4 levels of folders and files">{:width=“450px”}</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/prenomics_file_hierarchy.png" class="img-fluid figure-img" width="400"></p>
+<figcaption>A file hierarchy containing 4 levels of folders and files.</figcaption>
+</figure>
+</div>
 <p>The directory you are working inside is called your <strong>working directory</strong>. For example, if you were editing <code>doc2.txt</code> in the diagram above, your working directory would be the folder called <code>docs</code>.</p>
-<blockquote class="blockquote">
-<h2 id="exercise" class="anchored">Exercise</h2>
-<p>Think about your own computer and how your files and directories are organised. Sketch a tree diagram like the one above for your file system.<br>
-Hint: remind yourself of your file system’s layout using a file manager application such as:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Think about your own computer and how your files and directories are organised. Sketch a tree diagram like the one above for your file system.</p>
+<p>Hint: remind yourself of your file system’s layout using a file manager application such as:</p>
 <table class="table">
 <colgroup>
 <col style="width: 50%">
@@ -429,23 +443,26 @@ Hint: remind yourself of your file system’s layout using a file manager applic
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">OS</th>
-<th style="text-align: left;">Icon</th>
+<th>OS</th>
+<th>Icon</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">File Explorer (Windows)</td>
-<td style="text-align: left;"><img src="../fig/icon-file-explorer-windows.png" width="50px"></td>
+<td>File Explorer (Windows)</td>
+<td><img src="../../images/icon-file-explorer-windows.png" class="img-fluid" width="50" alt="."></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Finder (Mac)</td>
-<td style="text-align: left;"><img src="../fig/icon-finder-mac.png" width="50px"></td>
+<td>Finder (Mac)</td>
+<td><img src="../../images/icon-finder-mac.png" class="img-fluid" width="50" alt="."></td>
 </tr>
 </tbody>
 </table>
-<p>You probably already use these applications regularly to find, open and organise files. {: .challenge}</p>
-</blockquote>
+<p>You probably already use these applications regularly to find, open and organise files.</p>
+</div>
+</div>
+<!-- >| File Explorer (Windows) | <img src="../fig/icon-file-explorer-windows.png" width="50px"> | -->
+<!-- | Finder (Mac) | <img src="../fig/icon-finder-mac.png" width="50px"> | -->
 </section>
 <section id="file-paths" class="level2">
 <h2 class="anchored" data-anchor-id="file-paths">File paths</h2>
@@ -462,7 +479,14 @@ Hint: remind yourself of your file system’s layout using a file manager applic
 <p>Even though the root directory is at the base of the file tree (or the top, depending on how you view it), it is not necessarily where our journey through the file system starts when we launch a new session on our computer. Instead our journey begins in the so called “home directory”.</p>
 <p>In Windows, Mac, Unix, and Linux, the “<strong>home directory</strong>” is a folder named with your username. Your personal files and directories can be found inside this folder. This is where your computer assumes you want to start when you open your file manager.</p>
 <p>On Windows and Mac your home directory is a directory inside directory called <strong>Users</strong> and named with your username. On Unix/Linux systems it is called <strong>home</strong>.</p>
-<p>From the root, the file system is: <img src="../fig/prenomics_file_hierarchy_root.png" class="img-fluid" alt="A file hierarchy containing with root and home directories labelled">{:width=“450px”}</p>
+<p>From the root, the file system is:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/prenomics_file_hierarchy_root.png" class="img-fluid figure-img" width="375"></p>
+<figcaption>A file hierarchy containing with root and home directories labelled.</figcaption>
+</figure>
+</div>
+<!-- ![A file hierarchy containing with root and home directories labelled](../fig/prenomics_file_hierarchy_root.png){:width="450px"} -->
 <p>Your home directory is:</p>
 <ul>
 <li><code>C:\Users\user1\</code> on Windows</li>
@@ -477,22 +501,42 @@ Hint: remind yourself of your file system’s layout using a file manager applic
 <p>An absolute path contains the complete list of directories needed to locate a file on your computer. This allows you to reach the file no matter where you are.</p>
 <p>A relative path describes the location of a file relative to your current working directory. For example, if you were already in the folder called <code>docs</code>, the relative path for <code>doc3.txt</code> would be <code>data/doc3.txt</code>. There is no need to give instructions to navigate a route you have already taken.</p>
 <p>If, however, you were in the folder called <code>docs</code> and you wanted to open one of the <code>.exe</code> files, you would need to give the path to <code>.exe</code> <em>relative</em> to the docs folder or give the absolute path.</p>
-<blockquote class="blockquote">
-<h2 id="challenge" class="anchored">Challenge</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Challenge
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Use the file system above to answer these questions. Don’t forget to share your answer on the forum!</p>
 <ol type="1">
 <li>What is the absolute path for the document <code>doc4.txt</code> on a Linux computer?</li>
 <li>Assuming you are currently in the directory called <code>docs</code>, what is the relative path for the document <code>doc2.txt</code>?</li>
 </ol>
-<blockquote class="blockquote">
-<h2 id="solution" class="anchored">Solution</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <ol type="1">
 <li>The absolute path is <code>/home/user1/docs/data/doc4.txt</code> or <code>~/docs/data/doc4.txt</code>.</li>
 <li>The relative path is <code>doc2.txt</code> (as you are already in the directory where <code>doc2.txt</code> is stored).</li>
 </ol>
-<p>{: .solution} {: .challenge}</p>
-</blockquote>
-</blockquote>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="create-a-folder-for-the-course" class="level2">
 <h2 class="anchored" data-anchor-id="create-a-folder-for-the-course">Create a folder for the course</h2>
@@ -506,8 +550,8 @@ Hint: remind yourself of your file system’s layout using a file manager applic
 <li><p><strong>Write down the absolute path</strong> to your <code>cloudspan</code> folder.</p>
 <p>Find out what the absolute path is using your file manager application. Right click on the folder, or in any blank space inside the folder, and then:</p>
 <ul>
-<li>Windows users: select <em>Properties</em>, then look at the field called <em>Location</em>. Your path will be separated with backslashes (<code>\</code>) but you should write it down using forward slashes (<code>/</code>).</li>
-<li>Mac Users: select <em>Get info</em>, then look at the field called <em>Where</em>. Your path should start with the word <code>Users/</code> - ignore anything that comes before this. Separate your path components using forward slashes (<code>/</code>).</li>
+<li><strong>Windows users</strong>: select <em>Properties</em>, then look at the field called <em>Location</em>. Your path will be separated with backslashes (<code>\</code>) but you should write it down using forward slashes (<code>/</code>).</li>
+<li><strong>Mac Users</strong>: select <em>Get info</em>, then look at the field called <em>Where</em>. Your path should start with the word <code>Users/</code> - ignore anything that comes before this. Separate your path components using forward slashes (<code>/</code>).</li>
 </ul>
 <p>Now add the folder name (<code>/cloudspan</code>) to the end of this path. This is your absolute path. Once you have this written down, do not lose it! Now you can find your way back to the <code>cloudspan</code> folder whenever you need to, no matter where you are in your file structure.</p></li>
 </ol>
@@ -941,7 +985,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson01-files-and-directories/index.html" class="pagination-link" aria-label="Files and Directories">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Files and Directories</span>
@@ -961,7 +1005,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson01-files-and-directories/01-understanding-file-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson01-files-and-directories/01-understanding-file-systems.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

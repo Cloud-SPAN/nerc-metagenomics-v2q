@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Automating Metagenomics Analyses with Bash Scripts - Polishing an assembly</title>
+<title>Cloud-SPAN Metagenomics - Polishing an assembly</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -31,6 +65,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <link href="../../docs/lesson04-polishing/02-QC-polished-assembly.html" rel="next">
 <link href="../../docs/lesson04-polishing/index.html" rel="prev">
+<link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -124,7 +159,7 @@ ul.task-list li input[type="checkbox"] {
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
@@ -386,10 +421,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#running-pilon" id="toc-running-pilon" class="nav-link" data-scroll-target="#running-pilon">Running Pilon</a></li>
   </ul></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson04-polishing/01-polishing-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson04-polishing/01-polishing-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content page-columns page-full column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/index.html">Polishing</a></li><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/01-polishing-assembly.html">Polishing an assembly</a></li></ol></nav>
 <div class="quarto-title">
@@ -398,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -410,18 +445,28 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In the <a href="https://cloud-span.github.io/metagenomics01-qc-assembly/03-assembly/index.html">previous episode</a> we generated a draft assembly using Flye from our long read Nanopore data.</p>
-<p>Long reads can span regions which make them difficult to assemble with short reads such as regions with large repeats. Despite this, some long reads will be misassembled. In addition, the base accuracy of long reads is lower than that of short reads and some bases will be incorrectly assigned. Consequently it is common to correct these errors known as “polishing” an assembly. We will use two polishing strategies: 1. Polishing with long reads using <a href="https://github.com/nanoporetech/medaka">Medaka</a>. This maps the raw long reads to the assembly to identify contigs that have been incorrectly joined. 2. Polishing with short reads using <a href="https://github.com/broadinstitute/pilon">Pilon</a> which uses the more accurate short read data to correct incorrectly called bases in the assembly. More detail on the advantages and disadvantages of short and long read sequencing is covered in our <a href="https://cloud-span.github.io/experimental_design00-overview/">Statistically useful experimental design</a> workshop in <a href="https://cloud-span.github.io/experimental_design01-principles/01-platform/index.html">Platform choice</a>.</p>
+<p>In the <a href="../../docs/lesson03-qc-assembly/02-assembly.html">previous episode</a> we generated a draft assembly using Flye from our long read Nanopore data.</p>
+<p>Long reads can span regions which make them difficult to assemble with short reads such as regions with large repeats. Despite this, some long reads will be misassembled. In addition, the base accuracy of long reads is lower than that of short reads and some bases will be incorrectly assigned. Consequently it is common to correct these errors known as “polishing” an assembly. We will use two polishing strategies:</p>
+<ol type="1">
+<li>Polishing with long reads using <a href="https://github.com/nanoporetech/medaka">Medaka</a>. This maps the raw long reads to the assembly to identify contigs that have been incorrectly joined.</li>
+<li>Polishing with short reads using <a href="https://github.com/broadinstitute/pilon">Pilon</a> which uses the more accurate short read data to correct incorrectly called bases in the assembly. More detail on the advantages and disadvantages of short and long read sequencing is covered in our <a href="https://cloud-span.github.io/experimental_design00-overview/">Statistically useful experimental design</a> workshop in <a href="https://cloud-span.github.io/experimental_design01-principles/01-platform/index.html">Platform choice</a>.</li>
+</ol>
 <section id="polishing-with-short-reads" class="level3">
 <h3 class="anchored" data-anchor-id="polishing-with-short-reads">Polishing with short reads</h3>
-<p><img width="525" height="307" src="{{ page.root }}/fig/04_polishing_diagram_v1.png" alt="Diagram showing overlap of reads for polishing"> &nbsp; &nbsp; &nbsp;</p>
+<!-- <img width="525" height="307" src="{{ page.root }}/fig/04_polishing_diagram_v1.png" alt="Diagram showing overlap of reads for polishing" /> &nbsp; &nbsp; &nbsp; -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/04_polishing_diagram_v1.png" width="525" height="307" class="figure-img"></p>
+<figcaption>Diagram showing overlap of reads for polishing.</figcaption>
+</figure>
+</div>
 <p>In the diagram, the long read assembly is shown at the top. The four short reads shown below the assembly have been aligned to it. The third position in the assembly is <code>A</code> but the three short reads that cover this region contain a <code>T</code>. The assembly probably contains a miscalled base but it can be corrected - or polished - at this position with the higher accuracy short read information. Typically short read polishing would be carried out three times with the base accuracy increasing each time. However, to reduce the compute requirements and the time required to finish the assembly, we will be performing it just once.</p>
 </section>
 <section id="why-bother-polishing" class="level2">
 <h2 class="anchored" data-anchor-id="why-bother-polishing">Why bother polishing?</h2>
 <p>How important polishing is to your analysis will depend on what you need it for. Usually we generate metagenome assemblies so we can compare the sequences to a database and find out what taxa they belong to.</p>
 <p>You might <strong>NOT</strong> need to polish your assembly if: - you only need to taxa to the genus level (meaning single incorrect bases are not important)</p>
-<p>You <strong>DO</strong> need to polish your assembly if: - you want to identify taxa to the species level (if possible). This is a common requirement since one of the main advantages of whole genome sequencing over amplicon sequencing is that you can assign annotations to the species level. We will cover <a href="https://cloud-span.github.io/nerc-metagenomics06-taxonomic-anno/">Taxonomic annotations</a> later in the course. - you want to generate protein predictions or identify protein structure domains to determine the functionality of metagenomes. This is discussed in more detail in Watson and Warr (2019): <a href="https://www.nature.com/articles/s41587-018-0004-z">Errors in long-read assemblies can critically affect protein prediction</a>.</p>
+<p>You <strong>DO</strong> need to polish your assembly if: - you want to identify taxa to the species level (if possible). This is a common requirement since one of the main advantages of whole genome sequencing over amplicon sequencing is that you can assign annotations to the species level. We will cover <a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic annotations</a> later in the course. - you want to generate protein predictions or identify protein structure domains to determine the functionality of metagenomes. This is discussed in more detail in Watson and Warr (2019): <a href="https://www.nature.com/articles/s41587-018-0004-z">Errors in long-read assemblies can critically affect protein prediction</a>.</p>
 </section>
 <section id="polishing-an-assembly-with-long-reads" class="level2">
 <h2 class="anchored" data-anchor-id="polishing-an-assembly-with-long-reads">Polishing an assembly with long reads</h2>
@@ -429,32 +474,47 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://github.com/nanoporetech/medaka">Medaka</a> is a command line tool built by Oxford Nanopore Technologies which will polish an assembly by generating a consensus from raw Nanopore sequences using a recurrent neural network.</p>
 <p>We will be using one Medaka command, <code>medaka_consensus</code>. This pipeline will first align the raw reads to the draft assembly, then process this alignment to generate a pileup. The pileup is presented to a recurrent neural network in order to produce a consensus sequence.</p>
 <p>Medaka is installed on the AWS instance. Let’s take a look at the help page for <code>medaka_consensus</code>:</p>
-<pre><code>medaka_consensus -h</code></pre>
-<p>{: .bash}</p>
-<blockquote class="blockquote">
-<h2 id="medaka_consensus-help" class="anchored"><code>medaka_consensus</code> Help</h2>
-<pre><code>medaka 1.7.2
-
-Assembly polishing via neural networks. Medaka is optimized
-to work with the Flye assembler.
-
-medaka_consensus [-h] -i &lt;fastx&gt; -d &lt;fasta&gt;
-
-    -h  show this help text.
-    -i  fastx input basecalls (required).
-    -d  fasta input assembly (required).
-    -o  output folder (default: medaka).
-    -g  don't fill gaps in consensus with draft sequence.
-    -r  use gap-filling character instead of draft sequence (default: None)
-    -m  medaka model, (default: r941_min_hac_g507).
-        Choices: r103_fast_g507 r103_hac_g507 r103_min_high_g345 r103_min_high_g360 r103_prom_high_g360 r103_sup_g507 r1041_e82_400bps_fast_g615 r1041_e82_400bps_hac_g615 r1041_e82_400bps_sup_g615 r104_e81_fast_g5015 r104_e81_hac_g5015 r104_e81_sup_g5015 r104_e81_sup_g610 r10_min_high_g303 r10_min_high_g340 r941_e81_fast_g514 r941_e81_hac_g514 r941_e81_sup_g514 r941_min_fast_g303 r941_min_fast_g507 r941_min_hac_g507 r941_min_high_g303 r941_min_high_g330 r941_min_high_g340_rle r941_min_high_g344 r941_min_high_g351 r941_min_high_g360 r941_min_sup_g507 r941_prom_fast_g303 r941_prom_fast_g507 r941_prom_hac_g507 r941_prom_high_g303 r941_prom_high_g330 r941_prom_high_g344 r941_prom_high_g360 r941_prom_high_g4011 r941_prom_sup_g507 r941_sup_plant_g610
-        Alternatively a .tar.gz/.hdf file from 'medaka train'.
-    -f  Force overwrite of outputs (default will reuse existing outputs).
-    -x  Force recreation of alignment index.
-    -t  number of threads with which to create features (default: 1).
-    -b  batchsize, controls memory use (default: 100).</code></pre>
-<p>{: .output} {: .solution}</p>
-</blockquote>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">medaka_consensus</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<code>Output --- medaka_consensus</code> Help
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>medaka 1.7.2</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Assembly polishing via neural networks. Medaka is optimized</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>to work with the Flye assembler.</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>medaka_consensus [-h] -i &lt;fastx&gt; -d &lt;fasta&gt;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     -h  show this help text.</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     -i  fastx input basecalls (required).</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>     -d  fasta input assembly (required).</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>     -o  output folder (default: medaka).</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>     -g  don't fill gaps in consensus with draft sequence.</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>     -r  use gap-filling character instead of draft sequence (default: None)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     -m  medaka model, (default: r941_min_hac_g507).</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>         Choices: r103_fast_g507 r103_hac_g507 r103_min_high_g345 r103_min_high_g360 r103_prom_high_g360 r103_sup_g507 r1041_e82_400bps_fast_g615 r1041_e82_400bps_hac_g615 r1041_e82_400bps_sup_g615 r104_e81_fast_g5015 r104_e81_hac_g5015 r104_e81_sup_g5015 r104_e81_sup_g610 r10_min_high_g303 r10_min_high_g340 r941_e81_fast_g514 r941_e81_hac_g514 r941_e81_sup_g514 r941_min_fast_g303 r941_min_fast_g507 r941_min_hac_g507 r941_min_high_g303 r941_min_high_g330 r941_min_high_g340_rle r941_min_high_g344 r941_min_high_g351 r941_min_high_g360 r941_min_sup_g507 r941_prom_fast_g303 r941_prom_fast_g507 r941_prom_hac_g507 r941_prom_high_g303 r941_prom_high_g330 r941_prom_high_g344 r941_prom_high_g360 r941_prom_high_g4011 r941_prom_sup_g507 r941_sup_plant_g610</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>         Alternatively a .tar.gz/.hdf file from 'medaka train'.</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>     -f  Force overwrite of outputs (default will reuse existing outputs).</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>     -x  Force recreation of alignment index.</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>     -t  number of threads with which to create features (default: 1).</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>     -b  batchsize, controls memory use (default: 100).</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>To use Medaka we need to specify certain parameters in the command, like we did when we ran Flye last session. The help page tells us that the basic format for medaka is <code>medaka_consensus [-h] -i &lt;fastx&gt; -d &lt;fasta&gt;1</code>, indicating that the <code>-i</code> and <code>-d</code> flags are mandatory.</p>
 <p>Let’s have a look at the flags and options we’re going to use:</p>
 <table class="table">
@@ -495,39 +555,178 @@ medaka_consensus [-h] -i &lt;fastx&gt; -d &lt;fasta&gt;
 </table>
 <p>Once again we will run this command in the background and redirect the output to a file. This means we add <code>&amp;&gt; medaka.out</code> to redirect the output and <code>&amp;</code> to the very end to make it run in the background.</p>
 <p>Before we start let’s make sure we’re in the <code>analysis</code> folder and create a directory called <code>medaka</code> for our output.</p>
-<pre><code>cd ~/cs_course/analysis/
-mkdir medaka</code></pre>
-<p>{: .bash}</p>
-<p>Now it’s time to run Medaka! ~~~ medaka_consensus<br>
--i ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq<br>
--d assembly/assembly.fasta<br>
--m r941_min_hac_g507<br>
--o medaka<br>
--t 8<br>
-&amp;&gt; medaka.out &amp; ~~~ {: .bash}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> medaka</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now it’s time to run Medaka!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">medaka_consensus</span> <span class="dt">\</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>-i ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>-d assembly/assembly.fasta <span class="dt">\</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>-m r941_min_hac_g507 <span class="dt">\</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>-o medaka <span class="dt">\</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>-t 8 <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">&amp;&gt;</span> medaka.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We have added <code>&amp;&gt; medaka.out &amp;</code> to redirect the output to <code>medaka.out</code>and run the command in the background.</p>
-<p>We can check the command is running using <code>jobs</code>: ~~~ jobs ~~~ {: .bash}</p>
-<p>If it is successfully running you should see an output like: ~~~ [1]+ Running medaka_consensus -i ../data/nano_fastq/ERR3152367_sub5_filtered.fastq -d assembly/assembly.fasta -m r941_prom_fast_g303 -o medaka -t 8 &amp;&gt; medaka.out &amp; ~~~ {: .output}</p>
-<p>We can also look in the output file (<code>medaka.out</code>) to check the progress of the command. In this case Medaka will take about three hours to run. ~~~ less medaka.out ~~~ {: .bash} If the Medaka command has been run correctly you will see something like this near the start of the output: ~~~ Checking program versions This is medaka 1.7.2 This is medaka 1.7.2 Program Version Required Pass bcftools 1.16-20-g6f4732b 1.11 True bgzip 1.16-16-g3c6f83f 1.11 True minimap2 2.24 2.11 True samtools 1.16.1-33-gbd942a0 1.11 True tabix 1.16-16-g3c6f83f 1.11 True Aligning basecalls to draft Constructing minimap index. [M::mm_idx_gen::0.515*0.99] collected minimizers [M::mm_idx_gen::0.648*1.40] sorted minimizers [M::main::0.877*1.29] loaded/built the index for 146 target sequence(s) [M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 146 [M::mm_idx_stat::0.910*1.28] distinct minimizers: 2598367 (94.68% are singletons); average occurrences: 1.076; average spacing: 5.350; total length: 14953273 ~~~ {: .output}</p>
-<blockquote class="blockquote">
-<h2 id="help" class="anchored">Help!</h2>
-<p>Medaka may give you a warning along the lines of: ~~~ 2023-03-31 12:22:21.572954: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library ‘libcudart.so.11.0’; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory 2023-03-31 12:22:21.573012: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine. 2023-03-31 12:22:24.690162: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Couldnot load dynamic library ‘libcudart.so.11.0’; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory 2023-03-31 12:22:24.690198: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine. ~~~ {: .output} and/or ~~~ 2022-10-25 09:07:35.970532: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library ‘libcudart.so.11.0’; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory 2022-10-25 09:07:35.970583: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine. 2022-10-25 09:07:39.935310: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library ‘libcudart.so.11.0’; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory 2022-10-25 09:07:39.935346: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine. ~~~ {: .output} Don’t worry, you can safely ignore this warning wherever it pops up. It is telling us that it couldn’t load a library required for parallel computing using GPUs. We are not using a GPU setup and so this warning is irrelevant. {: .callout}</p>
-</blockquote>
-<blockquote class="blockquote">
-<h2 id="help-1" class="anchored">Help!</h2>
-<p>If you have entered the command incorrectly you will usually find out quite quickly! An easy way to tell is if you get an output in your terminal that starts with ‘Exit’ rather than ‘Done’: ~~~ [1]+ Exit 1 medaka_consensus -i ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq -d assembly/assembly.fasta -m r941_min_hac_g507 -o medaka -t 8 &amp;&gt; medaka.out ~~~ {: .output}</p>
-<p>Another way to tell is by looking inside the <code>medaka.out</code> log file. You will get some of the usual text output as Medaka loads its dependencies but once it starts processing the command it will tell you that something is wrong, e.g. ~~~ Creating fai index file /home/csuser/cs_course/analysis/assembly/assembly.fasta.fai [E::fai_build3_core] Failed to open the file /home/csuser/cs_course/analysis/assembly/assembly.fasta [faidx] Could not build fai index /home/csuser/cs_course/analysis/assembly/assembly.fasta.fai Failed to run alignment of reads to draft. ~~~ {: .output}</p>
-<p>Things to check if your command fails: - spelling/typos — have you spelled the command correctly and typed the directory names without error? - paths — are all of your absolute/relative paths complete and accurate? (tip: using tab completion can help with peace of mind here, as you can check that your path definitely follows the right trail) - flags — have you included all the mandatory flags, including the one (<code>-</code>) or two (<code>--</code>) dashes that usually accompany them? - output — does the output in your log/.out file give you any clues as to where your error lies? e.g.&nbsp;in the example above the line “Failed to open the file /home/csuser/cs_course/analysis/assembly/assembly.fasta” suggests that this path might be wrong somehow.</p>
-<p>If you really can’t find your mistake then the your instructors and/or other participants will be able to help you sort it out, so there is no need to panic! {: .callout}</p>
-</blockquote>
+<p>We can check the command is running using <code>jobs</code>:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">jobs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If it is successfully running you should see an output like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>[1]+  Running                 medaka_consensus -i ../data/nano_fastq/ERR3152367_sub5_filtered.fastq -d assembly/assembly.fasta -m r941_prom_fast_g303 -o medaka -t 8 &amp;&gt; medaka.out &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We can also look in the output file (<code>medaka.out</code>) to check the progress of the command. In this case Medaka will take about three hours to run.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> medaka.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>If the Medaka command has been run correctly you will see something like this near the start of the output:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>Checking program versions</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>This is medaka 1.7.2</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>This is medaka 1.7.2</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>Program    Version            Required   Pass</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>bcftools   1.16-20-g6f4732b   1.11       True</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>bgzip      1.16-16-g3c6f83f   1.11       True</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>minimap2   2.24               2.11       True</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>samtools   1.16.1-33-gbd942a0 1.11       True</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>tabix      1.16-16-g3c6f83f   1.11       True</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>Aligning basecalls to draft</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>Constructing minimap index.</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>[M::mm_idx_gen::0.515*0.99] collected minimizers</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>[M::mm_idx_gen::0.648*1.40] sorted minimizers</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>[M::main::0.877*1.29] loaded/built the index for 146 target sequence(s)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>[M::mm_idx_stat] kmer size: 15; skip: 10; is_hpc: 0; #seq: 146</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>[M::mm_idx_stat::0.910*1.28] distinct minimizers: 2598367 (94.68% are singletons); average occurrences: 1.076; average spacing: 5.350; total length: 14953273</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Help!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Medaka may give you a warning along the lines of:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb9" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>2023-03-31 12:22:21.572954: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>2023-03-31 12:22:21.573012: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>2023-03-31 12:22:24.690162: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Couldnot load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>2023-03-31 12:22:24.690198: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>and/or</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb10" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>2022-10-25 09:07:35.970532: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>2022-10-25 09:07:35.970583: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>2022-10-25 09:07:39.935310: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>2022-10-25 09:07:39.935346: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Don’t worry, you can safely ignore this warning wherever it pops up. It is telling us that it couldn’t load a library required for parallel computing using GPUs. We are not using a GPU setup and so this warning is irrelevant.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Help!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you have entered the command incorrectly you will usually find out quite quickly! An easy way to tell is if you get an output in your terminal that starts with ‘Exit’ rather than ‘Done’:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb11" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>[1]+  Exit 1                  medaka_consensus -i ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq -d assembly/assembly.fasta -m r941_min_hac_g507 -o medaka -t 8 &amp; medaka.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Another way to tell is by looking inside the <code>medaka.out</code> log file. You will get some of the usual text output as Medaka loads its dependencies but once it starts processing the command it will tell you that something is wrong, e.g.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb12" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Creating fai index file /home/csuser/cs_course/analysis/assembly/assembly.fasta.fai</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>[E::fai_build3_core] Failed to open the file /home/csuser/cs_course/analysis/assembly/assembly.fasta</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>[faidx] Could not build fai index /home/csuser/cs_course/analysis/assembly/assembly.fasta.fai</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Failed to run alignment of reads to draft.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Things to check if your command fails:</p>
+<ul>
+<li>spelling/typos — have you spelled the command correctly and typed the directory names without error?</li>
+<li>paths — are all of your absolute/relative paths complete and accurate? (tip: using tab completion can help with peace of mind here, as you can check that your path definitely follows the right trail)</li>
+<li>flags — have you included all the mandatory flags, including the one (<code>-</code>) or two (<code>--</code>) dashes that usually accompany them?</li>
+<li>output — does the output in your log/.out file give you any clues as to where your error lies? e.g.&nbsp;in the example above the line “Failed to open the file /home/csuser/cs_course/analysis/assembly/assembly.fasta” suggests that this path might be wrong somehow.</li>
+</ul>
+<p>If you really can’t find your mistake then the your instructors and/or other participants will be able to help you sort it out, so there is no need to panic!</p>
+</div>
+</div>
 <p>Medaka first looks for the other programs that it needs (known as dependencies) and their versions. These dependencies are installed on the AWS instance. Once it confirms they are present, it begins by aligning the raw reads (basecalls) to the assembly using minimap.</p>
-<p>Once Medaka has completed the end of the file (which you can skip to by typing <kbd>G</kbd>) will contain something like: ~~~ less medaka.out ~~~ {: .bash} ~~~ [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files. [20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files. Polished assembly written to medaka/consensus.fasta, have a nice day. ~~~ {: .output}</p>
+<p>Once Medaka has completed the end of the file (which you can skip to by typing <kbd>G</kbd>) will contain something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> medaka.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>[20:51:16 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>[20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>[20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>[20:51:17 - DataIndx] Loaded 1/1 (100.00%) sample files.</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>Polished assembly written to medaka/consensus.fasta, have a nice day.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Once Medaka has completed (~ 3 hours on average) we can navigate into the output directory and look at the files it has generated.</p>
-<pre><code>cd medaka
-ls</code></pre>
-<p>{: .bash}</p>
-<pre><code>calls_to_draft.bam  calls_to_draft.bam.bai  consensus.fasta  consensus.fasta.gaps_in_draft_coords.bed  consensus_probs.hdf</code></pre>
-<p>{: .output}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb15" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> medaka</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb16" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>calls_to_draft.bam  calls_to_draft.bam.bai  consensus.fasta  consensus.fasta.gaps_in_draft_coords.bed  consensus_probs.hdf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Medaka has created multiple files:</p>
 <ul>
 <li><code>calls_to_draft.bam</code> - a BAM file containing the alignment of the raw reads (basecalls) to the draft assembly</li>
@@ -537,36 +736,79 @@ ls</code></pre>
 <li><code>consensus_probs.hdf</code> — a file that contains the output of the neural network calculations and is not an output for end-users, so we don’t need to worry about this file</li>
 </ul>
 <p>In our case we’re interested in the polished assembly, so we want the <code>consensus.fasta</code> file.</p>
-<blockquote class="blockquote">
-<h2 id="bam-and-sam-files" class="anchored">BAM and SAM Files</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+BAM and SAM Files
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>A <a href="https://genome.sph.umich.edu/wiki/SAM">SAM file</a>, is a tab-delimited text file that contains information for each individual read and its alignment to the genome. The paper by <a href="http://bioinformatics.oxfordjournals.org/content/25/16/2078.full">Heng Li et al.</a> provides the full specification.</p>
 <p>The compressed binary version of SAM is called a BAM file. We use this version to reduce size and to allow for indexing, which enables efficient random access of the data contained within the file.</p>
 <p>The file begins with a header, which is optional. The header describes the source of data, reference sequence, method of alignment etc. - these will change depending on the aligner being used. Following the header is the alignment section. Each line that follows corresponds to alignment information for a single read. There are 11 mandatory fields for essential mapping information and a variable number of other fields for aligner specific information.</p>
-<p>See <a href="https://cloud-span.github.io/04genomics/01-variant_calling/index.html">Genomics - Variant Calling</a> for a deeper dive.<br>
-{: .callout}</p>
-</blockquote>
+<p>See <a href="https://cloud-span.github.io/04genomics/01-variant_calling/index.html">Genomics - Variant Calling</a> for a deeper dive.</p>
+</div>
+</div>
 </section>
-<section id="polishing-with-short-reads-1" class="level2">
+<section id="polishing-with-short-reads-1" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="polishing-with-short-reads-1">Polishing with short reads</h2>
 <p>We will be using the program <a href="https://github.com/broadinstitute/pilon">Pilon</a> to further polish the draft assembly using the raw short reads. Pilon will improve a draft assembly by filling gaps, fixing misassemblies and correcting bases. You can read more about how it works in the paper <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963">Pilon: An Integrated Tool for Comprehensive Microbial Variant Detection and Genome Assembly Improvement</a>.</p>
 <p>Bioinformatics programs are not built equally. Some programs, like Flye or Medaka, require very few input files as they will generate any that they need within the pipeline. Some programs however, require a lot of user input to generate the input files that are needed.</p>
 <p>Pilon is in the latter group of bioinformatics software, so we will need to do some pre-processing using other programs to create some of the inputs needed.</p>
-<section id="generating-the-pilon-input-files" class="level3">
-<h3 class="anchored">Generating the Pilon input files</h3>
+<section id="generating-the-pilon-input-files" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="generating-the-pilon-input-files">Generating the Pilon input files</h3>
 <p>We will first use the program <a href="https://github.com/lh3/bwa">BWA</a> to generate an alignment of the raw short reads against the draft genome in consensus.fasta. The steps will be: 1. indexing the polished assembly, consensus.fasta with <code>bwa index</code>. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment. 2. creating a directory for the outputs of Pilon 3. aligning the short reads (the illumina data) to the assembly, consensus.fasta with <code>bwa mem</code> 4. converting the short read alignment to a BAM file <code>samtools view</code> 5. sorting the short read alignment with <code>samtools sort</code> 6. indexing the short read alignment with <code>samtools index</code></p>
-<p>Make sure you are in the <code>analysis</code> folder and use <code>bwa index</code> to index the consensus assembly: ~~~ cd ~/cs_course/analysis/ bwa index medaka/consensus.fasta ~~~ {: .bash} This should only take a few seconds to complete so we don’t need to run the job in the background. Once the indexing is complete you should see an output like: ~~~ [bwa_index] Pack FASTA… 0.51 sec [bwa_index] Construct BWT for the packed sequence… [bwa_index] 5.86 seconds elapse. [bwa_index] Update BWT… 0.10 sec [bwa_index] Pack forward-only FASTA… 0.10 sec [bwa_index] Construct SA from BWT and Occ… 1.81 sec [main] Version: 0.7.17-r1188 [main] CMD: bwa index consensus.fasta [main] Real time: 8.704 sec; CPU: 8.395 sec ~~~ {: .output}</p>
+<p>Make sure you are in the <code>analysis</code> folder and use <code>bwa index</code> to index the consensus assembly:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index medaka/consensus.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This should only take a few seconds to complete so we don’t need to run the job in the background. Once the indexing is complete you should see an output like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>[bwa_index] Pack FASTA... 0.51 sec</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>[bwa_index] Construct BWT for the packed sequence...</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>[bwa_index] 5.86 seconds elapse.</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>[bwa_index] Update BWT... 0.10 sec</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>[bwa_index] Pack forward-only FASTA... 0.10 sec</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>[bwa_index] Construct SA from BWT and Occ... 1.81 sec</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>[main] Version: 0.7.17-r1188</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>[main] CMD: bwa index consensus.fasta</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>[main] Real time: 8.704 sec; CPU: 8.395 sec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>This will generate five additional files in the <code>medaka</code> directory with the file extensions <code>.pac</code>, <code>.bwt</code>, <code>.ann</code>, <code>.amb</code> and <code>.sa</code>. These files are used by BWA in step 3.</p>
 <p>Next we will make an output directory and move into it:</p>
-<pre><code>mkdir pilon
-cd pilon</code></pre>
-<p>{: .bash}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> pilon</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pilon</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We will now do steps 3, 4 and 5 in one go by chaining them together with pipes.</p>
-<blockquote class="blockquote">
-<h2 id="chaining-together-commands-with-a-pipe" class="anchored" data-anchor-id="generating-the-pilon-input-files">Chaining together commands with a pipe</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Chaining together commands with a pipe
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>It is possible to chain together commands in Linux (and Unix) using a command known as “pipe”. This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy (and unfull). The pipe command is the character <code>|</code> which is obtained with <kbd>⇧ Shift</kbd> + <kbd>&lt;/kbd&gt; on most keyboards.</kbd></p>
 <p>You can use multiple pipes in a single line of commands but data will only go from the left to the right:</p>
-<p><code>command1 | command2 | command3 | .... |</code> {: .callout}</p>
-</blockquote>
+<p><code>command1 | command2 | command3 | .... |</code></p>
+</div>
+</div>
 <p>We will be using two pipes to join three separate steps. First we will align the raw reads to the draft assembly, then convert the output to BAM format, before finally sorting this alignment to generate a sorted BAM file. Chaining the steps together together will only generate one final output file, avoiding the need to generate large intermediary files we don’t need again between the other two steps.</p>
 <ol type="1">
 <li>we will align the short reads (the illumina data) to the assembly, consensus.fasta with <code>bwa mem</code>: <code>bwa mem -t 8 ~/cs_course/analysis/medaka/consensus.fasta ~/cs_course/data/illumina_fastq/ERR4998593_1.fastq ~/cs_course/data/illumina_fastq/ERR4998593_2.fastq</code></li>
@@ -574,262 +816,402 @@ cd pilon</code></pre>
 <li>sort the short read alignment with <code>samtools sort</code>: <code>samtools sort - -@4 -o short_read_alignment.bam</code></li>
 </ol>
 <p>Here are the various flags/options used in these commands and what they mean:</p>
-<table>
+<div>
+<!-- 
+<table data-quarto-postprocess="true">
 <thead>
-<tr>
-<th>
-Command
-</th>
-<th>
-Flag/option
-</th>
-<th>
-Meaning
-</th>
+<tr class="header">
+<th data-quarto-table-cell-role="th">Command</th>
+<th data-quarto-table-cell-role="th">Flag/option</th>
+<th data-quarto-table-cell-role="th">Meaning</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>
-<code>bwa mem -t 8 [input assembly] [input short read file(s)]</code>
-</td>
-<td>
--t 8
-</td>
-<td>
-Number of threads (8)
-</td>
+<tr class="odd">
+<td>`bwa mem -t 8 [input assembly] [input short read file(s)]`</td>
+<td>-t 8</td>
+<td>Number of threads (8)</td>
 </tr>
-<tr>
-<td rowspan="2">
-<code>samtools view - -Sb</code>
-</td>
-<td>
--
-</td>
-<td>
-Take piped output from <code>bwa mem</code> as input
-</td>
+<tr class="even">
+<td rowspan="2">`samtools view - -Sb`</td>
+<td>-</td>
+<td>Take piped output from `bwa mem` as input</td>
 </tr>
-<tr>
-<td>
--Sb
-</td>
-<td>
-Convert from SAM to BAM format
-</td>
+<tr class="odd">
+<td>-Sb</td>
+<td>Convert from SAM to BAM format</td>
 </tr>
-<tr>
-<td rowspan="3">
-<code>samtools sort - -@4 -o short_read_alignment.bam</code>
-</td>
-<td>
--
-</td>
-<td>
-Take piped output from <code>samtools view</code> as input
-</td>
+<tr class="even">
+<td rowspan="3">`samtools sort - -@4 -o short_read_alignment.bam`</td>
+<td>-</td>
+<td>Take piped output from `samtools view` as input</td>
 </tr>
-<tr>
-<td>
--<span class="citation" data-cites="4">@4</span>
-</td>
-<td>
-Number of threads (4)
-</td>
+<tr class="odd">
+<td>-@4</td>
+<td>Number of threads (4)</td>
 </tr>
-<tr>
-<td>
--o [filename]
-</td>
-<td>
-Output a file with name [filename]
-</td>
+<tr class="even">
+<td>-o [filename]</td>
+<td>Output a file with name [filename]</td>
 </tr>
 </tbody>
 </table>
+ -->
+</div>
+<!-- NB: below, the number of hyphens (---..) in the line below "|---|---...|" does help determine the length of each column. It's a matter of trying how many hyphens to use for each column -->
+<div class="column-body-outset">
+<table class="table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 15%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Command</th>
+<th>Flag/option</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>bwa mem -t 8 [input assembly] [input short read file(s)]</code></td>
+<td>-t 8</td>
+<td>Number of threads (8)</td>
+</tr>
+<tr class="even">
+<td><code>samtools view - -Sb</code></td>
+<td>-</td>
+<td>Take piped output from <code>bwa mem</code> as input</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-Sb</td>
+<td>Convert from SAM to BAM format</td>
+</tr>
+<tr class="even">
+<td><code>samtools sort - -@4 -o short_read_alignment.bam</code></td>
+<td>-</td>
+<td>Take piped output from <code>samtools view</code> as input</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>-<span class="citation" data-cites="4">@4</span></td>
+<td>Number of threads (4)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>-o [filename]</td>
+<td>Output a file with name [filename]</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>This will take around 60 minutes so we will use <code>&amp;&gt; alignment.out &amp;</code> to redirect the process to a file and to run the command in the background. We will also wrap our whole three-fold command in brackets so we run all three steps in the background.</p>
-<p>Add the pipes between these commands and run: ~~~ (bwa mem -t 8 ~/cs_course/analysis/medaka/consensus.fasta ~/cs_course/data/illumina_fastq/ERR4998593_1.fastq ~/cs_course/data/illumina_fastq/ERR4998593_2.fastq | samtools view - -Sb | samtools sort - -<span class="citation" data-cites="4">@4</span> -o short_read_alignment.bam) &amp;&gt; alignment.out &amp; ~~~ {: .bash}</p>
-<p>Once the command is running, you can check the process of this job by looking at the <code>alignment.out</code> file. ~~~ less alignment.out ~~~ {: .bash}</p>
-<pre><code>[M::bwa_idx_load_from_disk] read 0 ALT contigs
-[M::process] read 529802 sequences (80000102 bp)...
-[M::process] read 529802 sequences (80000102 bp)...
-[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (2, 14035, 29, 8)
-[M::mem_pestat] skip orientation FF as there are not enough pairs
-[M::mem_pestat] analyzing insert size distribution for orientation FR...
-[M::mem_pestat] (25, 50, 75) percentile: (333, 416, 538)
-[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 948)
-[M::mem_pestat] mean and std.dev: (435.53, 162.74)
-[M::mem_pestat] low and high boundaries for proper pairs: (1, 1153)
-[M::mem_pestat] analyzing insert size distribution for orientation RF...
-[M::mem_pestat] (25, 50, 75) percentile: (891, 2304, 6802)
-[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 18624)
-[M::mem_pestat] mean and std.dev: (3479.45, 2918.28)</code></pre>
-<p>{: .output}</p>
+<p>Add the pipes between these commands and run:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb20" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">bwa</span> mem <span class="at">-t</span> 8 ~/cs_course/analysis/medaka/consensus.fasta ~/cs_course/data/illumina_fastq/ERR4998593_1.fastq ~/cs_course/data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> short_read_alignment.bam<span class="kw">)</span> <span class="op">&amp;&gt;</span> alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once the command is running, you can check the process of this job by looking at the <code>alignment.out</code> file.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb21" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> alignment.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb22" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>[M::bwa_idx_load_from_disk] read 0 ALT contigs</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>[M::process] read 529802 sequences (80000102 bp)...</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>[M::process] read 529802 sequences (80000102 bp)...</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] # candidate unique pairs for (FF, FR, RF, RR): (2, 14035, 29, 8)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] skip orientation FF as there are not enough pairs</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] analyzing insert size distribution for orientation FR...</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] (25, 50, 75) percentile: (333, 416, 538)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 948)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] mean and std.dev: (435.53, 162.74)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] low and high boundaries for proper pairs: (1, 1153)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] analyzing insert size distribution for orientation RF...</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] (25, 50, 75) percentile: (891, 2304, 6802)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] low and high boundaries for computing mean and std.dev: (1, 18624)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] mean and std.dev: (3479.45, 2918.28)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>The command should take around 45 minutes to run. Once completed, the end of the <code>alignment.out</code> file should contain something like:</p>
-<pre><code>low and high boundaries for proper pairs: (1, 1222)
-[M::mem_pestat] skip orientation RF as there are not enough pairs
-[M::mem_pestat] skip orientation RR as there are not enough pairs
-[M::mem_process_seqs] Processed 182762 reads in 37.961 CPU sec, 5.397 real sec
-[main] Version: 0.7.17-r1188
-[main] CMD: bwa mem -t 8 ~/cs_course/analysis/medaka/consensus.fasta ~/cs_course/data/illumina_fastq/ERR4998593_1.fastq ~/cs_course/data/illumina_fastq/ERR4998593_2.fastq
-[main] Real time: 2207.540 sec; CPU: 14851.383 sec
-[bam_sort_core] merging from 7 files and 4 in-memory blocks...</code></pre>
-<p>{: .output}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb23" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>low and high boundaries for proper pairs: (1, 1222)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] skip orientation RF as there are not enough pairs</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>[M::mem_pestat] skip orientation RR as there are not enough pairs</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>[M::mem_process_seqs] Processed 182762 reads in 37.961 CPU sec, 5.397 real sec</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>[main] Version: 0.7.17-r1188</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>[main] CMD: bwa mem -t 8 ~/cs_course/analysis/medaka/consensus.fasta ~/cs_course/data/illumina_fastq/ERR4998593_1.fastq ~/cs_course/data/illumina_fastq/ERR4998593_2.fastq</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>[main] Real time: 2207.540 sec; CPU: 14851.383 sec</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>[bam_sort_core] merging from 7 files and 4 in-memory blocks...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We have now generated the <code>short_read_alignment.bam</code> file - this is a binary file (meaning it’s not human readable) so we won’t be checking its contents.</p>
 <p>Now carry out step 6, index the alignment:</p>
-<pre><code>samtools index short_read_alignment.bam</code></pre>
-<p>{: .bash}</p>
-<blockquote class="blockquote">
-<h2 id="something-to-think-about" class="anchored">Something to think about</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb24" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> index short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Something to think about
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Why didn’t we include this command in the sequence of pipes in the previous step?</p>
-<p>The answer is that we will need access to the BAM file produced for further analysis. If we included this step as part of a pipe the intermediate BAM file would not be saved. {: .callout}</p>
-</blockquote>
+<p>The answer is that we will need access to the BAM file produced for further analysis. If we included this step as part of a pipe the intermediate BAM file would not be saved.</p>
+</div>
+</div>
 <p>This command will take around one or two minutes so we don’t need to run it in the background.</p>
 <p>Once your prompt has returned you should also have a file named <code>short_read_alignment.bam.bai</code> which is the index.</p>
 </section>
 <section id="running-pilon" class="level3">
-<h3 class="anchored">Running Pilon</h3>
+<h3 class="anchored" data-anchor-id="running-pilon">Running Pilon</h3>
 <p>Now we have generated the necessary input files we can finally run Pilon.</p>
 <p>Pilon is installed on the AWS instance and we can view the help documentation using:</p>
-<pre><code>pilon --help</code></pre>
-<p>{: .bash}</p>
-<blockquote class="blockquote">
-<h2 id="pilon-help-documentation" class="anchored" data-anchor-id="running-pilon">Pilon help Documentation</h2>
-<pre><code>Pilon version 1.24 Thu Jan 28 13:00:45 2021 -0500
-
-   Usage: pilon --genome genome.fasta [--frags frags.bam] [--jumps jumps.bam] [--unpaired unpaired.bam]
-                [...other options...]
-          pilon --help for option details
-
-
-        INPUTS:
-          --genome genome.fasta
-             The input genome we are trying to improve, which must be the reference used
-             for the bam alignments.  At least one of --frags or --jumps must also be given.
-          --frags frags.bam
-             A bam file consisting of fragment paired-end alignments, aligned to the --genome
-             argument using bwa or bowtie2.  This argument may be specified more than once.
-          --jumps jumps.bam
-             A bam file consisting of jump (mate pair) paired-end alignments, aligned to the
-             --genome argument using bwa or bowtie2.  This argument may be specified more than once.
-          --unpaired unpaired.bam
-             A bam file consisting of unpaired alignments, aligned to the --genome argument
-             using bwa or bowtie2.  This argument may be specified more than once.
-          --bam any.bam
-             A bam file of unknown type; Pilon will scan it and attempt to classify it as one
-             of the above bam types.
-          --nanopore ont.bam
-             A bam file containing Oxford Nanopore read alignments. Experimental.
-          --pacbio pb.bam
-             A bam file containing Pacific Biosciences read alignments. Experimental.
-        OUTPUTS:
-          --output prefix
-             Prefix for output files
-          --outdir directory
-             Use this directory for all output files.
-          --changes
-             If specified, a file listing changes in the &lt;output&gt;.fasta will be generated.
-          --vcf
-             If specified, a vcf file will be generated
-          --vcfqe
-              If specified, the VCF will contain a QE (quality-weighted evidence) field rather
-              than the default QP (quality-weighted percentage of evidence) field.
-          --tracks
-              This options will cause many track files (*.bed, *.wig) suitable for viewing in
-              a genome browser to be written.
-        CONTROL:
-          --variant
-             Sets up heuristics for variant calling, as opposed to assembly improvement;
-             equivalent to "--vcf --fix all,breaks".
-          --chunksize
-             Input FASTA elements larger than this will be processed in smaller pieces not to
-             exceed this size (default 10000000).
-          --diploid
-             Sample is from diploid organism; will eventually affect calling of heterozygous SNPs
-          --fix fixlist
-             A comma-separated list of categories of issues to try to fix:
-               "snps": try to fix individual base errors;
-               "indels": try to fix small indels;
-               "gaps": try to fill gaps;
-               "local": try to detect and fix local misassemblies;
-               "all": all of the above (default);
-               "bases": shorthand for "snps" and "indels" (for back compatibility);
-               "none": none of the above; new fasta file will not be written.
-             The following are experimental fix types:
-               "amb": fix ambiguous bases in fasta output (to most likely alternative);
-               "breaks": allow local reassembly to open new gaps (with "local");
-               "circles": try to close circular elements when used with long corrected reads;
-               "novel": assemble novel sequence from unaligned non-jump reads.
-          --dumpreads
-             Dump reads for local re-assemblies.
-          --duplicates
-             Use reads marked as duplicates in the input BAMs (ignored by default).
-          --iupac
-             Output IUPAC ambiguous base codes in the output FASTA file when appropriate.
-          --nonpf
-             Use reads which failed sequencer quality filtering (ignored by default).
-          --targets targetlist
-             Only process the specified target(s).  Targets are comma-separated, and each target
-             is a fasta element name optionally followed by a base range.
-             Example: "scaffold00001,scaffold00002:10000-20000" would result in processing all of
-             scaffold00001 and coordinates 10000-20000 of scaffold00002.
-             If "targetlist" is the name of a file, each line will be treated as a target
-             specification.
-          --verbose
-             More verbose output.
-          --debug
-             Debugging output (implies verbose).
-          --version
-             Print version string and exit.
-        HEURISTICS:
-          --defaultqual qual
-             Assumes bases are of this quality if quals are no present in input BAMs (default 10).
-          --flank nbases
-             Controls how much of the well-aligned reads will be used; this many bases at each
-             end of the good reads will be ignored (default 10).
-          --gapmargin
-             Closed gaps must be within this number of bases of true size to be closed (100000)
-          --K
-             Kmer size used by internal assembler (default 47).
-          --mindepth depth
-             Variants (snps and indels) will only be called if there is coverage of good pairs
-             at this depth or more; if this value is &gt;= 1, it is an absolute depth, if it is a
-             fraction &lt; 1, then minimum depth is computed by multiplying this value by the mean
-             coverage for the region, with a minumum value of 5 (default 0.1: min depth to call
-             is 10% of mean coverage or 5, whichever is greater).
-          --mingap
-             Minimum size for unclosed gaps (default 10)
-          --minmq
-             Minimum alignment mapping quality for a read to count in pileups (default 0)
-          --minqual
-             Minimum base quality to consider for pileups (default 0)
-          --nostrays
-             Skip making a pass through the input BAM files to identify stray pairs, that is,
-             those pairs in which both reads are aligned but not marked valid because they have
-             inconsistent orientation or separation. Identifying stray pairs can help fill gaps
-             and assemble larger insertions, especially of repeat content.  However, doing so
-             sometimes consumes considerable memory.</code></pre>
-<p>{: .output} {: .solution}</p>
-</blockquote>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb25" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pilon</span> <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Output — Pilon help Documentation
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb26"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Pilon version 1.24 Thu Jan 28 13:00:45 2021 -0500</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>   Usage: pilon --genome genome.fasta [--frags frags.bam] [--jumps jumps.bam] [--unpaired </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                unpaired.bam]  [...other options...]</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>          pilon --help for option details</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>         INPUTS:</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>           --genome genome.fasta</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>              The input genome we are trying to improve, which must be the reference used</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>              for the bam alignments.  At least one of --frags or --jumps must also be given.</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>           --frags frags.bam</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>              A bam file consisting of fragment paired-end alignments, aligned to the --genome</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>              argument using bwa or bowtie2.  This argument may be specified more than once.</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>           --jumps jumps.bam</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>              A bam file consisting of jump (mate pair) paired-end alignments, aligned to the</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>              --genome argument using bwa or bowtie2.  This argument may be specified more than once.</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>           --unpaired unpaired.bam</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>              A bam file consisting of unpaired alignments, aligned to the --genome argument</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>              using bwa or bowtie2.  This argument may be specified more than once.</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>           --bam any.bam</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>              A bam file of unknown type; Pilon will scan it and attempt to classify it as one</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>              of the above bam types.</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>           --nanopore ont.bam</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>              A bam file containing Oxford Nanopore read alignments. Experimental.</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>           --pacbio pb.bam</span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>              A bam file containing Pacific Biosciences read alignments. Experimental.</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>         OUTPUTS:</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>           --output prefix</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>              Prefix for output files</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>           --outdir directory</span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>              Use this directory for all output files.</span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>           --changes</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>              If specified, a file listing changes in the &lt;output&gt;.fasta will be generated.</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>           --vcf</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>              If specified, a vcf file will be generated</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>           --vcfqe</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>               If specified, the VCF will contain a QE (quality-weighted evidence) field rather</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>               than the default QP (quality-weighted percentage of evidence) field.</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>           --tracks</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>               This options will cause many track files (*.bed, *.wig) suitable for viewing in</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>               a genome browser to be written.</span>
+<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>         CONTROL:</span>
+<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>           --variant</span>
+<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>              Sets up heuristics for variant calling, as opposed to assembly improvement;</span>
+<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>              equivalent to "--vcf --fix all,breaks".</span>
+<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>           --chunksize</span>
+<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>              Input FASTA elements larger than this will be processed in smaller pieces not to</span>
+<span id="cb26-49"><a href="#cb26-49" aria-hidden="true" tabindex="-1"></a>              exceed this size (default 10000000).</span>
+<span id="cb26-50"><a href="#cb26-50" aria-hidden="true" tabindex="-1"></a>           --diploid</span>
+<span id="cb26-51"><a href="#cb26-51" aria-hidden="true" tabindex="-1"></a>              Sample is from diploid organism; will eventually affect calling of heterozygous SNPs</span>
+<span id="cb26-52"><a href="#cb26-52" aria-hidden="true" tabindex="-1"></a>           --fix fixlist</span>
+<span id="cb26-53"><a href="#cb26-53" aria-hidden="true" tabindex="-1"></a>              A comma-separated list of categories of issues to try to fix:</span>
+<span id="cb26-54"><a href="#cb26-54" aria-hidden="true" tabindex="-1"></a>                "snps": try to fix individual base errors;</span>
+<span id="cb26-55"><a href="#cb26-55" aria-hidden="true" tabindex="-1"></a>                "indels": try to fix small indels;</span>
+<span id="cb26-56"><a href="#cb26-56" aria-hidden="true" tabindex="-1"></a>                "gaps": try to fill gaps;</span>
+<span id="cb26-57"><a href="#cb26-57" aria-hidden="true" tabindex="-1"></a>                "local": try to detect and fix local misassemblies;</span>
+<span id="cb26-58"><a href="#cb26-58" aria-hidden="true" tabindex="-1"></a>                "all": all of the above (default);</span>
+<span id="cb26-59"><a href="#cb26-59" aria-hidden="true" tabindex="-1"></a>                "bases": shorthand for "snps" and "indels" (for back compatibility);</span>
+<span id="cb26-60"><a href="#cb26-60" aria-hidden="true" tabindex="-1"></a>                "none": none of the above; new fasta file will not be written.</span>
+<span id="cb26-61"><a href="#cb26-61" aria-hidden="true" tabindex="-1"></a>              The following are experimental fix types:</span>
+<span id="cb26-62"><a href="#cb26-62" aria-hidden="true" tabindex="-1"></a>                "amb": fix ambiguous bases in fasta output (to most likely alternative);</span>
+<span id="cb26-63"><a href="#cb26-63" aria-hidden="true" tabindex="-1"></a>                "breaks": allow local reassembly to open new gaps (with "local");</span>
+<span id="cb26-64"><a href="#cb26-64" aria-hidden="true" tabindex="-1"></a>                "circles": try to close circular elements when used with long corrected reads;</span>
+<span id="cb26-65"><a href="#cb26-65" aria-hidden="true" tabindex="-1"></a>                "novel": assemble novel sequence from unaligned non-jump reads.</span>
+<span id="cb26-66"><a href="#cb26-66" aria-hidden="true" tabindex="-1"></a>           --dumpreads</span>
+<span id="cb26-67"><a href="#cb26-67" aria-hidden="true" tabindex="-1"></a>              Dump reads for local re-assemblies.</span>
+<span id="cb26-68"><a href="#cb26-68" aria-hidden="true" tabindex="-1"></a>           --duplicates</span>
+<span id="cb26-69"><a href="#cb26-69" aria-hidden="true" tabindex="-1"></a>              Use reads marked as duplicates in the input BAMs (ignored by default).</span>
+<span id="cb26-70"><a href="#cb26-70" aria-hidden="true" tabindex="-1"></a>           --iupac</span>
+<span id="cb26-71"><a href="#cb26-71" aria-hidden="true" tabindex="-1"></a>              Output IUPAC ambiguous base codes in the output FASTA file when appropriate.</span>
+<span id="cb26-72"><a href="#cb26-72" aria-hidden="true" tabindex="-1"></a>           --nonpf</span>
+<span id="cb26-73"><a href="#cb26-73" aria-hidden="true" tabindex="-1"></a>              Use reads which failed sequencer quality filtering (ignored by default).</span>
+<span id="cb26-74"><a href="#cb26-74" aria-hidden="true" tabindex="-1"></a>           --targets targetlist</span>
+<span id="cb26-75"><a href="#cb26-75" aria-hidden="true" tabindex="-1"></a>              Only process the specified target(s).  Targets are comma-separated, and each target</span>
+<span id="cb26-76"><a href="#cb26-76" aria-hidden="true" tabindex="-1"></a>              is a fasta element name optionally followed by a base range.</span>
+<span id="cb26-77"><a href="#cb26-77" aria-hidden="true" tabindex="-1"></a>              Example: "scaffold00001,scaffold00002:10000-20000" would result in processing all of </span>
+<span id="cb26-78"><a href="#cb26-78" aria-hidden="true" tabindex="-1"></a>              scaffold00001 and coordinates 10000-20000 of scaffold00002.</span>
+<span id="cb26-79"><a href="#cb26-79" aria-hidden="true" tabindex="-1"></a>              If "targetlist" is the name of a file, each line will be treated as a target</span>
+<span id="cb26-80"><a href="#cb26-80" aria-hidden="true" tabindex="-1"></a>              specification.</span>
+<span id="cb26-81"><a href="#cb26-81" aria-hidden="true" tabindex="-1"></a>           --verbose</span>
+<span id="cb26-82"><a href="#cb26-82" aria-hidden="true" tabindex="-1"></a>              More verbose output.</span>
+<span id="cb26-83"><a href="#cb26-83" aria-hidden="true" tabindex="-1"></a>           --debug</span>
+<span id="cb26-84"><a href="#cb26-84" aria-hidden="true" tabindex="-1"></a>              Debugging output (implies verbose).</span>
+<span id="cb26-85"><a href="#cb26-85" aria-hidden="true" tabindex="-1"></a>           --version</span>
+<span id="cb26-86"><a href="#cb26-86" aria-hidden="true" tabindex="-1"></a>              Print version string and exit.</span>
+<span id="cb26-87"><a href="#cb26-87" aria-hidden="true" tabindex="-1"></a>         HEURISTICS:</span>
+<span id="cb26-88"><a href="#cb26-88" aria-hidden="true" tabindex="-1"></a>           --defaultqual qual</span>
+<span id="cb26-89"><a href="#cb26-89" aria-hidden="true" tabindex="-1"></a>              Assumes bases are of this quality if quals are no present in input BAMs (default 10).</span>
+<span id="cb26-90"><a href="#cb26-90" aria-hidden="true" tabindex="-1"></a>           --flank nbases</span>
+<span id="cb26-91"><a href="#cb26-91" aria-hidden="true" tabindex="-1"></a>              Controls how much of the well-aligned reads will be used; this many bases at each</span>
+<span id="cb26-92"><a href="#cb26-92" aria-hidden="true" tabindex="-1"></a>              end of the good reads will be ignored (default 10).</span>
+<span id="cb26-93"><a href="#cb26-93" aria-hidden="true" tabindex="-1"></a>           --gapmargin</span>
+<span id="cb26-94"><a href="#cb26-94" aria-hidden="true" tabindex="-1"></a>              Closed gaps must be within this number of bases of true size to be closed (100000)</span>
+<span id="cb26-95"><a href="#cb26-95" aria-hidden="true" tabindex="-1"></a>           --K</span>
+<span id="cb26-96"><a href="#cb26-96" aria-hidden="true" tabindex="-1"></a>              Kmer size used by internal assembler (default 47).</span>
+<span id="cb26-97"><a href="#cb26-97" aria-hidden="true" tabindex="-1"></a>           --mindepth depth</span>
+<span id="cb26-98"><a href="#cb26-98" aria-hidden="true" tabindex="-1"></a>              Variants (snps and indels) will only be called if there is coverage of good pairs</span>
+<span id="cb26-99"><a href="#cb26-99" aria-hidden="true" tabindex="-1"></a>              at this depth or more; if this value is &gt;= 1, it is an absolute depth, if it is a</span>
+<span id="cb26-100"><a href="#cb26-100" aria-hidden="true" tabindex="-1"></a>              fraction &lt; 1, then minimum depth is computed by multiplying this value by the mean</span>
+<span id="cb26-101"><a href="#cb26-101" aria-hidden="true" tabindex="-1"></a>              coverage for the region, with a minumum value of 5 (default 0.1: min depth to call</span>
+<span id="cb26-102"><a href="#cb26-102" aria-hidden="true" tabindex="-1"></a>              is 10% of mean coverage or 5, whichever is greater).</span>
+<span id="cb26-103"><a href="#cb26-103" aria-hidden="true" tabindex="-1"></a>           --mingap</span>
+<span id="cb26-104"><a href="#cb26-104" aria-hidden="true" tabindex="-1"></a>              Minimum size for unclosed gaps (default 10)</span>
+<span id="cb26-105"><a href="#cb26-105" aria-hidden="true" tabindex="-1"></a>           --minmq</span>
+<span id="cb26-106"><a href="#cb26-106" aria-hidden="true" tabindex="-1"></a>              Minimum alignment mapping quality for a read to count in pileups (default 0)</span>
+<span id="cb26-107"><a href="#cb26-107" aria-hidden="true" tabindex="-1"></a>           --minqual</span>
+<span id="cb26-108"><a href="#cb26-108" aria-hidden="true" tabindex="-1"></a>              Minimum base quality to consider for pileups (default 0)</span>
+<span id="cb26-109"><a href="#cb26-109" aria-hidden="true" tabindex="-1"></a>           --nostrays</span>
+<span id="cb26-110"><a href="#cb26-110" aria-hidden="true" tabindex="-1"></a>              Skip making a pass through the input BAM files to identify stray pairs, that is,</span>
+<span id="cb26-111"><a href="#cb26-111" aria-hidden="true" tabindex="-1"></a>              those pairs in which both reads are aligned but not marked valid because they have</span>
+<span id="cb26-112"><a href="#cb26-112" aria-hidden="true" tabindex="-1"></a>              inconsistent orientation or separation. Identifying stray pairs can help fill gaps</span>
+<span id="cb26-113"><a href="#cb26-113" aria-hidden="true" tabindex="-1"></a>              and assemble larger insertions, especially of repeat content.  However, doing so</span>
+<span id="cb26-114"><a href="#cb26-114" aria-hidden="true" tabindex="-1"></a>              sometimes consumes considerable memory.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <p>You can read more about the possible outputs Pilon can produce in the <a href="https://github.com/broadinstitute/pilon/wiki/Output-File-Descriptions">Wiki</a>.</p>
-<p>We can see there are many different options for pilon. We will be using the defaults for our assembly. * <code>--genome</code> — this will be the output assembly from Medaka * <code>--frags</code> — the short reads we used to create the BAM alignment were paired-end fragments, so we need to specify this using this flag * <code>--outdir</code> — this specifies a directory for all the output</p>
+<p>We can see there are many different options for pilon. We will be using the defaults for our assembly.</p>
+<ul>
+<li><code>--genome</code> — this will be the output assembly from Medaka</li>
+<li><code>--frags</code> — the short reads we used to create the BAM alignment were paired-end fragments, so we need to specify this using this flag</li>
+<li><code>--outdir</code> — this specifies a directory for all the output</li>
+</ul>
 <p>Check you are in the <code>analysis</code> folder and run Pilon:</p>
-<pre><code>cd ~/cs_course/analysis/
-pilon --genome medaka/consensus.fasta --frags pilon/short_read_alignment.bam --outdir pilon &amp;&gt; pilon.out &amp;
-</code></pre>
-<p>{: .bash}</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb27" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pilon</span> <span class="at">--genome</span> medaka/consensus.fasta <span class="at">--frags</span> pilon/short_read_alignment.bam <span class="at">--outdir</span> pilon <span class="op">&amp;&gt;</span> pilon.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We can again keep track of the analysis by looking at the <code>pilon.out</code> file with <code>less</code>.</p>
-<p>The top of the file:<br>
-~~~ Pilon version 1.24 Thu Jan 28 13:00:45 2021 -0500 Genome: medaka/consensus.fasta Fixing snps, indels, gaps, local Input genome size: 18930486 Scanning BAMs short_read_alignment.bam: 68579742 reads, 0 filtered, 7344428 mapped, 6036898 proper, 167134 stray, FR 100% 401+/-206, max 1018 Processing contig_1057:1-17080 frags short_read_alignment.bam: coverage 36 Total Reads: 9147, Coverage: 36, minDepth: 5 Confirmed 10586 of 17080 bases (61.98%) Corrected 234 snps; 40 ambiguous bases; corrected 22 small insertions totaling 38 bases, 101 small deletions totaling 141 bases # Attempting to fix local continuity breaks # fix break: contig_1057:780-2830 0 -0 +0 NoSolution # fix break: contig_1057:3081-4075 0 -0 +0 NoSolution # fix break: contig_1057:4312-5132 0 -0 +0 NoSolution # fix break: contig_1057:5367-5452 0 -0 +0 NoSolution # fix break: contig_1057:5798-6336 0 -0 +0 NoSolution # fix break: contig_1057:6798-8683 0 -0 +0 NoSolution # fix break: contig_1057:8886-9132 0 -0 +0 NoSolution # fix break: contig_1057:9394-12244 0 -0 +0 NoSolution ~~~ {: .output}</p>
-<p>When Pilon finishes (aroud 1.5 hours) the end of the file will contain something like: ~~~ Writing updated contig_1125_pilon to ./pilon.fasta Writing updated contig_885_pilon to ./pilon.fasta Writing updated contig_1130_pilon to ./pilon.fasta Writing updated contig_1121_pilon to ./pilon.fasta Writing updated contig_697_pilon to ./pilon.fasta Mean frags coverage: 30 Mean total coverage: 30 ~~~ {: .output}</p>
-<p>Navigate into the <code>pilon</code> directory and have a look at the output files Pilon has produced. ~~~ cd pilon ls ~~~ {: .bash} ~~~ alignment.out pilon.fasta short_read_alignment.bam short_read_alignment.bam.bai ~~~ {: .output}</p>
+<p>The top of the file:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb28" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>Pilon version 1.24 Thu Jan 28 13:00:45 2021 -0500</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>Genome: medaka/consensus.fasta</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>Fixing snps, indels, gaps, local</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>Input genome size: 18930486</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>Scanning BAMs</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>short_read_alignment.bam: 68579742 reads, 0 filtered, 7344428 mapped, 6036898 proper, 167134 stray, FR 100% 401+/-206, max 1018</span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>Processing contig_1057:1-17080</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>frags short_read_alignment.bam: coverage 36</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>Total Reads: 9147, Coverage: 36, minDepth: 5</span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>Confirmed 10586 of 17080 bases (61.98%)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>Corrected 234 snps; 40 ambiguous bases; corrected 22 small insertions totaling 38 bases, 101 small deletions totaling 141 bases</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a># Attempting to fix local continuity breaks</span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:780-2830 0 -0 +0 NoSolution</span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:3081-4075 0 -0 +0 NoSolution</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:4312-5132 0 -0 +0 NoSolution</span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:5367-5452 0 -0 +0 NoSolution</span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:5798-6336 0 -0 +0 NoSolution</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:6798-8683 0 -0 +0 NoSolution</span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:8886-9132 0 -0 +0 NoSolution</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:9394-12244 0 -0 +0 NoSolution</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>When Pilon finishes (aroud 1.5 hours) the end of the file will contain something like:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb29" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>Writing updated contig_1125_pilon to ./pilon.fasta</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>Writing updated contig_885_pilon to ./pilon.fasta</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>Writing updated contig_1130_pilon to ./pilon.fasta</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>Writing updated contig_1121_pilon to ./pilon.fasta</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>Writing updated contig_697_pilon to ./pilon.fasta</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>Mean frags coverage: 30</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>Mean total coverage: 30</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Navigate into the <code>pilon</code> directory and have a look at the output files Pilon has produced.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb30" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> pilon</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb31" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>alignment.out  pilon.fasta short_read_alignment.bam  short_read_alignment.bam.bai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We can see pilon has produced a fasta file <code>pilon.fasta</code>, which is the newly polished assembly. This file is now our assembly.</p>
 <p>In the next episode we will assess the quality of this assembly and compare its quality to that of the unpolished assemly.</p>
-<blockquote class="blockquote">
-<h2 id="recommended-reading" class="anchored">Recommended reading:</h2>
-<p>While you’re waiting for the polishing to finish, here’s some things you might want to read about: * Comparison of combined assembly and polishing methods <a href="https://link.springer.com/article/10.1186/s13059-021-02483-z">Trycycler: consensus long-read assemblies for bacterial genomes</a> * Polishing strategy for ONT and Pacbio Hifi reads <a href="https://www.nature.com/articles/s41592-022-01515-1">Polishing high-quality genome assemblies</a> * Comparison of polishing of ONT data with alignment free tool Jasper compared to POLCA, NextPolish and ntEdit <a href="https://www.biorxiv.org/content/10.1101/2022.06.14.496115v1.full">JASPER: a fast genome polishing tool that improves accuracy and creates population-specific reference genomes</a> * Comparison of short read polishers including pilon to the polisher Polypolish <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009802#">Polypolish: Short-read polishing of long-read bacterial genome assemblies</a> * Pilon short read polisher paper <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963">Pilon: An Integrated Tool for Comprehensive Microbial Variant Detection and Genome Assembly Improvement</a> * Accuracy of polishers including medaka for nanopore data <a href="https://github.com/rrwick/August-2019-consensus-accuracy-update#racon">Nanpore consensus quality</a> * Comparison of nanopore polishing tools <a href="https://www.nature.com/articles/s41598-021-00178-w">Comparative evaluation of Nanopore polishing tools for microbial genome assembly and polishing strategies for downstream analysis</a> {: .callout}</p>
-</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Recommended reading:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While you’re waiting for the polishing to finish, here’s some things you might want to read about:</p>
+<ul>
+<li>Comparison of combined assembly and polishing methods <a href="https://link.springer.com/article/10.1186/s13059-021-02483-z">Trycycler: consensus long-read assemblies for bacterial genomes</a></li>
+<li>Polishing strategy for ONT and Pacbio Hifi reads <a href="https://www.nature.com/articles/s41592-022-01515-1">Polishing high-quality genome assemblies</a></li>
+<li>Comparison of polishing of ONT data with alignment free tool Jasper compared to POLCA, NextPolish and ntEdit <a href="https://www.biorxiv.org/content/10.1101/2022.06.14.496115v1.full">JASPER: a fast genome polishing tool that improves accuracy and creates population-specific reference genomes</a></li>
+<li>Comparison of short read polishers including pilon to the polisher Polypolish <a href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009802#">Polypolish: Short-read polishing of long-read bacterial genome assemblies</a></li>
+<li>Pilon short read polisher paper <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0112963">Pilon: An Integrated Tool for Comprehensive Microbial Variant Detection and Genome Assembly Improvement</a></li>
+<li>Accuracy of polishers including medaka for nanopore data <a href="https://github.com/rrwick/August-2019-consensus-accuracy-update#racon">Nanpore consensus quality</a></li>
+<li>Comparison of nanopore polishing tools <a href="https://www.nature.com/articles/s41598-021-00178-w">Comparative evaluation of Nanopore polishing tools for microbial genome assembly and polishing strategies for downstream analysis</a></li>
+</ul>
+</div>
+</div>
 
 
 </section>
@@ -1245,7 +1627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../../docs/lesson04-polishing/index.html" class="pagination-link" aria-label="Polishing">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Polishing</span>
@@ -1265,7 +1647,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/edit/main/docs/lesson04-polishing/01-polishing-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nercMtGn-bashAutomation/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson04-polishing/01-polishing-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">
