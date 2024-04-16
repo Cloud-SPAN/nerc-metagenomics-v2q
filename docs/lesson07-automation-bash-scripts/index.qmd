@@ -5,10 +5,9 @@ subtitle: "[Metagenomics Environmental Application](/index.qmd)"
 ---
 ## Overview
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+In construction.
 
 ## Section 1 
-
 
 ## Section 2
 

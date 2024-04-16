@@ -168,7 +168,7 @@ A description that specifies the location of a file or directory within a [file 
     Its name is "/" on Unix (including Linux and Mac OS X) and "\\" on Microsoft Windows.
 
 ###### **shell**
-   A [command-line interface](#command-line interface) such as Bash (the Bourne-Again Shell)
+   A [command-line interface](#command-line-interface) such as Bash (the Bourne-Again Shell)
     or the Microsoft Windows DOS shell
     that allows a user to interact with the [operating system](#operating-system).
 

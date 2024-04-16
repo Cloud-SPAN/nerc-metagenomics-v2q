@@ -90,7 +90,7 @@ on **Next**.
 ::: {.callout-caution collapse="true"}
 ## Configure the Terminal to use Bash (instead of Zsh)
 
-The instructions below will guide you to configure your **terminal** to use the Bash shell. Do so only if you cannot login to your instance as described in the Episode [Logging onto the Cloud](https://cloud-span.github.io/nerc-metagenomics01-file-directories/02-logging-onto-cloud/index.html), and your  terminal displays the error message "**`ssh` command not found**" instead when trying to login.
+The instructions below will guide you to configure your **terminal** to use the Bash shell. Do so only if you cannot login to your instance as described in the Episode [Logging onto the Cloud](/docs/lesson01-files-and-directories/02-logging-onto-cloud.qmd), and your  terminal displays the error message "**`ssh` command not found**" instead when trying to login.
 
 You will also find below the instructions to revert your terminal configuration if you want to. Do so
 only after you have finished the course.

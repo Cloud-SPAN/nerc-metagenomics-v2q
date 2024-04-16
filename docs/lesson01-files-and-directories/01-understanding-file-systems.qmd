@@ -33,21 +33,26 @@ In a file system, files are organised into **directories**, which can also be ca
 
 It is easiest to picture a file system, or part of it, as a tree that starts at a directory and branches out from there. This is called a **hierarchical structure**. The figure below shows an example of a hierarchical file structure that starts at the "**home directory**" of the user named **user1**:
 
-![A file hierarchy containing 4 levels of folders and files](../fig/prenomics_file_hierarchy.png){:width="450px"}
+![A file hierarchy containing 4 levels of folders and files.](/images/prenomics_file_hierarchy.png){width=400 fig-alt="A file hierarchy containing 4 levels of folders and files."}
 
 The directory you are working inside is called your **working directory**. For example, if you were editing `doc2.txt` in the diagram above, your working directory would be the folder called `docs`.
 
-> ## Exercise
-> Think about your own computer and how your files and directories are organised. Sketch a tree diagram like the one above for your file system.\
+::: {.callout-note} 
+## Exercise
+Think about your own computer and how your files and directories are organised. Sketch a tree diagram like the one above for your file system.
+
 Hint: remind yourself of your file system's layout using a file manager application such as:
->
->| OS  |Icon |
->|:---|:---|
->| File Explorer (Windows) | <img src="../fig/icon-file-explorer-windows.png" width="50px"> |
->| Finder (Mac) | <img src="../fig/icon-finder-mac.png" width="50px"> |
->
-> You probably already use these applications regularly to find, open and organise files.
-{: .challenge}
+
+| OS  |Icon |
+|-----|-----|
+| File Explorer (Windows) | ![.](/images/icon-file-explorer-windows.png){width="50px"} |
+| Finder (Mac) | ![.](/images/icon-finder-mac.png){width="50px"} |
+
+You probably already use these applications regularly to find, open and organise files.
+:::
+
+<!-- >| File Explorer (Windows) | <img src="../fig/icon-file-explorer-windows.png" width="50px"> | -->
+<!-- | Finder (Mac) | <img src="../fig/icon-finder-mac.png" width="50px"> | -->
 
 ## File paths
 
@@ -75,7 +80,10 @@ In Windows, Mac, Unix, and Linux, the "**home directory**" is a folder named wit
 On Windows and Mac your home directory is a directory inside directory called **Users** and named with your username. On Unix/Linux systems it is called **home**.
 
 From the root, the file system is:
-![A file hierarchy containing with root and home directories labelled](../fig/prenomics_file_hierarchy_root.png){:width="450px"}
+
+![A file hierarchy containing with root and home directories labelled.](/images/prenomics_file_hierarchy_root.png){width="375" fig-alt="A file hierarchy containing with root and home directories labelled."}
+
+<!-- ![A file hierarchy containing with root and home directories labelled](../fig/prenomics_file_hierarchy_root.png){:width="450px"} -->
 
 Your home directory is:
 
@@ -83,9 +91,7 @@ Your home directory is:
 -   `/Users/user1/` on Mac
 -   `/home/user1/` on Linux
 
-
 In Linux (the operating system we will use later in the course), a tilde symbol (`~`) is used as a shortcut for your home directory. So, for example, the path `~/docs/doc2.txt` is equivalent to `/home/user1/docs/doc2.txt`.
-
 
 ## Absolute vs relative paths
 
@@ -97,20 +103,19 @@ A relative path describes the location of a file relative to your current workin
 
 If, however, you were in the folder called `docs` and you wanted to open one of the `.exe` files, you would need to give the path to `.exe` *relative* to the docs folder or give the absolute path.
 
+::: {.callout-note}
+##  Challenge
+Use the file system above to answer these questions. Don't forget to share your answer on the forum!
 
-> ##  Challenge
-> Use the file system above to answer these questions. Don't forget to share your answer on the forum!
->
-> 1. What is the absolute path for the document `doc4.txt` on a Linux computer?
-> 2. Assuming you are currently in the directory called `docs`, what is the relative path for the document `doc2.txt`?
->
-> > ## Solution
-> > 
-> > 1. The absolute path is `/home/user1/docs/data/doc4.txt` or `~/docs/data/doc4.txt`.
-> > 2. The relative path is `doc2.txt` (as you are already in the directory where `doc2.txt` is stored).
-> >
-> {: .solution}
-{: .challenge}
+1. What is the absolute path for the document `doc4.txt` on a Linux computer?
+2. Assuming you are currently in the directory called `docs`, what is the relative path for the document `doc2.txt`?
+
+::: {.callout-caution collapse="true"}
+## Solution
+1. The absolute path is `/home/user1/docs/data/doc4.txt` or `~/docs/data/doc4.txt`.
+2. The relative path is `doc2.txt` (as you are already in the directory where `doc2.txt` is stored).
+:::
+:::
 
 ## Create a folder for the course
 
@@ -129,8 +134,8 @@ In theory you can make this folder anywhere in your file system but we recommend
 2. **Write down the absolute path** to your `cloudspan` folder.
 
    Find out what the absolute path is using your file manager application. Right click on the folder, or in any blank space inside the folder, and then:
-   - Windows users: select *Properties*, then look at the field called *Location*. Your path will be separated with backslashes (`\`) but you should write it down using forward slashes (`/`).
-   - Mac Users: select *Get info*, then look at the field called *Where*. Your path should start with the word `Users/` - ignore anything that comes before this. Separate your path components using forward slashes (`/`).
+   - **Windows users**: select *Properties*, then look at the field called *Location*. Your path will be separated with backslashes (`\`) but you should write it down using forward slashes (`/`).
+   - **Mac Users**: select *Get info*, then look at the field called *Where*. Your path should start with the word `Users/` - ignore anything that comes before this. Separate your path components using forward slashes (`/`).
 
    Now add the folder name (`/cloudspan`) to the end of this path. This is your absolute path.
    Once you have this written down, do not lose it! Now you can find your way back to the `cloudspan` folder whenever you need to, no matter where you are in your file structure.

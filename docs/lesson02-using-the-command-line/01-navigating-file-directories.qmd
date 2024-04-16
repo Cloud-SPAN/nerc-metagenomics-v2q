@@ -18,38 +18,45 @@ keypoints:
 
 The first thing we need to do is log in to our cloud instance.
 
-1. **Open the *cloudspan* folder you created for the course**
+##### **1. Open the *cloudspan* folder you created for the course**
 
-    Open your file manager and navigate to the `cloudspan` folder (hint: we recommended you make the folder in your *Desktop* directory - but you might have made it somewhere else). If you cannot find the folder, you can remind yourself where it is stored by looking at the absolute path you wrote down in the previous episode.
+Open your file manager and navigate to the `cloudspan` folder (hint: we recommended you make the folder in your *Desktop* directory - but you might have made it somewhere else). If you cannot find the folder, you can remind yourself where it is stored by looking at the absolute path you wrote down in the previous episode.
 
-    The folder should contain the login key file we downloaded in the previous episode and nothing else.
+The folder should contain the login key file we downloaded in the previous episode and nothing else.
 
-2. **Right-click and open your machine's command line interface**
+##### **2. Right-click and open your machine's command line interface**
 
-    Now we can open the command line.
+Now we can open the command line.
 
-    **Windows users**: right click anywhere inside the blank space of the file manager, then select **Git Bash Here**.
+**Windows users**:
+
+- right click anywhere inside the blank space of the file manager, then select **Git Bash Here**.
   
-    **Mac users** you have two options:\
-    EITHER:
-    - Open **Terminal** in one window and type `cd` followed by a space but **don't press** `Enter` yet! Now open **Finder** in another window. Drag and drop the `cloudspan` folder from the Finder to the Terminal. You should see the file path leading to your `cloudspan` folder appear. Now press enter to navigate to the folder.
+**Mac users** you have two options:
 
-    OR
-    - Open **Terminal** and type `cd` followed by the absolute path that leads to your `cloudspan` folder. Press enter. 
+EITHER:
+
+- Open **Terminal** in one window and type `cd` followed by a space but **don't press** `Enter` yet! Now open **Finder** in another window. Drag and drop the `cloudspan` folder from the Finder to the Terminal. You should see the file path leading to your `cloudspan` folder appear. Now press enter to navigate to the folder.
+
+OR
+
+- Open **Terminal** and type `cd` followed by the absolute path that leads to your `cloudspan` folder. Press enter. 
     
-3. **Login into your instance**
+##### **3. Login into your instance**
 
-    ~~~
-    $ ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
-    ~~~
-    {: .bash}
+```bash
+$ ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
+```
 
-  *Be sure to replace NNN with your own number, twice.*
+*Be sure to replace NNN with your own number, twice.*
 
 ## Reminder: our file structure
 
 Before we start, here's a reminder of what our file structure looks like as a hierarchy tree:
-![A file hierarchy tree](../fig/blank_instance_file_tree_with_hidden.png){:width="400px"}
+
+<!-- ![A file hierarchy tree](../fig/blank_instance_file_tree_with_hidden.png){:width="400px"} -->
+
+![A file hierarchy tree.](/images/blank_instance_file_tree_with_hidden.png){width="350px" fig-alt="A file hierarchy tree."}
 
 Keep this in mind as we continue to navigate the file system, and don't hesitate to refer back to it if needed.
 
@@ -63,22 +70,22 @@ You can always find the directory you are in using the `pwd` command.
 However, you can also give `ls` the names of other directories to view. 
 Navigate to your home directory if you are not already there.
 
-~~~
+```bash
 $ cd
-~~~
-{: .bash}
+```
 
 Then enter the command:
 
-~~~
+```bash
 $ ls cs_course
-~~~
-{: .bash}
+```
 
-~~~
+::: {.callout-note}
+## Output
+```text
 data   databases
-~~~
-{: .output}
+```
+:::
 
 This will list the contents of the `cs_course` directory without you needing to navigate there.
 
@@ -86,34 +93,34 @@ The `cd` command works in a similar way.
 
 Try entering:
 
-~~~
+```bash
 $ cd
 $ cd cs_course/data/
-~~~
-{: .bash}
+```
 
 This will take you to the `data` directory without having to go through the intermediate `cs_course` directory.
 
-> ## Navigating practice
->
-> Navigate to your home directory. From there, list the contents of the `illumina_fastq`
-> directory.
->
-> > ## Solution
-> >
-> > ~~~
-> > $ cd
-> > $ ls cs_course/data/illumina_fastq
-> > ~~~
-> > {: .bash}
-> >
-> > ~~~
-> > ERR4998593_1.fastq  ERR4998593_2.fastq
-> > ~~~
-> > {: .output}
-> >
-> {: .solution}
-{: .challenge}
+::: {.callout-note}
+## Navigating practice
+
+Navigate to your home directory. From there, list the contents of the `illumina_fastq`
+directory.
+
+::: {.callout-caution collapse="true"}
+## Solution
+
+```bash
+$ cd
+$ ls cs_course/data/illumina_fastq
+```
+::: {.callout-note}
+## Output
+```text
+ERR4998593_1.fastq  ERR4998593_2.fastq
+```
+:::
+:::
+:::
 
 ## Full vs. Relative Paths
 
@@ -123,18 +130,19 @@ The directories on the computer are arranged into a hierarchy.
 The full path tells you where a directory is in that hierarchy. 
 Navigate to the home directory, then enter the `pwd` command.
 
-~~~
+```bash
 $ cd  
 $ pwd  
-~~~
-{: .bash}
+```
 
 You will see:
 
-~~~
+::: {.callout-note}
+## Output
+```text
 /home/csuser
-~~~
-{: .output}
+```
+:::
 
 This is the full name of your home directory. This tells you that you are in a directory called `csuser`, which sits inside a directory called
 `home` which sits inside the very top directory in the hierarchy. 
@@ -143,25 +151,22 @@ So, to summarize: `csuser` is a directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-~~~
+```bash
 $ cd /home/csuser/cs_course/.hidden
-~~~
-{: .bash}
+```
 
 This jumps forward multiple levels to the `.hidden` directory.
 Now go back to the home directory.
 
-~~~
+```bash
 $ cd
-~~~
-{: .bash}
+```
 
 You can also navigate to the `.hidden` directory using:
 
-~~~
+```bash
 $ cd cs_course/.hidden
-~~~
-{: .bash}
+```
 
 These two commands have the same effect, they both take us to the `.hidden` directory.
 The first uses the absolute path, giving the full address from the root directory `/`. 
@@ -174,24 +179,30 @@ If you're trying to get to a directory in a different branch, it might be more c
 
 Over time, it will become easier for you to keep a mental note of the structure of the directories that you are using and how to quickly navigate amongst them. We will be using the same directory structure for this whole course so navigating it should get easier as you progress.
 
-> ## Relative path resolution
->
-> Using the file system diagram below, if `pwd` displays `~/csuser/cs_course/data/illumina_fastq`,
-> what will `ls ../nano_fastq` display?
-> 
-> Can you explain why?
->
-> ![blank instance file tree](../fig/blank_instance_file_tree_with_hidden.png){:width="300px"}
->
-> > ## Solution
-> > ~~~
-> > ERR5000342_sub12.fastq
-> > ~~~
-> > {: .output}
-> > 
-> > The command `ls ..` moves us up a folder level before we list the contents of `nano_fastq`.
-> {: .solution}
-{: .challenge}
+::: {.callout-note}
+## Relative path resolution
+
+Using the file system diagram below, if `pwd` displays `~/csuser/cs_course/data/illumina_fastq`,
+what will `ls ../nano_fastq` display?
+
+Can you explain why?
+
+<!-- ![Blank instance file tree.](../fig/blank_instance_file_tree_with_hidden.png){:width="300px"} -->
+
+![Blank instance file tree.](/images/blank_instance_file_tree_with_hidden.png){width="300px" fig-alt="Blank instance file tree."}
+
+::: {.callout-caution collapse="true"}
+## Solution
+::: {.callout-note}
+## Output
+```text
+ERR5000342_sub12.fastq
+```
+:::
+
+The command `ls ..` moves us up a folder level before we list the contents of `nano_fastq`.
+:::
+:::
 
 ### Navigational Shortcuts
 
@@ -204,23 +215,23 @@ The tilde character, `~`, is a shortcut for your home directory. In our case, th
 
 Navigate to the `illumina_fastq` directory:
 
-~~~
+```bash
 $ cd
 $ cd cs_course/data/illumina_fastq
-~~~
-{: .bash}
+```
 
 Then enter the command:
 
-~~~
+```bash
 $ ls ~
-~~~
-{: .bash}
+```
 
-~~~
+::: {.callout-note}
+## Output
+```text
 bin  cs_course software
-~~~
-{: .output}
+```
+:::
 
 This prints the contents of your home directory, without you needing to
 type the full path.

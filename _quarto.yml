@@ -6,11 +6,12 @@ project:
 #date-format: "YYYY"
 
 website:
-  title: "Automating Metagenomics Analyses with Bash Scripts"
+  title: "Cloud-SPAN Metagenomics"
+  favicon: images/cloud-span-icon.png
   page-navigation: true         # prev and next options at the bottom of each page
   back-to-top-navigation: true
   reader-mode: true  
-  repo-url: https://github.com/Cloud-SPAN/nercMtGn-bashAutomation
+  repo-url: https://github.com/Cloud-SPAN/nerc-metagenomics-v2q
   repo-actions: [edit, issue]
   page-footer:
     left: |
@@ -122,11 +123,21 @@ website:
 
 format:
   html:
+    code-copy: true
+    # highlight-style: oblivion, haddock or monochrome # dracula # espresso #(nice greyish)
+    highlight-style: oblivion
+    code-overflow: wrap
+    page-layout: full
     theme: cosmo
     css: styles.css
 #    theme:
 #    - styles.scss
     toc: true
+    grid:                     # defaults
+      sidebar-width: 230px    # 300px
+      body-width: 1040px      # 900px
+      margin-width: 230px     # 300px
+      gutter-width: 1.5rem    # 1.5rem
 
 execute:
   freeze: auto
