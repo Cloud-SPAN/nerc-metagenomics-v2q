@@ -1,5 +1,5 @@
 ---
-title: "Metagenomics"
+title: "Metagenomics 2"
 subtitle: "Environmental Applications"
 # title-block-banner: true
 ---
