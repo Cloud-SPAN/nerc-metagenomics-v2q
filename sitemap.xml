@@ -2,142 +2,142 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson07-automation-bash-scripts/01-scripting-intro.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson07-automation-bash-scripts/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson04-polishing/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson01-files-and-directories/02-logging-onto-cloud.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson01-files-and-directories/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson03-qc-assembly/00-introduction-meta.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson03-qc-assembly/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson05-binning-functional-annotation/01-binning.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson05-binning-functional-annotation/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson02-using-the-command-line/01-navigating-file-directories.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson02-using-the-command-line/03-redirection.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/about.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/workflow03.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/glossary.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/workflow06.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson06-taxonomic-annotations/01-taxonomic.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson06-taxonomic-annotations/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.490Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.564Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/precourse-instructions.html</loc>
-    <lastmod>2024-04-16T08:03:53.362Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.436Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/workflow04.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/workflow05.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/miscellanea/extras/data.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson02-using-the-command-line/02-working-with-file.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson02-using-the-command-line/index.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson05-binning-functional-annotation/02-binning_quality.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson05-binning-functional-annotation/03-Functional-annotation.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson03-qc-assembly/02-assembly.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson01-files-and-directories/01-understanding-file-systems.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.380Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson01-files-and-directories/03-shell-introduction.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson04-polishing/01-polishing-assembly.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson04-polishing/02-QC-polished-assembly.html</loc>
-    <lastmod>2024-04-16T08:03:53.310Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
   <url>
     <loc>https://Cloud-SPAN.github.io/nerc-metagenomics-v2q/docs/lesson07-automation-bash-scripts/02-base-automation-script.html</loc>
-    <lastmod>2024-04-16T08:03:53.314Z</lastmod>
+    <lastmod>2024-04-16T10:54:18.384Z</lastmod>
   </url>
 </urlset>
