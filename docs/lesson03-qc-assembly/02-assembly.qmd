@@ -111,7 +111,7 @@ flye: error: the following arguments are required: -o/--out-dir
 
 A full description can be displayed by using the `--help` flag:
 ```bash {filename="Code"}
-  flye --help
+flye --help
 ```
 
 ::: {.callout-note collapse="true"}

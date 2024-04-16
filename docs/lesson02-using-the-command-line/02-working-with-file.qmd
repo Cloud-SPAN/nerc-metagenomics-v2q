@@ -27,51 +27,44 @@ We are looking at the results from a short-read sequencing experiment, which are
 
 Navigate to your `illumina_fastq` directory:
 
-```bash
-$ cd ~/cs_course/data/illumina_fastq
+```bash   {filename="Code"}
+cd ~/cs_course/data/illumina_fastq
 ```
 
 We are interested in looking at the fastq files in this directory. We can list
 all files with the .fastq extension using the command:
 
-```bash
-$ ls *.fastq
+```bash   {filename="Code"}
+ls *.fastq
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1.fastq  ERR4998593_2.fastq
 ```
-:::
 
 The `*` character is a special type of character called a wildcard, which can be used to represent any number of any type of character.
 Thus, `*.fastq` matches every file that ends with `.fastq`.
 
 This command:
 
-```bash
-$ ls *_2.fastq
+```bash {filename="Code"}
+ls ../../
+ls *_2.fastq
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_2.fastq
 ```
-:::
 
 lists only the file that ends with `_2.fastq`.
 
 This command:
 
-```bash
-$ ls /usr/bin/*.sh
+```bash {filename="Code"}
+ls /usr/bin/*.sh
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 /usr/bin/amuFormat.sh  /usr/bin/gettext.sh  /usr/bin/gvmap.sh
 ```
-:::
+
 
 Lists every file in `/usr/bin` that ends in the characters `.sh`.
 Note that the output displays __full__ paths to files, since
@@ -119,8 +112,8 @@ is very useful.
 
 You can also review your recent commands with the `history` command, by entering:
 
-```bash
-$ history
+```bash {filename="Code"}
+history
 ```
 
 to see a numbered list of recent commands. You can reuse one of these commands
@@ -128,19 +121,15 @@ directly by referring to the number of that command.
 
 For example, if your history looked like this:
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 259  ls *
 260  ls /usr/bin/*.sh
 261  ls *R1*fastq
 ```
-:::
-
 then you could repeat command #260 by entering:
 
-```bash
-$ !260
+```bash {filename="Code"}
+!260
 ```
 
 Type `!` (exclamation point) and then the number of the command from your history.
@@ -165,9 +154,9 @@ One way to examine a file is to open the file in a read-only format and navigate
 
 Enter the following command from within the `illumina_fastq` directory:
 
-```bash
-$ cd ~/cs_course/data/illumina_fastq
-$ less ERR4998593_1.fastq
+```bash {filename="Code"}
+cd ~/cs_course/data/illumina_fastq
+less ERR4998593_1.fastq
 ```
 ::: {.callout-note}
 ## FASTQ format
@@ -207,7 +196,7 @@ Quality is interpreted as the probability of an incorrect base call. To make it 
 
 ::: {.callout-caution collapse="true"}
 ## Solution
-```text
+```default {filename="Output"}
 1. :FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF
 ```
 :::
@@ -252,13 +241,10 @@ There's another final way that we can look at files, and in this case, just look
 
 The commands are `head` and `tail` and they let you look at the beginning and end of a file, respectively.
 
-```bash
-$ head ERR4998593_1.fastq
+```bash {filename="Code"}
+head ERR4998593_1.fastq
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 @ERR4998593.40838091 40838091 length=151
 CCACATGCTTTAAGTGCATGTGGTACTGCTCCAGGACCAGCATTGTAGGTCGCCAATGCTTTGGCGTAGGTGCCATCAAACATATTCGTGTAATGAGCCATGAGATGGGCTGCTCCCTTCAATGCATCAACCGGATTCCACGGATCAATGC
 +
@@ -270,15 +256,11 @@ FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 @ERR4998593.3 3 length=151
 GNGGTGCTCGACGGTGGCTCGGCGGATGCGCATGGCGTCGGGCCTGCGGTCCAGCCGCTCCCGCATGGCGTCGATCACCGCCTCATGCTCCCAGCGTTTGATGCGGCGCTCCTTGCCGCTCGTACACCGGCTCTTCAGCGGGCAGCCGGCGta
 ```
-:::
 
-```bash
-$ tail ERR4998593_1.fastq
+```bash {filename="Code"}
+tail ERR4998593_1.fastq
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 +
 FFF:F,FF:FFFFFF:F,:FFF,FF:FF,FFF::F:F,FF,FF,FFF,FFFFFF:FFFFFFF,F,,FFF:FFFF:,FFFF:FF::F:FFF,F:FFFF,:FFFFF,F:F:FF,FF:F:FFFF:FFF:FFF::FF:FF:,::FF,FF:,F,FF
 @ERR4998593.55595926 55595926 length=151
@@ -290,31 +272,22 @@ ACGCCCCACAGGGCGGCACCGACGCCGCCGCCCGGGCCCGCCGGCCCGCCCCGGTGGGCACCGGTTGCCACTGCGGCTTG
 +
 FFFFFFFFF:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF,FFF,FFFF:FFFFFFFF,FFFFFF::F:F,FFFFFF,FFFFFFFFFFFFF,F:F:FF,FFFF
 ```
-:::
 
 The `-n` option to either of these commands can be used to print the first or last `n` lines of a file.
 
-```bash
-$ head -n 1 ERR4998593_1.fastq
+```bash {filename="Code"}
+head -n 1 ERR4998593_1.fastq
 ```
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 @ERR4998593.40838091 40838091 length=151
 ```
-:::
-
-```bash
-$ tail -n 1 ERR4998593_1.fastq
+```bash {filename="Code"}
+tail -n 1 ERR4998593_1.fastq
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 F:FFFFFFFFFFFFFFFFFFFF:FFFFFFFFFFFFFFFF:FFFFFFFF,FFFFFFFFFFFFFFFFFFFFFFFFFF:FFFFF:FFF:FFFFFFFFFFFFFF:FFFFFF:FF:FFFFFFFFFFFFFFFFFFFFFF,F,FFF,FFFFFF,FFFF
 ```
-:::
 
 ## Creating, moving, copying, and removing files
 
@@ -335,17 +308,14 @@ First, let's make a copy of one of our FASTQ files using the `cp` command.
 
 Navigate to the `cs_course/data/illumina_fastq` directory and enter:
 
-```bash
-$ cp ERR4998593_1.fastq ERR4998593_1_copy.fastq
-$ ls -F
+```bash  {filename="Code"}
+cp ERR4998593_1.fastq ERR4998593_1_copy.fastq
+ls -F
 ```
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1.fastq  ERR4998593_1_copy.fastq  ERR4998593_2.fastq
 ```
-:::
 
 The prompt will disappear for up to two minutes and reappear when the command is completed and the backup is made.
 
@@ -356,47 +326,40 @@ called `backup` where we'll store our backup data files.
 
 The `mkdir` command is used to make a directory. Enter `mkdir`followed by a space, then the directory name you want to create:
 
-```bash
-$ mkdir backup
+```bash  {filename="Code"}
+mkdir backup
 ```
 
 ### Moving / Renaming files and directories
 
 We can now move our backup file to this directory. We can move files around using the command `mv`:
 
-```bash
-$ mv ERR4998593_1_copy.fastq backup
-$ ls backup
+```bash   {filename="Code"}
+mv ERR4998593_1_copy.fastq backup
+ls backup
 ```
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1_copy.fastq
 ```
-:::
 
 The `mv` command is also how you rename files. Let's rename this file to make it clear that this is a backup:
 
-```bash
-$ cd backup
-$ mv ERR4998593_1_copy.fastq ERR4998593_1_backup.fastq
-$ ls
+```bash {filename="Code"}
+cd backup
+mv ERR4998593_1_copy.fastq ERR4998593_1_backup.fastq
+ls
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1_backup.fastq
 ```
-:::
 
 ### Removing files and directories
 
 You can delete or remove files with the `rm` command:
 
-```bash
-$ rm ERR4998593_1_backup.fastq
+```bash  {filename="Code"}
+rm ERR4998593_1_backup.fastq
 ```
 
 **Important**: The `rm` command permanently removes the file. Be careful with this command. It doesn't just nicely put the files in the recycling. They're really gone.
@@ -404,9 +367,9 @@ $ rm ERR4998593_1_backup.fastq
 By default, `rm` will not delete directories. You can tell `rm` to delete a directory using the `-r` (recursive) option. Let's delete the backup directory
 we just made:
 
-```bash
-$ cd ..
-$ rm -r backup
+```bash {filename="Code"}
+cd ..
+rm -r backup
 ```
 
 This will delete not only the directory, but all files within the directory.
@@ -433,13 +396,10 @@ To fix this, move your new backup directory out of `illumina_fastq` and into the
 
 It's always a good idea to check your work. Move to the `data` folder with `cd ..` and then list the contents of `backup` with `ls -l backup`. You should see something like:
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 -rw-rw-r-- 1 csuser csuser 2811886584 Feb 22 11:25 ERR4998593_1_backup.fastq
 -rw-rw-r-- 1 csuser csuser 2302264784 Feb 22 11:29 ERR4998593_2_backup.fastq
 ```
-:::
 :::
 :::
 

@@ -40,8 +40,8 @@ nucleotide at that position in the DNA sequence.
 We'll search for strings inside of our fastq files. Let's first make sure we are in the correct
 directory:
 
-```bash
-$ cd ~/cs_course/data/illumina_fastq
+```bash {filename="Code"}
+cd ~/cs_course/data/illumina_fastq
 ```
 
 However, suppose we want to see how many reads in our file have bad segments containing three or more unclassified nucleotides (N) in a row.
@@ -61,8 +61,8 @@ To search files we use a new command called `grep`. The name "grep" comes from a
 
 Let's search for the string NNN in the ERR4998593_1 file:
 
-```bash
-$ grep NNN ERR4998593_1.fastq
+```bash  {filename="Code"}
+grep NNN ERR4998593_1.fastq
 ```
 
 This command returns quite a lot of output to the terminal. Every single line in the ERR4998593_1 file that contains at least 3 consecutive Ns is printed to the terminal, regardless of how long or short the file is.
@@ -78,21 +78,18 @@ To get all of the information about each read, we will return the line immediate
 
 We can use the `-B` argument for grep to return a specific number of lines before each match. The `-A` argument returns a specific number of lines after each matching line. Here we want the line *before* and the two lines *after* each matching line, so we add `-B1 -A2` to our grep command:
 
-```bash
-$ grep -B1 -A2 NNN ERR4998593_1.fastq
+```bash  {filename="Code"}
+grep -B1 -A2 NNN ERR4998593_1.fastq
 ```
 
 One of the sets of lines returned by this command is:
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 @ERR4998593.50651366 50651366 length=151
 TCCTTGCGGAGCCGGGCATGCAGGNCCTGCAGGTAGNGGCGGCGGCAGGNGCCGCCGCCGTCTACCACGGTGTANCGNNCNANNNNNCANTCATCGACGGNNGGTGNGACNNCTGCGATCTTGCGNCGCCTGGTCTNGCGGCCATCCTCTN
 +
 FFF,FFFFFFFF:,,F:F,FFFFF#,:F,FFFF:F,#,FFFFF::FF:,#FFFFFFFFF:F,FF,FFFF,F,FF#,F##:#:#####:F#FFFFFFF,FF##:FFF#F:F##FFF,FFFFFF,,,#FF:F:,FFFF#F:::F:FFF:FF,#
 ```
-:::
 
 ::: {.callout-note}
 ## Exercise
@@ -105,9 +102,7 @@ that contains a match. What is the output?
 ## Solution  
 1. `grep -B1 AAAACCCCGGGGTTTT ERR4998593_1.fastq`
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 @ERR4998593.49988640 49988640 length=151
 GGTCCATGAAGCTTGTACTGCGCGCCGATATTCTCGAAGCCGAGGCCCTAGTCCGCAAAAAACAAAAACCCCGGGGTTTTGGCCCCGGGGTTTGTCGTTTGAGCGTTTGCCGCGGCGATCAGAACCGGTAGTTGACGCCGGCGCGAACGAT
 --
@@ -117,13 +112,10 @@ GCCGAGGCCCTAGTCCGCAAAAAACAAAAACCCCGGGGTTTTGGCCCCGGGGTTTGTCGTTTTAGCGTTTGCCGCGGCGA
 @ERR4998593.39668571 39668571 length=151
 CCCCGGGGCCAAAACCCCGGGGTTTTTGTTTTTTGCGGACTAGGCCTCGGCTTCGAGAATATCGGCGCGCAGTCCAAGCTTCATGGACCTGTCGTGACCCAAGATGGCGGATCAGGCGGGAGACTCAGGTTTTCCCGAAAGGTCTTTATGC
 ```
-:::
 
 2. `grep -B1 AACCGGTTAACCGGTT *.fastq`
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1.fastq-@ERR4998593.64616570 64616570 length=151
 ERR4998593_1.fastq:GACAAGCTCATCTTCCAAAATCCGCAACGGTTTTTAAGCCAGTGCCCGAAATTTAGATTAACCGATTAACCGGTTAACCGGTTCGTAGGAGACGGGTAACGAGACTCTAACTCAAGTTTCGCATACTACCACCAAAACAGCCCGTCCGCGT
 --
@@ -141,7 +133,6 @@ ERR4998593_2.fastq:GAACAGGGCTGTTAGTTAACCGGTCAAAGCCGCCTTAACCGGTTAACCGGTTGTAACGCCC
 ```
 :::
 :::
-:::
 
 ## Redirecting output
 
@@ -157,8 +148,8 @@ The command for redirecting output to a file is `>`.
 
 Let's try out this command and copy all the records (including all four lines of each record) in our FASTQ files that contain 'NNN' to another file called `bad_reads.txt`. The new flag `--no-group-separator` stops grep from putting a dashed line (--) between matches. The reason this is necessary will become apparent shortly.
 
-```bash
-$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
+```bash {filename="Code"}
+grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
 ```
 
 The prompt should sit there a little bit, and then it should look like nothing
@@ -180,29 +171,22 @@ However, using an extension such as `.txt` makes it easy to distinguish the file
 We can check the number of lines in our new file using a command called `wc`. `wc` stands for **word count**. This command counts the number of words, lines, and characters in a file. The FASTQ file may change over time, so given the potential for updates, make sure the output of your `wc` command below matches your instructor's output.
 
 As of February 2023, wc gives the following output:  
-```bash
-$ wc bad_reads.txt
+```bash  {filename="Code"}
+wc bad_reads.txt
 ```
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
   52   78 4511 bad_reads.txt
 ```
-:::
 
 This will tell us the number of lines, words and characters in the file. If we want only the number of lines, we can use the `-l` flag for `lines`.
 
-```bash
-$ wc -l bad_reads.txt
+```bash  {filename="Code"}
+wc -l bad_reads.txt
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 52 bad_reads.txt
 ```
-:::
 
 The `--no-group-separator` flag used above prevents grep from adding unnecessary extra lines to the file which would alter the number of lines present.
 
@@ -217,29 +201,22 @@ Try these questions on your own first. Then, if you are attending an instructor-
 ::: {.callout-caution collapse="true"}
 ## Solution
 1.
-```bash
-$ wc -l ERR4998593_1.fastq
+```bash  {filename="Code"}
+wc -l ERR4998593_1.fastq
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 137054440 ERR4998593_1.fastq
 ```
-:::
-
 Now you can divide this number by four to get the number of sequences in your fastq file (34263610).
 
 2.
-```bash
-$ grep NNNNN ERR4998593_1.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+```bash {filename="Code"}
+grep NNNNN ERR4998593_1.fastq > bad_reads.txt
+wc -l bad_reads.txt
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 3 bad_reads.txt
 ```
-:::
 :::
 :::
 
@@ -250,29 +227,21 @@ to a file, the new output will replace the output that was already present in th
 This is called "overwriting" and, just like you don't want to overwrite your video recording
 of your kid's first birthday party, you also want to avoid overwriting your data files.
 
-```bash
-$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+```bash {filename="Code"}
+grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
+wc -l bad_reads.txt
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 52 bad_reads.txt
 ```
-:::
 
-
-```bash
-$ grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+```bash  {filename="Code"}
+grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
+wc -l bad_reads.txt
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 0 bad_reads.txt
 ```
-:::
 
 Here, the output of our second  call to `wc` shows that we no longer have any lines in our `bad_reads.txt` file. This is because the second string we searched (`NNNNNNNNNN`) does not match any strings in the file. So our file was overwritten and is now empty.
 
@@ -280,27 +249,21 @@ Here, the output of our second  call to `wc` shows that we no longer have any li
 
 We can avoid overwriting our files by using the command `>>`. `>>` is known as the "append redirect" and will append new output to the end of a file, rather than overwriting it.
 
-```bash
-$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
-$ wc -l bad_reads.txt
+```bash  {filename="Code"}
+grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq > bad_reads.txt
+wc -l bad_reads.txt
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 52 bad_reads.txt
 ```
-:::
 
-```bash
-$ grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq >> bad_reads.txt
-$ wc -l bad_reads.txt
+```bash {filename="Code"}
+grep -B1 -A2 NNNNNNNNNN --no-group-separator ERR4998593_1.fastq >> bad_reads.txt
+wc -l bad_reads.txt
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 52 bad_reads.txt
 ```
-:::
 
 The output of our second call to `wc` shows that we have not overwritten our original data.
 
@@ -320,8 +283,8 @@ When our output was scrolling by, we might have wished we could slow it down and
 look at it, like we can with `less`. Well it turns out that we can! We can redirect our output
 from our `grep` call through the `less` command.
 
-```bash
-$ grep -B1 -A2 NNN ERR4998593_1.fastq | less
+```bash  {filename="Code"}
+grep -B1 -A2 NNN ERR4998593_1.fastq | less
 ```
 
 We can now see the output from our `grep` call within the `less` interface. We can use the up and down arrows
@@ -331,15 +294,12 @@ If we don't want to create a file before counting lines of output from our `grep
 the output of the grep search to the command `wc -l`. This can be helpful for investigating your output if you are not sure
 you would like to save it to a file.
 
-```bash
-$ grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq | wc -l
+```bash {filename="Code"}
+grep -B1 -A2 NNN --no-group-separator ERR4998593_1.fastq | wc -l
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 52
 ```
-:::
 
 ::: {.callout-note}
 ## Custom `grep` control

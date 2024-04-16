@@ -44,8 +44,8 @@ OR
     
 ##### **3. Login into your instance**
 
-```bash
-$ ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
+```bash {filename="Code"}
+ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
 ```
 
 *Be sure to replace NNN with your own number, twice.*
@@ -70,22 +70,19 @@ You can always find the directory you are in using the `pwd` command.
 However, you can also give `ls` the names of other directories to view. 
 Navigate to your home directory if you are not already there.
 
-```bash
-$ cd
+```bash {filename="Code"}
+cd
 ```
 
 Then enter the command:
 
-```bash
-$ ls cs_course
+```bash  {filename="Code"}
+ls cs_course
 ```
-
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 data   databases
 ```
-:::
+
 
 This will list the contents of the `cs_course` directory without you needing to navigate there.
 
@@ -93,9 +90,9 @@ The `cd` command works in a similar way.
 
 Try entering:
 
-```bash
-$ cd
-$ cd cs_course/data/
+```bash   {filename="Code"}
+cd
+cd cs_course/data/
 ```
 
 This will take you to the `data` directory without having to go through the intermediate `cs_course` directory.
@@ -109,16 +106,13 @@ directory.
 ::: {.callout-caution collapse="true"}
 ## Solution
 
-```bash
-$ cd
-$ ls cs_course/data/illumina_fastq
+```bash   {filename="Code"}
+cd
+ls cs_course/data/illumina_fastq
 ```
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR4998593_1.fastq  ERR4998593_2.fastq
 ```
-:::
 :::
 :::
 
@@ -130,19 +124,16 @@ The directories on the computer are arranged into a hierarchy.
 The full path tells you where a directory is in that hierarchy. 
 Navigate to the home directory, then enter the `pwd` command.
 
-```bash
-$ cd  
-$ pwd  
+```bash  {filename="Code"}
+cd  
+pwd  
 ```
 
 You will see:
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 /home/csuser
 ```
-:::
 
 This is the full name of your home directory. This tells you that you are in a directory called `csuser`, which sits inside a directory called
 `home` which sits inside the very top directory in the hierarchy. 
@@ -151,21 +142,21 @@ So, to summarize: `csuser` is a directory in `home` which is a directory in `/`.
 
 Now enter the following command:
 
-```bash
-$ cd /home/csuser/cs_course/.hidden
+```bash  {filename="Code"}
+cd /home/csuser/cs_course/.hidden
 ```
 
 This jumps forward multiple levels to the `.hidden` directory.
 Now go back to the home directory.
 
-```bash
-$ cd
+```bash  {filename="Code"}
+cd
 ```
 
 You can also navigate to the `.hidden` directory using:
 
-```bash
-$ cd cs_course/.hidden
+```bash  {filename="Code"}
+cd cs_course/.hidden
 ```
 
 These two commands have the same effect, they both take us to the `.hidden` directory.
@@ -193,13 +184,9 @@ Can you explain why?
 
 ::: {.callout-caution collapse="true"}
 ## Solution
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 ERR5000342_sub12.fastq
 ```
-:::
-
 The command `ls ..` moves us up a folder level before we list the contents of `nano_fastq`.
 :::
 :::
@@ -215,23 +202,20 @@ The tilde character, `~`, is a shortcut for your home directory. In our case, th
 
 Navigate to the `illumina_fastq` directory:
 
-```bash
-$ cd
-$ cd cs_course/data/illumina_fastq
+```bash {filename="Code"}
+cd
+cd cs_course/data/illumina_fastq
 ```
 
 Then enter the command:
 
-```bash
-$ ls ~
+```bash {filename="Code"}
+ls ~
 ```
 
-::: {.callout-note}
-## Output
-```text
+```default {filename="Output"}
 bin  cs_course software
 ```
-:::
 
 This prints the contents of your home directory, without you needing to
 type the full path.
