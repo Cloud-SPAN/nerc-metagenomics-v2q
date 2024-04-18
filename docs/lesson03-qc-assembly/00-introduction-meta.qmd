@@ -61,8 +61,8 @@ For organisms that are well characterised, establishing identity can give you in
 
 Despite this, there are workflows such as [QIIME2](https://qiime2.org/), which are free and community led, which use database annotations of the reference versions of the organisms identified from the amplicon, to suggest what metabolic functions maybe present. The amplicon sequence is also limited because species may have genomic differences, but may be indistinguishable from the amplicon sequence alone. This means that amplicon sequencing can rarely resolve to less than a genus level.
 
-| Attribute       | Amplicon | Whole genome metagenomics |
-|-------|--------------|
+| Attribute   | Amplicon | Whole genome metagenomics |
+|-------------|--------------|-------------------|
 | Cost | Cheap | Expensive |
 | Coverage depth | High | Lower - medium |
 | Taxonomy detection | Specific to amplicons used  | All in sample |
@@ -83,7 +83,7 @@ We will talk about this more later in this lesson as part of the [Genome Assembl
 However, for metagenome analysis, if you were to use only short read sequencing for the assembly you would end up with a much more fragmented assembly to work with.
 
 |        | Short reads | Long reads |
-|-------|-----------|
+|-----------|------------|----------------|
 | Technologies | Illumina | Nanopore and pacbio |
 | Number of reads generated | 800 million paired end**\*** | Depends on read length, and instrument, but usually only 10s of thousands**\*\*** |
 | Base accuracy | Very high | Low |
