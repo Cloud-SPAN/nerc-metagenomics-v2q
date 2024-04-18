@@ -450,36 +450,48 @@ ul.task-list li input[type="checkbox"] {
 <p>For organisms that are well characterised, establishing identity can give you information about functional capacity of the community. For organisms which are not well characterised - and these are common in such samples - we will know little other than relative abundances in the community.</p>
 <p>Despite this, there are workflows such as <a href="https://qiime2.org/">QIIME2</a>, which are free and community led, which use database annotations of the reference versions of the organisms identified from the amplicon, to suggest what metabolic functions maybe present. The amplicon sequence is also limited because species may have genomic differences, but may be indistinguishable from the amplicon sequence alone. This means that amplicon sequencing can rarely resolve to less than a genus level.</p>
 <table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 30%">
+<col style="width: 41%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Attribute</th>
 <th>Amplicon</th>
+<th>Whole genome metagenomics</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Cost</td>
 <td>Cheap</td>
+<td>Expensive</td>
 </tr>
 <tr class="even">
 <td>Coverage depth</td>
 <td>High</td>
+<td>Lower - medium</td>
 </tr>
 <tr class="odd">
 <td>Taxonomy detection</td>
 <td>Specific to amplicons used</td>
+<td>All in sample</td>
 </tr>
 <tr class="even">
 <td>Genome coverage</td>
 <td>Only region amplified</td>
+<td>All of genome</td>
 </tr>
 <tr class="odd">
 <td>Taxonomic resolution</td>
 <td>Lower</td>
+<td>Higher</td>
 </tr>
 <tr class="even">
 <td>Turnaround time</td>
 <td>Fast</td>
+<td>Slower - more computational time for analysis needed</td>
 </tr>
 </tbody>
 </table>
@@ -493,36 +505,48 @@ ul.task-list li input[type="checkbox"] {
 <p>We will talk about this more later in this lesson as part of the <a href="https://cloud-span.github.io/nerc-metagenomics03-qc-assembly/03-assembly/index.html">Genome Assembly</a> section. There are pros and cons to each using both long and short reads, and so using them in combination is usually the best method. These pros and cons are irrespective of the application.</p>
 <p>However, for metagenome analysis, if you were to use only short read sequencing for the assembly you would end up with a much more fragmented assembly to work with.</p>
 <table class="table">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 30%">
+<col style="width: 41%">
+</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th>Short reads</th>
+<th>Long reads</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>Technologies</td>
 <td>Illumina</td>
+<td>Nanopore and pacbio</td>
 </tr>
 <tr class="even">
 <td>Number of reads generated</td>
 <td>800 million paired end<strong>*</strong></td>
+<td>Depends on read length, and instrument, but usually only 10s of thousands<strong>**</strong></td>
 </tr>
 <tr class="odd">
 <td>Base accuracy</td>
 <td>Very high</td>
+<td>Low</td>
 </tr>
 <tr class="even">
 <td>Ease of assembly</td>
 <td>Very difficult</td>
+<td>Easier</td>
 </tr>
 <tr class="odd">
 <td>Format output files</td>
 <td>Fastq</td>
+<td>Fastq, Fast5</td>
 </tr>
 <tr class="even">
 <td>Read length</td>
 <td>150-300bp</td>
+<td>Commonly 10-30kb<strong>***</strong></td>
 </tr>
 </tbody>
 </table>
