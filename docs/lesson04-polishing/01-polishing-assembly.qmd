@@ -37,9 +37,11 @@ In the diagram, the long read assembly is shown at the top. The four short reads
 How important polishing is to your analysis will depend on what you need it for. Usually we generate metagenome assemblies so we can compare the sequences to a database and find out what taxa they belong to.
 
 You might **NOT** need to polish your assembly if:
+
 - you only need to taxa to the genus level (meaning single incorrect bases are not important)
 
 You **DO** need to polish your assembly if:
+
 - you want to identify taxa to the species level (if possible). This is a common requirement since one of the main advantages of whole genome sequencing over amplicon sequencing is that you can assign annotations to the species level.  We will cover [Taxonomic annotations](/docs/lesson06-taxonomic-annotations/index.qmd) later in the course.
 - you want to generate protein predictions or identify protein structure domains to determine the functionality of metagenomes. This is discussed in more detail in Watson and Warr (2019): [Errors in long-read assemblies can critically affect protein prediction](https://www.nature.com/articles/s41587-018-0004-z).   
 
@@ -259,6 +261,7 @@ Pilon is in the latter group of bioinformatics software, so we will need to do s
 ### Generating the Pilon input files
 
 We will first use the program [BWA](https://github.com/lh3/bwa) to generate an alignment of the raw short reads against the draft genome in consensus.fasta. The steps will be:
+
 1. indexing the polished assembly, consensus.fasta with `bwa index`. Indexing allows the aligner to quickly find potential alignment sites for query sequences in a genome, which saves time during alignment.
 2. creating a directory for the outputs of Pilon
 3. aligning the short reads (the illumina data) to the assembly, consensus.fasta with `bwa mem`

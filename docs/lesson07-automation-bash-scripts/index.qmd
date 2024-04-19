@@ -5,10 +5,13 @@ subtitle: "[Metagenomics Environmental Application](/index.qmd)"
 ---
 ## Overview
 
-In construction.
+This lesson shows how to automate the analyses run in the previous lessons except the R tasks in the last lesson.  
 
-## Section 1 
+To consider:
 
-## Section 2
+- Running commands on multiple files rather than a single file --- after the base script. 
+  - using directory names instead of file names 
+- Do we need scripts in the local machine too?
 
-## Section 3 
+Next sections contain the code in each lesson episode to be considered to automate it.
+
