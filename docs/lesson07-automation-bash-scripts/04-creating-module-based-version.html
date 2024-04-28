@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Cloud-SPAN Metagenomics - Files and Directories</title>
+<title>Cloud-SPAN Metagenomics - Creating a Module-based Script</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -29,7 +29,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" rel="next">
 <link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -117,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson01-files-and-directories/index.html">Files and Directories</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></li><li class="breadcrumb-item"><a href="../../docs/lesson07-automation-bash-scripts/04-creating-module-based-version.html">Creating a Module-based Script</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -131,13 +130,13 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link active">
+            <a href="../../docs/lesson01-files-and-directories/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Files and Directories</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="sidebar-item-text sidebar-link">
@@ -301,11 +300,11 @@ ul.task-list li input[type="checkbox"] {
       <div class="sidebar-item-container"> 
             <a href="../../docs/lesson07-automation-bash-scripts/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Automating Analyses with Bash Scripts</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
@@ -326,7 +325,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../docs/lesson07-automation-bash-scripts/04-creating-module-based-version.html" class="sidebar-item-text sidebar-link">
+  <a href="../../docs/lesson07-automation-bash-scripts/04-creating-module-based-version.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Creating a Module-based Script</span></a>
   </div>
 </li>
@@ -384,20 +383,26 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson07-automation-bash-scripts/04-creating-module-based-version.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson07-automation-bash-scripts/index.html">Automating Analyses with Bash Scripts</a></li><li class="breadcrumb-item"><a href="../../docs/lesson07-automation-bash-scripts/04-creating-module-based-version.html">Creating a Module-based Script</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Files and Directories</h1>
+<h1 class="title">Creating a Module-based Script</h1>
 </div>
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -409,33 +414,12 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- Below: in inserting figure, we need a title even if empty [.] for the figure to be centred -->
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/xkcd-comic-file-names.png" class="img-fluid figure-img"></p>
-<figcaption>.</figcaption>
-</figure>
-</div>
-<p>Welcome to the first lesson in Cloud-SPAN’s <strong>Metagenomics with High Performance Computing</strong> course!</p>
-<p>Over the next two lessons we will cover the foundational skills and knowledge needed for the rest of the course. Once you are comfortable with these skills, we can move on to applying them to a metagenomics analysis workflow.</p>
-<p>In this lesson we will learn how the files and directories on your computer are structured, as well as logging onto the cloud and using the <strong>command line</strong> (also known as the <strong>shell</strong> and the <strong>terminal</strong>) for the first time. It is heavily based on the first lesson of our <a href="https://cloud-span.github.io/prenomics00-intro/">Prenomics course</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Getting Started
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This lesson assumes <strong>no prior experience</strong> with the tools covered in the module. It is designed for absolute beginners.</p>
-<p>This lesson uses an Amazon Web Services (AWS) instance, which is a Linux virtual machine. Your AWS instance will be created for you and you will be sent the log in information you will need for this lesson.</p>
-<p>Before starting you should read the <a href="../../docs/miscellanea/precourse-instructions.html">Precourse Instructions</a> page.</p>
-</div>
-</div>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>in construction</p>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -847,15 +831,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-page-right">
-  <div class="nav-page nav-page-previous">
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../docs/lesson01-files-and-directories/01-understanding-file-systems.html" class="pagination-link" aria-label="Understanding your file system">
-        <span class="nav-page-text">Understanding your file system</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -864,7 +839,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson01-files-and-directories/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson07-automation-bash-scripts/04-creating-module-based-version.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       <ul class="footer-items list-unstyled">
     <li class="nav-item compact">

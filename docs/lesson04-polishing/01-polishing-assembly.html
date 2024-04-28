@@ -344,13 +344,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../docs/lesson07-automation-bash-scripts/01-scripting-intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Introduction to Bash Scripting</span></a>
+ <span class="menu-text">Scripting Basics</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../docs/lesson07-automation-bash-scripts/02-base-automation-script.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Base Automation Script</span></a>
+ <span class="menu-text">Base Environmental Metagenomics Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson07-automation-bash-scripts/03-adding-logging-and-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Adding Logging and Control to the Base Script</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson07-automation-bash-scripts/04-creating-module-based-version.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating a Module-based Script</span></a>
   </div>
 </li>
       </ul>
@@ -819,7 +831,7 @@ Chaining together commands with a pipe
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is possible to chain together commands in Linux (and Unix) using a command known as “pipe”. This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy (and unfull). The pipe command is the character <code>|</code> which is obtained with <kbd>⇧ Shift</kbd> + <kbd>&lt;/kbd&gt; on most keyboards.</kbd></p>
+<p>It is possible to chain together commands in Linux (and Unix) using a command known as “pipe”. This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy (and unfull). The pipe command is the character <code>|</code> which is obtained with <kbd>⇧ Shift</kbd> + <kbd>\</kbd> on most keyboards.</p>
 <p>You can use multiple pipes in a single line of commands but data will only go from the left to the right:</p>
 <p><code>command1 | command2 | command3 | .... |</code></p>
 </div>
