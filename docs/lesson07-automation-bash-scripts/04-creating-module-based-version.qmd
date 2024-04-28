@@ -1,5 +1,5 @@
 ---
-title: "Scripting Basics"
+title: "Creating a Module-based Script"
 page-navigation: false
 ---
 # Overview

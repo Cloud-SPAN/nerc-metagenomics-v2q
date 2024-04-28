@@ -1,5 +1,5 @@
 ---
-title: "Scripting Basics"
+title: "Adding Logging and Control to the Base Script"
 page-navigation: false
 ---
 # Overview

@@ -112,6 +112,8 @@ website:
         contents: 
           - docs/lesson07-automation-bash-scripts/01-scripting-intro.qmd
           - docs/lesson07-automation-bash-scripts/02-base-automation-script.qmd
+          - docs/lesson07-automation-bash-scripts/03-adding-logging-and-control.qmd
+          - docs/lesson07-automation-bash-scripts/04-creating-module-based-version.qmd
       - section: "Extras"
         contents: 
           - docs/miscellanea/extras/data.qmd
@@ -125,7 +127,7 @@ format:
   html:
     code-copy: true
     # highlight-style: oblivion, haddock or monochrome # dracula # espresso #(nice greyish)
-    highlight-style: oblivion
+    highlight-style: dracula
     code-overflow: wrap
     page-layout: full
     theme: cosmo
