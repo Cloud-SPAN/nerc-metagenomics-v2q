@@ -107,13 +107,13 @@ website:
           - docs/lesson06-taxonomic-annotations/01-taxonomic.qmd
           - docs/lesson06-taxonomic-annotations/02-Diversity-tackled-with-R.qmd
           - docs/lesson06-taxonomic-annotations/03-hands_on-diversity.qmd
-      - section: "Automating Analyses with Bash Scripts"
-        href: docs/lesson07-automation-bash-scripts/index.qmd
-        contents: 
-          - docs/lesson07-automation-bash-scripts/01-scripting-intro.qmd
-          - docs/lesson07-automation-bash-scripts/02-base-automation-script.qmd
-          - docs/lesson07-automation-bash-scripts/03-adding-logging-and-control.qmd
-          - docs/lesson07-automation-bash-scripts/04-creating-module-based-version.qmd
+      # - section: "Automating Analyses with Bash Scripts"
+      #   href: docs/lesson07-automation-bash-scripts/index.qmd
+      #   contents: 
+      #     - docs/lesson07-automation-bash-scripts/01-scripting-intro.qmd
+      #     - docs/lesson07-automation-bash-scripts/02-base-automation-script.qmd
+      #     - docs/lesson07-automation-bash-scripts/03-adding-logging-and-control.qmd
+      #     - docs/lesson07-automation-bash-scripts/04-creating-module-based-version.qmd
       - section: "Extras"
         contents: 
           - docs/miscellanea/extras/data.qmd
