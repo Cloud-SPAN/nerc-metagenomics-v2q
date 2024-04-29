@@ -514,13 +514,12 @@ Important
 <p>Make sure you’re still logged into your cloud instance. If you can’t remember how to log on, visit <a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html#getting-started">the instructions from earlier today</a>.</p>
 </div>
 </div>
-<p>Navigate to the <code>analysis</code> directory you made in a previous step.</p>
+<p>Navigate to the <code>cs_course</code> directory.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cs_course/analysis</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Run the <code>flye</code> command without any arguments to see a short description of its use:</p>
 <div class="code-with-filename">
@@ -672,12 +671,12 @@ Unused parameters
 </div>
 </div>
 <p>Now we’ve worked out what parameters are appropriate for our data we can put them all together in one command. Since the command is quite long, we will use backward slashes to allow it to span several lines. <code>\</code> basically means “start a new line and carry on reading without submitting the command”.</p>
-<p>First let’s make sure we’re in the <code>analysis</code> directory, and make a new directory called <code>assembly</code> for the Flye output.</p>
+<p>First let’s make sure we’re in the <code>results</code> directory, and make a new directory called <code>assembly</code> for the Flye output.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
+<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/results/</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> assembly</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we can start constructing our command! You can type/copy this code into your command line but don’t press enter just yet.</p>
@@ -685,20 +684,20 @@ Unused parameters
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> assembly <span class="dt">\</span></span>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> results/assembly <span class="dt">\</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">--threads</span> 8 <span class="dt">\</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--iterations</span> 3 <span class="dt">\</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
-<li><code>--nano-raw</code> tells Flye that it is receiving pre-Guppy5 reads and that the <strong>input</strong> is found at the path <code>~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq</code> (note that we are using our ‘filtered reads’ - there’d be no point doing quality control and filtering otherwise!)</li>
-<li><code>--out-dir</code> tells Flye that the <strong>output</strong> should be saved in the <code>assembly/</code> directory</li>
+<li><code>--nano-raw</code> tells Flye that it is receiving pre-Guppy5 reads and that the <strong>input</strong> is found at the path <code>data/nano_fastq/ERR5000342_sub12_filtered.fastq</code> (note that we are using our ‘filtered reads’ - there’d be no point doing quality control and filtering otherwise!)</li>
+<li><code>--out-dir</code> tells Flye that the <strong>output</strong> should be saved in the <code>results/assembly/</code> directory</li>
 <li><code>--threads</code> indicates that the number of parallel cores is <code>8</code></li>
 <li><code>--iterations</code> indicates that the data will be polished <code>3</code> times</li>
 <li><code>--meta</code> indicates that the dataset is a metagenome</li>
 </ul>
-<p><strong><span style="color:red"> Don’t run this command yet! — If you have, you can press <kbd>Ctrl</kbd>+<kbd>z</kbd> to stop the command.</span></strong></p>
+<p><span style="color:red"><strong>Don’t run this command yet! — If you have, you can press</strong> <kbd>Ctrl</kbd>+<kbd>z</kbd> to stop the command.</span></p>
 <p>Now we’ve built our command we could stop here <strong>but</strong> metagenomic assembly takes a long time. If we were to run this command as is we’d have to stay logged into the instance (aka leaving your computer running) for hours.</p>
 <p>Luckily we don’t have to do that as we’re using a remote computer.</p>
 <section id="running-a-command-in-the-background" class="level3">
@@ -719,17 +718,17 @@ Warning
 </div>
 </div>
 <p>To run a command in the background, we follow it with an ampersand (<code>&amp;</code>) symbol.</p>
-<p>The final thing to add to our <code>flye</code> command is “redirection”: <code>&amp;&gt; flye_output.txt</code> will send any output that would be sent to the terminal to a file, <code>flye_output.txt</code> instead</p>
+<p>The final thing to add to our <code>flye</code> command is “redirection”: <code>&amp;&gt; results/assembly/flye_output.txt.txt</code> will send any output that would be sent to the terminal to a file called <code>flye_output.txt</code> (in <code>results/assembly</code>) instead.</p>
 <p>The complete command is:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> assembly <span class="dt">\</span></span>
+<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">flye</span> <span class="at">--nano-raw</span> data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="dt">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">--out-dir</span> results/assembly <span class="dt">\</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">--threads</span> 8 <span class="dt">\</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--iterations</span> 3 <span class="dt">\</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span> <span class="op">&amp;&gt;</span> flye_output.txt <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span> <span class="op">&amp;&gt;</span> results/assembly/flye_output.txt <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>&amp;&gt;</code> redirects sends information that would normally go to the terminal to a file instead. This means any logging and progress information <code>flye</code> creates will be saved in <code>flye_output.txt</code>. Note the lack of a space between <code>&amp;&gt;</code>. The second <code>&amp;</code> then runs this command in the background.</p>
 <p>We can now press enter to run the command. Your prompt should immediately return. This doesn’t mean that the code has finished already: it is now running in the background.</p>
@@ -772,7 +771,7 @@ How you run these commands will depend on the computing resources (and their fai
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[1]+  Running      flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir assembly --threads 8 --iterations 3 --meta &amp;&gt; flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[1]+  Running      flye --nano-raw data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir results/assembly --threads 8 --iterations 3 --meta &amp;&gt; results/assembly/flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The <code>[1]</code> is the job number. If you need to stop the job running, you can use <code>kill %1</code>, where 1 is the job number.</p>
 </section>
@@ -783,7 +782,8 @@ How you run these commands will depend on the computing resources (and their fai
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> assembly/flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/assembly</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The contents of the file will depend on how far through the assembly Flye is. At the start of an assembly you’ll probably see something like this:</p>
 <div class="code-with-filename">
@@ -854,7 +854,7 @@ Navigation commands in <code>less</code>:
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>[2]+  Done      flye --nano-raw ~/cs_course/data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir assembly --threads 8 --iterations 3 --meta &amp;&gt; flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>[2]+  Done      flye --nano-raw data/nano_fastq/ERR5000342_sub12_filtered.fastq --out-dir results/assembly --threads 8 --iterations 3 --meta &amp;&gt; results/assembly/flye_output.txt &amp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This message won’t be displayed if you disconnected from the instance for whatever reason during the assembly process. However, you can still examine the <code>flye.log</code> file in the <code>assembly</code> directory. If the assembly has finished the log file will have summary statistics and information about the location of the assembly at the end.</p>
 <p>Move to the <code>assembly</code> directory and use <code>less</code> to examine the contents of the log file:</p>
@@ -862,7 +862,7 @@ Navigation commands in <code>less</code>:
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/assembly/</span>
+<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/results/assembly/</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> flye.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Navigate to the end of the file using <kbd>G</kbd>. You should see something like:</p>
@@ -879,7 +879,7 @@ Navigation commands in <code>less</code>:
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        Scaffolds:      0</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        Mean coverage:  7</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/analysis/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/results/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are some basic statistics about the final assembly created.</p>
 </section>
@@ -897,7 +897,7 @@ Navigation commands in <code>less</code>:
 <ul>
 <li>Flye generates a directory to contain the output for each step of the assembly process. (These are the <code>00-assembly</code>, <code>10-consensus</code>, <code>20-repeat</code>, <code>30-contigger</code> and <code>40-polishing</code> directories.)<br>
 </li>
-<li>We also have a file containing the parameters we ran the assembly under <code>params.json</code> which is useful to keep our analysis reproducible.<br>
+<li>We also have a file containing the parameters we ran the assembly under <code>params.json</code> which is useful to keep our results reproducible.<br>
 </li>
 <li>The assembled contigs are in FASTA format (<code>assembly.fasta</code>), a common standard file type for storing sequence data without its quality scores.<br>
 </li>
@@ -930,8 +930,8 @@ Contigs vs.&nbsp;reads
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/assembly/</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats results/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>SeqKit</code> is fast so we have run the command in the terminal foreground. It should take just a couple of seconds to process this assembly. Assemblies with more sequencing data can take a bit longer.</p>
 <p>Once it has finished you should see an output table like this:</p>
