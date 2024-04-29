@@ -32,7 +32,7 @@
     "href": "index.html#course-overview",
     "title": "Metagenomics",
     "section": "Course Overview",
-    "text": "Course Overview\n\n\n\nLesson\nOverview\n\n\n\n\nFiles and Directories\nLearn about files and directories, log onto a cloud instance and get a basic introduction to the shell.\n\n\nUsing the Command Line\nLearn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.\n\n\nQC & Assembly\nHow to quality control and assemble a genome.\n\n\nPolishing\nHow to use short reads to polish your metagenome assembly\n\n\nBinning & Functional Annotation\nHow to separate an assembly into MAGs and add functional annotation to these MAGs.\n\n\nTaxonomic Annotations\nHow to add taxonomic annotations onto contigs in an assembly.\n\n\nAutomating Analyses with Bash Scripts\nHow to automate the analyses tasks in the previous lessons using Bash scripts."
+    "text": "Course Overview\n\n\n\nLesson\nOverview\n\n\n\n\nFiles and Directories\nLearn about files and directories, log onto a cloud instance and get a basic introduction to the shell.\n\n\nUsing the Command Line\nLearn more about using the shell to navigate directories, manipulate and search files, and combine existing commands to do new things.\n\n\nQC & Assembly\nHow to quality control and assemble a genome.\n\n\nPolishing\nHow to use short reads to polish your metagenome assembly\n\n\nBinning & Functional Annotation\nHow to separate an assembly into MAGs and add functional annotation to these MAGs.\n\n\nTaxonomic Annotations\nHow to add taxonomic annotations onto contigs in an assembly."
   },
   {
     "objectID": "docs/lesson02-using-the-command-line/01-navigating-file-directories.html",
