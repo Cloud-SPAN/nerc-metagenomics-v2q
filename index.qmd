@@ -50,4 +50,4 @@ The course will take place over three weeks and will combine live coding and tea
 | [Polishing](docs/lesson04-polishing/index.qmd) | How to use short reads to polish your metagenome assembly |
 | [Binning & Functional Annotation](docs/lesson05-binning-functional-annotation/index.qmd)| How to separate an assembly into MAGs and add functional annotation to these MAGs. |
 | [Taxonomic Annotations](docs/lesson06-taxonomic-annotations/index.qmd) | How to add taxonomic annotations onto contigs in an assembly. |
-| [Automating Analyses with Bash Scripts](docs/lesson07-automation-bash-scripts/index.qmd) | How to automate the analyses tasks in the previous lessons using Bash scripts. |
+<!-- | [Automating Analyses with Bash Scripts](docs/lesson07-automation-bash-scripts/index.qmd) | How to automate the analyses tasks in the previous lessons using Bash scripts. | -->
