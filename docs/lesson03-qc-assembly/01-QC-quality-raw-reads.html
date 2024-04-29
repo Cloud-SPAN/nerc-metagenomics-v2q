@@ -404,7 +404,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson03-qc-assembly/01-QC-quality-raw-reads.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/01-QC-quality-raw-reads.html">Assessing Read Quality, Trimming and Filtering</a></li></ol></nav>
 <div class="quarto-title">
@@ -882,7 +882,7 @@ When sequencing is poor(er) Quality
 </div>
 </section>
 </section>
-<section id="nanopore-quality-control" class="level2 page-columns page-full">
+<section id="nanopore-quality-control" class="level2">
 <h2 class="anchored" data-anchor-id="nanopore-quality-control">Nanopore quality control</h2>
 <p>Next we will assess the quality of the Nanopore raw reads. These are found in the file located at <code>~/cs_course/data/nano_fastq/ERR5000342_sub12.fastq</code>.</p>
 <p>This file contains a subset of 12% of the Nanopore reads from our site of interest (hence <code>sub12</code>). The reason we aren’t using all of the reads is because there are so many that our remote computer would be overwhelmed! We will be using the <code>sub12</code> data for the time being, but later in the course you will be given an assembly for analysis which was assembled using the full set of reads.</p>
@@ -1088,20 +1088,23 @@ Output — NanoPlot Help Documentation
 <!-- :::{.column-body-outset} JUST LITTLE OUT BODY-->
 <!-- :::{.column-page} THE WHOLE PAGE WIDTH-->
 <!-- :::{.column-screen} THE WHOLE SCREEN WIDTH -->
-<div class="column-screen">
+<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb24" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_dot.html            LengthvsQualityScatterPlot_loglength_kde.png         Non_weightedLogTransformed_HistogramReadlength.png</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_dot.png             NanoPlot_202303307_1630.log                          WeightedHistogramReadlength.html</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_kde.html            NanoPlot-report.html                                 WeightedHistogramReadlength.png</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_kde.png             NanoStats.txt                                        WeightedLogTransformed_HistogramReadlength.html</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_dot.html  Non_weightedHistogramReadlength.html                 WeightedLogTransformed_HistogramReadlength.png</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_dot.png   Non_weightedHistogramReadlength.png                  Yield_By_Length.html</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_kde.html  Non_weightedLogTransformed_HistogramReadlength.html  Yield_By_Length.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_dot.html               NanoStats.txt         </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_dot.png                Non_weightedHistogramReadlength.html                          </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_kde.html               Non_weightedHistogramReadlength.png                                 </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_kde.png                Non_weightedLogTransformed_HistogramReadlength.html                                        WeightedLogTransformed_HistogramReadlength.html   Non_weightedLogTransformed_HistogramReadlength.png</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_dot.html     WeightedLogTransformed_HistogramReadlength.png</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_dot.png      WeightedHistogramReadlength.html               </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_kde.html     WeightedHistogramReadlength.png</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>LengthvsQualityScatterPlot_loglength_kde.png      Yield_By_Length.html</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>NanoPlot_202303307_1630.log                       Yield_By_Length.png</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>NanoPlot-report.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>:::</p>
 <p>We can see that NanoPlot has generated a lot of different files.</p>
 <p>Like before, we can’t view most of these files in our terminal as we can’t open images or HTML files. Instead we’ll download the core information to our own computer. Luckily, the <code>NanoPlot-report.html</code> file contains all of the plots and information held in the other files so we only need to download that one onto our local computer using <code>scp</code>.</p>
 <p>Use a terminal that is <strong><em>not</em></strong> logged into the cloud instance and ensure you are in your <code>cloudspan</code> directory. You may have one from earlier. If you do not, unveil the instructions below to start one.</p>
@@ -1127,16 +1130,16 @@ Starting a new terminal
 </div>
 </div>
 <p>Use <code>scp</code> to copy the file - the command will look something like:</p>
-<div class="column-page">
+<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
 <div class="sourceCode" id="cb25" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>:::</p>
 <p>Remember to replace NNN with the instance number specific to you. As the file is downloading you will see an output like:</p>
-<div class="column-page">
+<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
@@ -1144,7 +1147,7 @@ Starting a new terminal
 <div class="sourceCode" id="cb26" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>NanoPlot-report.html                                  100% 3281KB   2.3MB/s   00:01</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>:::</p>
 <p>Once the file has downloaded, use the File Explorer (Windows) or Finder (Mac) to find the file and open it - it should open up in your browser.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
