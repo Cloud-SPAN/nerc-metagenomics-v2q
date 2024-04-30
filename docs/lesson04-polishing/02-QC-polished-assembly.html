@@ -403,18 +403,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-n50-length" id="toc-the-n50-length" class="nav-link" data-scroll-target="#the-n50-length">The N50 length</a></li>
   <li><a href="#generating-statistics-for-all-three-assemblies" id="toc-generating-statistics-for-all-three-assemblies" class="nav-link" data-scroll-target="#generating-statistics-for-all-three-assemblies">Generating statistics for all three assemblies</a></li>
   </ul></li>
-  <li><a href="#using-metaquast-to-further-assess-assembly-quality" id="toc-using-metaquast-to-further-assess-assembly-quality" class="nav-link" data-scroll-target="#using-metaquast-to-further-assess-assembly-quality">Using metaQUAST to further assess assembly quality</a></li>
+  <li><a href="#using-metaquast-to-further-assess-assembly-quality" id="toc-using-metaquast-to-further-assess-assembly-quality" class="nav-link" data-scroll-target="#using-metaquast-to-further-assess-assembly-quality">Using MetaQUAST to further assess assembly quality</a></li>
   <li><a href="#writing-files" id="toc-writing-files" class="nav-link" data-scroll-target="#writing-files">Writing files</a>
   <ul class="collapse">
-  <li><a href="#running-metaquast" id="toc-running-metaquast" class="nav-link" data-scroll-target="#running-metaquast">Running <strong>metaquast</strong></a></li>
-  <li><a href="#downloading-metaquast-report.html" id="toc-downloading-metaquast-report.html" class="nav-link" data-scroll-target="#downloading-metaquast-report.html">Downloading metaquast <strong>report.html</strong></a></li>
-  <li><a href="#understanding-metaquast-output" id="toc-understanding-metaquast-output" class="nav-link" data-scroll-target="#understanding-metaquast-output">Understanding metaQUAST output</a></li>
+  <li><a href="#running-metaquast" id="toc-running-metaquast" class="nav-link" data-scroll-target="#running-metaquast">Running MetaQUAST</a></li>
+  <li><a href="#downloading-metaquast-report.html" id="toc-downloading-metaquast-report.html" class="nav-link" data-scroll-target="#downloading-metaquast-report.html">Downloading MetaQUAST report.html</a></li>
+  <li><a href="#understanding-metaquast-output" id="toc-understanding-metaquast-output" class="nav-link" data-scroll-target="#understanding-metaquast-output">Understanding MetaQUAST output</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson04-polishing/02-QC-polished-assembly.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/index.html">Polishing</a></li><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/02-QC-polished-assembly.html">QC polished assembly</a></li></ol></nav>
 <div class="quarto-title">
@@ -439,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="why-qc-a-metagenome-assembly">Why QC a metagenome assembly?</h2>
 <p>We now have a polished assembly (<code>pilon.fasta</code>). The next thing to do is to perform quality control (QC) checks to make sure we can be confident in our results and conclusions about the taxonomic, metabolic or functional composition of the communities that we are studying. This also allows us to check whether our efforts to improve the assembly with polishing were successful.</p>
 <p>The quality of metagenome assemblies is typically lower than it is for single genome assemblies due to the use of long reads.</p>
-<p>In this episode we explain what is meant by assembly quality and how to examine and compare the quality of your metagenome assemblies using <code>seqkit stats</code> and <a href="http://quast.sourceforge.net/metaquast">MetaQUAST</a></p>
+<p>In this episode we explain what is meant by assembly quality and how to examine and compare the quality of your metagenome assemblies using <code>seqkit stats</code> and <a href="http://quast.sourceforge.net/metaquast">MetaQUAST</a>.</p>
 </section>
 <section id="what-do-we-mean-by-assembly-quality" class="level2">
 <h2 class="anchored" data-anchor-id="what-do-we-mean-by-assembly-quality">What do we mean by assembly quality?</h2>
@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <hr>
 </section>
 </section>
-<section id="using-seqkit-to-generate-summary-statistics-of-an-assembly" class="level2 page-columns page-full">
+<section id="using-seqkit-to-generate-summary-statistics-of-an-assembly" class="level2">
 <h2 class="anchored" data-anchor-id="using-seqkit-to-generate-summary-statistics-of-an-assembly">Using seqkit to generate summary statistics of an assembly</h2>
 <p>After finishing the draft assembly we used <code>seqkit stats</code> to see some basic statistics about the assembly. We will be using it again to get summary statistics for all three of the assemblies (unpolished, long read polished and short read polished). We can then use those statistics to examine the polishing process.</p>
 <p>Let’s review the help documentation for seqkit stats.</p>
@@ -478,7 +478,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">--help</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-page">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -526,8 +525,7 @@ Output — seqkit stats help documentation
 </div>
 </div>
 </div>
-</div>
-<section id="the-n50-length" class="level3 page-columns page-full">
+<section id="the-n50-length" class="level3">
 <h3 class="anchored" data-anchor-id="the-n50-length">The N50 length</h3>
 <p>N50 is a metric indicating the distribution of contig lengths in an assembly. The value of N50 indicates that 50% of the total sequence is in contigs that are that size or larger. For a more thorough introduction to N50, read <a href="https://www.molecularecologist.com/2017/03/29/whats-n50/">What’s N50? By The Molecular Ecologist</a>.</p>
 <p>It indicates the average size of the contigs the assembly software has produced. A higher N50 length means that more of the assembly is in longer fragments. That means the chunks of sequence produced by the assembler are, on average, larger.</p>
@@ -571,7 +569,7 @@ Solution
 </div>
 </div>
 </div>
-<p>Next, run the command on the original draft assembly (<code>~/cs_course/analysis/assembly/assembly.fasta</code>) to calculate the N50 length and answer the questions below about the output.</p>
+<p>Next, run the command on the original draft assembly (<code>~/cs_course/results/assembly/assembly.fasta</code>) to calculate the N50 length and answer the questions below about the output.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -588,13 +586,13 @@ Hint: Seqkit stats N50 command
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/assembly</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> results/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="callout callout-style-default callout-note callout-titled page-columns page-full">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -603,14 +601,13 @@ Hint: Seqkit stats N50 command
 Exercise 2: Calculating the N50 length
 </div>
 </div>
-<div class="callout-body-container callout-body page-columns page-full">
+<div class="callout-body-container callout-body">
 <ol type="a">
 <li>What is the output if we run the new command from the above exercise?<br>
 </li>
 <li>What is the N50 length of this assembly?</li>
 </ol>
 <p>Bonus exercise: Looking at the <a href="https://bioinf.shenwei.me/seqkit/usage/#stats">information available online for Seqkit stats</a>, can you work out what the extra statistics other than N50 tell us?</p>
-<div class="column-page">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -642,128 +639,38 @@ Solution
 </div>
 </div>
 </div>
-</div>
 </section>
-<section id="generating-statistics-for-all-three-assemblies" class="level3 page-columns page-full">
+<section id="generating-statistics-for-all-three-assemblies" class="level3">
 <h3 class="anchored" data-anchor-id="generating-statistics-for-all-three-assemblies">Generating statistics for all three assemblies</h3>
 <p>Instead of passing just one FASTA file to <code>seqkit stats</code> we can use all three FASTA files at once.</p>
-<p>First we need to navigate into the analysis directory.</p>
+<p>First we need to make sure we’re in the <code>cs_course</code> directory.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Within the analysis directory, these three files are:</p>
+<p>The three files we want to generate statistics for are:</p>
 <ul>
-<li>Draft assembly generated by Flye in <code>assembly/assembly.fasta</code></li>
-<li>Long-read polished assembly generated by Medaka in <code>medaka/consensus.fasta</code></li>
-<li>Short-read polished assembly generated by Pilon in <code>pilon/pilon.fasta</code></li>
+<li>Draft assembly generated by Flye in <code>results/assembly/assembly.fasta</code></li>
+<li>Long-read polished assembly generated by Medaka in <code>results/medaka/consensus.fasta</code></li>
+<li>Short-read polished assembly generated by Pilon in <code>results/pilon/pilon.fasta</code></li>
 </ul>
 <p>This makes our command:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> assembly/assembly.fasta medaka/consensus.fasta pilon/pilon.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-screen">
-<table class="table">
-<colgroup>
-<col style="width: 15%">
-<col style="width: 5%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 1%">
-<col style="width: 4%">
-<col style="width: 6%">
-<col style="width: 6%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>file</th>
-<th>format</th>
-<th>type</th>
-<th>num_seqs</th>
-<th>sum_len</th>
-<th>min_len</th>
-<th>avg_len</th>
-<th>max_len</th>
-<th>Q1</th>
-<th>Q2</th>
-<th>Q3</th>
-<th>sum_gap</th>
-<th>N50</th>
-<th>Q20(%)</th>
-<th>Q30(%)</th>
-<th>GC(%)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>assembly/assembly.fasta</td>
-<td>FASTA</td>
-<td>DNA</td>
-<td>791</td>
-<td>11,979,728</td>
-<td>662</td>
-<td>15,145</td>
-<td>95,860</td>
-<td>7,148</td>
-<td>11,019</td>
-<td>18,874</td>
-<td>0</td>
-<td>19,835</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>66.58</td>
-</tr>
-<tr class="even">
-<td>medaka/consensus.fasta</td>
-<td>FASTA</td>
-<td>DNA</td>
-<td>791</td>
-<td>12,019,945</td>
-<td>662</td>
-<td>15,195.9</td>
-<td>96,516</td>
-<td>7,127.5</td>
-<td>10,960</td>
-<td>18,914.5</td>
-<td>0</td>
-<td>19,831</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>65.16</td>
-</tr>
-<tr class="odd">
-<td>pilon/pilon.fasta</td>
-<td>FASTA</td>
-<td>DNA</td>
-<td>791</td>
-<td>11,950,064</td>
-<td>662</td>
-<td>15,107.5</td>
-<td>95,826</td>
-<td>7,108.5</td>
-<td>10,902</td>
-<td>18,830</td>
-<td>0</td>
-<td>19,748</td>
-<td>0.00</td>
-<td>0.00</td>
-<td>66.13</td>
-</tr>
-</tbody>
-</table>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>file                    format type num_seqs sum_len    min_len avg_len  max_len Q1      Q2     Q3       sum_gap N50    Q20(%) Q30(%) GC(%)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>assembly/assembly.fasta FASTA  DNA  791      11,979,728 662     15,145   95,860  7,148   11,019 18,874   0       19,835 0.00   0.00   66.58</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>medaka/consensus.fasta  FASTA  DNA  791      12,019,945 662     15,195.9 96,516  7,127.5 10,960 18,914.5 0       19,831 0.00   0.00   65.16</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>pilon/pilon.fasta       FASTA  DNA  791      11,950,064 662     15,107.5 95,826  7,108.5 10,902 18,830   0       19,748 0.00   0.00   66.13</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -805,7 +712,7 @@ Solution
 </section>
 </section>
 <section id="using-metaquast-to-further-assess-assembly-quality" class="level2">
-<h2 class="anchored" data-anchor-id="using-metaquast-to-further-assess-assembly-quality">Using metaQUAST to further assess assembly quality</h2>
+<h2 class="anchored" data-anchor-id="using-metaquast-to-further-assess-assembly-quality">Using MetaQUAST to further assess assembly quality</h2>
 <p>We will use <a href="http://quast.sourceforge.net/metaquast">MetaQUAST</a> to further evaluate our metagenomic assemblies. MetaQUAST is based on the QUAST genome quality tool but accounts for high species diversity and misassemblies.</p>
 <p>MetaQUAST assesses the quality of assemblies using alignments to close references. This means we need to determine which references are appropriate for our data. MetaQUAST can automatically select reference genomes to align the assembly to, but it does not always pick the most appropriate references. Instead we will provide it with a list of references. For now you can just use our list, but next lesson we will show you how we generated it so you know how to do it for your own data in future.</p>
 <p>So far we’ve been able to do a lot of work with files that already exist, but now we need to write our own file using the text editor Nano.</p>
@@ -825,23 +732,23 @@ Text editors
 </div>
 </div>
 </section>
-<section id="writing-files" class="level2 page-columns page-full">
+<section id="writing-files" class="level2">
 <h2 class="anchored" data-anchor-id="writing-files">Writing files</h2>
-<p>First, we create a directory for the metaQUAST output in the analysis directory.</p>
+<p>First, we need to create a directory to put the reference genomes list in. We’ll put it in a new folder in the data directory, since it’s an input not an output.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> metaquast</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> metaquast</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/data</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ref_genomes</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ref_genomes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To open nano we type the command <code>nano</code> followed by the name of the text file we want to generate.</p>
+<p>To open nano type the command <code>nano</code> followed by the name of the text file we want to generate.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When you press enter your terminal should change. You should see a white bar at the top with <code>GNU nano 4.8</code> (instead of ‘GNU nano 2.5.3’ shown in the screenshot below) and some suggested commands at the bottom of the page. There should also be a white box which indicates where your cursor is. It should look something like this:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -856,26 +763,26 @@ Text editors
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> erythrophlei</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> lablabi</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> canariense</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 200</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 170</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> diazoefficiens</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 186</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Rhodopseudomonas</span> palustris</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Afipia</span> sp. GAS231</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> arachidis</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> icense</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. CCBAU 051011</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Rhodoplanes</span> sp. Z2-YC6860</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. S2-20-1</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. S2-11-2</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. CCBAU 51753</span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> genosp. L</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> paxllaeri</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Frigoriglobus</span> tundricola</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. A19</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> erythrophlei</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> lablabi</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> canariense</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 200</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 170</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> diazoefficiens</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. 186</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="ex">Rhodopseudomonas</span> palustris</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="ex">Afipia</span> sp. GAS231</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> arachidis</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> icense</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. CCBAU 051011</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="ex">Rhodoplanes</span> sp. Z2-YC6860</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. S2-20-1</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. S2-11-2</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. CCBAU 51753</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> genosp. L</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> paxllaeri</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="ex">Frigoriglobus</span> tundricola</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="ex">Bradyrhizobium</span> sp. A19</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once we’re happy with our text, we can press <kbd>Ctrl</kbd>-<kbd>o</kbd> (press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while holding it down, press the <kbd>o</kbd> key) to write our data to disk. You will then be prompted with <code>File Name to Write: reference_genomes.txt</code> at the bottom of the screen. Pressing <kbd>Enter</kbd> will confirm and save your changes. Once the file is saved, we can use <kbd>Ctrl</kbd>-<kbd>x</kbd> to quit the <code>nano</code> editor and return to the shell.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -923,52 +830,59 @@ Copying and pasting in Git bash
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb12" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium erythrophlei</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium lablabi</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium canariense</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 200</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 170</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium diazoefficiens</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 186</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>Rhodopseudomonas palustris</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>Afipia sp. GAS231</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium arachidis</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium icense</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. CCBAU 051011</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>Rhodoplanes sp. Z2-YC6860</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. S2-20-1</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. S2-11-2</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. CCBAU 51753</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium genosp. L</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium paxllaeri</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>Frigoriglobus tundricola</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. A19</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>(END)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium erythrophlei</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium lablabi</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium canariense</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 200</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 170</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium diazoefficiens</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. 186</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>Rhodopseudomonas palustris</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>Afipia sp. GAS231</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium arachidis</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium icense</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. CCBAU 051011</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>Rhodoplanes sp. Z2-YC6860</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. S2-20-1</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. S2-11-2</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. CCBAU 51753</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium genosp. L</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium paxllaeri</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>Frigoriglobus tundricola</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>Bradyrhizobium sp. A19</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>(END)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<section id="running-metaquast" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="running-metaquast">Running <strong>metaquast</strong></h3>
+<section id="running-metaquast" class="level3">
+<h3 class="anchored" data-anchor-id="running-metaquast">Running MetaQUAST</h3>
 <p>Once we have our list of reference genomes we can run MetaQUAST on the original assembly and the two polished assemblies.</p>
-<p>First we should look at the help documentation to work out which commands are right for us.</p>
+<p>First we should make a directory in <code>results</code> where we’ll store the MetaQUAST output.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/metaquast</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-page">
+<p>Next let’s look at the help documentation to work out which commands are right for us.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb15" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -981,129 +895,128 @@ Output — MetaQUAST help documentation
 </div>
 <div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb14"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>MetaQUAST: Quality Assessment Tool for Metagenome Assemblies</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Version: 5.2.0</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>Usage: python metaquast.py [options] &lt;files_with_contigs&gt;</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>Options:</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>-o  --output-dir  &lt;dirname&gt;       Directory to store all result files [default: quast_results/results_&lt;datetime&gt;]</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>-r   &lt;filename,filename,...&gt;      Comma-separated list of reference genomes or directory with reference genomes</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>--references-list &lt;filename&gt;      Text file with list of reference genome names for downloading from NCBI</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>-g  --features [type:]&lt;filename&gt;  File with genomic feature coordinates in the references (GFF, BED, NCBI or TXT)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                                   Optional 'type' can be specified for extracting only a specific feature type from GFF</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>-m  --min-contig  &lt;int&gt;           Lower threshold for contig length [default: 500]</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>-t  --threads     &lt;int&gt;           Maximum number of threads [default: 25% of CPUs]</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>Advanced options:</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>-s  --split-scaffolds                 Split assemblies by continuous fragments of N's and add such "contigs" to the comparison</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>-l  --labels "label, label, ..."      Names of assemblies to use in reports, comma-separated. If contain spaces, use quotes</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>-L                                    Take assembly names from their parent directory names</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>-e  --eukaryote                       Genome is eukaryotic (primarily affects gene prediction)</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    --fungus                          Genome is fungal (primarily affects gene prediction)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    --large                           Use optimal parameters for evaluation of large genomes</span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>                                      In particular, imposes '-e -m 3000 -i 500 -x 7000' (can be overridden manually)</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>-k  --k-mer-stats                     Compute k-mer-based quality metrics (recommended for large genomes)</span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>                                      This may significantly increase memory and time consumption on large genomes</span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    --k-mer-size                      Size of k used in --k-mer-stats [default: 101]</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    --circos                          Draw Circos plot</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>-f  --gene-finding                    Predict genes using MetaGeneMark</span>
-<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    --glimmer                         Use GlimmerHMM for gene prediction (instead of the default finder, see above)</span>
-<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    --gene-thresholds &lt;int,int,...&gt;   Comma-separated list of threshold lengths of genes to search with Gene Finding module</span>
-<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>                                      [default: 0,300,1500,3000]</span>
-<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>    --rna-finding                     Predict ribosomal RNA genes using Barrnap</span>
-<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>-b  --conserved-genes-finding         Count conserved orthologs using BUSCO (only on Linux)</span>
-<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a>    --operons  &lt;filename&gt;             File with operon coordinates in the reference (GFF, BED, NCBI or TXT)</span>
-<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    --max-ref-number &lt;int&gt;            Maximum number of references (per each assembly) to download after looking in SILVA database.</span>
-<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>                                      Set 0 for not looking in SILVA at all [default: 50]</span>
-<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    --blast-db &lt;filename&gt;             Custom BLAST database (.nsq file). By default, MetaQUAST searches references in SILVA database</span>
-<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>    --use-input-ref-order             Use provided order of references in MetaQUAST summary plots (default order: by the best average value)</span>
-<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    --contig-thresholds &lt;int,int,...&gt; Comma-separated list of contig length thresholds [default: 0,1000,5000,10000,25000,50000]</span>
-<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>    --x-for-Nx &lt;int&gt;                  Value of 'x' for Nx, Lx, etc metrics reported in addition to N50, L50, etc (0, 100) [default: 90]</span>
-<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>    --reuse-combined-alignments       Reuse the alignments from the combined_reference stage on runs_per_reference stages.</span>
-<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>-u  --use-all-alignments              Compute genome fraction, # genes, # operons in QUAST v1.* style.</span>
-<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST filters Minimap's alignments to keep only best ones</span>
-<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>-i  --min-alignment &lt;int&gt;             The minimum alignment length [default: 65]</span>
-<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>    --min-identity &lt;float&gt;            The minimum alignment identity (80.0, 100.0) [default: 90.0]</span>
-<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>-a  --ambiguity-usage &lt;none|one|all&gt;  Use none, one, or all alignments of a contig when all of them</span>
-<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>                                      are almost equally good (see --ambiguity-score) [default: one]</span>
-<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>    --ambiguity-score &lt;float&gt;         Score S for defining equally good alignments of a single contig. All alignments are sorted</span>
-<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>                                      by decreasing LEN * IDY% value. All alignments with LEN * IDY% &lt; S * best(LEN * IDY%) are</span>
-<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>                                      discarded. S should be between 0.8 and 1.0 [default: 0.99]</span>
-<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>    --unique-mapping                  Disable --ambiguity-usage=all for the combined reference run,</span>
-<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                                      i.e. use user-specified or default ('one') value of --ambiguity-usage</span>
-<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>    --strict-NA                       Break contigs in any misassembly event when compute NAx and NGAx.</span>
-<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST breaks contigs only by extensive misassemblies (not local ones)</span>
-<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>-x  --extensive-mis-size  &lt;int&gt;       Lower threshold for extensive misassembly size. All relocations with inconsistency</span>
-<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>                                      less than extensive-mis-size are counted as local misassemblies [default: 1000]</span>
-<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>    --local-mis-size  &lt;int&gt;           Lower threshold on local misassembly size. Local misassemblies with inconsistency</span>
-<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a>                                      less than local-mis-size are counted as (long) indels [default: 200]</span>
-<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>    --scaffold-gap-max-size  &lt;int&gt;    Max allowed scaffold gap length difference. All relocations with inconsistency</span>
-<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>                                      less than scaffold-gap-size are counted as scaffold gap misassemblies [default: 10000]</span>
-<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>    --unaligned-part-size  &lt;int&gt;      Lower threshold for detecting partially unaligned contigs. Such contig should have</span>
-<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>                                      at least one unaligned fragment &gt;= the threshold [default: 500]</span>
-<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    --skip-unaligned-mis-contigs      Do not distinguish contigs with &gt;= 50% unaligned bases as a separate group</span>
-<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST does not count misassemblies in them</span>
-<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>    --fragmented                      Reference genome may be fragmented into small pieces (e.g. scaffolded reference)</span>
-<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a>    --fragmented-max-indent  &lt;int&gt;    Mark translocation as fake if both alignments are located no further than N bases</span>
-<span id="cb14-66"><a href="#cb14-66" aria-hidden="true" tabindex="-1"></a>                                      from the ends of the reference fragments [default: 200]</span>
-<span id="cb14-67"><a href="#cb14-67" aria-hidden="true" tabindex="-1"></a>                                      Requires --fragmented option</span>
-<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a>    --upper-bound-assembly            Simulate upper bound assembly based on the reference genome and reads</span>
-<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>    --upper-bound-min-con  &lt;int&gt;      Minimal number of 'connecting reads' needed for joining upper bound contigs into a scaffold</span>
-<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a>                                      [default: 2 for mate-pairs and 1 for long reads]</span>
-<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    --est-insert-size  &lt;int&gt;          Use provided insert size in upper bound assembly simulation [default: auto detect from reads or 255]</span>
-<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>    --report-all-metrics              Keep all quality metrics in the main report even if their values are '-' for all assemblies or</span>
-<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a>                                      if they are not applicable (e.g., reference-based metrics in the no-reference mode)</span>
-<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a>    --plots-format  &lt;str&gt;             Save plots in specified format [default: pdf].</span>
-<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a>                                      Supported formats: emf, eps, pdf, png, ps, raw, rgba, svg, svgz</span>
-<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>    --memory-efficient                Run everything using one thread, separately per each assembly.</span>
-<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a>                                      This may significantly reduce memory consumption on large genomes</span>
-<span id="cb14-78"><a href="#cb14-78" aria-hidden="true" tabindex="-1"></a>    --space-efficient                 Create only reports and plots files. Aux files including .stdout, .stderr, .coords will not be created.</span>
-<span id="cb14-79"><a href="#cb14-79" aria-hidden="true" tabindex="-1"></a>                                      This may significantly reduce space consumption on large genomes. Icarus viewers also will not be built</span>
-<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a>-1  --pe1     &lt;filename&gt;              File with forward paired-end reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a>-2  --pe2     &lt;filename&gt;              File with reverse paired-end reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a>    --pe12    &lt;filename&gt;              File with interlaced forward and reverse paired-end reads. (in FASTQ format, may be gzipped)</span>
-<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>    --mp1     &lt;filename&gt;              File with forward mate-pair reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a>    --mp2     &lt;filename&gt;              File with reverse mate-pair reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a>    --mp12    &lt;filename&gt;              File with interlaced forward and reverse mate-pair reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-86"><a href="#cb14-86" aria-hidden="true" tabindex="-1"></a>    --single  &lt;filename&gt;              File with unpaired short reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-87"><a href="#cb14-87" aria-hidden="true" tabindex="-1"></a>    --pacbio     &lt;filename&gt;           File with PacBio reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a>    --nanopore   &lt;filename&gt;           File with Oxford Nanopore reads (in FASTQ format, may be gzipped)</span>
-<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a>    --ref-sam &lt;filename&gt;              SAM alignment file obtained by aligning reads to reference genome file</span>
-<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a>    --ref-bam &lt;filename&gt;              BAM alignment file obtained by aligning reads to reference genome file</span>
-<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a>    --sam     &lt;filename,filename,...&gt; Comma-separated list of SAM alignment files obtained by aligning reads to assemblies</span>
-<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>                                      (use the same order as for files with contigs)</span>
-<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a>    --bam     &lt;filename,filename,...&gt; Comma-separated list of BAM alignment files obtained by aligning reads to assemblies</span>
-<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>                                      (use the same order as for files with contigs)</span>
-<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a>                                      Reads (or SAM/BAM file) are used for structural variation detection and</span>
-<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a>                                      coverage histogram building in Icarus</span>
-<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a>    --sv-bedpe  &lt;filename&gt;            File with structural variations (in BEDPE format)</span>
-<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a>Speedup options:</span>
-<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>    --no-check                        Do not check and correct input fasta files. Use at your own risk (see manual)</span>
-<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a>    --no-plots                        Do not draw plots</span>
-<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>    --no-html                         Do not build html reports and Icarus viewers</span>
-<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a>    --no-icarus                       Do not build Icarus viewers</span>
-<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a>    --no-snps                         Do not report SNPs (may significantly reduce memory consumption on large genomes)</span>
-<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a>    --no-gc                           Do not compute GC% and GC-distribution</span>
-<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>    --no-sv                           Do not run structural variation detection (make sense only if reads are specified)</span>
-<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a>    --no-read-stats                   Do not align reads to assemblies</span>
-<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>                                      Reads will be aligned to reference and used for coverage analysis,</span>
-<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a>                                      upper bound assembly simulation, and structural variation detection.</span>
-<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>                                      Use this option if you do not need read statistics for assemblies.</span>
-<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a>    --fast                            A combination of all speedup options except --no-check</span>
-<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a>Other:</span>
-<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a>    --silent                          Do not print detailed information about each step to stdout (log file is not affected)</span>
-<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a>    --test                            Run MetaQUAST on the data from the test_data folder, output to quast_test_output</span>
-<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a>    --test-no-ref                     Run MetaQUAST without references on the data from the test_data folder, output to quast_test_output.</span>
-<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>                                      MetaQUAST will download SILVA 16S rRNA database (~170 Mb) for searching reference genomes</span>
-<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a>                                      Internet connection is required</span>
-<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>-h  --help                            Print full usage message</span>
-<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a>-v  --version                         Print version</span>
-<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a>Online QUAST manual is available at http://quast.sf.net/manual</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>MetaQUAST: Quality Assessment Tool for Metagenome Assemblies</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Version: 5.2.0</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Usage: python metaquast.py [options] &lt;files_with_contigs&gt;</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Options:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>-o  --output-dir  &lt;dirname&gt;       Directory to store all result files [default: quast_results/results_&lt;datetime&gt;]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>-r   &lt;filename,filename,...&gt;      Comma-separated list of reference genomes or directory with reference genomes</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>--references-list &lt;filename&gt;      Text file with list of reference genome names for downloading from NCBI</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>-g  --features [type:]&lt;filename&gt;  File with genomic feature coordinates in the references (GFF, BED, NCBI or TXT)</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>                                   Optional 'type' can be specified for extracting only a specific feature type from GFF</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>-m  --min-contig  &lt;int&gt;           Lower threshold for contig length [default: 500]</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>-t  --threads     &lt;int&gt;           Maximum number of threads [default: 25% of CPUs]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>Advanced options:</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>-s  --split-scaffolds                 Split assemblies by continuous fragments of N's and add such "contigs" to the comparison</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>-l  --labels "label, label, ..."      Names of assemblies to use in reports, comma-separated. If contain spaces, use quotes</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>-L                                    Take assembly names from their parent directory names</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>-e  --eukaryote                       Genome is eukaryotic (primarily affects gene prediction)</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>    --fungus                          Genome is fungal (primarily affects gene prediction)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>    --large                           Use optimal parameters for evaluation of large genomes</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>                                      In particular, imposes '-e -m 3000 -i 500 -x 7000' (can be overridden manually)</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>-k  --k-mer-stats                     Compute k-mer-based quality metrics (recommended for large genomes)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>                                      This may significantly increase memory and time consumption on large genomes</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>    --k-mer-size                      Size of k used in --k-mer-stats [default: 101]</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>    --circos                          Draw Circos plot</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>-f  --gene-finding                    Predict genes using MetaGeneMark</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>    --glimmer                         Use GlimmerHMM for gene prediction (instead of the default finder, see above)</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>    --gene-thresholds &lt;int,int,...&gt;   Comma-separated list of threshold lengths of genes to search with Gene Finding module</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>                                      [default: 0,300,1500,3000]</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>    --rna-finding                     Predict ribosomal RNA genes using Barrnap</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>-b  --conserved-genes-finding         Count conserved orthologs using BUSCO (only on Linux)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>    --operons  &lt;filename&gt;             File with operon coordinates in the reference (GFF, BED, NCBI or TXT)</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>    --max-ref-number &lt;int&gt;            Maximum number of references (per each assembly) to download after looking in SILVA database.</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>                                      Set 0 for not looking in SILVA at all [default: 50]</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>    --blast-db &lt;filename&gt;             Custom BLAST database (.nsq file). By default, MetaQUAST searches references in SILVA database</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>    --use-input-ref-order             Use provided order of references in MetaQUAST summary plots (default order: by the best average value)</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>    --contig-thresholds &lt;int,int,...&gt; Comma-separated list of contig length thresholds [default: 0,1000,5000,10000,25000,50000]</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>    --x-for-Nx &lt;int&gt;                  Value of 'x' for Nx, Lx, etc metrics reported in addition to N50, L50, etc (0, 100) [default: 90]</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>    --reuse-combined-alignments       Reuse the alignments from the combined_reference stage on runs_per_reference stages.</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>-u  --use-all-alignments              Compute genome fraction, # genes, # operons in QUAST v1.* style.</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST filters Minimap's alignments to keep only best ones</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>-i  --min-alignment &lt;int&gt;             The minimum alignment length [default: 65]</span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>    --min-identity &lt;float&gt;            The minimum alignment identity (80.0, 100.0) [default: 90.0]</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>-a  --ambiguity-usage &lt;none|one|all&gt;  Use none, one, or all alignments of a contig when all of them</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a>                                      are almost equally good (see --ambiguity-score) [default: one]</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>    --ambiguity-score &lt;float&gt;         Score S for defining equally good alignments of a single contig. All alignments are sorted</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>                                      by decreasing LEN * IDY% value. All alignments with LEN * IDY% &lt; S * best(LEN * IDY%) are</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>                                      discarded. S should be between 0.8 and 1.0 [default: 0.99]</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a>    --unique-mapping                  Disable --ambiguity-usage=all for the combined reference run,</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>                                      i.e. use user-specified or default ('one') value of --ambiguity-usage</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>    --strict-NA                       Break contigs in any misassembly event when compute NAx and NGAx.</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST breaks contigs only by extensive misassemblies (not local ones)</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>-x  --extensive-mis-size  &lt;int&gt;       Lower threshold for extensive misassembly size. All relocations with inconsistency</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>                                      less than extensive-mis-size are counted as local misassemblies [default: 1000]</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>    --local-mis-size  &lt;int&gt;           Lower threshold on local misassembly size. Local misassemblies with inconsistency</span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>                                      less than local-mis-size are counted as (long) indels [default: 200]</span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>    --scaffold-gap-max-size  &lt;int&gt;    Max allowed scaffold gap length difference. All relocations with inconsistency</span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>                                      less than scaffold-gap-size are counted as scaffold gap misassemblies [default: 10000]</span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>    --unaligned-part-size  &lt;int&gt;      Lower threshold for detecting partially unaligned contigs. Such contig should have</span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>                                      at least one unaligned fragment &gt;= the threshold [default: 500]</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>    --skip-unaligned-mis-contigs      Do not distinguish contigs with &gt;= 50% unaligned bases as a separate group</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a>                                      By default, QUAST does not count misassemblies in them</span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>    --fragmented                      Reference genome may be fragmented into small pieces (e.g. scaffolded reference)</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a>    --fragmented-max-indent  &lt;int&gt;    Mark translocation as fake if both alignments are located no further than N bases</span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>                                      from the ends of the reference fragments [default: 200]</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>                                      Requires --fragmented option</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>    --upper-bound-assembly            Simulate upper bound assembly based on the reference genome and reads</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>    --upper-bound-min-con  &lt;int&gt;      Minimal number of 'connecting reads' needed for joining upper bound contigs into a scaffold</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a>                                      [default: 2 for mate-pairs and 1 for long reads]</span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>    --est-insert-size  &lt;int&gt;          Use provided insert size in upper bound assembly simulation [default: auto detect from reads or 255]</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a>    --report-all-metrics              Keep all quality metrics in the main report even if their values are '-' for all assemblies or</span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a>                                      if they are not applicable (e.g., reference-based metrics in the no-reference mode)</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a>    --plots-format  &lt;str&gt;             Save plots in specified format [default: pdf].</span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a>                                      Supported formats: emf, eps, pdf, png, ps, raw, rgba, svg, svgz</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>    --memory-efficient                Run everything using one thread, separately per each assembly.</span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>                                      This may significantly reduce memory consumption on large genomes</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a>    --space-efficient                 Create only reports and plots files. Aux files including .stdout, .stderr, .coords will not be created.</span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a>                                      This may significantly reduce space consumption on large genomes. Icarus viewers also will not be built</span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a>-1  --pe1     &lt;filename&gt;              File with forward paired-end reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>-2  --pe2     &lt;filename&gt;              File with reverse paired-end reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a>    --pe12    &lt;filename&gt;              File with interlaced forward and reverse paired-end reads. (in FASTQ format, may be gzipped)</span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>    --mp1     &lt;filename&gt;              File with forward mate-pair reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a>    --mp2     &lt;filename&gt;              File with reverse mate-pair reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a>    --mp12    &lt;filename&gt;              File with interlaced forward and reverse mate-pair reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>    --single  &lt;filename&gt;              File with unpaired short reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>    --pacbio     &lt;filename&gt;           File with PacBio reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>    --nanopore   &lt;filename&gt;           File with Oxford Nanopore reads (in FASTQ format, may be gzipped)</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>    --ref-sam &lt;filename&gt;              SAM alignment file obtained by aligning reads to reference genome file</span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>    --ref-bam &lt;filename&gt;              BAM alignment file obtained by aligning reads to reference genome file</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>    --sam     &lt;filename,filename,...&gt; Comma-separated list of SAM alignment files obtained by aligning reads to assemblies</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>                                      (use the same order as for files with contigs)</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a>    --bam     &lt;filename,filename,...&gt; Comma-separated list of BAM alignment files obtained by aligning reads to assemblies</span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>                                      (use the same order as for files with contigs)</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>                                      Reads (or SAM/BAM file) are used for structural variation detection and</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>                                      coverage histogram building in Icarus</span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>    --sv-bedpe  &lt;filename&gt;            File with structural variations (in BEDPE format)</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>Speedup options:</span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>    --no-check                        Do not check and correct input fasta files. Use at your own risk (see manual)</span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>    --no-plots                        Do not draw plots</span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>    --no-html                         Do not build html reports and Icarus viewers</span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>    --no-icarus                       Do not build Icarus viewers</span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>    --no-snps                         Do not report SNPs (may significantly reduce memory consumption on large genomes)</span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>    --no-gc                           Do not compute GC% and GC-distribution</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a>    --no-sv                           Do not run structural variation detection (make sense only if reads are specified)</span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>    --no-read-stats                   Do not align reads to assemblies</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a>                                      Reads will be aligned to reference and used for coverage analysis,</span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>                                      upper bound assembly simulation, and structural variation detection.</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>                                      Use this option if you do not need read statistics for assemblies.</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a>    --fast                            A combination of all speedup options except --no-check</span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a>Other:</span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>    --silent                          Do not print detailed information about each step to stdout (log file is not affected)</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>    --test                            Run MetaQUAST on the data from the test_data folder, output to quast_test_output</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>    --test-no-ref                     Run MetaQUAST without references on the data from the test_data folder, output to quast_test_output.</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>                                      MetaQUAST will download SILVA 16S rRNA database (~170 Mb) for searching reference genomes</span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>                                      Internet connection is required</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>-h  --help                            Print full usage message</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>-v  --version                         Print version</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>Online QUAST manual is available at http://quast.sf.net/manual</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -1111,124 +1024,119 @@ Output — MetaQUAST help documentation
 <ul>
 <li>We can disregard the <code>python</code> portion of this</li>
 </ul>
-<p>The main “option” we want to include is <code>--references-list</code> to supply a text file containing our list of reference genomes (this is the file we just made).</p>
+<p>The main “option” we want to include is <code>--references-list</code>, which supplies a text file containing our list of reference genomes (this is the file we just made).</p>
 <p>The <code>&lt;files_with_contigs&gt;</code> part just means that this is where we put the assemblies to be evaluated. We’ll list them all one after the other so we can compare their outputs easily.</p>
 <p>Our command therefore looks like:</p>
-<div class="column-page">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb15" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">--references-list</span> reference_genomes.txt ../assembly/assembly.fasta ../medaka/consensus.fasta ../pilon/pilon.fasta <span class="op">&amp;&gt;</span> metaquast.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">--references-list</span> data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta <span class="op">&amp;&gt;</span> results/metaquast/metaquast.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that once again we are running the command in the background using the <code>&amp;</code> symbol and redirecting the output to a file (<code>metaquast.out</code>) using <code>&gt;</code>. This is because it takes around 8-10 minutes to run.</p>
-<p>If you open up <code>metaquast.out</code> after running the command you should see something like this as metaQUAST starts downloading the reference species we specified in our files:</p>
+<p>If you open up <code>metaquast.out</code> after running the command you should see something like this as MetaQUAST starts downloading the reference species we specified in our files:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb16" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> metaquast.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/metaquast</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> metaquast.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Version: 5.2.0</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>System information:</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  OS: Linux-5.4.0-131-generic-x86_64-with-glibc2.31 (linux_64)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  Python version: 3.9.7</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  CPUs number: 8</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>Started: 2023-03-16 16:32:09</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>Logging to /home/csuser/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log</span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>NOTICE: Maximum number of threads is set to 2 (use --threads option to set it manually)</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>Contigs:</span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  Pre-processing...</span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  1  ../assembly/assembly.fasta ==&gt; assembly</span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  2  ../medaka/consensus.fasta==&gt; consensus</span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  3  ../pilon/pilon.fasta ==&gt; pilon</span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>List of references was provided, starting to download reference genomes from NCBI...</span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>2023-03-16 16:32:11</span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>2023-03-16 16:32:11</span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>Trying to download found references from NCBI. Totally 20 organisms to try.</span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_erythrophlei     | successfully downloaded (total 1, 19 more to go)</span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_lablabi          | successfully downloaded (total 2, 18 more to go)</span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_canariense       | successfully downloaded (total 3, 17 more to go)</span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._200          | successfully downloaded (total 4, 16 more to go)</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._170          | successfully downloaded (total 5, 15 more to go)</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_diazoefficiens   | successfully downloaded (total 6, 14 more to go)</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._186          | successfully downloaded (total 7, 13 more to go)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  Rhodopseudomonas_palustris      | successfully downloaded (total 8, 12 more to go)</span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  Afipia_sp._GAS231               | successfully downloaded (total 9, 11 more to go)</span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_arachidis        | successfully downloaded (total 10, 10 more to go)</span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_icense           | successfully downloaded (total 11, 9 more to go)</span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._CCBAU_051011 | successfully downloaded (total 12, 8 more to go)</span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  Rhodoplanes_sp._Z2-YC6860       | successfully downloaded (total 13, 7 more to go)</span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._S2-20-1      | successfully downloaded (total 14, 6 more to go)</span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._S2-11-2      | successfully downloaded (total 15, 5 more to go)</span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._CCBAU_51753  | successfully downloaded (total 16, 4 more to go)</span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_genosp._L        | successfully downloaded (total 17, 3 more to go)</span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_paxllaeri        | successfully downloaded (total 18, 2 more to go)</span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  Frigoriglobus_tundricola        | successfully downloaded (total 19, 1 more to go)</span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._A19          | successfully downloaded (total 20, 0 more to go)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>Version: 5.2.0</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>System information:</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  OS: Linux-5.4.0-131-generic-x86_64-with-glibc2.31 (linux_64)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  Python version: 3.9.7</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  CPUs number: 8</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>Started: 2023-03-16 16:32:09</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>Logging to /home/csuser/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>NOTICE: Maximum number of threads is set to 2 (use --threads option to set it manually)</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>Contigs:</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  Pre-processing...</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  1  results/assembly/assembly.fasta ==&gt; assembly</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  2  results/medaka/consensus.fasta==&gt; consensus</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  3  results/pilon/pilon.fasta ==&gt; pilon</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>List of references was provided, starting to download reference genomes from NCBI...</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>2023-03-16 16:32:11</span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>2023-03-16 16:32:11</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>Trying to download found references from NCBI. Totally 20 organisms to try.</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_erythrophlei     | successfully downloaded (total 1, 19 more to go)</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_lablabi          | successfully downloaded (total 2, 18 more to go)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_canariense       | successfully downloaded (total 3, 17 more to go)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._200          | successfully downloaded (total 4, 16 more to go)</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._170          | successfully downloaded (total 5, 15 more to go)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_diazoefficiens   | successfully downloaded (total 6, 14 more to go)</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._186          | successfully downloaded (total 7, 13 more to go)</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>  Rhodopseudomonas_palustris      | successfully downloaded (total 8, 12 more to go)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>  Afipia_sp._GAS231               | successfully downloaded (total 9, 11 more to go)</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_arachidis        | successfully downloaded (total 10, 10 more to go)</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_icense           | successfully downloaded (total 11, 9 more to go)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._CCBAU_051011 | successfully downloaded (total 12, 8 more to go)</span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>  Rhodoplanes_sp._Z2-YC6860       | successfully downloaded (total 13, 7 more to go)</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._S2-20-1      | successfully downloaded (total 14, 6 more to go)</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._S2-11-2      | successfully downloaded (total 15, 5 more to go)</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._CCBAU_51753  | successfully downloaded (total 16, 4 more to go)</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_genosp._L        | successfully downloaded (total 17, 3 more to go)</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_paxllaeri        | successfully downloaded (total 18, 2 more to go)</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>  Frigoriglobus_tundricola        | successfully downloaded (total 19, 1 more to go)</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>  Bradyrhizobium_sp._A19          | successfully downloaded (total 20, 0 more to go)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once MetaQUAST has finished you should see an output like:</p>
-<div class="column-page">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>[2]+  Done   metaquast.py --references-list reference_genomes.txt ../assembly/assembly.fasta ../medaka/consensus.fasta ../pilon/pilon.fasta &amp;&gt; metaquast.out &amp; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb20" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>[2]+  Done   metaquast.py --references-list data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta &amp;&gt; results/metaquast/metaquast.out &amp; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>You can also look in your <code>metaquast.out</code> and jump to the end using <kbd>Shift</kbd>+<kbd>g</kbd>.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>MetaQUAST finished.</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  Log is saved to /home/csuser/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>Finished: 2023-03-16 13:12:43</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>Elapsed time: 0:10:51.624140</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>Total NOTICEs: 45; WARNINGs: 0; non-fatal ERRORs: 0</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>Thank you for using QUAST!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>MetaQUAST finished.</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  Log is saved to /home/csuser/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>Finished: 2023-03-16 13:12:43</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>Elapsed time: 0:10:51.624140</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>Total NOTICEs: 45; WARNINGs: 0; non-fatal ERRORs: 0</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>Thank you for using QUAST!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can now navigate into the <code>quast_results</code> directory MetaQUAST generated. Within this directory there will be a folder for each time MetaQUAST has been run in this directory. We can navigate then navigate into the results file generated which will be in the format <code>results_YYYY_MM_DD_HH_MM_SS</code>. (There is also a symbolic link called <code>latest</code> in this directory that is a shortcut to the newest MetaQUAST run).</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb20" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> quast_results/results_YYYY_MM_DD_HH_MM_SS/</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> quast_results/results_YYYY_MM_DD_HH_MM_SS/</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Outut</strong></pre>
 </div>
-<div class="sourceCode" id="cb21" data-filename="Outut"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>combined_reference  icarus.html  icarus_viewers  metaquast.log  not_aligned  quast_downloaded_references  report.html  runs_per_reference  summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-filename="Outut"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>combined_reference  icarus.html  icarus_viewers  metaquast.log  not_aligned  quast_downloaded_references  report.html  runs_per_reference  summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once in this directory, we can see that MetaQUAST has generated multiple different files.</p>
 <p>If you want to explore all the files you can download this whole directory using <code>scp</code>, with <code>-r</code> flag to download all directories and what they contain. This will require ~500MB of space.</p>
 <p>However, most of this information is in the <code>report.html</code> file so we can download only that one instead. As this is a HTML file we will first need to download it to our local computer in order to open it.</p>
 </section>
-<section id="downloading-metaquast-report.html" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="downloading-metaquast-report.html">Downloading metaquast <strong>report.html</strong></h3>
-<div class="column-screen">
+<section id="downloading-metaquast-report.html" class="level3">
+<h3 class="anchored" data-anchor-id="downloading-metaquast-report.html">Downloading MetaQUAST report.html</h3>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb22" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/report.html .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb24" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/report.html .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Make sure you replace both the NNN with your particular number and also the directory name of the results file. The <code>results.html</code> file relies on some of the other files generated by MetaQUAST so with only the one file you won’t have full functionality but we can still view the information we want.</p>
 <p>If you haven’t managed to download the file you can view <a href="../../docs/miscellanea/files/metaquast_report_ERR5000342.html">our example report here</a>.</p>
@@ -1242,7 +1150,7 @@ Output — MetaQUAST help documentation
 </div>
 </section>
 <section id="understanding-metaquast-output" class="level3">
-<h3 class="anchored" data-anchor-id="understanding-metaquast-output">Understanding metaQUAST output</h3>
+<h3 class="anchored" data-anchor-id="understanding-metaquast-output">Understanding MetaQUAST output</h3>
 <p>The output is organised into several sections, with a column for each assembly. The worst scoring column is shown in red, the best in blue.</p>
 <section id="genome-statistics" class="level4">
 <h4 class="anchored" data-anchor-id="genome-statistics">Genome statistics</h4>
@@ -1250,8 +1158,8 @@ Output — MetaQUAST help documentation
 </section>
 <section id="misassemblies" class="level4">
 <h4 class="anchored" data-anchor-id="misassemblies">Misassemblies</h4>
-<p>Missassemblies are when pieces in an assembly are overlapped in the incorrect way. In the metaQUAST manual, they define missassemblies in the four following ways (taken from the manual):</p>
-<p>misassemblies is the number of positions in the contigs (breakpoints) that satisfy one of the following criteria.</p>
+<p>Missassemblies are when pieces in an assembly are overlapped in the incorrect way. In the MetaQUAST manual, they define missassemblies in the four following ways (taken from the manual):</p>
+<p>Misassemblies is the number of positions in the contigs (breakpoints) that satisfy one of the following criteria.</p>
 <ul>
 <li>the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference;</li>
 <li>flanking sequences overlap on more than 1 kbp;</li>
@@ -1267,7 +1175,7 @@ Output — MetaQUAST help documentation
 <section id="statistics-without-reference" class="level4">
 <h4 class="anchored" data-anchor-id="statistics-without-reference">Statistics without reference</h4>
 <p>The statistics without a reference are based on the full assembly rather than comparing the assembly to the species that you have asked it to compare to. The largest contig is an indicator of how good the overall assembly is. If the largest contig is small, it means that the rest of the assembly is of a poor quality.</p>
-<p>There is a detailed description of each of the outputs in the <a href="https://quast.sourceforge.net/docs/manual.html#sec3">metaQUAST manual</a> which you can use to understand the output more fully.</p>
+<p>There is a detailed description of each of the outputs in the <a href="https://quast.sourceforge.net/docs/manual.html#sec3">MetaQUAST manual</a> which you can use to understand the output more fully.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1285,7 +1193,7 @@ Comparing assemblies using MetaQUAST
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Answer
+Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
