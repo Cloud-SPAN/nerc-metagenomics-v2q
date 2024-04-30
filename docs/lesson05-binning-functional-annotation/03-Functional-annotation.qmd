@@ -15,6 +15,7 @@ math: true
 ---
 
 ## What is functional annotation?
+
 Now we have our binned MAGs, we can start to think about what functions genes contained within their genomes do. We can do this via functional annotation - a way to collect information about and describe a DNA sequence.
 
 Next lesson we will talk about [taxonomic annotation](/docs/lesson06-taxonomic-annotations/index.qmd), which tells us which organisms are present in the metagenome assembly. This lesson, however, we will do some brief functional annotation to get more information about the potential metabolic capacity of the organism we are annotating. This is possible because there is software available which uses features in DNA sequences to predict where genes start and end, allowing us to predict which genes are in our MAGs.
@@ -29,21 +30,22 @@ As with taxonomic annotation, effectiveness is determined by the database that t
 
 ## How do we perform functional annotation?
 
-::: {.callout-note}
+::: callout-note
 ## Software choices
+
 We are using Prokka here as it is still the software most commonly used. However, the program is no longer being updated. One recent alternative that is being actively developed is [Bakta](https://github.com/oschwengers/bakta).
 :::
 
 Prokka identifies candidate genes in a iterative process. First it uses Prodigal (another command line tool) to find candidate genes.These are then compared against databases of known protein sequences in order to determine their function. If you like, you can read more about Prokka in [this 2014 paper](https://academic.oup.com/bioinformatics/article/30/14/2068/2390517).
 
-Prokka has been pre-installed on our instance. First, let's create a directory inside `analysis` where we can store our outputs from Prokka.
-```bash {filename="Code"}
-cd ~/cs_course/analysis/
-mkdir prokka
-cd prokka
+Prokka has been pre-installed on our instance. First, let's create a directory inside `results` where we can store our outputs from Prokka.
+
+``` {.bash filename="Code"}
+cd ~/cs_course
+mkdir results/prokka
 ```
 
-For now we will annotate just one MAG at a time with Prokka. In the previous episode we produced 90 MAGs of varying quality. In this example, we will start with the MAG `bin.45.fa`, as this MAG had the fairly high completeness (57.76%) and only 1.72% contamination.
+For now we will annotate just one MAG at a time with Prokka. In the previous episode we produced 90 MAGs of varying quality. In this example, we will start with the MAG `bin.45.fa`, as this MAG had fairly high completeness (57.76%) and only 1.72% contamination. You should choose your own "best" bin to use (one with good completeness and low contamination).
 
 Before we start we'll need to activate a `conda environment` to run the software.
 
@@ -53,29 +55,32 @@ Environments are a way of installing a piece of software so that it is isolated,
 
 For this course we have created a conda environment containing prokka. In order to use this we will need to use the `conda activate` command:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 conda activate prokka
 ```
 
 You will be able to tell you have activated your environment because your prompt should go from looking like this, with `(base)` at the beginning...
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 (base) csuser@instance001:~ $
 ```
 
 ...to having `(prokka)` at the beginning. If you forget whether you are in an the prokka environment, look back to see what the prompt looks like.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 (prokka) csuser@instance001:~ $
 ```
 
 Now let's take a look at the help page for Prokka using the `-h` flag.
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 prokka -h
 ```
+
 ::: {.callout-note collapse="true"}
-## Output ---  Prokka Help documentation
-```default
+## Output --- Prokka Help documentation
+
+``` default
 Name:
   Prokka 1.12 by Torsten Seemann <torsten.seemann@gmail.com>
 Synopsis:
@@ -133,58 +138,54 @@ Computation:
 ```
 :::
 
-Looking at the help page tells us how to construct our basic command, which looks like this:
-
-```default {filename="Output"}
-prokka --outdir mydir --prefix mygenome contigs.fa
-```
-
-- `--outdir mydir` tells Prokka that the 'output directory' is `mydir`
-- `--prefix mygenome` tells Prokka that the output files should all be labelled `mygenome`
-- `contigs.fa` is the file we want Prokka to annotate
+Looking at the help page tells us how to construct our basic command, which has these arguments:
+-   `--outdir` tells Prokka where to put the output
+-   `--prefix` tells Prokka what to call the outputs (in this case, the name of the bin will suffice)
+-   finally we need to provide the file to be annotated
 
 Prokka produces multiple different file types, which you can see in the table below. We are mainly interested in `.faa` and `.tsv` but many of the other files are useful for submission to different databases.
 
-| Suffix | Description of file contents                       |
-|--------|----------------------------------------------------|
-| .fna   | FASTA file of original input contigs (nucleotide)  |
-| .faa   | FASTA file of translated coding genes (protein)    |
-| .ffn   | FASTA file of all genomic features (nucleotide)    |
-| .fsa   | Contig sequences for submission (nucleotide)       |
-| .tbl   | Feature table for submission                       |
-| .sqn   | Sequin editable file for submission                |
-| .gbk   | Genbank file containing sequences and annotations  |
-| .gff   | GFF v3 file containing sequences and annotations   |
-| .log   | Log file of Prokka processing output               |
-| .txt   | Annotation summary statistics                      |
-| .tsv	 | Tab-separated file of all features: locus_tag,ftype,len_bp,gene,EC_number,COG,product |
+| Suffix | Description of file contents                                                          |
+|-------------|-----------------------------------------------------------|
+| .fna   | FASTA file of original input contigs (nucleotide)                                     |
+| .faa   | FASTA file of translated coding genes (protein)                                       |
+| .ffn   | FASTA file of all genomic features (nucleotide)                                       |
+| .fsa   | Contig sequences for submission (nucleotide)                                          |
+| .tbl   | Feature table for submission                                                          |
+| .sqn   | Sequin editable file for submission                                                   |
+| .gbk   | Genbank file containing sequences and annotations                                     |
+| .gff   | GFF v3 file containing sequences and annotations                                      |
+| .log   | Log file of Prokka processing output                                                  |
+| .txt   | Annotation summary statistics                                                         |
+| .tsv   | Tab-separated file of all features: locus_tag,ftype,len_bp,gene,EC_number,COG,product |
 
-::: {.column-page}
-```bash {filename="Code"}
-prokka --outdir bin.45 --prefix bin.45 ../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa
+``` {.bash filename="Code"}
+prokka --outdir results/prokka/bin.45 --prefix bin.45 results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa
 ```
-:::
 
 This should take around 1-2 minutes on the instance so we will not be running the command in the background.
 
-::: {.callout-note}
+::: callout-note
 ## Exercise 1: Recap of Prokka command
+
 Test yourself! What do each of these parts of the command signal?
 
-1. `--outdir bin.45`
-2. `--prefix bin.45`
-3. `../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa`
+1.  `--outdir bin.45`
+2.  `--prefix bin.45`
+3.  `results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa`
 
 ::: {.callout-note collapse="true"}
 ## Solution
-1. `bin.45` is the name of the directory where Prokka will place its output files
-2. `bin.45` will be the name of each output file e.g. `bin.45.tsv` or `bin.45.faa`
-3. This is the file path for the file we want Prokka to annotate
+
+1.  `bin.45` is the name of the directory where Prokka will place its output files
+2.  `bin.45` will be the name of each output file e.g. `bin.45.tsv` or `bin.45.faa`
+3.  This is the file path for the file we want Prokka to annotate
 :::
 :::
 
 When you initially run the command you should see similar to the following.
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 [11:58:55] This is prokka 1.12
 [11:58:55] Written by Torsten Seemann <torsten.seemann@gmail.com>
 [11:58:55] Homepage is https://github.com/tseemann/prokka
@@ -195,12 +196,12 @@ When you initially run the command you should see similar to the following.
 [11:58:55] System has 8 cores.
 [11:58:55] Will use maximum of 8 cores.
 [11:58:55] Annotating as >>> Bacteria <<<
-[11:58:55] Generating locus_tag from '../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa' contents.
+[11:58:55] Generating locus_tag from 'results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa' contents.
 ```
 
 And you should see the following when the command has finished:
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 [12:00:28] Output files:
 [12:00:28] bin.45/bin.45.fna
 [12:00:28] bin.45/bin.45.faa
@@ -222,47 +223,47 @@ And you should see the following when the command has finished:
 [12:00:28] Share and enjoy!
 ```
 
-Now prokka has finished running, we can exit the conda environment and our prompt should return to `base`. In order to do this we need to use the `conda deactivate` command, which is as follows:
+Now prokka has finished running, we can exit the conda environment using the `conda deactivate` command.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 conda deactivate
 ```
 
 Your prompt should return from something like this:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 (prokka) csuser@metagenomicsT3instance04:~ $ conda deactivate
 ```
 
 to this:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 (base) csuser@metagenomicsT3instance04:~ $
 ```
 
-
 If we navigate into the `bin.45` output file we can use `ls` to see that Prokka has generated many files.
 
-```bash {filename="Code"}
-cd bin.45
+``` {.bash filename="Code"}
+cd results/prokka/bin.45
 ls
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 bin.45.err  bin.45.faa  bin.45.ffn  bin.45.fna  bin.45.fsa  bin.45.gbk  bin.45.gff  bin.45.log  bin.45.sqn  bin.45.tbl  bin.45.tsv  bin.45.txt
 ```
 
 As mentioned previously, the two files we are most interested in are those with the extension `.tsv` and `.faa`:
 
-- the `.tsv` file contains information about every gene identified by Prokka
-- the `.faa` file is a FASTA file containing the amino acid sequence of every gene that has been identified.
+-   the `.tsv` file contains information about every gene identified by Prokka
+-   the `.faa` file is a FASTA file containing the amino acid sequence of every gene that has been identified.
 
 We can take a look at the `.tsv` file using `head`.
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 head bin.45.tsv
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 locus_tag       ftype   gene    EC_number       product
 DDJNKIGN_00001  CDS     hypothetical protein
 DDJNKIGN_00002  CDS     hypothetical protein
@@ -275,18 +276,19 @@ DDJNKIGN_00008  CDS     pstA_1  Phosphate transport system permease protein PstA
 DDJNKIGN_00009  CDS     pstA_2  Phosphate transport system permease protein PstA
 ```
 
-This file gives us a list of all the sequences that Prokka has identified as being protein-coding, along with the gene name (if there is one) and the protein product (again, if there is one). 
+This file gives us a list of all the sequences that Prokka has identified as being protein-coding, along with the gene name (if there is one) and the protein product (again, if there is one).
 
 You will notice that some of the output are labelled simply "hypothetical protein". This means the locus in questions looks like a protein-coding gene, but there isn't a match for it in any of the databases used by Prokka to label genes.
 
 Others have a gene *and* product name, meaning Prokka was able to successfully identify them as a specific gene. The product column tells you the name of the protein this gene codes for.
 
 We can then look at the `.faa` file to see the sequences of these proteins.
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 head bin.45.faa
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 >DDJNKIGN_00001 hypothetical protein
 MTSSTVINTLVAAQTPILKQNLRPVSVWLHHCGLGGVQASWIQFRDSLRQAIIDALSAAG
 MTDCMNELKYRWGL
@@ -300,10 +302,12 @@ MTSKHIGMVAGAMAFIAAGVGCARSRTAAAGDERPAVSVVKIARGDLSQGLTLAAEFRPF
 ```
 
 ## What next?
+
 Now we have information about the various genes (and the proteins they code for) present in one of our bins. What can we do with this information?
 
 ### Relating genes to an online database
-There are tools available which allow you to visualise the proteins in your bin and how they fit into different metabolic pathways. Some of these are available through your browser. 
+
+There are tools available which allow you to visualise the proteins in your bin and how they fit into different metabolic pathways. Some of these are available through your browser.
 
 One such tool is [BlastKOALA](https://www.kegg.jp/blastkoala/), where you can upload the `.faa` file we just looked at and get back a breakdown of the proteins mapped to the KEGG database (a database of molecular interaction maps). The output looks like this:
 
