@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson05-binning-functional-annotation/01-binning.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></li><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/01-binning.html">Metagenome Binning</a></li></ol></nav>
 <div class="quarto-title">
@@ -527,13 +527,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="preparation-for-binning" class="level2">
 <h2 class="anchored" data-anchor-id="preparation-for-binning">Preparation for binning</h2>
 <p>This preparation process follows exactly the same steps we used to prepare our long-read polished assembly for short-read polishing. We need to align our short reads to our assembly to determine <strong>depth-of-coverage</strong> — how many reads align to each portion of the assembly.</p>
-<p>First we index the polished reference using <code>bwa index</code>. Remember, we’re using our new assembly which is in our <code>data/full_assembly</code> directory.</p>
+<p>First we index the polished reference using <code>bwa index</code>. Remember, we’re using our new assembly which is in our <code>data/full_assembly</code> directory. The outputs will automatically be put in the same folder as the assembly, as they should always stay together.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/data/full_assembly/</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index assembly_ERR5000342.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span> index data/full_assembly/assembly_ERR5000342.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This is a big file so indexing will take about 4-5 minutes to complete. We ran this command in the foreground so you won’t be able to use your prompt until it’s finished.</p>
 <p>We then make a directory for the output of our binning.</p>
@@ -541,24 +541,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> binning</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> binning</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/binning</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can then use an adapted form of the <code>bwa mem</code> command we used earlier to align our short reads to the polished assembly and determine the abundance of each contig.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="ex">bwa</span> mem <span class="at">-t</span> 8 ../../data/full_assembly/assembly_ERR5000342.fasta ../../data/illumina_fastq/ERR4998593_1.fastq ../../data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> assembly_short_read_alignment.bam <span class="kw">)</span> <span class="op">&amp;&gt;</span> alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span> <span class="ex">bwa</span> mem <span class="at">-t</span> 8 data/full_assembly/assembly_ERR5000342.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> results/binning/assembly_short_read_alignment.bam <span class="kw">)</span> <span class="op">&amp;&gt;</span> results/binning/alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This should take around 80 minutes to complete.</p>
-<p>Once the file is created, we can take a quick look inside. We are already in the <code>binning</code> directory where the output file is stored so all we need to do is use the command <code>less</code> on <code>alignment.out</code>.</p>
+<p>Once the file is created, we can check the <code>alignment.out</code> log file.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> alignment.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/binning</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> alignment.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The start of the file should look like this:</p>
 <div class="code-with-filename">
@@ -590,16 +589,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>[main] Real time: 4154.680 sec; CPU: 30896.696 sec</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>[bam_sort_core] merging from 7 files and 4 in-memory blocks...</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>We can also check that the new BAM file exists using <code>ls</code>.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Code</strong></pre>
+</div>
+<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb14" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>alignment.out   assembly_short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>In order to use this new BAM with MetaBAT2 we also need to index the alignment using the command <code>samtools index</code>. This only takes 2-3 minutes.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> index assembly_short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> index results/binning/assembly_short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When we have the sorted and indexed BAM file we are then ready to use MetaBAT2.</p>
 </section>
-<section id="binning-using-metabat2" class="level2 page-columns page-full">
+<section id="binning-using-metabat2" class="level2">
 <h2 class="anchored" data-anchor-id="binning-using-metabat2">Binning using MetaBAT2</h2>
 <p>MetaBAT2 has been pre-installed on your instance. The <a href="https://bitbucket.org/berkeleylab/metabat/src/master/README.md">documentation</a> tells us how to run the program via the command line.</p>
 <p>The easiest way to run MetaBAT2 is using the command <code>runMetaBat.sh &lt;options&gt; assembly.fasta sample1.bam [sample2.bam ...]</code>. This will generate a depth file and then do the binning for us. In this example, we’re also going to add the flag <code>-m 1500</code>, which sets the minimum contig length to 1500bp - any contigs shorter than this will not be binned.</p>
@@ -607,7 +620,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">runMetaBat.sh</span> <span class="at">-m</span> 1500 ../../data/full_assembly/assembly_ERR5000342.fasta assembly_short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">runMetaBat.sh</span> <span class="at">-m</span> 1500 data/full_assembly/assembly_ERR5000342.fasta results/binning/assembly_short_read_alignment.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>MetaBAT2 first reads in the <code>.bam</code> file, then generates bins. This should take around 2 or 3 minutes.</p>
 <p>While MetaBAT2 is processing the <code>.bam</code> file you will see the following output:</p>
@@ -615,62 +629,75 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb15" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>Executing: 'jgi_summarize_bam_contig_depths --outputDepth assembly_ERR5000342.fasta.depth.txt --percentIdentity 97 --minContigLength 1000 --minContigDepth 1.0  --referenceFasta ../../data/full_assembly/assembly_ERR5000342.fasta assembly_short_read_alignment.bam' at Tue 14 Mar 2023 05:39:47 PM UTC</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>Output depth matrix to assembly_ERR5000342.fasta.depth.txt</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>Minimum percent identity for a mapped read: 0.97</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>minContigLength: 1000</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>minContigDepth: 1</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>Reference fasta file /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>jgi_summarize_bam_contig_depths 2.15 (Bioconda) 2020-01-04T21:10:40</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>Output matrix to assembly_ERR5000342.fasta.depth.txt</span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>Reading reference fasta file: /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>... 7250 sequences</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>0: Opening bam: assembly_short_read_alignment.bam</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>Processing bam files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>Executing: 'jgi_summarize_bam_contig_depths --outputDepth assembly_ERR5000342.fasta.depth.txt --percentIdentity 97 --minContigLength 1000 --minContigDepth 1.0  --referenceFasta data/full_assembly/assembly_ERR5000342.fasta results/binning/assembly_short_read_alignment.bam' at Tue 14 Mar 2023 05:39:47 PM UTC</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Output depth matrix to assembly_ERR5000342.fasta.depth.txt</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>Minimum percent identity for a mapped read: 0.97</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>minContigLength: 1000</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>minContigDepth: 1</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>Reference fasta file /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>jgi_summarize_bam_contig_depths 2.15 (Bioconda) 2020-01-04T21:10:40</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>Output matrix to assembly_ERR5000342.fasta.depth.txt</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>Reading reference fasta file: /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>... 7250 sequences</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>0: Opening bam: assembly_short_read_alignment.bam</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>Processing bam files</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once the <code>.bam</code> file has processed and binning has completed, the output will look like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb16" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Thread 0 finished: assembly_short_read_alignment.bam with 68793457 reads and 11049740 readsWellMapped</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Creating depth matrix file: assembly_ERR5000342.fasta.depth.txt</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>Closing most bam files</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Closing last bam file</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Finished</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>Finished jgi_summarize_bam_contig_depths at Fri 17 Mar 2023 12:24:35 PM UTC</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>Creating depth file for metabat at Fri 17 Mar 2023 12:24:35 PM UTC</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>Executing: 'metabat2  -m 1500 --inFile /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta --outFile assembly_ERR5000342.fasta.metabat-bins1500-20230317_122435/bin --abdFile assembly_ERR5000342.fasta.depth.txt' at Fri 17 Mar 2023 12:24:35 PM UTC</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>MetaBAT 2 (2.15 (Bioconda)) using minContig 1500, minCV 1.0, minCVSum 1.0, maxP 95%, minS 60, maxEdges 200 and minClsSize 200000. with random seed=1679055875</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>90 bins (212166000 bases in total) formed.</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>Finished metabat2 at Tue 14 Mar 2023 05:40:46 PM UTC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>Thread 0 finished: assembly_short_read_alignment.bam with 68793457 reads and 11049740 readsWellMapped</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Creating depth matrix file: assembly_ERR5000342.fasta.depth.txt</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>Closing most bam files</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>Closing last bam file</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>Finished</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>Finished jgi_summarize_bam_contig_depths at Fri 17 Mar 2023 12:24:35 PM UTC</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>Creating depth file for metabat at Fri 17 Mar 2023 12:24:35 PM UTC</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>Executing: 'metabat2  -m 1500 --inFile /home/csuser/cs_course/data/full_assembly/assembly_ERR5000342.fasta --outFile assembly_ERR5000342.fasta.metabat-bins1500-20230317_122435/bin --abdFile assembly_ERR5000342.fasta.depth.txt' at Fri 17 Mar 2023 12:24:35 PM UTC</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>MetaBAT 2 (2.15 (Bioconda)) using minContig 1500, minCV 1.0, minCVSum 1.0, maxP 95%, minS 60, maxEdges 200 and minClsSize 200000. with random seed=1679055875</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>90 bins (212166000 bases in total) formed.</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>Finished metabat2 at Tue 14 Mar 2023 05:40:46 PM UTC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The penultimate line tells us that MetaBAT has produced 90 bins containing 212166000 bases (your number might vary slightly depending on how the algorithm has analysed your assembly).</p>
 <p>Using <code>ls</code> will show that MetaBAT2 has generated a depth file (<code>assembly_ERR5000342.fasta.depth.txt</code>) and a directory (<code>assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/</code>). Our bins are in this directory so we should navigate into it and have a look at what files have been generated.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The name of the directory containing the bins will depend on exactly when the binning completes. Don’t forget to replace <code>YYYMMDD_HHMMSS</code> in the command below with the actual name of your directory.</p>
+</div>
+</div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>bin.10.fa  bin.22.fa  bin.34.fa  bin.46.fa  bin.58.fa  bin.6.fa   bin.81.fa</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>bin.11.fa  bin.23.fa  bin.35.fa  bin.47.fa  bin.59.fa  bin.70.fa  bin.82.fa</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>bin.12.fa  bin.24.fa  bin.36.fa  bin.48.fa  bin.5.fa   bin.71.fa  bin.83.fa</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>bin.13.fa  bin.25.fa  bin.37.fa  bin.49.fa  bin.60.fa  bin.72.fa  bin.84.fa</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>bin.14.fa  bin.26.fa  bin.38.fa  bin.4.fa   bin.61.fa  bin.73.fa  bin.85.fa</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>bin.15.fa  bin.27.fa  bin.39.fa  bin.50.fa  bin.62.fa  bin.74.fa  bin.86.fa</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>bin.16.fa  bin.28.fa  bin.3.fa   bin.51.fa  bin.63.fa  bin.75.fa  bin.87.fa</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>bin.17.fa  bin.29.fa  bin.40.fa  bin.52.fa  bin.64.fa  bin.76.fa  bin.88.fa</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>bin.18.fa  bin.2.fa   bin.41.fa  bin.53.fa  bin.65.fa  bin.77.fa  bin.89.fa</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>bin.19.fa  bin.30.fa  bin.42.fa  bin.54.fa  bin.66.fa  bin.78.fa  bin.8.fa</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>bin.1.fa   bin.31.fa  bin.43.fa  bin.55.fa  bin.67.fa  bin.79.fa  bin.90.fa</span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>bin.20.fa  bin.32.fa  bin.44.fa  bin.56.fa  bin.68.fa  bin.7.fa   bin.9.fa</span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>bin.21.fa  bin.33.fa  bin.45.fa  bin.57.fa  bin.69.fa  bin.80.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bin.10.fa  bin.22.fa  bin.34.fa  bin.46.fa  bin.58.fa  bin.6.fa   bin.81.fa</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bin.11.fa  bin.23.fa  bin.35.fa  bin.47.fa  bin.59.fa  bin.70.fa  bin.82.fa</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>bin.12.fa  bin.24.fa  bin.36.fa  bin.48.fa  bin.5.fa   bin.71.fa  bin.83.fa</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>bin.13.fa  bin.25.fa  bin.37.fa  bin.49.fa  bin.60.fa  bin.72.fa  bin.84.fa</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>bin.14.fa  bin.26.fa  bin.38.fa  bin.4.fa   bin.61.fa  bin.73.fa  bin.85.fa</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>bin.15.fa  bin.27.fa  bin.39.fa  bin.50.fa  bin.62.fa  bin.74.fa  bin.86.fa</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>bin.16.fa  bin.28.fa  bin.3.fa   bin.51.fa  bin.63.fa  bin.75.fa  bin.87.fa</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>bin.17.fa  bin.29.fa  bin.40.fa  bin.52.fa  bin.64.fa  bin.76.fa  bin.88.fa</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>bin.18.fa  bin.2.fa   bin.41.fa  bin.53.fa  bin.65.fa  bin.77.fa  bin.89.fa</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>bin.19.fa  bin.30.fa  bin.42.fa  bin.54.fa  bin.66.fa  bin.78.fa  bin.8.fa</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>bin.1.fa   bin.31.fa  bin.43.fa  bin.55.fa  bin.67.fa  bin.79.fa  bin.90.fa</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>bin.20.fa  bin.32.fa  bin.44.fa  bin.56.fa  bin.68.fa  bin.7.fa   bin.9.fa</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>bin.21.fa  bin.33.fa  bin.45.fa  bin.57.fa  bin.69.fa  bin.80.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note these output files have the file extensions of <code>.fa</code>. This is exactly the same format as a <code>.fasta</code> file but with a shortened version of the extension. See the wikipedia page on <a href="https://en.wikipedia.org/wiki/FASTA_format#FASTA_file">FASTA format - file</a> for some other examples of file extensions.</p>
 <p>Ideally we would like only one contig per bin, with a length similar to the genome size of the corresponding taxa. This is challenging as this would require knowing what species are present in the mixed community, but all we have is “microbial dark matter”. Instead, other statistics can demonstrate how effective our assembly and binning were.</p>
@@ -679,27 +706,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="pp">*</span>.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="pp">*</span>.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-page">
 <table class="table">
 <colgroup>
-<col style="width: 7%">
-<col style="width: 5%">
-<col style="width: 4%">
 <col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 6%">
 <col style="width: 6%">
-<col style="width: 7%">
-<col style="width: 6%">
-<col style="width: 7%">
 <col style="width: 6%">
 <col style="width: 6%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
+<col style="width: 6%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -832,7 +858,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-</div>
 <p>The table is quite long as we have 90 separate bins! It may also be hard to read depending on how your shell program formats and wraps the table columns. You might find it useful to copy and paste the table into a Google Sheets or Excel spreadsheet and use the ‘split text to columns’ feature to have a better look at your bins.</p>
 <ul>
 <li><h3 id="google-sheets" class="anchored">Google Sheets</h3>
