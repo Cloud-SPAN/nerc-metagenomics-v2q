@@ -432,7 +432,7 @@ window.Quarto = {
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson05-binning-functional-annotation/03-Functional-annotation.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></li><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/03-Functional-annotation.html">Functional annotation</a></li></ol></nav>
 <div class="quarto-title">
@@ -462,7 +462,7 @@ window.Quarto = {
 <p>In this lesson we will only be doing a very small amount of functional annotation using the tool <a href="https://github.com/tseemann/prokka">Prokka</a> for rapid prokaryotic genome annotation. This is intended as a taster to give you an idea what you can use your MAGs for. There are many other routes to be taken regarding functional annotation, some of which will be discussed briefly at the end of this episode.</p>
 <p>As with taxonomic annotation, effectiveness is determined by the database that the MAG sequence is being compared to. If you do not use the appropriate database you may not end up with many annotated sequences. In particular, <a href="https://github.com/tseemann/prokka">Prokka</a> (the tool we will use in this episode) annotates archaea and bacterial genomes. If you are trying to annotate a fungal genome or a eukaryote, you will need to use something different.</p>
 </section>
-<section id="how-do-we-perform-functional-annotation" class="level2 page-columns page-full">
+<section id="how-do-we-perform-functional-annotation" class="level2">
 <h2 class="anchored" data-anchor-id="how-do-we-perform-functional-annotation">How do we perform functional annotation?</h2>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -478,18 +478,17 @@ Software choices
 </div>
 </div>
 <p>Prokka identifies candidate genes in a iterative process. First it uses Prodigal (another command line tool) to find candidate genes.These are then compared against databases of known protein sequences in order to determine their function. If you like, you can read more about Prokka in <a href="https://academic.oup.com/bioinformatics/article/30/14/2068/2390517">this 2014 paper</a>.</p>
-<p>Prokka has been pre-installed on our instance. First, let’s create a directory inside <code>analysis</code> where we can store our outputs from Prokka.</p>
+<p>Prokka has been pre-installed on our instance. First, let’s create a directory inside <code>results</code> where we can store our outputs from Prokka.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> prokka</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> prokka</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/prokka</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>For now we will annotate just one MAG at a time with Prokka. In the previous episode we produced 90 MAGs of varying quality. In this example, we will start with the MAG <code>bin.45.fa</code>, as this MAG had the fairly high completeness (57.76%) and only 1.72% contamination.</p>
+<p>For now we will annotate just one MAG at a time with Prokka. In the previous episode we produced 90 MAGs of varying quality. In this example, we will start with the MAG <code>bin.45.fa</code>, as this MAG had fairly high completeness (57.76%) and only 1.72% contamination. You should choose your own “best” bin to use (one with good completeness and low contamination).</p>
 <p>Before we start we’ll need to activate a <code>conda environment</code> to run the software.</p>
-<section id="activating-an-environment" class="level3 page-columns page-full">
+<section id="activating-an-environment" class="level3">
 <h3 class="anchored" data-anchor-id="activating-an-environment">Activating an environment</h3>
 <p>Environments are a way of installing a piece of software so that it is isolated, so that things installed within an environment, do not affect other software installed at system wide level. For some pieces of software, the requirements for different dependency versions, such different versions of <code>python</code> mean this is an easy way to have multiple pieces of software installed without conflicts. One popular way to manage environments is to use <a href="https://docs.conda.io/en/latest/"><code>conda</code></a> which is a popular environment manager. We will not discuss using conda in detail, so for further information of how to use it, here is <a href="https://carpentries-incubator.github.io/introduction-to-conda-for-data-scientists/">a Carpentries course</a> that covers how to use conda in more detail.</p>
 <p>For this course we have created a conda environment containing prokka. In order to use this we will need to use the <code>conda activate</code> command:</p>
@@ -589,23 +588,12 @@ Output — Prokka Help documentation
 </div>
 </div>
 </div>
-<p>Looking at the help page tells us how to construct our basic command, which looks like this:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Output</strong></pre>
-</div>
-<div class="sourceCode" id="cb7" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>prokka --outdir mydir --prefix mygenome contigs.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<ul>
-<li><code>--outdir mydir</code> tells Prokka that the ‘output directory’ is <code>mydir</code></li>
-<li><code>--prefix mygenome</code> tells Prokka that the output files should all be labelled <code>mygenome</code></li>
-<li><code>contigs.fa</code> is the file we want Prokka to annotate</li>
-</ul>
+<p>Looking at the help page tells us how to construct our basic command, which has these arguments: - <code>--outdir</code> tells Prokka where to put the output - <code>--prefix</code> tells Prokka what to call the outputs (in this case, the name of the bin will suffice) - finally we need to provide the file to be annotated</p>
 <p>Prokka produces multiple different file types, which you can see in the table below. We are mainly interested in <code>.faa</code> and <code>.tsv</code> but many of the other files are useful for submission to different databases.</p>
 <table class="table">
 <colgroup>
-<col style="width: 13%">
-<col style="width: 86%">
+<col style="width: 18%">
+<col style="width: 81%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -660,13 +648,11 @@ Output — Prokka Help documentation
 </tr>
 </tbody>
 </table>
-<div class="column-page">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prokka</span> <span class="at">--outdir</span> bin.45 <span class="at">--prefix</span> bin.45 ../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">prokka</span> <span class="at">--outdir</span> results/prokka/bin.45 <span class="at">--prefix</span> bin.45 results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This should take around 1-2 minutes on the instance so we will not be running the command in the background.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -683,7 +669,7 @@ Exercise 1: Recap of Prokka command
 <ol type="1">
 <li><code>--outdir bin.45</code></li>
 <li><code>--prefix bin.45</code></li>
-<li><code>../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa</code></li>
+<li><code>results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa</code></li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -712,77 +698,77 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>[11:58:55] This is prokka 1.12</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>[11:58:55] Written by Torsten Seemann &lt;torsten.seemann@gmail.com&gt;</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>[11:58:55] Homepage is https://github.com/tseemann/prokka</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>[11:58:55] Local time is Wed Mar 22 11:58:55 2023</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>[11:58:55] You are csuser</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>[11:58:55] Operating system is linux</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>[11:58:55] You have BioPerl 1.006924</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>[11:58:55] System has 8 cores.</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>[11:58:55] Will use maximum of 8 cores.</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>[11:58:55] Annotating as &gt;&gt;&gt; Bacteria &lt;&lt;&lt;</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>[11:58:55] Generating locus_tag from '../binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa' contents.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>[11:58:55] This is prokka 1.12</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>[11:58:55] Written by Torsten Seemann &lt;torsten.seemann@gmail.com&gt;</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>[11:58:55] Homepage is https://github.com/tseemann/prokka</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>[11:58:55] Local time is Wed Mar 22 11:58:55 2023</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>[11:58:55] You are csuser</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>[11:58:55] Operating system is linux</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>[11:58:55] You have BioPerl 1.006924</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>[11:58:55] System has 8 cores.</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>[11:58:55] Will use maximum of 8 cores.</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>[11:58:55] Annotating as &gt;&gt;&gt; Bacteria &lt;&lt;&lt;</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>[11:58:55] Generating locus_tag from 'results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYMMDD_HHMMSS/bin.45.fa' contents.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>And you should see the following when the command has finished:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>[12:00:28] Output files:</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.fna</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.faa</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.ffn</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.fsa</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.err</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.sqn</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.txt</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.gbk</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.tsv</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.gff</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.log</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.tbl</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>[12:00:28] Annotation finished successfully.</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>[12:00:28] Walltime used: 1.55 minutes</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>[12:00:28] If you use this result please cite the Prokka paper:</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>[12:00:28] Seemann T (2014) Prokka: rapid prokaryotic genome annotation. Bioinformatics. 30(14):2068-9.</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>[12:00:28] Type 'prokka --citation' for more details.</span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>[12:00:28] Share and enjoy!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>[12:00:28] Output files:</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.fna</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.faa</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.ffn</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.fsa</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.err</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.sqn</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.txt</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.gbk</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.tsv</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.gff</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.log</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>[12:00:28] bin.45/bin.45.tbl</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>[12:00:28] Annotation finished successfully.</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>[12:00:28] Walltime used: 1.55 minutes</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>[12:00:28] If you use this result please cite the Prokka paper:</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>[12:00:28] Seemann T (2014) Prokka: rapid prokaryotic genome annotation. Bioinformatics. 30(14):2068-9.</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>[12:00:28] Type 'prokka --citation' for more details.</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>[12:00:28] Share and enjoy!</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Now prokka has finished running, we can exit the conda environment and our prompt should return to <code>base</code>. In order to do this we need to use the <code>conda deactivate</code> command, which is as follows:</p>
+<p>Now prokka has finished running, we can exit the conda environment using the <code>conda deactivate</code> command.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Your prompt should return from something like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb12" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">prokka</span><span class="kw">)</span> <span class="ex">csuser@metagenomicsT3instance04:~</span> $ conda deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">prokka</span><span class="kw">)</span> <span class="ex">csuser@metagenomicsT3instance04:~</span> $ conda deactivate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>to this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">csuser@metagenomicsT3instance04:~</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">base</span><span class="kw">)</span> <span class="ex">csuser@metagenomicsT3instance04:~</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>If we navigate into the <code>bin.45</code> output file we can use <code>ls</code> to see that Prokka has generated many files.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb14" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> bin.45</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/prokka/bin.45</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb15" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>bin.45.err  bin.45.faa  bin.45.ffn  bin.45.fna  bin.45.fsa  bin.45.gbk  bin.45.gff  bin.45.log  bin.45.sqn  bin.45.tbl  bin.45.tsv  bin.45.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bin.45.err  bin.45.faa  bin.45.ffn  bin.45.fna  bin.45.fsa  bin.45.gbk  bin.45.gff  bin.45.log  bin.45.sqn  bin.45.tbl  bin.45.tsv  bin.45.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>As mentioned previously, the two files we are most interested in are those with the extension <code>.tsv</code> and <code>.faa</code>:</p>
 <ul>
@@ -794,22 +780,22 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb16" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> bin.45.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> bin.45.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>locus_tag       ftype   gene    EC_number       product</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00001  CDS     hypothetical protein</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00002  CDS     hypothetical protein</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00003  CDS     macA    Macrolide export protein MacA</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00004  CDS     hypothetical protein</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00005  CDS     hypothetical protein</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00006  CDS     hypothetical protein</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00007  CDS     hypothetical protein</span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00008  CDS     pstA_1  Phosphate transport system permease protein PstA</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00009  CDS     pstA_2  Phosphate transport system permease protein PstA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>locus_tag       ftype   gene    EC_number       product</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00001  CDS     hypothetical protein</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00002  CDS     hypothetical protein</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00003  CDS     macA    Macrolide export protein MacA</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00004  CDS     hypothetical protein</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00005  CDS     hypothetical protein</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00006  CDS     hypothetical protein</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00007  CDS     hypothetical protein</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00008  CDS     pstA_1  Phosphate transport system permease protein PstA</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>DDJNKIGN_00009  CDS     pstA_2  Phosphate transport system permease protein PstA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This file gives us a list of all the sequences that Prokka has identified as being protein-coding, along with the gene name (if there is one) and the protein product (again, if there is one).</p>
 <p>You will notice that some of the output are labelled simply “hypothetical protein”. This means the locus in questions looks like a protein-coding gene, but there isn’t a match for it in any of the databases used by Prokka to label genes.</p>
@@ -819,22 +805,22 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb18" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> bin.45.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span> bin.45.faa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00001 hypothetical protein</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>MTSSTVINTLVAAQTPILKQNLRPVSVWLHHCGLGGVQASWIQFRDSLRQAIIDALSAAG</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>MTDCMNELKYRWGL</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00002 hypothetical protein</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>MQPRPGIPFAGALVPLSTFNKTALRSNSIDLTNPPQLEPFTRREQYRIVVSGDEPDCDDT</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>LELPVWDCDLIRKCYEVSYHKARLDYYGPAAPFSPKDMTSFRGSSRQCWERTERLRSAGC</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>TTSRPINCLRQILNVSWTKNMSAVLAGGLLQGLRPEPQLDPAWAAFFALPDIEITSLRST</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>GTSSPDRTRSRKRTPSAESRRPWRCHGPQPVLPG</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00003 Macrolide export protein MacA</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>MTSKHIGMVAGAMAFIAAGVGCARSRTAAAGDERPAVSVVKIARGDLSQGLTLAAEFRPF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00001 hypothetical protein</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>MTSSTVINTLVAAQTPILKQNLRPVSVWLHHCGLGGVQASWIQFRDSLRQAIIDALSAAG</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>MTDCMNELKYRWGL</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00002 hypothetical protein</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>MQPRPGIPFAGALVPLSTFNKTALRSNSIDLTNPPQLEPFTRREQYRIVVSGDEPDCDDT</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>LELPVWDCDLIRKCYEVSYHKARLDYYGPAAPFSPKDMTSFRGSSRQCWERTERLRSAGC</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>TTSRPINCLRQILNVSWTKNMSAVLAGGLLQGLRPEPQLDPAWAAFFALPDIEITSLRST</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>GTSSPDRTRSRKRTPSAESRRPWRCHGPQPVLPG</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>&gt;DDJNKIGN_00003 Macrolide export protein MacA</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>MTSKHIGMVAGAMAFIAAGVGCARSRTAAAGDERPAVSVVKIARGDLSQGLTLAAEFRPF</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>

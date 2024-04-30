@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson05-binning-functional-annotation/02-binning_quality.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/index.html">Binning &amp; Functional Annotation</a></li><li class="breadcrumb-item"><a href="../../docs/lesson05-binning-functional-annotation/02-binning_quality.html">QC of metagenome bins</a></li></ol></nav>
 <div class="quarto-title">
@@ -418,7 +418,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quality-check" class="level2 page-columns page-full">
+<section id="quality-check" class="level2">
 <h2 class="anchored" data-anchor-id="quality-check">Quality check</h2>
 <p>The quality of a metagenome-assembled genome (MAG) or bin is highly dependent on several things:</p>
 <ul>
@@ -435,21 +435,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can use the program <a href="https://github.com/Ecogenomics/CheckM">CheckM</a> to determine the quality of MAGs. CheckM uses a collection of domain and lineage-specific markers to estimate completeness and contamination of a MAG. This <a href="https://youtu.be/sLtSDs3sh6k">short YouTube video</a> by Dr Robert Edwards explains how CheckM uses a hidden Markov model to calculate the level of contamination and completeness of bins, based on marker gene sets.</p>
 <p>CheckM has multiple different workflows available which are appropriate for different datasets. See <a href="https://github.com/Ecogenomics/CheckM/wiki/Workflows">CheckM documentation on Workflows</a> for more information.</p>
 <p>We will be using the lineage-specific workflow here. <code>lineage_wf</code> places your bins in a reference tree to determine which lineage it corresponds to. This allows it to use the appropriate marker genes to estimate quality parameters.</p>
-<p>First let’s move into our analysis folder.</p>
+<p>First let’s move into our <code>cs_course</code> folder and make a directory for our CheckM results.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/checkm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>CheckM has been pre-installed on the instance so we can check the help documentation for the lineage-specific workflow using the <code>-h</code> flag /option.</p>
+<p>CheckM has been pre-installed on the instance so we can check the help documentation for the lineage-specific workflow using the <code>-h</code> flag/option.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
 <div class="sourceCode" id="cb2" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-h</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-page">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -517,7 +517,6 @@ Output — CheckM help documentation
 </div>
 </div>
 </div>
-</div>
 <p>This readout tells us what we need to include in the command:</p>
 <ul>
 <li>the <code>x</code> flag telling CheckM the format of our bins (<code>fa</code>)</li>
@@ -533,18 +532,18 @@ Output — CheckM help documentation
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ checkm/ <span class="at">--reduced_tree</span> <span class="at">-t</span> 4 <span class="at">--tab_table</span> <span class="at">-f</span> MAGs_checkm.tsv <span class="op">&amp;&gt;</span> checkm.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ results/checkm/ <span class="at">--reduced_tree</span> <span class="at">-t</span> 4 <span class="at">--tab_table</span> <span class="at">-f</span> MAGs_checkm.tsv <span class="op">&amp;&gt;</span> results/checkm/checkm.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(Don’t forget to change <code>YYYYMMDD-HHMMSS</code> to match your directory’s name.)</p>
-<p>As always you can check the command’s progress by looking inside the <code>checkm.out</code> file or using <code>jobs</code> (as long as you haven’t logged out of your instance since starting the command running)</p>
+<p>As always you can check the command’s progress by looking inside the <code>checkm.out</code> file or using <code>jobs</code> (as long as you haven’t logged out of your instance since starting the command running).</p>
 <p>When the run ends (it should take around 20 minutes) we can open our results file.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> MAGs_checkm.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/checkm</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> MAGs_checkm.tsv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="column-page">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
@@ -559,9 +558,7 @@ Output — CheckM help documentation
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>| bin.14 | k__Bacteria (UID203) | 5449      | 104       | 58            | 92  | 12 | 0 | 0 | 0 | 0  | 10.11        | 0.00          | 0.00    |</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>| bin.15 | root (UID1)          | 5656      | 56        | 24            | 55  | 1  | 0 | 0 | 0 | 0  | 4.17         | 0.00          | 0.00    |</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
 <p>Running this workflow is equivalent to running six separate CheckM commands. The <a href="https://github.com/Ecogenomics/CheckM/wiki/Workflows">CheckM documentation</a> explains this is more detail.</p>
-<div class="column-page">
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -577,7 +574,7 @@ Exercise 1: Downloading the tsv file
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> ___ csuser@instanceNNN.cloud-span.aws.york.ac.uk.:___/cs_course/analysis/MAGs_checkm.tsv ____</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> ___ csuser@instanceNNN.cloud-span.aws.york.ac.uk.:___/cs_course/results/checkm/MAGs_checkm.tsv ____</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
@@ -596,8 +593,7 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/MAGs_checkm.tsv <span class="op">&lt;</span>the destination directory of your choice<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb8" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/checkm/MAGs_checkm.tsv <span class="op">&lt;</span>the destination directory of your choice<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -609,6 +605,12 @@ Solution
 <p>As part of the standard, a framework to determine MAG quality from statistics is outlined. A MAG can be assigned one of three different metrics: High, Medium or Low quality draft metagenome assembled genomes.</p>
 <p>See the table below for an overview of each category.</p>
 <table class="table">
+<colgroup>
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 34%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>Quality Category</th>
@@ -640,7 +642,7 @@ Solution
 </table>
 <p>We have already determined the <strong>completeness</strong> and <strong>contamination</strong> of each of our MAGs using CheckM. Next we will use a program to determine which rRNA and tRNAs are present in each MAG.</p>
 <p>Note that due to the difficulty in the assembly of short-read metagenomes, often just a completeness of &gt;90% and a contamination of ≤ 5% is treated as a good quality MAG.</p>
-<p>To best examine your bins, you might want to import it into a spreadsheet software program (you should be able to directly copy and paste the contents of your <code>MAGS_checkm.tsv</code> text file into a spreadsheet without needing to do any further formatting or splitting into columns). Then, you can use “filter” (Google Sheets) or “format as table (Excel) to sort your bins by completeness and/or contamination.</p>
+<p>To best examine your bins, you might want to import it into a spreadsheet software program (you should be able to directly copy and paste the contents of your <code>MAGS_checkm.tsv</code> text file into a spreadsheet without needing to do any further formatting or splitting into columns). Then, you can use “filter” (Google Sheets) or “format as table” (Excel) to sort your bins by completeness and/or contamination.</p>
 <ul>
 <li><h3 id="google-sheets" class="anchored">Google Sheets</h3>
 <ul>
@@ -667,9 +669,9 @@ Solution
 <p>Here the bins are sorted by completeness. Completeness is evaluated by looking for the presence of a set of marker genes - 100% complete means all the genes were found. Contamination is determined by the fraction of marker genes that occur as duplicates, indicating that more than one genome is present.</p>
 <p>Other columns to consider:</p>
 <ul>
-<li><code>marker lineage</code> tells you what taxa your MAG might belong to (even if this is as broad as just “bacteria” or even “root” i.e.&nbsp;)</li>
+<li><code>marker lineage</code> tells you what taxa your MAG might belong to (even if this is as broad as just “bacteria” or even “root”)</li>
 <li><code># genomes</code> tells you how many genomes were used to generate each marker set (which is based on the marker lineage, so if CheckM couldn’t work out what your MAG was beyond “bacteria” it uses marker genes from 5449 different species)</li>
-<li>`# markers’ tells you how many markers were needed for the genome to be 100% complete</li>
+<li><code># markers</code> tells you how many markers were needed for the genome to be 100% complete</li>
 <li>numbers <code>0</code> to <code>5+</code> tell you how many times marker genes were identified e.g.
 <ul>
 <li><code>0</code> tells you how many markers were not found at all</li>
@@ -685,7 +687,7 @@ Solution
 <h3 class="anchored" data-anchor-id="things-to-bear-in-mind">Things to bear in mind</h3>
 <p>It is important to remember that the “completeness” metric relies on having well-characterised lineages present in CheckM’s database. If the MAG belongs to a poorly-characterised lineage, the results may not be accurate.</p>
 <p>You will find that none of our bins satisfy the requirements for a “high quality” bin. That’s okay! Binning is still quite an inexact science and while various tools exist to do the job of binning, all of them need to be taken with a pinch of salt.</p>
-<p>So how can you make your bin outputs more reliable? - there are ways of combining outputs from different binning tools which can help crosscheck results and refine your bins</p>
+<p>So how can you make your bin outputs more reliable? There are ways of combining outputs from different binning tools which can help crosscheck results and refine your bins.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
