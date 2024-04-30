@@ -461,7 +461,7 @@ window.Quarto = {
 
 
 <p>Once we know the taxonomic composition of our metagenomic sequencing data we can characterise them by their diversity. In this episode we will first define what we mean by diversity and then calculate the α diversity in our sample. We will also calculate the diversity of another sample.</p>
-<section id="what-is-diversity" class="level2 page-columns page-full">
+<section id="what-is-diversity" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-diversity">What is diversity?</h2>
 <p>Species diversity is the number of species in a system and the relative abundance of each of those species. It can be defined on three different scales (Whittaker, 1960).</p>
 <ol type="1">
@@ -470,16 +470,15 @@ window.Quarto = {
 <li>the difference in diversity between local sites, known as <strong>beta (β) diversity</strong></li>
 </ol>
 <p>A metagenome can be considered a local site. In this episode we will calculate α diversity (that within a metagenome) and β diversity (that between metagenomes).</p>
-<section id="alpha-α-diversity" class="level3 page-columns page-full">
+<section id="alpha-α-diversity" class="level3">
 <h3 class="anchored" data-anchor-id="alpha-α-diversity">Alpha (α) diversity</h3>
 <p>The simplest measure of α diversity is the number of species, or species <strong>richness</strong>. However, most indices of α diversity take into account both the number of species and their relative abundances, or species <strong>evenness</strong>. Different diversity indices weight these two components differently.</p>
-<div class="column-body-outset">
 <table class="table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 31%">
-<col style="width: 17%">
-<col style="width: 34%">
+<col style="width: 20%">
+<col style="width: 26%">
+<col style="width: 20%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -510,7 +509,6 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-</div>
 <!-- <a href="{{ page.root }}/fig/03-07-01.png">
   <img src="{{ page.root }}/fig/03-07-01.png" alt="Diagram to demonstratealpha diversity. Three lakes are shown, A, B and C. In lake A, we have three fishes, each one of a different species. In lake B, we have two fishes each one of a different species.And in lake C we have four fishes, each one of different species." />
 </a>
@@ -527,8 +525,8 @@ window.Quarto = {
 <p>β diversity measures how different two or more communities are in their richness, evenness or both.</p>
 <table class="table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 80%">
+<col style="width: 16%">
+<col style="width: 83%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -582,7 +580,6 @@ Exercise 1:
 </figure>
 </div>
 <p>Which of the options below is true: 1. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 1 2. α diversity of A = 4, α diversity of B = 3, β diversity between A and B = 5 3. α diversity of A = 9, α diversity of B = 7, β diversity between A and B= 16</p>
-<p>Please, paste your result on the collaborative document provided by instructors.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -620,7 +617,7 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> ~/cs_course/analysis/taxonomy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a> <span class="bu">cd</span> ~/cs_course/results/taxonomy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>List the files</p>
 <div class="code-with-filename">
@@ -765,14 +762,15 @@ Solution
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="ex">kraken-biom</span> ERR4998593.report ERR4998600.report <span class="at">--fmt</span> json <span class="at">-o</span> metagenome.biom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">kraken-biom</span> results/taxonomy/ERR4998593.report results/taxonomy/ERR4998600.report <span class="at">--fmt</span> json <span class="at">-o</span> results/taxonomy/metagenome.biom</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>kraken-biom</code> uses both reports to generate the BIOM table. The BIOM table is in a file called <code>metagenome.biom</code>.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a> <span class="fu">ls</span> <span class="at">-l</span> results/taxonomy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -813,7 +811,7 @@ Download the file to the project folder using <code>scp</code>. Use a terminal t
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/taxonomy/metagenome.biom diversity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/taxonomy/metagenome.biom diversity</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Remember to replace NNN with the instance number specific to you.</p></li>
 <li><p>Open a new script.</p></li>
@@ -822,14 +820,11 @@ Download the file to the project folder using <code>scp</code>. Use a terminal t
 </section>
 <section id="option-b-i-dont-know-r-and-rstudio." class="level3">
 <h3 class="anchored" data-anchor-id="option-b-i-dont-know-r-and-rstudio.">Option B: I don’t know R and RStudio.</h3>
-<p>If you don’t know R and RStudio we suggest you to use this option. We have installed the packages needed and put the data, <code>metagenome.biom</code> and a script <code>analysis.R</code> in the RStudio Cloud Project.</p>
+<p>If you don’t know R and RStudio we suggest you to use this option. We have installed the packages needed and put the data, <code>metagenome.biom</code>, and a script, <code>analysis.R</code>, in the RStudio Cloud Project.</p>
 <ol type="1">
-<li>Make an RStudio Cloud account<br>
-Go to <a href="https://rstudio.cloud/">https://rstudio.cloud/</a> and follow Get Started for Free. We recommend signing up with your Google account if you use one.<br>
+<li>Make an RStudio Cloud account by visiting <a href="https://rstudio.cloud/" class="uri">https://rstudio.cloud/</a> and click Get Started for Free. We recommend signing up with your Google account if you use one.<br>
 </li>
-<li>Follow the link to the <a href="https://posit.cloud/content/5663744">cloud-span-metagenomics</a> project.<br>
-Open the project we have set up: <a href="https://posit.cloud/content/5663744">cloud-span-metagenomics</a>. You’ll get a message saying “Deploying project”. This will take a few seconds.<br>
-</li>
+<li>Open the project we have set up: <a href="https://posit.cloud/content/5663744">cloud-span-metagenomics</a>. You’ll get a message saying “Deploying project”. This will take a few seconds.</li>
 <li>Open <code>analysis.R</code> from the Files pane on the bottom right of the display.</li>
 </ol>
 </section>
@@ -853,7 +848,7 @@ Open the project we have set up: <a href="https://posit.cloud/content/5663744">c
 <div class="sourceCode" id="cb12" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>biom_metagenome <span class="ot">&lt;-</span> <span class="fu">import_biom</span>(<span class="st">"metagenome.biom"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This command produces no output in the console but created a special class of R object which is defined by the <code>phyloseq</code> package and called it <code>biom_metagenome</code>. Click on the object name, biom_metagenome, in the Environment pane (top right), see the screenshot below. This will open a view of the object in the same pane as your script.</p>
-<p>A phyloseq object is a special object in R. It has five parts, called ‘slots’ which you can see listed in the object view. These are <code>otu_table</code>, <code>tax_table</code>, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code>. In our case, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code> are empty. The useful data are in otu_table<code>and</code>tax_table`.</p>
+<p>A phyloseq object is a special object in R. It has five parts, called ‘slots’ which you can see listed in the object view. These are <code>otu_table</code>, <code>tax_table</code>, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code>. In our case, <code>sam_data</code>, <code>phy_tree</code> and <code>refseq</code> are empty. The useful data are in <code>otu_table</code>and<code>tax_table</code>.</p>
 <!-- <a href="{{ page.root }}/fig/r-phyloseq-obj.png">
   <img src="{{ page.root }}/fig/r-phyloseq-obj.png" alt="Screenshot of RStudio showing the bio_metagenome object in the environment window which has been clicked on to open a view of the object. The five slots are listed in that view." />
 </a> -->
@@ -1022,8 +1017,8 @@ Solution
 <li>This is the number of rows in the table<br>
 </li>
 </ol></li>
-<li>Hyphomicrobiales. Sorting the column n will bring this to the top. Hyphomicrobiales appears 480 times<br>
-</li>
+<li><p>Hyphomicrobiales. Sorting the column n will bring this to the top. Hyphomicrobiales appears 480 times<br>
+</p></li>
 <li><ol start="66" type="1">
 <li>If an OTU has not been identified to order level the order column will be blank. The table shows there were 66 such cases (you can find this more easily by sorting the column Order).<br>
 </li>
@@ -1249,7 +1244,7 @@ Solution
 </section>
 <section id="reading" class="level2">
 <h2 class="anchored" data-anchor-id="reading">Reading</h2>
-<p>Tuomisto, H. A consistent terminology for quantifying species diversity? Yes, it does exist. Oecologia 164, 853–860 (2010). <a href="https://doi.org/10.1007/s00442-010-1812-0">https://doi.org/10.1007/s00442-010-1812-0</a></p>
+<p>Tuomisto, H. A consistent terminology for quantifying species diversity? Yes, it does exist. Oecologia 164, 853–860 (2010). <a href="https://doi.org/10.1007/s00442-010-1812-0" class="uri">https://doi.org/10.1007/s00442-010-1812-0</a></p>
 <p>Whittaker, R. H. (1960) Vegetation of the Siskiyou Mountains, Oregon and California. Ecological Monographs, 30, 279–338</p>
 
 

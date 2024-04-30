@@ -400,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson06-taxonomic-annotations/01-taxonomic.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></li><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/01-taxonomic.html">Taxonomic Assignment</a></li></ol></nav>
 <div class="quarto-title">
@@ -429,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><strong>BLAST</strong>: Using BLAST or DIAMOND, these mappers search for the most likely hit for each sequence within a database of genomes (i.e.&nbsp;mapping). This strategy is slow.</p></li>
 <li><p><strong>K-mers</strong>: A genome database is broken into pieces of length k, so as to be able to search for unique pieces by taxonomic group, from lowest common ancestor (LCA), passing through phylum to species. Then, the algorithm breaks the query sequence (reads, contigs) into pieces of length k, looks for where these are placed within the tree and make the classification with the most probable position.</p></li>
-<li><p><strong>Markers</strong>: This method looks for markers of a database made <em>a priori</em> &nbsp;in the sequences to be classified and assigns the taxonomy depending on the hits obtained.</p></li>
+<li><p><strong>Markers</strong>: This method looks for markers of a database made <em>a priori</em> in the sequences to be classified and assigns the taxonomy depending on the hits obtained.</p></li>
 </ol>
 <!-- <a href="{{ page.root }}/fig/03-01_LCA.png">
   <img src="{{ page.root }}/fig/03-01_LCA.png" alt="Diagram of taxonomic tree " />
@@ -557,10 +557,10 @@ It’s very important to know your database!
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course/analysis/</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> taxonomy</span>
+<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> results/taxonomy</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kraken2</span> <span class="at">--db</span> ../databases/kraken_20220926/ <span class="at">--output</span> taxonomy/ERR4998593.kraken <span class="at">--report</span> taxonomy/ERR4998593.report <span class="at">--minimum-base-quality</span> 30 <span class="at">--threads</span> 8 ../data/illumina_fastq/ERR4998593_1.fastq ../data/illumina_fastq/ERR4998593_2.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">kraken2</span> <span class="at">--db</span> databases/kraken_20220926/ <span class="at">--output</span> results/taxonomy/ERR4998593.kraken <span class="at">--report</span> results/taxonomy/ERR4998593.report <span class="at">--minimum-base-quality</span> 30 <span class="at">--threads</span> 8 data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This should take around 3 - 5 minutes to run so we will run it in the foreground.</p>
 <p>You should see an output similar to below:</p>
@@ -648,19 +648,17 @@ Reading a Kraken report
 <p>This data is real environmental data, and this means the quality of the DNA is likely to be low - it may have degraded in the time between sampling and extraction, or been damaged during the extraction process. In addition, we would see a higher percentage of our reads classified if we ran them through a bigger database - the Standard-8 database we used is fairly small. We [the course writers] saw up to 14% of reads classified when we used Kraken on the same data with a much bigger database and a more powerful computer.</p>
 <p>As the report is nearly 10,000 lines, we will explore it with <a href="https://github.com/fbreitwieser/pavian">Pavian</a>, rather than by hand.</p>
 </section>
-<section id="visualisation-of-taxonomic-assignment-results" class="level2 page-columns page-full">
+<section id="visualisation-of-taxonomic-assignment-results" class="level2">
 <h2 class="anchored" data-anchor-id="visualisation-of-taxonomic-assignment-results">Visualisation of taxonomic assignment results</h2>
-<section id="pavian" class="level3 page-columns page-full">
+<section id="pavian" class="level3">
 <h3 class="anchored" data-anchor-id="pavian">Pavian</h3>
 <p><a href="https://github.com/fbreitwieser/pavian">Pavian</a> is a tool for the interactive visualisation of metagenomics data and allows the comparison of multiple samples. Pavian can be installed locally but we will use the browser version of <a href="https://fbreitwieser.shinyapps.io/pavian/">Pavian</a>.</p>
 <p>First we need to download our <code>ERR4998593.report</code> file from our AWS instance to our local computer. Launch a GitBash window or terminal which is logged into your local computer, from the <code>cloudspan</code> folder. Then use <code>scp</code> to fetch the report.</p>
-<div class="column-page">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk.:~/cs_course/analysis/taxonomy/ERR4998593.report .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk.:~/cs_course/results/taxonomy/ERR4998593.report .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check you have included the <code>.</code> on the end meaning copy the file ‘to here’.</p>
 <p>Go to <a href="https://fbreitwieser.shinyapps.io/pavian/">the Pavian website</a>, click on Browse and upload the <code>ERR4998593.report</code> file you have just downloaded.</p>
@@ -687,13 +685,11 @@ Reading a Kraken report
   src="{{ page.root }}/files/sankey-ERR4998593.report.html"
   style="width:100%; height:500px;"
 ></iframe> -->
-<div class="column-page">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><embed src="../../docs/miscellanea/files/sankey-ERR4998593.report.html" style="width:100.0%" height="500"></p>
+<p><embed src="../../docs/miscellanea/files/sankey-ERR4998593.report.html" style="width:100.0%" height="800"></p>
 <figcaption>.</figcaption>
 </figure>
-</div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">

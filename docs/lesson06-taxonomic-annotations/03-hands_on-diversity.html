@@ -397,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/lesson06-taxonomic-annotations/03-hands_on-diversity.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full column-body" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/index.html">Taxonomic Annotations</a></li><li class="breadcrumb-item"><a href="../../docs/lesson06-taxonomic-annotations/03-hands_on-diversity.html">Taxonomic Analysis with R</a></li></ol></nav>
 <div class="quarto-title">
@@ -505,7 +505,7 @@ Solution
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">View</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="summarise-metagenomes" class="level2 page-columns page-full">
+<section id="summarise-metagenomes" class="level2">
 <h2 class="anchored" data-anchor-id="summarise-metagenomes">Summarise metagenomes</h2>
 <p><code>phyloseq</code> has a useful function that turns a phyloseq object into a dataframe. Since the dataframe is a standard data format in R, this makes it easier for R users to apply methods they are familiar with.</p>
 <p>Use <code>psmelt()</code> to make a dataframe for the bacterial metagenomes:</p>
@@ -601,14 +601,12 @@ Solution
 </div>
 </div>
 <p>To place the two sets of phlya in a list, we use</p>
-<div class="column-body-outset">
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code (R)</strong></pre>
 </div>
 <div class="sourceCode" id="cb12" data-filename="Code (R)"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>venn_data <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ERR4998593 =</span> <span class="fu">unique</span>(number_of_taxa<span class="sc">$</span>Phylum[number_of_taxa<span class="sc">$</span>Sample <span class="sc">==</span> <span class="st">"ERR4998593"</span>]),</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">ERR4998600 =</span> <span class="fu">unique</span>(number_of_taxa<span class="sc">$</span>Phylum[number_of_taxa<span class="sc">$</span>Sample <span class="sc">==</span> <span class="st">"ERR4998600"</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </div>
 <p>And to draw the venn diagram</p>
 <div class="code-with-filename">
@@ -619,7 +617,7 @@ Solution
 </div>
 <p>The Venn diagram shows that all of the phyla are found in both samples. There are no phyla exclusive to either ERR4998593 or ERR4998600.</p>
 <!-- <a href="/images/03_03_phyla_venn.png"> -->
-<p><!-- <img src="{{ page.root }}/fig/03_03_phyla_venn.png" alt="venn diagram for the phyla in the two sample." /> --></p>
+<!-- <img src="{{ page.root }}/fig/03_03_phyla_venn.png" alt="venn diagram for the phyla in the two sample." /> -->
 <p><a href="../../images/03_03_phyla_venn.png"></a></p><a href="../../images/03_03_phyla_venn.png">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -696,7 +694,7 @@ Solution
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"stack"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><a href="../../images/03_03_rel_phyl_plot.png"></a></p><a href="../../images/03_03_rel_phyl_plot.png">
-<p><!-- <img src="{{ page.root }}/fig/03_03_rel_abun.png" alt="Plot of the relative abundance of each Phylum in the two samples." /> --></p>
+<!-- <img src="{{ page.root }}/fig/03_03_rel_abun.png" alt="Plot of the relative abundance of each Phylum in the two samples." /> -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../../images/03_03_rel_abun.png" class="img-fluid figure-img"></p>
@@ -733,7 +731,7 @@ Solution
 </figure>
 </div>
 </a><p><a href="../../images/03_03_scatter_1.png"></a></p>
-<p>It looks like our data is all clustered at the low end of the scale, with only a couple of points further along. Let’s try using a log scale to see the spread a bit better. We’d better add labels to our axes too, to remind us that a log scale was used</p>
+<p>It looks like our data is all clustered at the low end of the scale, with only a couple of points further along. Let’s try using a log scale to see the spread a bit better. We’d better add labels to our axes too, to remind us that a log scale was used.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code (R)</strong></pre>
@@ -755,7 +753,7 @@ Solution
 </figure>
 </div>
 </a><p><a href="../../images/03_03_scatter_logged.png"></a></p>
-<p>That’s better! We should also add a reference line too so we can see where the points would be if they were found in equal proportions in both samples. Then we can see which phyla have a higher relative abundance in each sample. We can do this with geom_abline() which draws a line with formula y=x</p>
+<p>That’s better! We should also add a reference line too so we can see where the points would be if they were found in equal proportions in both samples. Then we can see which phyla have a higher relative abundance in each sample. We can do this with geom_abline() which draws a line with formula y = x.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code (R)</strong></pre>
