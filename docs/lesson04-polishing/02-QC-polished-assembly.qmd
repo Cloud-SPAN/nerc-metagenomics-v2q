@@ -11,24 +11,25 @@ objectives:
 - "Understand what factors might affect the quality of an assembly."
 - "Use the help documentation to work out an appropriate flag for seqkit"
 - "Apply seqkit to assess multiple assemblies"
-- "Use metaQUAST to identify the quality of an assembly."
+- "Use MetaQUAST to identify the quality of an assembly."
 keypoints:
 - "The N50 is the contig length of the 50th percentile, meaning that 50% of the contigs are at least this length in the assembly"
 - "A misassembly is when a portion of the assembly is incorrectly put back together"
 - "The largest contig is the longest contiguous piece in the assembly"
 - "Seqkit can generate summary statistics that will tell us the N50, largest contig and the number of gaps"
-- "metaQUAST can generate additional information in a report which can be used to identify misassemblies"
+- "MetaQUAST can generate additional information in a report which can be used to identify misassemblies"
 ---
 
 ## Why QC a metagenome assembly?
+
 We now have a polished assembly (`pilon.fasta`). The next thing to do is to perform quality control (QC) checks to make sure we can be confident in our results and conclusions about the taxonomic, metabolic or functional composition of the communities that we are studying. This also allows us to check whether our efforts to improve the assembly with polishing were successful.
 
 The quality of metagenome assemblies is typically lower than it is for single genome assemblies due to the use of long reads.
 
-In this episode we explain what is meant by assembly quality and how to examine and compare the quality of your metagenome assemblies using `seqkit stats` and [MetaQUAST](http://quast.sourceforge.net/metaquast)
-
+In this episode we explain what is meant by assembly quality and how to examine and compare the quality of your metagenome assemblies using `seqkit stats` and [MetaQUAST](http://quast.sourceforge.net/metaquast).
 
 ## What do we mean by assembly quality?
+
 There are several variables that affect assembly quality. Let's go over them in more detail.
 
 ### Contiguity
@@ -55,20 +56,22 @@ Chimeric contigs are when contigs belonging to different genomes get stuck toget
 
 Low base quality happens when mutations are present in reads that do not reflect actual biological variation. This happens more in long reads due to a higher error rate. However, this is outweighed by the fact that using long reads for metagenome assemblies results in higher overall quality due to higher contiguity. This is why we 'polished' our genome in the last episode by comparing the draft assembly to raw short reads.
 
--------
+------------------------------------------------------------------------
 
 ## Using seqkit to generate summary statistics of an assembly
 
 After finishing the draft assembly we used `seqkit stats` to see some basic statistics about the assembly. We will be using it again to get summary statistics for all three of the assemblies (unpolished, long read polished and short read polished). We can then use those statistics to examine the polishing process.
 
 Let's review the help documentation for seqkit stats.
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 seqkit stats --help
 ```
-:::{.column-page} 
+
 ::: {.callout-note collapse="true"}
-## Output ---  seqkit stats help documentation
-```default
+## Output --- seqkit stats help documentation
+
+``` default
 simple statistics of FASTA/Q files
 
 Tips:
@@ -103,7 +106,6 @@ Global Flags:
   -j, --threads int                     number of CPUs. can also set with environment variable SEQKIT_THREADS) (default 4)
 ```
 :::
-:::
 
 ### The N50 length
 
@@ -113,52 +115,56 @@ It indicates the average size of the contigs the assembly software has produced.
 
 `seqkit stats` has an option to calculate the N50 length. Use the `seqkit stats` help documentation to answer the exercise below.
 
-::: {.callout-note}
+::: callout-note
 ## Exercise 1: Flag to get the N50 length
-a) Using the help documentation, what flag can we add to get the N50 length for this assembly?  
-b) What would the new command be if we added this flag?
- 
+
+a)  Using the help documentation, what flag can we add to get the N50 length for this assembly?\
+b)  What would the new command be if we added this flag?
+
 Bonus exercise: What flag would enable us to save the output table in a tabular (i.e. tsv) format?
 
 ::: {.callout-note collapse="true"}
 ## Solution
-a) We can see from the help documentation that the flag `-a` or `--all` will calculate `all statistics, including quartiles of seq length, sum_gap, N50`.  
-b) The new command would be `seqkit stats -a assembly/assembly.fasta` or `seqkit stats --all assembly/assembly.fasta`  
+
+a)  We can see from the help documentation that the flag `-a` or `--all` will calculate `all statistics, including quartiles of seq length, sum_gap, N50`.\
+b)  The new command would be `seqkit stats -a assembly/assembly.fasta` or `seqkit stats --all assembly/assembly.fasta`
 
 Bonus: The flag `-T` allows us to save it in a tabular output - this makes the table easier to use in other command line programs or programming languages such as R and Python. The command could be either `seqkit stats -a -T assembly/assembly.fasta` or we can combine the two flags `seqkit stats -aT assembly/assembly.fasta`
 :::
 :::
 
-Next, run the command on the original draft assembly (`~/cs_course/analysis/assembly/assembly.fasta`) to calculate the N50 length and answer the questions below about the output.
+Next, run the command on the original draft assembly (`~/cs_course/results/assembly/assembly.fasta`) to calculate the N50 length and answer the questions below about the output.
 
 ::: {.callout-tip collapse="true"}
 ## Hint: Seqkit stats N50 command
-```bash {filename="Code"}
-cd ~/cs_course/analysis/assembly
-seqkit stats -a assembly.fasta
+
+``` {.bash filename="Code"}
+cd ~/cs_course/
+seqkit stats -a results/assembly/assembly.fasta
 ```
 :::
 
-::: {.callout-note}
+::: callout-note
 ## Exercise 2: Calculating the N50 length
 
-a) What is the output if we run the new command from the above exercise?   
-b) What is the N50 length of this assembly?  
-  
+a)  What is the output if we run the new command from the above exercise?\
+b)  What is the N50 length of this assembly?
+
 Bonus exercise: Looking at the [information available online for Seqkit stats](https://bioinf.shenwei.me/seqkit/usage/#stats), can you work out what the extra statistics other than N50 tell us?
 
-::: {.column-page}
 ::: {.callout-note collapse="true"}
 ## Solution
-a)
-```default {filename="Output"}
+
+a)  
+
+``` {.default filename="Output"}
 file            format  type  num_seqs     sum_len  min_len   avg_len  max_len     Q1      Q2      Q3  sum_gap     N50  Q20(%)  Q30(%)  GC(%)
 assembly.fasta  FASTA   DNA      1,161  18,872,828      528  16,255.7  118,427  7,513  11,854  19,634        0  20,921       0       0  66.26
 ```
-b) The N50 length for this assembly is 20,921 bp. This tells us that 50% of the assembly is in fragments that are nearly 21,000 bases long or longer!
-  
+
+b)  The N50 length for this assembly is 20,921 bp. This tells us that 50% of the assembly is in fragments that are nearly 21,000 bases long or longer!
+
 Bonus: `Q1`, `Q2` and `Q3` are the quartile ranges of sequence length. `sum_gap` is the total number of ambiguous bases (N's) in the sequence. `Q20`(%) is the percentage of bases with a PHRED score over 20 and similarly `Q30`(%) is the percentage of bases with a PHRED score over 30. GC(%) is the [guanine-cytosine content](https://en.wikipedia.org/wiki/GC-content) of the sequence.
-:::
 :::
 :::
 
@@ -166,49 +172,52 @@ Bonus: `Q1`, `Q2` and `Q3` are the quartile ranges of sequence length. `sum_gap`
 
 Instead of passing just one FASTA file to `seqkit stats` we can use all three FASTA files at once.
 
-First we need to navigate into the analysis directory.
-```bash {filename="Code"}
-cd ~/cs_course/analysis/
+First we need to make sure we're in the `cs_course` directory.
+
+``` {.bash filename="Code"}
+cd ~/cs_course/
 ```
 
-Within the analysis directory, these three files are:
+The three files we want to generate statistics for are:
 
-* Draft assembly generated by Flye in `assembly/assembly.fasta`
-* Long-read polished assembly generated by Medaka in `medaka/consensus.fasta`
-* Short-read polished assembly generated by Pilon in `pilon/pilon.fasta`
+-   Draft assembly generated by Flye in `results/assembly/assembly.fasta`
+-   Long-read polished assembly generated by Medaka in `results/medaka/consensus.fasta`
+-   Short-read polished assembly generated by Pilon in `results/pilon/pilon.fasta`
 
 This makes our command:
-```bash {filename="Code"}
-seqkit stats -a assembly/assembly.fasta medaka/consensus.fasta pilon/pilon.fasta
+
+``` {.bash filename="Code"}
+seqkit stats -a results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta
 ```
 
-::: {.column-screen}
-| file              | format | type | num_seqs | sum_len    | min_len| avg_len  | max_len | Q1      | Q2     | Q3       | sum_gap | N50    | Q20(%) | Q30(%) | GC(%) |
-|--------------------|-------|------|--------|---------|--------|---------|---------|---------|--------|--------|--|------|--------|--------|-------|
-| assembly/assembly.fasta | FASTA  | DNA  | 791      | 11,979,728 | 662    | 15,145   | 95,860  | 7,148   | 11,019 | 18,874   | 0       | 19,835 | 0.00   | 0.00   | 66.58 |
-| medaka/consensus.fasta  | FASTA  | DNA  | 791      | 12,019,945 | 662    | 15,195.9 | 96,516  | 7,127.5 | 10,960 | 18,914.5 | 0       | 19,831 | 0.00   | 0.00   | 65.16 |
-| pilon/pilon.fasta       | FASTA  | DNA  | 791      | 11,950,064 | 662    | 15,107.5 | 95,826  | 7,108.5 | 10,902 | 18,830   | 0       | 19,748 | 0.00   | 0.00   | 66.13 |
-:::
+``` {.default filename="Output"}
+file                    format type num_seqs sum_len    min_len avg_len  max_len Q1      Q2     Q3       sum_gap N50    Q20(%) Q30(%) GC(%)
+assembly/assembly.fasta FASTA  DNA  791      11,979,728 662     15,145   95,860  7,148   11,019 18,874   0       19,835 0.00   0.00   66.58
+medaka/consensus.fasta  FASTA  DNA  791      12,019,945 662     15,195.9 96,516  7,127.5 10,960 18,914.5 0       19,831 0.00   0.00   65.16
+pilon/pilon.fasta       FASTA  DNA  791      11,950,064 662     15,107.5 95,826  7,108.5 10,902 18,830   0       19,748 0.00   0.00   66.13
+```
 
-::: {.callout-note}
+::: callout-note
 ## Exercise 3: Comparing the Assemblies
-Using the seqkit output for all three assemblies, compare the statistics for each of the three assemblies. What has changed across the two rounds of polishing? (From assembly>medaka>pilon)
+
+Using the seqkit output for all three assemblies, compare the statistics for each of the three assemblies. What has changed across the two rounds of polishing? (From assembly\>medaka\>pilon)
 
 ::: {.callout-note collapse="true"}
 ## Solution
+
 Between the original assembly and the medaka polished assembly:
 
-- Total length, maximum length and average length have all increased. The N50 and GC content have decreased.
+-   Total length, maximum length and average length have all increased. The N50 and GC content have decreased.
 
 Between the medaka polished assembly and the pilon polished assembly:
 
-- All variables have either decreased in length or stayed the same, except the maximum length which is higher (as is GC content by a very small margin).
+-   All variables have either decreased in length or stayed the same, except the maximum length which is higher (as is GC content by a very small margin).
 :::
 :::
 
 We can compare these basic assembly statistics in this way. However, these may not tell the full story as there will also have been changes to the overall sequence (e.g. correcting individual base errors).
 
-## Using metaQUAST to further assess assembly quality
+## Using MetaQUAST to further assess assembly quality
 
 We will use [MetaQUAST](http://quast.sourceforge.net/metaquast) to further evaluate our metagenomic assemblies. MetaQUAST is based on the QUAST genome quality tool but accounts for high species diversity and misassemblies.
 
@@ -216,7 +225,7 @@ MetaQUAST assesses the quality of assemblies using alignments to close reference
 
 So far we've been able to do a lot of work with files that already exist, but now we need to write our own file using the text editor Nano.
 
-::: {.callout-tip}
+::: callout-tip
 ## Text editors
 
 Text editors, like nano, "notepad" on Windows or "TextEdit" on Mac are used to edit any plain text files. Plain text files are those that contain only characters, not images or formatting.
@@ -228,16 +237,17 @@ No matter what editor you use, you will need to know where it searches for and s
 
 ## Writing files
 
-First, we create a directory for the metaQUAST output in the analysis directory.
-```bash {filename="Code"}
-cd ~/cs_course/analysis/
-mkdir metaquast
-cd metaquast
+First, we need to create a directory to put the reference genomes list in. We'll put it in a new folder in the data directory, since it's an input not an output.
+
+``` {.bash filename="Code"}
+cd ~/cs_course/data
+mkdir ref_genomes
+cd ref_genomes
 ```
 
-To open nano we type the command `nano` followed by the name of the text file we want to generate.
+To open nano type the command `nano` followed by the name of the text file we want to generate.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 nano reference_genomes.txt
 ```
 
@@ -249,7 +259,7 @@ The text at the bottom of the screen shows the keyboard shortcuts for performing
 
 Copy and paste the following list of organism names into this file (don't forget that <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>v</kbd> won't work in Linux (Unix). Try <kbd>Shift</kbd>+<kbd>Insert</kbd> instead, or right click and select paste from the drop-down menu - see the note below).
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 Bradyrhizobium erythrophlei
 Bradyrhizobium lablabi
 Bradyrhizobium canariense
@@ -272,53 +282,46 @@ Frigoriglobus tundricola
 Bradyrhizobium sp. A19
 ```
 
-Once we're happy with our text, we can press <kbd>Ctrl</kbd>-<kbd>o</kbd> (press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while holding it down, press the <kbd>o</kbd> key) to write our data to disk. You will then be prompted with `File Name to Write: reference_genomes.txt` at the bottom of the screen. Pressing <kbd>Enter</kbd> will confirm and save your changes.  Once the file is saved, we can use <kbd>Ctrl</kbd>-<kbd>x</kbd> to quit the `nano` editor and
-return to the shell.
+Once we're happy with our text, we can press <kbd>Ctrl</kbd>-<kbd>o</kbd> (press the <kbd>Ctrl</kbd> or <kbd>Control</kbd> key and, while holding it down, press the <kbd>o</kbd> key) to write our data to disk. You will then be prompted with `File Name to Write: reference_genomes.txt` at the bottom of the screen. Pressing <kbd>Enter</kbd> will confirm and save your changes. Once the file is saved, we can use <kbd>Ctrl</kbd>-<kbd>x</kbd> to quit the `nano` editor and return to the shell.
 
-::: {.callout-note}
-## Control, Ctrl, or ^ Key
-The Control key is also called the "Ctrl" key. There are various ways
-in which using the Control key may be described. For example, you may
-see an instruction to press the <kbd>Ctrl</kbd> key and, while holding it down,
-press the <kbd>X</kbd> key, described as any of:
+::: callout-note
+## Control, Ctrl, or \^ Key
 
-* `Control-X`
-* `Control+X`
-* `Ctrl-X`
-* `Ctrl+X`
-* `^X`
-* `C-x`
+The Control key is also called the "Ctrl" key. There are various ways in which using the Control key may be described. For example, you may see an instruction to press the <kbd>Ctrl</kbd> key and, while holding it down, press the <kbd>X</kbd> key, described as any of:
+
+-   `Control-X`
+-   `Control+X`
+-   `Ctrl-X`
+-   `Ctrl+X`
+-   `^X`
+-   `C-x`
 :::
 
-In `nano`, along the bottom of the screen you'll see `^G Get Help ^O WriteOut`.
-This means that you can use <kbd>Ctrl</kbd>-<kbd>G</kbd> to get help and <kbd>Ctrl</kbd>-<kbd>O</kbd> to save your
-file.
+In `nano`, along the bottom of the screen you'll see `^G Get Help ^O WriteOut`. This means that you can use <kbd>Ctrl</kbd>-<kbd>G</kbd> to get help and <kbd>Ctrl</kbd>-<kbd>O</kbd> to save your file.
 
-If you are using a Mac, you might be more familiar with the `Command` key, which is labelled with a <kbd>⌘</kbd> .
-But you will often use the the `Ctrl` key when working in a Terminal.
-:::
+If you are using a Mac, you might be more familiar with the `Command` key, which is labelled with a <kbd>⌘</kbd> . But you will often use the the `Ctrl` key when working in a Terminal. :::
 
-::: {.callout-note}
+::: callout-note
 ## Copying and pasting in Git bash
 
-Most people will want to use <kbd>Ctrl</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>V</kbd> to copy and paste. However in GitBash these shortcuts have other functions. <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts the currently running command and <kbd>Ctrl</kbd>+<kbd>V</kbd> tells the terminal to treat every keystroke as a literal character, so will add shortcuts like <kbd>Ctrl</kbd>+<kbd>C</kbd> as characters.
-Instead you can copy and paste in two ways:
+Most people will want to use <kbd>Ctrl</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>V</kbd> to copy and paste. However in GitBash these shortcuts have other functions. <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts the currently running command and <kbd>Ctrl</kbd>+<kbd>V</kbd> tells the terminal to treat every keystroke as a literal character, so will add shortcuts like <kbd>Ctrl</kbd>+<kbd>C</kbd> as characters. Instead you can copy and paste in two ways:
 
-1. Keyboard: Use <kbd>Shift</kbd> and the left/right arrows to select text and press <kbd>Enter</kbd> to copy. You can paste the text by pressing <kbd>Insert</kbd>.
-2. Mouse: Left click and drag to highlight text, then right click to copy. Move the cursor to where you want to paste and right click to paste.
+1.  Keyboard: Use <kbd>Shift</kbd> and the left/right arrows to select text and press <kbd>Enter</kbd> to copy. You can paste the text by pressing <kbd>Insert</kbd>.
+2.  Mouse: Left click and drag to highlight text, then right click to copy. Move the cursor to where you want to paste and right click to paste.
 :::
 
 You should then be able to see this file when you `ls` and view it using `less`.
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 ls
 less reference_genomes.txt
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 reference_genomes.txt
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 Bradyrhizobium erythrophlei
 Bradyrhizobium lablabi
 Bradyrhizobium canariense
@@ -342,19 +345,28 @@ Bradyrhizobium sp. A19
 (END)
 ```
 
-### Running **metaquast**
+### Running MetaQUAST
+
 Once we have our list of reference genomes we can run MetaQUAST on the original assembly and the two polished assemblies.
 
-First we should look at the help documentation to work out which commands are right for us.
+First we should make a directory in `results` where we'll store the MetaQUAST output.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
+cd ~/cs_course
+mkdir results/metaquast
+```
+
+
+Next let's look at the help documentation to work out which commands are right for us.
+
+``` {.bash filename="Code"}
 metaquast.py -h
 ```
 
-:::{.column-page} 
 ::: {.callout-note collapse="true"}
 ## Output --- MetaQUAST help documentation
-```default
+
+``` default
 MetaQUAST: Quality Assessment Tool for Metagenome Assemblies
 Version: 5.2.0
 
@@ -479,33 +491,32 @@ Other:
 Online QUAST manual is available at http://quast.sf.net/manual
 ```
 :::
-:::
 
 The documentation gives the usage as `python metaquast.py [options] <files_with_contigs>`.
 
-- We can disregard the `python` portion of this
+-   We can disregard the `python` portion of this
 
-The main "option" we want to include is `--references-list` to supply a text file containing our list of reference genomes (this is the file we just made).
+The main "option" we want to include is `--references-list`, which supplies a text file containing our list of reference genomes (this is the file we just made).
 
 The `<files_with_contigs>` part just means that this is where we put the assemblies to be evaluated. We'll list them all one after the other so we can compare their outputs easily.
 
 Our command therefore looks like:
 
-:::{.column-page}
-```bash {filename="Code"}
-metaquast.py --references-list reference_genomes.txt ../assembly/assembly.fasta ../medaka/consensus.fasta ../pilon/pilon.fasta &> metaquast.out &
+``` {.bash filename="Code"}
+metaquast.py --references-list data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta &> results/metaquast/metaquast.out &
 ```
-:::
+
 
 Note that once again we are running the command in the background using the `&` symbol and redirecting the output to a file (`metaquast.out`) using `>`. This is because it takes around 8-10 minutes to run.
 
-If you open up `metaquast.out` after running the command you should see something like this as metaQUAST starts downloading the reference species we specified in our files:
+If you open up `metaquast.out` after running the command you should see something like this as MetaQUAST starts downloading the reference species we specified in our files:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
+cd results/metaquast
 less metaquast.out
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 Version: 5.2.0
 
 System information:
@@ -515,14 +526,14 @@ System information:
 
 Started: 2023-03-16 16:32:09
 
-Logging to /home/csuser/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log
+Logging to /home/csuser/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log
 NOTICE: Maximum number of threads is set to 2 (use --threads option to set it manually)
 
 Contigs:
   Pre-processing...
-  1  ../assembly/assembly.fasta ==> assembly
-  2  ../medaka/consensus.fasta==> consensus
-  3  ../pilon/pilon.fasta ==> pilon
+  1  results/assembly/assembly.fasta ==> assembly
+  2  results/medaka/consensus.fasta==> consensus
+  3  results/pilon/pilon.fasta ==> pilon
 
 List of references was provided, starting to download reference genomes from NCBI...
 
@@ -554,16 +565,15 @@ Trying to download found references from NCBI. Totally 20 organisms to try.
 
 Once MetaQUAST has finished you should see an output like:
 
-:::{.column-page}
-```default {filename="Output"}
-[2]+  Done   metaquast.py --references-list reference_genomes.txt ../assembly/assembly.fasta ../medaka/consensus.fasta ../pilon/pilon.fasta &> metaquast.out & 
+``` {.default filename="Output"}
+[2]+  Done   metaquast.py --references-list data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta &> results/metaquast/metaquast.out & 
 ```
-:::
 
 You can also look in your `metaquast.out` and jump to the end using <kbd>Shift</kbd>+<kbd>g</kbd>.
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 MetaQUAST finished.
-  Log is saved to /home/csuser/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log
+  Log is saved to /home/csuser/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/metaquast.log
 
 Finished: 2023-03-16 13:12:43
 Elapsed time: 0:10:51.624140
@@ -574,32 +584,28 @@ Thank you for using QUAST!
 
 We can now navigate into the `quast_results` directory MetaQUAST generated. Within this directory there will be a folder for each time MetaQUAST has been run in this directory. We can navigate then navigate into the results file generated which will be in the format `results_YYYY_MM_DD_HH_MM_SS`. (There is also a symbolic link called `latest` in this directory that is a shortcut to the newest MetaQUAST run).
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd quast_results/results_YYYY_MM_DD_HH_MM_SS/
 ls
 ```
 
-```default {filename="Outut"}
+``` {.default filename="Outut"}
 combined_reference  icarus.html  icarus_viewers  metaquast.log  not_aligned  quast_downloaded_references  report.html  runs_per_reference  summary
 ```
 
 Once in this directory, we can see that MetaQUAST has generated multiple different files.
 
-If you want to explore all the files you can download this whole directory using `scp`, with `-r` flag to download all directories and what they contain. This will require ~500MB of space.
+If you want to explore all the files you can download this whole directory using `scp`, with `-r` flag to download all directories and what they contain. This will require \~500MB of space.
 
-However, most of this information is in the `report.html` file so we can download only that one instead.
-As this is a HTML file we will first need to download it to our local computer in order to open it.
+However, most of this information is in the `report.html` file so we can download only that one instead. As this is a HTML file we will first need to download it to our local computer in order to open it.
 
-### Downloading metaquast **report.html**
+### Downloading MetaQUAST report.html
 
-:::{.column-screen}
-```bash {filename="Code"}
-scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/analysis/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/report.html .
+``` {.bash filename="Code"}
+scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/metaquast/quast_results/results_YYYY_MM_DD_HH_MM_SS/report.html .
 ```
-:::
 
-Make sure you replace both the NNN with your particular number and also the directory name of the results file.
-The `results.html` file relies on some of the other files generated by MetaQUAST so with only the one file you won't have full functionality but we can still view the information we want.
+Make sure you replace both the NNN with your particular number and also the directory name of the results file. The `results.html` file relies on some of the other files generated by MetaQUAST so with only the one file you won't have full functionality but we can still view the information we want.
 
 If you haven't managed to download the file you can view [our example report here](/docs/miscellanea/files/metaquast_report_ERR5000342.html).
 
@@ -609,7 +615,7 @@ You should take a few minutes to explore the file before answering the following
 
 ![MetaQUAST statistics output.](/images/05-metaquast_output.png){width="505" height="416" fig-alt="MetaQUAST statistics output"}
 
-### Understanding metaQUAST output
+### Understanding MetaQUAST output
 
 The output is organised into several sections, with a column for each assembly. The worst scoring column is shown in red, the best in blue.
 
@@ -619,17 +625,16 @@ This section determines the quality of the assembly based on the size of the tot
 
 #### Misassemblies
 
-Missassemblies are when pieces in an assembly are overlapped in the incorrect way. In the metaQUAST manual, they define missassemblies in the four following ways (taken from the manual):
+Missassemblies are when pieces in an assembly are overlapped in the incorrect way. In the MetaQUAST manual, they define missassemblies in the four following ways (taken from the manual):
 
-misassemblies is the number of positions in the contigs (breakpoints) that satisfy one of the following criteria.
+Misassemblies is the number of positions in the contigs (breakpoints) that satisfy one of the following criteria.
 
-- the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference;
-- flanking sequences overlap on more than 1 kbp;
-- flanking sequences align to different strands or different chromosomes;
-- flanking sequences align on different reference genomes (MetaQUAST only)
+-   the left flanking sequence aligns over 1 kbp away from the right flanking sequence on the reference;
+-   flanking sequences overlap on more than 1 kbp;
+-   flanking sequences align to different strands or different chromosomes;
+-   flanking sequences align on different reference genomes (MetaQUAST only)
 
 These can be caused by errors in the assembly, or they can be caused by structural variation in the sample, such as inversions, relocations and translocation.
-
 
 #### Mismatches
 
@@ -639,15 +644,16 @@ This is where there are incorrect bases in the contigs making up the assembly. T
 
 The statistics without a reference are based on the full assembly rather than comparing the assembly to the species that you have asked it to compare to. The largest contig is an indicator of how good the overall assembly is. If the largest contig is small, it means that the rest of the assembly is of a poor quality.
 
-There is a detailed description of each of the outputs in the [metaQUAST manual](https://quast.sourceforge.net/docs/manual.html#sec3) which you can use to understand the output more fully.
+There is a detailed description of each of the outputs in the [MetaQUAST manual](https://quast.sourceforge.net/docs/manual.html#sec3) which you can use to understand the output more fully.
 
-
-::: {.callout-note}
+::: callout-note
 ## Comparing assemblies using MetaQUAST
-Using the above image how has the iterative polishing from assembly > consensus > pilon improved the assembly?  
+
+Using the above image how has the iterative polishing from assembly \> consensus \> pilon improved the assembly?
 
 ::: {.callout-note collapse="true"}
-## Answer
+## Solution
+
 In all three assemblies there is a low duplication ratio and this decreases with each round of polishing. Completeness of the assembly increases with polishing, as does largest alignment. In these areas polishing has improved the assembly. However, the number of mismatches and misassemblies increased with polishing and the size of the largest contig decreased. These conflicting statistics illustrate the difficulty in assessing the quality of an assembly.
 :::
 :::
