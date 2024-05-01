@@ -20,40 +20,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -372,7 +338,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
   <ul class="collapse">
   <li><a href="#install-git-bash-windows-users" id="toc-install-git-bash-windows-users" class="nav-link" data-scroll-target="#install-git-bash-windows-users">Install Git Bash — Windows users</a></li>
-  <li><a href="#configure-your-terminal-to-use-bash-mac-users" id="toc-configure-your-terminal-to-use-bash-mac-users" class="nav-link" data-scroll-target="#configure-your-terminal-to-use-bash-mac-users">Configure your Terminal to use Bash — Mac users</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/edit/main/docs/miscellanea/precourse-instructions.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/Cloud-SPAN/nerc-metagenomics-v2q/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
@@ -401,12 +366,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="overview" class="level1">
 <h1>Overview</h1>
-<p>The software and data used for analysis during the course are hosted on an Amazon Web Services (AWS) virtual machine (VM) instance. A copy of such instance that requires no previous setup by you will be made available to you at no cost by the Cloud-SPAN team.</p>
-<p>To accesss and use the resources in your AWS instance from your personal computer, you will use a command-line interface (<strong>CLI</strong>) program that is widely known as the <strong>shell</strong> or <strong>terminal</strong>. The shell is available by default for Linux and Mac users (so they don’t need to install any software).</p>
+<p>The software and data used for analysis during the course are hosted on an Amazon Web Services (AWS) virtual machine (VM) instance. A copy of such an instance that requires no previous setup by you will be made available to you at no cost by the Cloud-SPAN team.</p>
+<p>To access and use the resources in your AWS instance from your personal computer, you will use a command-line interface (<strong>CLI</strong>) program that is widely known as the <strong>shell</strong> or <strong>terminal</strong>. The shell is available by default for Linux and Mac users (so they don’t need to install any software).</p>
 <p><strong>Windows</strong> users will need to install Git for Windows on their computer as described below <strong>prior to the course</strong>. Git includes <strong>Git Bash</strong> which is a Windows version of the Unix Bash shell, the most widely used shell and the default shell in Linux systems.</p>
-<p><strong>Mac</strong> users <strong>may need to configure</strong> the <strong>terminal</strong> to use the Bash shell as described below. Mac computers usually have installed both shell programs Zsh and Bash, and Zsh is the default shell used by the <strong>terminal</strong>. Unfortunately, Zsh may not be configured to locate the <code>ssh</code> program which you need to login to your instance. Configuring the terminal to use Bash solves the problem.</p>
-<p>You will need to use a laptop or desktop to take this course. Due to the need both to follow the instructor in zoom and to perform analyses, <strong>tablets</strong> and <strong>ipads are not suitable</strong> for using during this course. Having both an up to date browser and a stable internet connection is important.</p>
-<p>Before the course you will receive via email the information that you will need to login to your AWS instance during the course.</p>
+<p>You will need to use a laptop or desktop to take this course. Due to the need both to follow the instructor in zoom and to perform analyses, <strong>tablets</strong> and <strong>iPads are not suitable</strong> for using during this course. Having both an up to date browser and a stable internet connection is important.</p>
+<p>Before the course you will receive via email the information that you will need to log in to your AWS instance. Your instructor will show you how to log in.</p>
 <section id="install-git-bash-windows-users" class="level2">
 <h2 class="anchored" data-anchor-id="install-git-bash-windows-users">Install Git Bash — Windows users</h2>
 <div class="callout callout-style-default callout-caution callout-titled">
@@ -423,42 +387,40 @@ Install Git Bash (Git for Windows)
 <div class="callout-body-container callout-body">
 <p>The steps below correspond to the installation of Git for Windows version 2.33.1 from scratch. The installation of a more recent version, or updating a previously installed version, may show different wording in the screen messages mentioned below or may vary slightly in the number of steps to follow. Choose as many of the options below as possible.</p>
 <ul>
-<li>Click on this link: <a href="https://gitforwindows.org/">Git for Windows download page</a></li>
-<li>Once in that page, click on <strong>Download</strong> to download the installer.</li>
-<li>Once the installer is downloaded,
+<li><p>Click on this link: <a href="https://gitforwindows.org/">Git for Windows download page</a></p></li>
+<li><p>Once in that page, click on <strong>Download</strong> to download the installer.</p></li>
+<li><p>Once the installer is downloaded,</p>
 <ul>
 <li><strong>double click on it</strong></li>
 <li>you will then be asked some questions and to select an option for each question.</li>
 <li>each question <strong>is shown below</strong> in <em>Italics</em>, and the selection to be made is shown in <strong>bold</strong></li>
-<li>during the actual installation each question will be displayed at the top of a small window but we are showing only the small window for the question that requires somewhat more help</li>
-<li>the first question is next:</li>
 </ul></li>
-<li><em>The app you’re trying to install isn’t a Microsoft-verified app ..?</em>
+<li><p><em>The app you’re trying to install isn’t a Microsoft-verified app ..?</em></p>
 <ul>
 <li>Click on <strong>Install anyway</strong></li>
 </ul></li>
-<li><em>Do you want to allow this app to make changes to your device?</em>
+<li><p><em>Do you want to allow this app to make changes to your device?</em></p>
 <ul>
 <li>Click on <strong>Yes</strong></li>
 </ul></li>
-<li><em>GNU General Public License</em>
+<li><p><em>GNU General Public License</em></p>
 <ul>
 <li>click on <strong>Next</strong></li>
 </ul></li>
-<li><em>Select Destination Location</em>
+<li><p><em>Select Destination Location</em></p>
 <ul>
 <li>click on <strong>Next</strong> (don’t change the location shown).</li>
 </ul></li>
-<li><em>Select Components</em>
+<li><p><em>Select Components</em></p>
 <ul>
 <li>click on <strong>Additional Icons</strong> (it will also select “On the Desktop” option)</li>
 <li>then click on <strong>Next</strong></li>
 </ul></li>
-<li><em>Select Start Menu Folder</em>
+<li><p><em>Select Start Menu Folder</em></p>
 <ul>
 <li>click on <strong>Next</strong> (don’t change the folder name shown)</li>
 </ul></li>
-<li><em>Choosing the default editor used by Git</em>
+<li><p><em>Choosing the default editor used by Git</em></p>
 <ul>
 <li>select <strong>Use the nano editor by default</strong> and click on <strong>Next</strong>.</li>
 <li><strong>NB</strong>: you may need to click on the dropdown menu and to <strong>scroll up</strong> with the mouse to see this option – see the figure:</li>
@@ -470,49 +432,49 @@ Install Git Bash (Git for Windows)
 </figure>
 </div>
 <!-- OLD <img src="/images/git-installation-nano-option.png" alt="GIT installation nano option" width="600"/> --></li>
-<li><em>Adjusting the name of the initial branch in new repositories</em>
+<li><p><em>Adjusting the name of the initial branch in new repositories</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Let Git decide</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Adjusting your PATH environment</em>
+<li><p><em>Adjusting your PATH environment</em></p>
 <ul>
 <li>keep the selected, <em>Recommended</em> option <strong>Git from the command line and also from 3rd-party software</strong></li>
 <li>or selec it, and click on <strong>Next</strong>.</li>
 <li><strong>NB</strong>: if this option is not selected, some programs that you need for the course will not work properly. If this happens rerun the installer and select the appropriate option.</li>
 </ul></li>
-<li><em>Choosing the SSH executable</em>
+<li><p><em>Choosing the SSH executable</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Use bundled OpenSSH</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Choosing HTTPS transport backend</em>
+<li><p><em>Choosing HTTPS transport backend</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Use the OpenSSL library</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Configuring the line ending conversions</em>
+<li><p><em>Configuring the line ending conversions</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Checkout Windows-style, commit Unix-style line endings</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Configuring the terminal emulator to use with Git Bash</em>
+<li><p><em>Configuring the terminal emulator to use with Git Bash</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Use MinTTy (the default terminal of MSYS2)</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Choose the default behaviour of <code>git pull</code></em>
+<li><p><em>Choose the default behaviour of <code>git pull</code></em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Default (fast-forward or merge)</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Choose a credential helper</em>
+<li><p><em>Choose a credential helper</em></p>
 <ul>
 <li>keep the selected (or select the) option <strong>Git Credential Manager Core</strong> and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Configuring extra options</em>
+<li><p><em>Configuring extra options</em></p>
 <ul>
 <li>keep the selected option (Enable File System Caching) and click on <strong>Next</strong>.</li>
 </ul></li>
-<li><em>Configuring experimental options</em>
+<li><p><em>Configuring experimental options</em></p>
 <ul>
 <li>click on <strong>Install</strong> without selecting any option</li>
 </ul></li>
-<li>Click on <strong>Finish</strong></li>
+<li><p>Click on <strong>Finish</strong></p></li>
 </ul>
 <p><strong>Run</strong> Git Bash by double clicking on the Git Bash icon in your Desktop screen.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -521,96 +483,7 @@ Install Git Bash (Git for Windows)
 <figcaption>.</figcaption>
 </figure>
 </div>
-<!-- OLD <img src="/images/gitbash-launch-icon.png" alt="Git Bash launch icon" width="200"/> -->
 <p><strong>Exit</strong> Git Bash by pressing the keys <code>Ctrl</code> and <code>d</code> (<code>Ctrl-d</code>) simultaneously.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="configure-your-terminal-to-use-bash-mac-users" class="level2">
-<h2 class="anchored" data-anchor-id="configure-your-terminal-to-use-bash-mac-users">Configure your Terminal to use Bash — Mac users</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Configure the Terminal to use Bash (instead of Zsh)
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>The instructions below will guide you to configure your <strong>terminal</strong> to use the Bash shell. Do so only if you cannot login to your instance as described in the Episode <a href="../../docs/lesson01-files-and-directories/02-logging-onto-cloud.html">Logging onto the Cloud</a>, and your terminal displays the error message “<strong><code>ssh</code> command not found</strong>” instead when trying to login.</p>
-<p>You will also find below the instructions to revert your terminal configuration if you want to. Do so only after you have finished the course.</p>
-<section id="configuring-the-terminal-to-use-bash" class="level4">
-<h4 class="anchored" data-anchor-id="configuring-the-terminal-to-use-bash"><strong>Configuring the terminal to use Bash</strong></h4>
-<p>First check that your terminal is actually running the Zsh shell. As shown in the screenshot below, the top bar of your terminal should show <strong>zsh</strong> next to your username on the right. If so, continue; otherwise get in touch with the Cloud-SPAN team.</p>
-<!-- WAS THIS <img src="/images/mac01.png" alt="Mac terminal running Zsh shell" width="600"/> -->
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac01.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminal running Zsh shell.</figcaption>
-</figure>
-</div>
-<p>Enter or copy-paste the <code>chsh</code> command as shown below, see also the screenshot — <code>chsh</code> stands for “change shell”:</p>
-<div class="sourceCode" id="annotated-cell-1"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-1" class="code-annotation-target"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">%</span> chsh <span class="at">-s</span> /bin/bash</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-1" data-code-lines="1" data-code-annotation="1">Change the terminal shell to bash.</span>
-</dd>
-</dl>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac02.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminal showing command to change to Bash shell.</figcaption>
-</figure>
-</div>
-<p>Enter your password when prompted to do so:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac03.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminating showing prompt for password.</figcaption>
-</figure>
-</div>
-<p>The change you have made will take effect once you open a new terminal (you can close the terminal where you run the <code>chsh</code> command). Once you open a new you terminal, check that it displays <strong>bash</strong> in the top bar as in the screenshot below:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac04.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminal showing “bash” at the top bar.</figcaption>
-</figure>
-</div>
-<p>Note that new terminals that you open will show the message:<br>
-<strong>The default interactive shell is now zsh</strong>.<br>
-<strong>To update your account to use zsh, please run ‘chsh -s /bin/zsh’.</strong></p>
-<p>Just ignore it.</p>
-<p>You should now be able to login to your instance in the cloud. If not, get in touch with the Cloud-SPAN team.</p>
-</section>
-<section id="configuring-the-terminal-back-to-use-zsh" class="level4">
-<h4 class="anchored" data-anchor-id="configuring-the-terminal-back-to-use-zsh"><strong>Configuring the terminal back to use Zsh</strong></h4>
-<p>Once you finish the course, if want revert your terminal to its previous configuration, enter or copy-paste the <code>chsh</code> command below into a terminal and enter your password when prompted, see the screenshot:</p>
-<div class="sourceCode" id="annotated-cell-2"><pre class="sourceCode bash code-annotation-code code-with-copy code-annotated"><code class="sourceCode bash"><a class="code-annotation-anchor" data-target-cell="annotated-cell-2" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-2-1" class="code-annotation-target"><a href="#annotated-cell-2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">%</span> chsh <span class="at">-s</span> /bin/zsh</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<dl class="code-annotation-container-grid">
-<dt data-target-cell="annotated-cell-2" data-target-annotation="1">1</dt>
-<dd>
-<span data-code-cell="annotated-cell-2" data-code-lines="1" data-code-annotation="1">Change the terminal shell to zsh.</span>
-</dd>
-</dl>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac05.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminal showing command to change to Zsh shell.</figcaption>
-</figure>
-</div>
-<p>Open a new terminal and check that <strong>zsh</strong> is displayed in the top bar of the terminal:</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="../../images/mac06.png" class="img-fluid figure-img" width="500"></p>
-<figcaption>Mac terminal showing “zsh” at the top bar.</figcaption>
-</figure>
-</div>
-</section>
 </div>
 </div>
 </div>
