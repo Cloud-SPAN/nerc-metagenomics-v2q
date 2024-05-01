@@ -408,24 +408,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="background-to-aws" class="level2">
 <h2 class="anchored" data-anchor-id="background-to-aws">Background to AWS</h2>
-<p>An Amazon Web Services (AWS) instance is a <strong>remote computer</strong> that runs on AWS infrastructure and that is accessible from any laptop or desktop as described below. For this course, an AWS instance will have been created for you by the Cloud-SPAN team.</p>
+<p>An Amazon Web Services (AWS) instance is a <strong>remote computer</strong> that runs on AWS infrastructure and that is accessible from any laptop or desktop as described below. For this course, an AWS instance has been created for you by the Cloud-SPAN team.</p>
+<p>Remote computers are also called cloud computers. They allow you to access computers with many more resources (memory, processors, disk space etc) than the average laptop or PC. This is useful when you want to run analyses that use lots of data and/or take a lot of computational power to run.</p>
 <p>To login into your AWS instance for this course, you’ll need:</p>
 <ul>
 <li>the name of your instance and a login key file, both of which you received via email</li>
 <li>the shell/terminal application — <strong>Windows users</strong> should have already installed the <em>Git Bash</em> shell; otherwise follow the <a href="../../docs/miscellanea/precourse-instructions.html">Precourse Instructions</a>.</li>
-<li>the <em>secure shell</em> (<code>ssh</code>) application, which is readily available in MacOS, Linux and Windows. <strong>Windows users</strong> will use ssh through Git Bash.</li>
+<li>the <em>secure shell</em> (<code>ssh</code>) application, which is readily available in MacOS and Linux. <strong>Windows users</strong> will use ssh through Git Bash.</li>
 </ul>
-<p>As the name implies, <code>ssh</code> provides you with a secure (encrypted) way to use a remote <em>shell</em>, as simple as this (<strong><em>you do not have to type this yet</em></strong>):</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Code</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span> ssh <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A few seconds after you enter that command to the shell in your computer, you will be logged into your AWS instance and start using a (Linux) shell running in your instance.</p>
 </section>
 <section id="open-a-terminal-and-change-the-access-permissions-of-your-login-key-file" class="level2">
 <h2 class="anchored" data-anchor-id="open-a-terminal-and-change-the-access-permissions-of-your-login-key-file">Open a Terminal and change the access permissions of your login key file</h2>
+<p>The first thing we need to do is change the access permissions of the login key file so it can be used safely.</p>
 <section id="open-the-cloudspan-folder-you-created-for-the-course" class="level5">
 <h5 class="anchored" data-anchor-id="open-the-cloudspan-folder-you-created-for-the-course"><strong>1. Open the <code>cloudspan</code> folder you created for the course</strong></h5>
 <p>Open your file manager and navigate to the <code>cloudspan</code> folder (hint: we recommended you make the folder in your <em>Desktop</em> directory - but you might have made it somewhere else). If you cannot find the folder, you can remind yourself where it is stored by looking at the absolute path you wrote down in the previous episode.</p>
@@ -434,44 +428,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="right-click-and-open-your-machines-command-line-interface" class="level5">
 <h5 class="anchored" data-anchor-id="right-click-and-open-your-machines-command-line-interface"><strong>2. Right-click and open your machine’s command line interface</strong></h5>
 <p>Now we can open the command line.</p>
-<p><strong>Windows users</strong>:</p>
 <ul>
-<li>Right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>.</li>
-</ul>
-<p><strong>Mac users</strong>, you have two options:</p>
-<p>EITHER</p>
+<li><p><strong>Windows users</strong>:</p>
 <ul>
-<li>Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space. Do not press enter! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</li>
-</ul>
-<p>OR</p>
+<li>Right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>. A new window will open - this is your command line interface, also known as the shell or the terminal. It will automatically open with your <code>cloudspan</code> directory as the working directory.</li>
+</ul></li>
+<li><p><strong>Mac users</strong>, you have two options:</p>
 <ul>
-<li>Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</li>
+<li><p>EITHER: Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space. Do not press enter! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</p></li>
+<li><p>OR: Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</p></li>
+</ul></li>
 </ul>
-<p>A new window will open - this is your command line interface, also known as the shell or the terminal. Once the terminal opens, it will display/output the <strong>command prompt</strong> to signal that it is ready to accept commands (instructions). The <strong>command prompt</strong> is 1 or 2 lines depending on your operating system (Windows, Linux, MacOS) and will be similar to the following.</p>
+<p>The terminal displays/outputs the <strong>command prompt</strong> to signal that it is ready to accept commands (instructions). The <strong>command prompt</strong> is 1 or 2 lines depending on your operating system (Windows, Linux, MacOS) and will be similar to the following.</p>
 <p>Typical command prompt for Windows Git Bash users:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Code</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">username@machineid</span> MINGW64 ~</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Obviously “username” and “machineid” in the prompt shown above will be different when you open a terminal and will correspond to the actual username and the name of the machine you are using.</p>
-<p>The character <code>$</code> is the typical ending of user prompts (the ending of admin users prompts is typically <code>#</code>). Commands you type will follow the <code>$</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">username@machineid</span> MINGW64 ~</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">$</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Typical command prompt for Linux users:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Code</strong></pre>
-</div>
-<div class="sourceCode" id="cb3" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">username@machineid:~</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">username@machineid:~</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Typical command prompt for MacOS users:</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>Code</strong></pre>
-</div>
-<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">machineid:~</span> username $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">machineid:~</span> username $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Obviously “username” and “machineid” in the prompt shown above will be different and will correspond to the actual username and the name of the machine you are using.</p>
+<p>The character <code>$</code> is the typical ending of user prompts (the ending of admin users prompts is typically <code>#</code>). Commands you type will follow the <code>$</code>.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -482,7 +459,7 @@ IMPORTANT
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>In the rest of this course we will NOT show the prompt in the <strong>Code</strong> boxes showing commands that you need to type into your terminal, but only those commands so that it is easier for you to copy “long” commands without having to get rid of the prompt. You can <strong>copy</strong> the commands in a Code box by clicking on the green icon on the right of the Code box.</p>
+<p>In this course we will NOT show the prompt in the <strong>Code</strong> boxes so that it is easier for you to copy long commands. You can <strong>copy</strong> the commands in a Code box by clicking on the green icon on the right of the Code box.</p>
 </div>
 </div>
 </section>
@@ -499,29 +476,39 @@ IMPORTANT
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 400 login-key-instanceNNN.pem&nbsp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 400 login-key-instanceNNN.pem&nbsp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The command <code>chmod</code> (change access mode) makes your login key file accessible to you only (and non-accessible to any other potential users of your computer), a condition that is required and checked by the program <code>ssh</code> that you will use next to login to your AWS instance. You will learn about file access permissions later in the course.</p>
+<p>The command <code>chmod</code> (change access mode) makes your login key file accessible to you only (and non-accessible to any other potential users of your computer), a condition that is required and checked by the program <code>ssh</code> that you will use next to log in to your AWS instance. You will learn about file access permissions later in the course.</p>
 </section>
 </section>
 <section id="login-into-your-instance-with-ssh" class="level2">
 <h2 class="anchored" data-anchor-id="login-into-your-instance-with-ssh">Login into your instance with ssh</h2>
+<p>Now it’s time to log in to the Cloud! You do this with a secure shell protocol or <code>ssh</code>. As the name implies, <code>ssh</code> provides you with a secure (encrypted) way to use a remote <em>shell</em>.</p>
+<p>A few seconds after you enter that command to the shell in your computer, you will be logged into your AWS instance and start using a (Linux) shell running in your instance.</p>
 <section id="copy-and-paste-the-command-in-the-code-box-below-to-your-terminal-but-replace-nnn-with-the-number-in-your-login-key-file-name." class="level5">
 <h5 class="anchored" data-anchor-id="copy-and-paste-the-command-in-the-code-box-below-to-your-terminal-but-replace-nnn-with-the-number-in-your-login-key-file-name."><strong>1. Copy and paste the command in the Code box below to your <em>terminal</em>, but <em>replace</em> <code>NNN</code> with the number in your login key file name.</strong></h5>
-<p>Windows Git Bash users only:</p>
-<ul>
-<li><strong>copy</strong> the command the usual Windows way: (1) highlight it with the mouse pointer while pressing the mouse left button and (2) press Ctrl-c (keys Ctrl and c simultaneously).</li>
-<li>but <strong>paste</strong> it the Linux/Unix way: by pressing the mouse middle button while hovering the mouse pointer over the Git Bash window. (Try with the right button if the middle button doesn’t work.) Alternatively, right click and select <code>paste</code>.</li>
-</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Pasting in the shell
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can copy the command from the course materials by clicking the clipboard at the right of the code box.</p>
+<p>However, you cannot paste in the shell using <kbd>Ctrl</kbd> + <kbd>V</kbd> like you can usually. Instead you have two options: - right click and select <code>paste</code> - hover the mouse pointer over the terminal window and press the mouse middle button</p>
+</div>
+</div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb6" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><em>Be sure to replace</em> <code>NNN</code> <em>twice.</em> You can use the left and right arrow keys to move to where NNN is.</p>
-<p>The <code>-i</code> option tells <code>ssh</code> the identity file containing the key to send to your AWS instance for it to check that you have access permissions to connect as an <em>ssh client</em>.</p>
-<p><strong>NB</strong>: <code>ssh</code> looks for the identity file in the directory where you are, Desktop/cloudspan (that you moved to with the command <code>cd</code> above), which is the same directory wherein you downloaded your login key file.</p>
+<p><em>Be sure to replace</em> <code>NNN</code> <em>twice with your unique instance number (the one in your key).</em> You can use the left and right arrow keys to move to where NNN is.</p>
+<p>The <code>-i</code> option tells <code>ssh</code> where to find the key which proves you have permission to connect to the instance.</p>
 </section>
 <section id="the-terminal-will-display-a-security-message-after-you-enter-the-ssh-command-similar-to-the-message-below" class="level5">
 <h5 class="anchored" data-anchor-id="the-terminal-will-display-a-security-message-after-you-enter-the-ssh-command-similar-to-the-message-below"><strong>2. The terminal will display a security message, after you enter the <code>ssh</code> command, <em>similar</em> to the message below:</strong></h5>
@@ -529,19 +516,70 @@ IMPORTANT
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb7" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The authenticity of host instanceNNN-cloud-span.aws.york.ac.uk (52.211.132.120) can't be</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>established. ECDSA key fingerprint is SHA256:8N054prkkCeM4GCDSsa0AUnSQw5ngBQHbOR40FqfqLg.</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>Are you sure you want to continue connecting (yes/no/[fingerprint])?&nbsp;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>The authenticity of host instanceNNN-cloud-span.aws.york.ac.uk (52.211.132.120) can't be</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>established. ECDSA key fingerprint is SHA256:8N054prkkCeM4GCDSsa0AUnSQw5ngBQHbOR40FqfqLg.</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>Are you sure you want to continue connecting (yes/no/[fingerprint])?</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Type <strong>yes</strong> to continue and get connected to your AWS instance.</p>
-<p>The terminal will display a few messages and at the end the <strong>prompt</strong> of the <strong>shell running</strong> on your Linux AWS instance which will look like this:</p>
+<p>After logging in, you will see a screen showing something like this:</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Output</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-84-generic x86_64)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a> * Documentation:  https://help.ubuntu.com</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> * Management:     https://landscape.canonical.com</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> * Support:        https://ubuntu.com/advantage</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  System information as of Thu 21 Oct 2021 10:47:55 AM UTC</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  System load:  1.68               Processes:             189</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  Usage of /:   24.0% of 98.30GB   Users logged in:       0</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  Memory usage: 25%                IPv4 address for eth0: 10.0.32.254</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  Swap usage:   0%</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  Get cloud support with Ubuntu Advantage Cloud Guest:</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    http://www.ubuntu.com/business/services/cloud</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>73 updates can be applied immediately.</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>32 of these updates are standard security updates.</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>To see these additional updates run: apt list --upgradable</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>applicable law.</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>    _____________________________</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    W E L C O M E    T O    T H E</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>     ____ _                 _         ______ _____   _    __   _</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    / ___| | ___  _   _  __| |       / ____ |  _  \ / \  |  \ | |</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>   | |   | |/ _ \| | | |/ _` |  ___  \___  \| |_) '/ _ \ | \ \| |</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>   | |___| | (_) | |_| | (_| | |___| ____)  |  __ / ___ \| |\ | |</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>    \____|_|\___/ \___/ \__,_|       \_____/|_|  /_/   \_|_| \__|</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>    F O U N D A T I O N     C O U R S E     E N V I R O N M E N T</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>    _____________________________________________________________</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a>    Scroll up with the mouse for information before this welcome</span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>    Type "csguide" (and the Enter (↵) key) for some guidance</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>    _____________________________________________________________</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>Last login: Thu Oct 14 11:13:28 2021 from xxxxxxx</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Your prompt will now look like this:</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">csuser@instanceNNN:~</span> $</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Note that you did not need to give a password to login to your instance — you are using your login-key file for authentication.</p>
+<p>Note that you did not need to give a password to log in to your instance – you are using your login key file for authentication.</p>
 </section>
 </section>
 <section id="logging-off-your-cloud-instance" class="level2">
 <h2 class="anchored" data-anchor-id="logging-off-your-cloud-instance">Logging off your cloud instance</h2>
-<p>Logging off your instance is a lot like logging out of your local computer but it doesn’t shut the computer off. <strong>Be aware that AWS instances accrue charges whenever they are running, even if you are logged off</strong>. Today, however, you do not need to worry about this!</p>
+<p>When you are finished using the cloud instance and want to return to your local terminal, you can log off. <strong>Be aware that AWS instances accrue charges whenever they are running, even if you are logged off</strong>. Today, however, you do not need to worry about this!</p>
 <p>To log off, use the <code>exit</code> command in the same terminal you connected with. This will close the connection, and your terminal will go back to showing your local computer prompt, for example:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -565,7 +603,7 @@ IMPORTANT
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
