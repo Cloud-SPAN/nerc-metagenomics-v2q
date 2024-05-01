@@ -118,10 +118,7 @@ website:
         contents: 
           - docs/miscellanea/extras/data.qmd
           - docs/miscellanea/extras/glossary.qmd
-          - docs/miscellanea/extras/workflow03.qmd
-          - docs/miscellanea/extras/workflow04.qmd
-          - docs/miscellanea/extras/workflow05.qmd
-          - docs/miscellanea/extras/workflow06.qmd          
+          - docs/miscellanea/extras/workflow.qmd
 
 format:
   html:
