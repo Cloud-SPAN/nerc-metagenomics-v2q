@@ -24,16 +24,14 @@ keypoints:
 
 ## What is a shell and why should I care?
 
-A *shell* is a computer program that has a command line where you type commands to do 
-things on your computer rather than using menus and buttons on a Graphical User Interface (GUI).
+A *shell* is a computer program that has a command line where you type commands to do things on your computer rather than using menus and buttons on a Graphical User Interface (GUI).
 
 There are many reasons to learn how to use the shell/command line:
 
-* **Software access** - many bioinformatics tools can only be used through a command line interface, or have extra capabilities in the command line version that are not available in the GUI (this is true of most of the software used in this course).
-* **Cloud access** - bioinformatics tasks which require large amounts of computing power (like the ones we'll do later in this course!) are best performed on remote computers or cloud computing platforms, which are accessed via a shell.
-* **Automation** - repetitive tasks (e.g. doing the same set of tasks on a large number of files) can be easily automated in the shell, saving you time and preventing human error.
-* **Reproducibility** - when using the shell your computer keeps a record of every step that you've carried out, which you can use
-to re-do your work when you need to.
+-   **Software access** - many bioinformatics tools can only be used through a command line interface, or have extra capabilities in the command line version that are not available in the GUI (this is true of most of the software used in this course).
+-   **Cloud access** - bioinformatics tasks which require large amounts of computing power (like the ones we'll do later in this course!) are best performed on remote computers or cloud computing platforms, which are accessed via a shell.
+-   **Automation** - repetitive tasks (e.g. doing the same set of tasks on a large number of files) can be easily automated in the shell, saving you time and preventing human error.
+-   **Reproducibility** - when using the shell your computer keeps a record of every step that you've carried out, which you can use to re-do your work when you need to.
 
 In this lesson you will learn how to use the command line interface to move around in your file system.
 
@@ -41,67 +39,12 @@ In this lesson you will learn how to use the command line interface to move arou
 
 We have already accessed the shell in the previous episode, when we logged onto the Cloud instance.
 
-We will spend most of our time learning about the basics of the shell
-by manipulating some experimental data. Some of the data we're going to be working with is quite large, and
-we're also going to be using several bioinformatic packages in later
-lessons to work with this data. To avoid having to spend time
-downloading the data and downloading and installing all of the software,
-we're going to continue using our Cloud instance.
+We will spend most of our time learning about the basics of the shell by manipulating some experimental data. Some of the data we're going to be working with is quite large, and we're also going to be using several bioinformatic packages in later lessons to work with this data. To avoid having to spend time downloading the data and downloading and installing all of the software, we're going to continue using our Cloud instance.
 
-As a reminder, we log in by launching Git Bash or Terminal from the `cloudspan` folder we made in today's first episode, and then using our `ssh` command.
+As a reminder, we log in by launching Git Bash or Terminal from the `cloudspan` folder we made in today's first episode, and then using the `ssh` command.
 
-```bash {filename="Code"}
-ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
-```
-
-After logging in, you will see a screen showing something like this:
-
-```default {filename="Output"}
-Welcome to Ubuntu 20.04.3 LTS (GNU/Linux 5.4.0-84-generic x86_64)
-
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-  System information as of Thu 21 Oct 2021 10:47:55 AM UTC
-
-  System load:  1.68               Processes:             189
-  Usage of /:   24.0% of 98.30GB   Users logged in:       0
-  Memory usage: 25%                IPv4 address for eth0: 10.0.32.254
-  Swap usage:   0%
-
-  Get cloud support with Ubuntu Advantage Cloud Guest:
-    http://www.ubuntu.com/business/services/cloud
-
-73 updates can be applied immediately.
-32 of these updates are standard security updates.
-To see these additional updates run: apt list --upgradable
-
-Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
-applicable law.
-    _____________________________
-
-    W E L C O M E    T O    T H E
-
-
-     ____ _                 _         ______ _____   _    __   _
-    / ___| | ___  _   _  __| |       / ____ |  _  \ / \  |  \ | |
-   | |   | |/ _ \| | | |/ _` |  ___  \___  \| |_) '/ _ \ | \ \| |
-   | |___| | (_) | |_| | (_| | |___| ____)  |  __ / ___ \| |\ | |
-    \____|_|\___/ \___/ \__,_|       \_____/|_|  /_/   \_|_| \__|
-
-
-
-    F O U N D A T I O N     C O U R S E     E N V I R O N M E N T
-
-    _____________________________________________________________
-
-    Scroll up with the mouse for information before this welcome
-
-    Type "csguide" (and the Enter (↵) key) for some guidance
-    _____________________________________________________________
-
-Last login: Thu Oct 14 11:13:28 2021 from xxxxxxx
+``` {.bash filename="Code"}
+ssh -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk
 ```
 
 ## Navigating your file system
@@ -110,123 +53,100 @@ Now we have logged into our Cloud instance, we have access to a new file directo
 
 Several commands are frequently used to create, inspect, rename, and delete files and directories.
 
-```default
-$
-```
+Let's find out where we are by running a command called `pwd`(which stands for "print working directory"). At any moment, our **current working directory** is our current default directory, i.e., the directory that the computer assumes we want to run commands in,unless we explicitly specify something else. Here, the computer's response is `/home/csuser`:
 
-The dollar sign is a **prompt**, which shows us that the shell is waiting for input;
-your shell may use a different character as a prompt and may add information before
-the prompt. When typing commands, either from these lessons or from other sources,
-do not type the prompt, only the commands that follow it.
-
-Let's find out where we are by running a command called `pwd`(which stands for "print working directory").
-At any moment, our **current working directory** is our current default directory, i.e., the directory that the computer assumes we want to run commands in,unless we explicitly specify something else.
-Here, the computer's response is `/home/csuser`:
-
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 pwd
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 /home/csuser
 ```
 
 This `csuser` directory is our **home directory** within our cloud system.
 
-Let's look at how our file system is organised. We can see what files and subdirectories are in this directory by running `ls`,
-which stands for "listing":
+Let's look at how our file system is organised. We can see what files and subdirectories are in this directory by running `ls`, which stands for "listing":
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 bin  cs_course  software
 ```
 
-`ls` prints the names of the files and directories in the current directory in
-alphabetical order, arranged neatly into columns.
-We'll be working within the `cs_course` subdirectory, and creating new subdirectories, throughout this workshop.  
+`ls` prints the names of the files and directories in the current directory in alphabetical order, arranged neatly into columns. We'll be working within the `cs_course` subdirectory, and creating new subdirectories, throughout this workshop.
 
-The command to change locations in our file system is `cd`, followed by a directory name to change our working directory.
-`cd` stands for "change directory".
+The command to change locations in our file system is `cd`, followed by a directory name to change our working directory. `cd` stands for "change directory".
 
-Let's say we want to navigate to the `cs_course` directory we saw above.  We can use the following command to get there:
+Let's say we want to navigate to the `cs_course` directory we saw above. We can use the following command to get there:
 
-```bash {filename="Code"}
-cs_course
+``` {.bash filename="Code"}
+cd cs_course
 ```
 
 Let's look at what is in this directory:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 data   databases
 ```
 
-We can make the `ls` output easier to understand by using the **flag** `-F`,
-which tells `ls` to add a trailing `/` to the names of directories:
+We can make the `ls` output easier to understand by using the **flag** `-F`, which tells `ls` to add a trailing `/` to the names of directories:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls -F
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 data/   databases/
 ```
 
-Anything with a `/` after it is a directory. Things with a `*` after them are programs. If
-there are no decorations, it's a file.
+Anything with a `/` after it is a directory. Things with a `*` after them are programs. If there are no decorations, it's a file.
 
 `ls` has lots of other options. To find out what they are, we can type:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 man ls
 ```
 
-`man` (short for manual) displays detailed documentation (also referred as man page or man file)
-for `bash` commands. It is a powerful resource to explore `bash` commands, understand
-their usage and flags. Some manual files are very long. You can scroll through the
-file using your keyboard's down arrow or use the <kbd>Space</kbdkey to go forward one page
-and the <kbd>b</kbdkey to go backwards one page. When you are done reading, hit <kbd>q</kbd>
-to quit.
+`man` (short for manual) displays detailed documentation (also referred as man page or man file) for `bash` commands. It is a powerful resource to explore `bash` commands, understand their usage and flags. Some manual files are very long. You can scroll through the file using your keyboard's down arrow or use the <kbd>Space</kbd> key to go forward one page and the <kbd>b</kbd> key to go backwards one page. When you are done reading, hit <kbd>q</kbd> to quit.
 
-::: {.callout-note}
-##  Challenge
-Use the `-l` option for the `ls` command to display more information for each item
-in the directory. What is one piece of additional information this long format
-gives you that you don't see with the bare `ls` command?
+::: callout-note
+## Challenge
 
-Share your answer on the forum.
+Use the `-l` option for the `ls` command to display more information for each item in the directory. What is one piece of additional information this long format gives you that you don't see with the bare `ls` command?
 
 ::: {.callout-caution collapse="true"}
 ## Solution
-```bash {filename="Code"}
+
+``` {.bash filename="Code"}
 ls -l
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 total 12
 drwxrwxr-x 4 csuser csuser 4096 Oct 22 09:04 data
 drwxrwxr-x 3 csuser csuser 4096 Oct  6 13:08 databases
 ```
-The additional information given includes the name of the owner of the file,
-when the file was last modified, and whether the current user has permission
-to read and write to the file.
+
+The additional information given includes the name of the owner of the file, when the file was last modified, and whether the current user has permission to read and write to the file.
 :::
 :::
 
-No one can possibly learn all of these arguments - that's what the manual page is for! It does take practice to get used to using and understanding the information in the manual. 
-Often, you don't need to understand completely what it is saying to be able to guess what to try.
+No one can possibly learn all of these arguments - that's what the manual page is for! It does take practice to get used to using and understanding the information in the manual. Often, you don't need to understand completely what it is saying to be able to guess what to try.
 
 Let's go into the `data` directory and see what is in there using the `cd` and `ls` commands.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd data
 ls -F
 ```
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 illumina_fastq/   nano_fastq/
 ```
 
@@ -234,25 +154,25 @@ This directory contains two subdirectories. We can tell they are directories and
 
 For now, let's have a look in `illumina_fastq`. We can do this without changing directories using the `ls` command followed by the name of the directory.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls illumina_fastq
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 ERR4998593_1.fastq  ERR4998593_2.fastq
 ```
 
-This directory contains two files with `.fastq` extensions. FASTQ is a format for storing information about sequencing reads and their quality.
-We will be learning more about FASTQ files in a later lesson.
+This directory contains two files with `.fastq` extensions. FASTQ is a format for storing information about sequencing reads and their quality. We will be learning more about FASTQ files in a later lesson.
 
-Let's also have a look in the  `nano_fastq` directory.
+Let's also have a look in the `nano_fastq` directory.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls nano_fastq
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 ERR5000342_sub12.fastq
 ```
-
 
 Learning to navigate a new file directory can be confusing at first. To help, here is a tree diagram showing what we have explored so far.
 
@@ -260,72 +180,69 @@ Learning to navigate a new file directory can be confusing at first. To help, he
 
 ![A file hierarchy tree.](/images/blank_instance_file_tree.png){width="350px" fig-alt="A file hierarchy tree."}
 
-First we moved from our home directory at `csuser` into the `cs_course` directory, which is one level down. From there we opened up the `data` directory, which contains subdirectories -  `illumina_fastq` and `nano_fastq`. We had a peek inside both of these directories and found that `illumina_fastq` contained two files, while `nano_fastq` contained one.
+First we moved from our home directory at `csuser` into the `cs_course` directory, which is one level down. From there we opened up the `data` directory, which contains subdirectories - `illumina_fastq` and `nano_fastq`. We had a peek inside both of these directories and found that `illumina_fastq` contained two files, while `nano_fastq` contained one.
 
 ### Shortcut: Tab Completion
 
-It is very easy to make mistakes typing our filenames and commands. Thankfully, "tab completion"
-can help us! When you start typing out the name of a directory or file, then
-hit the <kbd>Tab</kbdkey, the shell will try to fill in the rest of the
-directory or file name.
+It is very easy to make mistakes typing our filenames and commands. Thankfully, "tab completion" can help us! When you start typing out the name of a directory or file, then hit the <kbd>tab</kbd> key, the shell will try to fill in the rest of the directory or file name.
 
 First of all, typing `cd` after the prompt and pressing enter will always take you back to your home directory.Let's do this:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd
 ```
 
 then enter:
 
-```bash {filename="Code"}
-cd cs<tab>
+``` {.bash filename="Code"}
+cd cs
 ```
+
+and press <kbd>tab</kbd>.
 
 The shell will fill in the rest of the directory name for `cs_course`. Press enter to execute the command and move directories.
 
 Now change directories again to `data`.
 
-```bash {filename="Code"}
-cd cs_course
+``` {.bash filename="Code"}
 cd data
 ```
 
 And again into `illumina_fastq`.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd illumina_fastq
 ```
 
-Using tab complete can be very helpful. However, it will only autocomplete a file or directory name if you've typed enough characters to provide
-a unique identifier for the file or directory you are trying to access.
+Using tab complete can be very helpful. However, it will only autocomplete a file or directory name if you've typed enough characters to provide a unique identifier for the file or directory you are trying to access.
 
-For example, if we now try to list the files in  `illumina_fastq` with names starting with `ERR`
-by using tab complete:  
+For example, if we now try to list the files in `illumina_fastq` with names starting with `ERR` by using tab complete:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 ls ERR<tab>
 ```
 
-The shell auto-completes your command to `ERR4998593_`, because all file names in the directory begin with this prefix. When you hit <kbd>Tab</kbdagain, the shell will list the possible choices.
+The shell auto-completes your command to `ERR4998593_`, because all file names in the directory begin with this prefix. When you hit <kbd>tab</kbd>again, the shell will list the possible choices.
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 ERR4998593_1.fastq  ERR4998593_2.fastq
 ```
 
-Tab completion can also fill in the names of programs, which can be useful if you
-remember the beginning of a program name.
+Tab completion can also fill in the names of programs, which can be useful if you remember the beginning of a program name.
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 pw<tab><tab>
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 pwck      pwconv    pwd       pwdx      pwunconv
 ```
 
 Displays the name of every program that starts with `pw`.
 
-::: {.callout-tip}
+::: callout-tip
 ## Tip
+
 You might find it useful to keep a note of the commands you learn in this course, so you can easily remember them in future. This will be faster than scrolling through the course each time you forget a command. While using your Cloud-SPAN AWS instance you can also type `csguide` into the command prompt and hit enter for a text-based guide to the command line, including frequently used commands.
 :::
 
@@ -335,47 +252,46 @@ Now we're going to learn some additional commands for moving around within our f
 
 Use the commands we've learned so far to navigate to the `illumina_fastq` directory from our home:
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd
 cd cs_course
 cd data
 cd illumina_fastq
 ```
 
-What if we want to move back up and out of this directory and to our top level
-directory? Can we type `cd data`? Try it and see what happens.
+What if we want to move back up and out of this directory and to our top level directory? Can we type `cd data`? Try it and see what happens.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd data
 ```
-```default  {filename="Output"}
+
+``` {.default filename="Output"}
 -bash: cd: shell_data: No such file or directory
 ```
 
-Your computer looked for a directory or file called `data` within the
-directory you were already in. It didn't know you wanted to look at a directory level
-above the one you were located in.
+Your computer looked for a directory or file called `data` within the directory you were already in. It didn't know you wanted to look at a directory level above the one you were located in.
 
 We have a special command to tell the computer to move us back or up one directory level.
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 cd ..
 ```
 
-Now we can use `pwd` to make sure that we are in the directory we intended to navigate
-to, and `ls` to check that the contents of the directory are correct.
+Now we can use `pwd` to make sure that we are in the directory we intended to navigate to, and `ls` to check that the contents of the directory are correct.
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 pwd
 ```
-```default   {filename="Output"}
+
+``` {.default filename="Output"}
 /home/csuser/cs_course/data
 ```
 
-```bash   {filename="Code"}
+``` {.bash filename="Code"}
 ls
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 illumina_fastq  nano_fastq
 ```
 
@@ -383,21 +299,20 @@ From this output, we can see that `..` did indeed take us back one level in our 
 
 You can chain these together like so:
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 ls ../../
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 bin  cs_course  software 
 ```
 
-
 This prints the contents of the folder called `csuser` (our home folder).
 
-::: {.callout-note}
+::: callout-note
 ## Finding hidden directories
-There is a hidden directory inside the `cs_course` directory.
-Explore the options for `ls` in the man page to find out how to see hidden directories. 
-List the contents of the directory and identify the name of the text file in the hidden directory.
+
+There is a hidden directory inside the `cs_course` directory. Explore the options for `ls` in the man page to find out how to see hidden directories. List the contents of the directory and identify the name of the text file in the hidden directory.
 
 Hint 1: hidden files and folders in Unix start with `.`, for example `.my_hidden_directory`
 
@@ -407,36 +322,37 @@ Hint 2: `cs_course` is one level above `data`, our current working directory.
 ## Solution
 
 First use the `man` command to look at the options for `ls`.
-```bash  {filename="Code"}
+
+``` {.bash filename="Code"}
 man ls
 ```
 
-The `-a` option is short for `all` and says that it causes `ls` to "not ignore
-entries starting with ." This is the option we want.
+The `-a` option is short for `all` and says that it causes `ls` to "not ignore entries starting with ." This is the option we want.
 
 We can use `..` to view the contents of the directory above our current working directory.
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 ls -a ..
 ```
-```default {filename="Output"}
-.  ..	data   databases   .hidden
-```
 
+``` {.default filename="Output"}
+.  ..   data   databases   .hidden
+```
 
 The name of the hidden directory is `.hidden`. We can navigate to that directory using `cd`.
 
-```bash {filename="Code"}
+``` {.bash filename="Code"}
 cd ..
 cd .hidden
 ```
 
 And then list the contents of the directory using `ls`.
 
-```bash  {filename="Code"}
+``` {.bash filename="Code"}
 ls
 ```
-```default {filename="Output"}
+
+``` {.default filename="Output"}
 youfoundit.txt
 ```
 
@@ -446,31 +362,26 @@ The name of the text file is `youfoundit.txt`.
 
 In most commands the flags can be combined together in no particular order to obtain the desired results/output.
 
-```bash   {filename="Code"}
+``` {.bash filename="Code"}
 ls -Fa
 ls -laF
 ```
 
 ## Summary
 
-We now know how to move around our file system using the command line.
-This gives us an advantage over interacting with the file system through
-a GUI as it allows us to work on a remote server, carry out the same set of operations
-on a large number of files quickly, and opens up many opportunities for using
-bioinformatic software that is only available in command line versions.
+We now know how to move around our file system using the command line. This gives us an advantage over interacting with the file system through a GUI as it allows us to work on a remote server, carry out the same set of operations on a large number of files quickly, and opens up many opportunities for using bioinformatic software that is only available in command line versions.
 
-In the next few episodes, we'll be expanding on these skills and seeing how
-using the command line shell enables us to make our workflow more efficient and reproducible.
+In the next few episodes, we'll be expanding on these skills and seeing how using the command line shell enables us to make our workflow more efficient and reproducible.
 
 For now, log off using the `exit` command: This will close the connection, and your terminal will go back to showing your local computer prompt, for example:
 
-```bash   {filename="Code"}
+``` {.bash filename="Code"}
 exit
 ```
 
 This will close the connection, and your terminal will go back to showing your local computer prompt, for example:
 
-```default {filename="Output"}
+``` {.default filename="Output"}
 logout
 Connection to instanceNNN.cloud-span.aws.york.ac.uk closed.
 username@machineid $
