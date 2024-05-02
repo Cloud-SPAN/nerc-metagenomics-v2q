@@ -63,6 +63,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../docs/lesson03-qc-assembly/03-assembly.html" rel="next">
+<link href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" rel="prev">
 <link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -150,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Assessing Read Quality, Trimming and Filtering</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/02-QC-quality-raw-reads.html">Assessing Read Quality, Trimming and Filtering</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -224,20 +226,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div class="sidebar-item-container"> 
             <a href="../../docs/lesson03-qc-assembly/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">QC &amp; Assembly</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/00-introduction-meta.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Metagenomics</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/01-QC-quality-raw-reads.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/02-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/02-assembly.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/03-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metagenome Assembly</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -377,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/index.html">QC &amp; Assembly</a></li><li class="breadcrumb-item"><a href="../../docs/lesson03-qc-assembly/02-QC-quality-raw-reads.html">Assessing Read Quality, Trimming and Filtering</a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title">Assessing Read Quality, Trimming and Filtering</h1>
 </div>
@@ -1078,7 +1089,6 @@ Output — NanoPlot Help Documentation
 <!-- :::{.column-body-outset} JUST LITTLE OUT BODY-->
 <!-- :::{.column-page} THE WHOLE PAGE WIDTH-->
 <!-- :::{.column-screen} THE WHOLE SCREEN WIDTH -->
-<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
@@ -1094,7 +1104,6 @@ Output — NanoPlot Help Documentation
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>NanoPlot_202303307_1630.log                       Yield_By_Length.png</span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>NanoPlot-report.html</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::</p>
 <p>We can see that NanoPlot has generated a lot of different files.</p>
 <p>Like before, we can’t view most of these files in our terminal as we can’t open images or HTML files. Instead we’ll download the core information to our own computer. Luckily, the <code>NanoPlot-report.html</code> file contains all of the plots and information held in the other files so we only need to download that one onto our local computer using <code>scp</code>.</p>
 <p>Use a terminal that is <strong><em>not</em></strong> logged into the cloud instance and ensure you are in your <code>cloudspan</code> directory. You may have one from earlier. If you do not, unveil the instructions below to start one.</p>
@@ -1120,16 +1129,13 @@ Starting a new terminal
 </div>
 </div>
 <p>Use <code>scp</code> to copy the file - the command will look something like:</p>
-<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
 <div class="sourceCode" id="cb26" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::</p>
 <p>Remember to replace NNN with the instance number specific to you. As the file is downloading you will see an output like:</p>
-<p>:::</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
@@ -1137,7 +1143,6 @@ Starting a new terminal
 <div class="sourceCode" id="cb27" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>NanoPlot-report.html                                  100% 3281KB   2.3MB/s   00:01</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>:::</p>
 <p>Once the file has downloaded, use the File Explorer (Windows) or Finder (Mac) to find the file and open it - it should open up in your browser.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -1790,6 +1795,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" class="pagination-link" aria-label="Introduction to Metagenomics">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction to Metagenomics</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../docs/lesson03-qc-assembly/03-assembly.html" class="pagination-link" aria-label="Metagenome Assembly">
+        <span class="nav-page-text">Metagenome Assembly</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

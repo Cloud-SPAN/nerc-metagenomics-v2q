@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../docs/lesson04-polishing/index.html" rel="next">
+<link href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" rel="next">
 <link href="../../docs/lesson02-using-the-command-line/03-redirection.html" rel="prev">
 <link href="../../images/cloud-span-icon.png" rel="icon" type="image/png">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -198,14 +198,23 @@ ul.task-list li input[type="checkbox"] {
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/00-introduction-meta.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Introduction to Metagenomics</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/01-QC-quality-raw-reads.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/02-QC-quality-raw-reads.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assessing Read Quality, Trimming and Filtering</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
- <span class="menu-text">docs/lesson03-qc-assembly/02-assembly.qmd</span>
-  </li>
+  <div class="sidebar-item-container"> 
+  <a href="../../docs/lesson03-qc-assembly/03-assembly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Metagenome Assembly</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -348,14 +357,16 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<!-- ---
-layout: lesson
-root: .
---- -->
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../../images/03_short_analysis_flowchart_short_asm.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Analysis flow diagram that shows the steps:  Sequence reads, Quality control and assembly." width="450"></p>
+</figure>
+</div>
 <p>A metagenome is a collection of genomic sequences from various (micro) organisms coexisting in a sample. They are snapshots that tell us about the taxonomic, metabolic or functional composition of the communities that we study.</p>
 <p>In this lesson we will discuss how to define metagenomics and consider the challenges that this type of analysis can present. We will also discuss a workflow for metagenomics analysis.</p>
 <p>We will then log into our cloud instance and take a look at some data. Then, we’ll go through the first two steps in our workflow: quality control and metagenome assembly.</p>
-<p>By the end of this lesson you will be able to:</p>
+<section id="by-the-end-of-this-lesson-you-will-be-able-to" class="level4">
+<h4 class="anchored" data-anchor-id="by-the-end-of-this-lesson-you-will-be-able-to">By the end of this lesson you will be able to:</h4>
 <ul>
 <li>explain what metagenomics is, and the challenges it presents</li>
 <li>interpret a FastQC plot summarizing per-base quality across all reads.</li>
@@ -379,6 +390,7 @@ IMPORTANT
 </div>
 
 
+</section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -797,8 +809,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../docs/lesson04-polishing/index.html" class="pagination-link" aria-label="Polishing">
-        <span class="nav-page-text">Polishing</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../docs/lesson03-qc-assembly/01-introduction-meta.html" class="pagination-link" aria-label="Introduction to Metagenomics">
+        <span class="nav-page-text">Introduction to Metagenomics</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
