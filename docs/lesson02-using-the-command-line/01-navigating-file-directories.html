@@ -414,18 +414,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="right-click-and-open-your-machines-command-line-interface" class="level5">
 <h5 class="anchored" data-anchor-id="right-click-and-open-your-machines-command-line-interface"><strong>2. Right-click and open your machine’s command line interface</strong></h5>
 <p>Now we can open the command line.</p>
-<p><strong>Windows users</strong>:</p>
 <ul>
-<li>right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>.</li>
-</ul>
-<p><strong>Mac users</strong> you have two options:</p>
-<p>EITHER:</p>
+<li><p><strong>Windows users</strong>:</p>
 <ul>
-<li>Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space but <strong>don’t press</strong> <code>Enter</code> yet! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</li>
-</ul>
-<p>OR</p>
+<li>Right click anywhere inside the blank space of the file manager, then select <strong>Git Bash Here</strong>. A new window will open - this is your command line interface, also known as the shell or the terminal. It will automatically open with your <code>cloudspan</code> directory as the working directory.</li>
+</ul></li>
+<li><p><strong>Mac users</strong>, you have two options:</p>
 <ul>
-<li>Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</li>
+<li><p>EITHER: Open <strong>Terminal</strong> in one window and type <code>cd</code> followed by a space. Do not press enter! Now open <strong>Finder</strong> in another window. Drag and drop the <code>cloudspan</code> folder from the Finder to the Terminal. You should see the file path leading to your <code>cloudspan</code> folder appear. Now press enter to navigate to the folder.</p></li>
+<li><p>OR: Open <strong>Terminal</strong> and type <code>cd</code> followed by the absolute path that leads to your <code>cloudspan</code> folder. Press enter.</p></li>
+</ul></li>
 </ul>
 </section>
 <section id="login-into-your-instance" class="level5">
@@ -434,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem&nbsp; csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh</span> <span class="at">-i</span> login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Be sure to replace NNN with your own number, twice.</em></p>
 </section>
@@ -445,7 +443,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- ![A file hierarchy tree](../fig/blank_instance_file_tree_with_hidden.png){:width="400px"} -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" alt="A file hierarchy tree." width="350"></p>
+<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" alt="A file hierarchy tree." width="400"></p>
 <figcaption>A file hierarchy tree.</figcaption>
 </figure>
 </div>
@@ -566,7 +564,7 @@ Solution
 </div>
 <div class="sourceCode" id="cb12" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> cs_course/.hidden</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>These two commands have the same effect, they both take us to the <code>.hidden</code> directory. The first uses the absolute path, giving the full address from the root directory <code>/</code>. The second uses a relative path, giving only the address from the working directory. A absolute (full) path always starts with a <code>/</code>. A relative path does not.</p>
+<p>These two commands have the same effect - they both take us to the <code>.hidden</code> directory. The first uses the absolute path, giving the full address from the root directory <code>/</code>. The second uses a relative path, giving only the address from the working directory. A absolute (full) path always starts with a <code>/</code>. A relative path does not.</p>
 <p>You can usually use either a full path or a relative path depending on what is most convenient. If you want to reach a directory further down the same branch as your current working directory, it’s easiest to use the relative path since it involves less typing. If you’re trying to get to a directory in a different branch, it might be more convenient to use the full path instead of navigating “backwards” and then forwards.</p>
 <p>Over time, it will become easier for you to keep a mental note of the structure of the directories that you are using and how to quickly navigate amongst them. We will be using the same directory structure for this whole course so navigating it should get easier as you progress.</p>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -579,12 +577,12 @@ Relative path resolution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Using the file system diagram below, if <code>pwd</code> displays <code>~/csuser/cs_course/data/illumina_fastq</code>, what will <code>ls ../nano_fastq</code> display?</p>
+<p>Using the file system diagram below, if <code>pwd</code> displays <code>/home/csuser/cs_course/data/illumina_fastq</code>, what will <code>ls ../nano_fastq</code> display?</p>
 <p>Can you explain why?</p>
 <!-- ![Blank instance file tree.](../fig/blank_instance_file_tree_with_hidden.png){:width="300px"} -->
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" alt="Blank instance file tree." width="300"></p>
+<p><img src="../../images/blank_instance_file_tree_with_hidden.png" class="img-fluid figure-img" alt="Blank instance file tree." width="400"></p>
 <figcaption>Blank instance file tree.</figcaption>
 </figure>
 </div>
@@ -614,7 +612,8 @@ Solution
 </div>
 <section id="navigational-shortcuts" class="level3">
 <h3 class="anchored" data-anchor-id="navigational-shortcuts">Navigational Shortcuts</h3>
-<p>The root directory is the highest level directory in your file system and contains files that are important for your computer to perform its daily work. While you will be using the root (<code>/</code>) at the beginning of your absolute paths, it is important that you avoid working with data in these higher-level directories, as your commands can permanently alter files that the operating system needs to function. In many cases, trying to run commands in <code>root</code> directories will require special permissions which are not discussed here, so it’s best to avoid them and work within your home directory. Dealing with your home directory is very common. The tilde character, <code>~</code>, is a shortcut for your home directory. In our case, the <code>root</code> directory is <strong>two</strong> levels above our <code>home</code> directory, so <code>cd</code> or <code>cd ~</code> will take you to<code>/home/csuser</code> and <code>cd /</code> will take you to <code>/</code>.</p>
+<p>The root directory is the highest level directory in your file system and contains files that are important for your computer to perform its daily work. While you will be using the root (<code>/</code>) at the beginning of your absolute paths, it is important that you avoid working with data in these higher-level directories, as your commands can permanently alter files that the operating system needs to function. In many cases, trying to run commands in <code>root</code> directories will require special permissions which are not discussed here, so it’s best to avoid them and work within your home directory.</p>
+<p>Dealing with your home directory is very common. The tilde character, <code>~</code>, is a shortcut for your home directory. In our case, the <code>root</code> directory is <strong>two</strong> levels above our <code>home</code> directory, so <code>cd</code> or <code>cd ~</code> will take you to<code>/home/csuser</code> and <code>cd /</code> will take you to <code>/</code>.</p>
 <p>Navigate to the <code>illumina_fastq</code> directory:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">

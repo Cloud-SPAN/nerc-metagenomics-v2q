@@ -379,7 +379,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#command-history" id="toc-command-history" class="nav-link" data-scroll-target="#command-history">Command History</a></li>
   <li><a href="#examining-files-the-less-program" id="toc-examining-files-the-less-program" class="nav-link" data-scroll-target="#examining-files-the-less-program">Examining Files — the <code>less</code> program</a>
   <ul class="collapse">
-  <li><a href="#some-navigation-commands-in-less" id="toc-some-navigation-commands-in-less" class="nav-link" data-scroll-target="#some-navigation-commands-in-less">Some navigation commands in <code>less</code>:</a></li>
   <li><a href="#other-programs-to-look-into-files-cat-more-head-and-tail" id="toc-other-programs-to-look-into-files-cat-more-head-and-tail" class="nav-link" data-scroll-target="#other-programs-to-look-into-files-cat-more-head-and-tail">Other programs to look into files: <code>cat</code>, <code>more</code>, <code>head</code>, and <code>tail</code></a></li>
   </ul></li>
   <li><a href="#creating-moving-copying-and-removing-files" id="toc-creating-moving-copying-and-removing-files" class="nav-link" data-scroll-target="#creating-moving-copying-and-removing-files">Creating, moving, copying, and removing files</a>
@@ -482,7 +481,7 @@ Exercise
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>What command would you use for each of the following tasks? Start from your current directory using a single&nbsp;<code>ls</code>&nbsp;command for each:</p>
+<p>What command would you use for each of the following tasks? Start from your current directory using a single<code>ls</code>command for each:</p>
 <ol type="1">
 <li>List all of the files in <code>/usr/bin</code> that start with the letter ‘c’.</li>
 <li>List all of the files in <code>/usr/bin</code> that contain the letter ‘a’.</li>
@@ -521,12 +520,6 @@ Solution
 <section id="command-history" class="level2">
 <h2 class="anchored" data-anchor-id="command-history">Command History</h2>
 <p>If you want to repeat a command that you’ve run recently, you can access previous commands using the up arrow on your keyboard to go back to the most recent command. Likewise, the down arrow takes you forward in the command history.</p>
-<p>A few more useful shortcuts:</p>
-<ul>
-<li><kbd>Ctrl</kbd>+<kbd>C</kbd> will cancel the command you are writing, and give you a fresh prompt.</li>
-<li><kbd>Ctrl</kbd>+<kbd>R</kbd> will do a reverse-search through your command history. This is very useful.</li>
-<li><kbd>Ctrl</kbd>+<kbd>L</kbd> or the <code>clear</code> command will clear your screen.</li>
-</ul>
 <p>You can also review your recent commands with the <code>history</code> command, by entering:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -611,8 +604,8 @@ FASTQ format
 <p>Each sequence is described in four lines:</p>
 <table class="table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
+<col style="width: 27%">
+<col style="width: 72%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -693,43 +686,6 @@ Solution
 </div>
 </div>
 </div>
-<section id="some-navigation-commands-in-less" class="level3">
-<h3 class="anchored" data-anchor-id="some-navigation-commands-in-less">Some navigation commands in <code>less</code>:</h3>
-<p><code>less</code> also gives you a way of searching through files. Use the “/” key to begin a search. Enter the word you would like to search for and press <code>enter</code>. The screen will jump to the next location where that word is found.</p>
-<p><strong>Shortcut:</strong> If you hit “/” then “enter”, <code>less</code> will repeat the previous search. <code>less</code> searches from the current location and works its way forward. Scroll up a couple lines on your terminal to verify you are at the beginning of the file. Note, if you are at the end of the file and search for the sequence “CAA”, <code>less</code> will not find it. You either need to go to the beginning of the file (by typing <code>g</code>) and search again using <code>/</code> or you can use <code>?</code> to search backwards in the same way you used <code>/</code> previously.</p>
-<p>For instance, let’s search forward for the sequence <code>TTTTT</code> in our file. You can see that we go right to that sequence, what it looks like, and where it is in the file. If you continue to type <code>/</code> and hit return, you will move forward to the next instance of this sequence motif. If you instead type <code>?</code> and hit return, you will search backwards and move up the file to previous examples of this motif.</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>What are the next three nucleotides (characters) after the first instance of the sequence quoted above (<code>TTTTT</code>)?</p>
-<p>Share your answer to o see if it matches everyone else’s!</p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Solution
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p><code>CTT</code></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<p>Remember, the <code>man</code> program actually uses <code>less</code> internally and therefore uses the same commands, so you can search documentation using “/” as well!</p>
-</section>
 <section id="other-programs-to-look-into-files-cat-more-head-and-tail" class="level3">
 <h3 class="anchored" data-anchor-id="other-programs-to-look-into-files-cat-more-head-and-tail">Other programs to look into files: <code>cat</code>, <code>more</code>, <code>head</code>, and <code>tail</code></h3>
 <p>Another way to look at files is using the command <code>cat</code>. This command prints out the entire contents of the file to the console. In large files, like the ones we’re working with today, this can take a long time and should generally be avoided. For small files, it can be a useful tool.</p>
@@ -911,7 +867,7 @@ Exercise
 <li>It doesn’t make sense to keep our backup directory inside the directory it is backing up. What if we accidentally delete the <code>illumina_fastq</code> directory? To fix this, move your new backup directory out of <code>illumina_fastq</code> and into the parent folder, <code>data</code>.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -920,7 +876,7 @@ Solution
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ol type="1">
 <li><code>rm -r backup</code><br>
