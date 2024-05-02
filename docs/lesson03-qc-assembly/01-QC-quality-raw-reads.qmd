@@ -31,24 +31,20 @@ The folder should contain the login key file we downloaded in the previous episo
 
 Now we can open the command line.
 
-For **Windows users**:
+-   **Windows users**:
 
--   Right click anywhere inside the blank space of the file manager, then select **Git Bash Here**.
+    -   Right click anywhere inside the blank space of the file manager, then select **Git Bash Here**. A new window will open - this is your command line interface, also known as the shell or the terminal. It will automatically open with your `cloudspan` directory as the working directory.
 
-For **Mac users**: you have two options.
+-   **Mac users**, you have two options:
 
-EITHER
+    -   EITHER: Open **Terminal** in one window and type `cd` followed by a space. Do not press enter! Now open **Finder** in another window. Drag and drop the `cloudspan` folder from the Finder to the Terminal. You should see the file path leading to your `cloudspan` folder appear. Now press enter to navigate to the folder.
 
--   Open **Terminal** in one window and type `cd` followed by a space. Do not press enter! Now open **Finder** in another window. Drag and drop the `cloudspan` folder from the Finder to the Terminal. You should see the file path leading to your `cloudspan` folder appear. Now press enter to navigate to the folder.
-
-OR
-
--   Open **Terminal** and type `cd` followed by the absolute path that leads to your `cloudspan` folder. Press enter.
+    -   OR: Open **Terminal** and type `cd` followed by the absolute path that leads to your `cloudspan` folder. Press enter.
 
 ##### **3. Login into your instance**
 
 ``` {.bash filename="Code"}
-ssh -i login-key-instanceNNN.pem  csuser@instanceNNN.cloud-span.aws.york.ac.uk
+ssh -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk
 ```
 
 *Be sure to replace NNN with your own number, twice.*
@@ -119,19 +115,25 @@ First, we are going to organise our results by creating a directory to contain t
 
 The `mkdir` command can be used to make a new directory. Using the `-p` flag for `mkdir` allows it to create a new directory, even if one of the parent directories doesn’t already exist. It also suppresses errors if the directory already exists, without overwriting that directory.
 
-Return to your home directory (`/home/csuser`)
+Return to your home directory (`/home/csuser`):
 
 ``` {.bash filename="Code"}
 cd 
 ```
 
-Create the directories `results/qc/illumina_qc` inside `cs_course`
+Create the directories `results` inside `cs_course`:
+
+``` {.bash filename="Code"}
+mkdir -p cs_course/results
+```
+
+You might want to use `ls` to check those nested directories have been made.
+
+We are going to have lots of outputs so it makes sense to organise them with some more subdirectories. Let's make one called `qc` (for **q**uality **c**ontrol) and another one inside that called `illumina_qc`.
 
 ``` {.bash filename="Code"}
 mkdir -p cs_course/results/qc/illumina_qc
 ```
-
-You might want to use `ls` to check those nested directories have been made.
 
 Now we have created the directories we are ready to start the quality control of the Illumina data.
 
@@ -596,6 +598,7 @@ ls
 <!-- :::{.column-screen} THE WHOLE SCREEN WIDTH -->
 
 :::
+
 ``` {.default filename="Output"}
 LengthvsQualityScatterPlot_dot.html               NanoStats.txt         
 LengthvsQualityScatterPlot_dot.png                Non_weightedHistogramReadlength.html                          
@@ -608,6 +611,7 @@ LengthvsQualityScatterPlot_loglength_kde.png      Yield_By_Length.html
 NanoPlot_202303307_1630.log                       Yield_By_Length.png
 NanoPlot-report.html
 ```
+
 :::
 
 We can see that NanoPlot has generated a lot of different files.
@@ -629,18 +633,22 @@ Use a terminal that is ***not*** logged into the cloud instance and ensure you a
 Use `scp` to copy the file - the command will look something like:
 
 :::
+
 ``` {.bash filename="Code"}
 scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .
 ```
+
 :::
 
 Remember to replace NNN with the instance number specific to you. As the file is downloading you will see an output like:
 
 :::
+
 ``` {.default filename="Output"}
 scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .
 NanoPlot-report.html                                  100% 3281KB   2.3MB/s   00:01
 ```
+
 :::
 
 Once the file has downloaded, use the File Explorer (Windows) or Finder (Mac) to find the file and open it - it should open up in your browser.
