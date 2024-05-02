@@ -282,6 +282,14 @@ cd ~/cs_course
 
 Now you can enter the command, using `-o` to tell FastQC to put its output files into our newly-made `illumina_qc/` directory.
 
+::: {.callout-tip}
+### Why here?
+
+You might be wondering why we're running our command from the `cs_course` directory and not the place where the data is stored (`~/cs_course/data/illumina_fastq`), or where we want our outputs to end up (`~/cs_course/results/qc/illumina_qc`). The reason is that it's *best practice* not to run commands from the same folder as your data in case you accidentally do something which would overwrite your data files. From `cs_course` we can easily "see" both our `data` and `results` directories to refer to them with local paths.
+
+Over the rest of the course we will be moving all over the file tree to look at files but will always return to `~/cs_course` to run commands. We encourage you to do the same in your own work!
+:::
+
 ``` {.bash filename="Code"}
 fastqc data/illumina_fastq/*.fastq -o results/qc/illumina_qc/
 ```
