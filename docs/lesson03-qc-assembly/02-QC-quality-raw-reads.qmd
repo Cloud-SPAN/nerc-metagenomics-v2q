@@ -605,7 +605,6 @@ ls
 
 <!-- :::{.column-screen} THE WHOLE SCREEN WIDTH -->
 
-:::
 
 ``` {.default filename="Output"}
 LengthvsQualityScatterPlot_dot.html               NanoStats.txt         
@@ -620,7 +619,6 @@ NanoPlot_202303307_1630.log                       Yield_By_Length.png
 NanoPlot-report.html
 ```
 
-:::
 
 We can see that NanoPlot has generated a lot of different files.
 
@@ -640,24 +638,16 @@ Use a terminal that is ***not*** logged into the cloud instance and ensure you a
 
 Use `scp` to copy the file - the command will look something like:
 
-:::
-
 ``` {.bash filename="Code"}
 scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .
 ```
 
-:::
-
 Remember to replace NNN with the instance number specific to you. As the file is downloading you will see an output like:
-
-:::
 
 ``` {.default filename="Output"}
 scp -i login-key-instanceNNN.pem csuser@instanceNNN.cloud-span.aws.york.ac.uk:~/cs_course/results/qc/nano_qc/NanoPlot-report.html .
 NanoPlot-report.html                                  100% 3281KB   2.3MB/s   00:01
 ```
-
-:::
 
 Once the file has downloaded, use the File Explorer (Windows) or Finder (Mac) to find the file and open it - it should open up in your browser.
 
