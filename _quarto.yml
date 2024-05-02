@@ -87,9 +87,9 @@ website:
       - section: "QC & Assembly"
         href: docs/lesson03-qc-assembly/index.qmd
         contents: 
-          - docs/lesson03-qc-assembly/00-introduction-meta.qmd
-          - docs/lesson03-qc-assembly/01-QC-quality-raw-reads.qmd
-          - docs/lesson03-qc-assembly/02-assembly.qmd
+          - docs/lesson03-qc-assembly/01-introduction-meta.qmd
+          - docs/lesson03-qc-assembly/02-QC-quality-raw-reads.qmd
+          - docs/lesson03-qc-assembly/03-assembly.qmd
       - section: "Polishing"
         href: docs/lesson04-polishing/index.qmd
         contents: 
