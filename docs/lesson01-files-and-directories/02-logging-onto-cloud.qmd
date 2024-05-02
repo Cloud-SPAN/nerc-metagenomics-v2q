@@ -116,6 +116,7 @@ A few seconds after you enter that command to the shell in your computer, you wi
 You can copy the command from the course materials by clicking the clipboard at the right of the code box.
 
 However, you cannot paste in the shell using <kbd>Ctrl</kbd> + <kbd>V</kbd> like you can usually. Instead you have two options:
+
 - right click and select `paste`
 - hover the mouse pointer over the terminal window and press the mouse middle button
 :::

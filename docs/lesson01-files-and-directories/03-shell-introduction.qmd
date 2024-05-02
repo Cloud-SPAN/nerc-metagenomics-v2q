@@ -186,13 +186,13 @@ First we moved from our home directory at `csuser` into the `cs_course` director
 
 It is very easy to make mistakes typing our filenames and commands. Thankfully, "tab completion" can help us! When you start typing out the name of a directory or file, then hit the <kbd>tab</kbd> key, the shell will try to fill in the rest of the directory or file name.
 
-First of all, typing `cd` after the prompt and pressing enter will always take you back to your home directory.Let's do this:
+First of all, typing `cd` after the prompt and pressing enter will always take you back to your home directory. Let's do this:
 
 ``` {.bash filename="Code"}
 cd
 ```
 
-then enter:
+then type:
 
 ``` {.bash filename="Code"}
 cd cs
