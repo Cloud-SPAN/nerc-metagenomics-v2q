@@ -366,16 +366,16 @@ less flye.log
 Navigate to the end of the file using <kbd>G</kbd>. You should see something like:
 
 ``` {.default filename="Output"}
-[2023-02-24 14:41:27] root: INFO: Assembly statistics:
+[2024-05-02 16:42:37] root: INFO: Assembly statistics:
 
-        Total length:   18872828
-        Fragments:      1161
-        Fragments N50:  20921
-        Largest frg:    118427
+        Total length:   11947363
+        Fragments:      787
+        Fragments N50:  19835
+        Largest frg:    95862
         Scaffolds:      0
         Mean coverage:  7
 
-[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/results/assembly/assembly.fasta
+[2024-05-02 16:42:37] root: INFO: Final assembly: /home/csuser/cs_course/results/assembly/assembly.fasta
 ```
 
 There are some basic statistics about the final assembly created.
@@ -425,8 +425,9 @@ seqkit stats results/assembly/assembly.fasta
 Once it has finished you should see an output table like this:
 
 ``` {.default filename="Output"}
-file            format  type  num_seqs     sum_len  min_len   avg_len  max_len
-assembly.fasta  FASTA   DNA      790    11,957,486      511  15,136.1    95,862
+file                             format  type  num_seqs     sum_len  min_len   avg_len  max_len
+results/assembly/assembly.fasta  FASTA   DNA        787  11,947,363      923  15,180.9   95,862
+
 ```
 
 This table shows the input file, the format of the file, the type of sequence and other statistics. The assembly process introduces small random variations in the assemly so your table will likely differ slightly. However, you should expect the numbers to be very similar.
@@ -446,9 +447,9 @@ c)  What is the shortest and longest contig produced by this assembly?
 ## Solution
 
 From our table:\
-a) From `num_seqs` we can see that this assembly is made up of 790 contigs\
-b) Looking at `sum_length` we can see that the assembly is 11,957,486bp in total (over 11 million bp!)\
-c) From `min_length` we can see the shortest contig is 511p and from `max_length` the longest contig is 95,862bp
+a) From `num_seqs` we can see that this assembly is made up of 787 contigs\
+b) Looking at `sum_length` we can see that the assembly is 11,947,363bp in total (nearly 12 million basepairs!)\
+c) From `min_length` we can see the shortest contig is 923bp and from `max_length` the longest contig is 95,862bp
 :::
 :::
 
