@@ -90,13 +90,13 @@ To use Medaka we need to specify certain parameters in the command, like we did 
 
 Let's have a look at the flags and options we're going to use:
 
-| Flag/option | Meaning                                                                                                       | Our input                                                  |
-|--------------|--------------------------------------|--------------------|
+| Flag/option | Meaning                                                                                                       | Our input                                      |
+|-------------|---------------------------------------------------------------------------------------------------------------|------------------------------------------------|
 | `-i`        | Input basecalls (i.e. what we are polishing with)                                                             | `-i data/nano_fastq/ERR5000342_sub12_filtered` |
-| `-d`        | Input assembly (i.e. what is being polished)                                                                  | `-d results/assembly/assembly.fasta`          |
-| `-m`        | Neural network model to use (described in [the documentation](https://github.com/nanoporetech/medaka#models)) | `-m r941_min_hac_g507`                                     |
-| `-o`        | Output directory                                                                                              | `-o results/medaka`                                                |
-| `-t`        | Number of threads                                                                                             | `-t 8`                                                     |
+| `-d`        | Input assembly (i.e. what is being polished)                                                                  | `-d results/assembly/assembly.fasta`           |
+| `-m`        | Neural network model to use (described in [the documentation](https://github.com/nanoporetech/medaka#models)) | `-m r941_min_hac_g507`                         |
+| `-o`        | Output directory                                                                                              | `-o results/medaka`                            |
+| `-t`        | Number of threads                                                                                             | `-t 8`                                         |
 
 Once again we will run this command in the background and redirect the output to a file. This means we add `&>` to redirect the output and `&` to the very end to make it run in the background.
 
@@ -326,29 +326,27 @@ Here are the various flags/options used in these commands and what they mean:
 
 <!-- NB: below, the number of hyphens (---..) in the line below "|---|---...|" does help determine the length of each column. It's a matter of trying how many hyphens to use for each column -->
 
-
 | Command                                                    | Flag/option     | Meaning                                         |
-|--------------------------|----------|--------------------|
+|------------------------------------------------------------|-----------------|-------------------------------------------------|
 | `bwa mem -t 8 [input assembly] [input short read file(s)]` | -t 8            | Number of threads (8)                           |
 | `samtools view - -Sb`                                      | \-              | Take piped output from `bwa mem` as input       |
 |                                                            | -Sb             | Convert from SAM to BAM format                  |
-| `samtools sort - -@4 -o [filename]`          | \-              | Take piped output from `samtools view` as input |
+| `samtools sort - -@4 -o [filename]`                        | \-              | Take piped output from `samtools view` as input |
 |                                                            | \-@4            | Number of threads (4)                           |
 |                                                            | -o \[filename\] | Output a file with name \[filename\]            |
 
-
-This will take around 60 minutes so we will use `&> alignment.out &` to redirect the process to a file and to run the command in the background. We will also wrap our whole three-fold command in brackets so we run all three steps in the background.
+This will take around 60 minutes so we will use redirection and `&` to print the output to a file and run the command in the background (just like in the previous lesson). We will also wrap our whole three-fold command in brackets so we run all three steps in the background.
 
 Add the pipes between these commands and run:
 
 ``` {.bash filename="Code"}
-(bwa mem -t 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq | samtools view - -Sb | samtools sort - -@4 -o results/pilon/short_read_alignment.bam) &> alignment.out &
+(bwa mem -t 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq | samtools view - -Sb | samtools sort - -@4 -o results/pilon/short_read_alignment.bam) &> results/pilon/alignment.out &
 ```
 
 Once the command is running, you can check the process of this job by looking at the `alignment.out` file.
 
 ``` {.bash filename="Code"}
-less alignment.out
+less results/pilon/alignment.out
 ```
 
 ``` {.default filename="Output"}
@@ -399,7 +397,7 @@ The answer is that we will need access to the BAM file produced for further anal
 
 This command will take around one or two minutes so we don't need to run it in the background.
 
-Once your prompt has returned you should also have a file named `short_read_alignment.bam.bai` which is the index.
+Once your prompt has returned you should also have a file named `short_read_alignment.bam.bai` in your pilon directory, which is the index.
 
 ### Running Pilon
 
