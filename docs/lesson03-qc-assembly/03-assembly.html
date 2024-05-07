@@ -827,16 +827,16 @@ Navigation commands in <code>less</code>:
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb15" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Assembly statistics:</span>
+<div class="sourceCode" id="cb15" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>[2024-05-02 16:42:37] root: INFO: Assembly statistics:</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        Total length:   18872828</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        Fragments:      1161</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        Fragments N50:  20921</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        Largest frg:    118427</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        Total length:   11947363</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        Fragments:      787</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        Fragments N50:  19835</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        Largest frg:    95862</span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        Scaffolds:      0</span>
 <span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>        Mean coverage:  7</span>
 <span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>[2023-02-24 14:41:27] root: INFO: Final assembly: /home/csuser/cs_course/results/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>[2024-05-02 16:42:37] root: INFO: Final assembly: /home/csuser/cs_course/results/assembly/assembly.fasta</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There are some basic statistics about the final assembly created.</p>
 </section>
@@ -896,8 +896,8 @@ Contigs vs.&nbsp;reads
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>file            format  type  num_seqs     sum_len  min_len   avg_len  max_len</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>assembly.fasta  FASTA   DNA      790    11,957,486      511  15,136.1    95,862</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>file                             format  type  num_seqs     sum_len  min_len   avg_len  max_len</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>results/assembly/assembly.fasta  FASTA   DNA        787  11,947,363      923  15,180.9   95,862</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This table shows the input file, the format of the file, the type of sequence and other statistics. The assembly process introduces small random variations in the assemly so your table will likely differ slightly. However, you should expect the numbers to be very similar.</p>
 <p>Using this table of statistics, answer the questions below.</p>
@@ -932,9 +932,9 @@ Solution
 <div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>From our table:<br>
-a) From <code>num_seqs</code> we can see that this assembly is made up of 790 contigs<br>
-b) Looking at <code>sum_length</code> we can see that the assembly is 11,957,486bp in total (over 11 million bp!)<br>
-c) From <code>min_length</code> we can see the shortest contig is 511p and from <code>max_length</code> the longest contig is 95,862bp</p>
+a) From <code>num_seqs</code> we can see that this assembly is made up of 787 contigs<br>
+b) Looking at <code>sum_length</code> we can see that the assembly is 11,947,363bp in total (nearly 12 million basepairs!)<br>
+c) From <code>min_length</code> we can see the shortest contig is 923bp and from <code>max_length</code> the longest contig is 95,862bp</p>
 </div>
 </div>
 </div>

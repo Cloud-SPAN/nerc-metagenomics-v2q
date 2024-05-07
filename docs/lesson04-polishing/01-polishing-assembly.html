@@ -781,9 +781,9 @@ Chaining together commands with a pipe
 <!-- NB: below, the number of hyphens (---..) in the line below "|---|---...|" does help determine the length of each column. It's a matter of trying how many hyphens to use for each column -->
 <table class="table">
 <colgroup>
-<col style="width: 46%">
-<col style="width: 17%">
-<col style="width: 35%">
+<col style="width: 47%">
+<col style="width: 13%">
+<col style="width: 38%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -825,20 +825,20 @@ Chaining together commands with a pipe
 </tr>
 </tbody>
 </table>
-<p>This will take around 60 minutes so we will use <code>&amp;&gt; alignment.out &amp;</code> to redirect the process to a file and to run the command in the background. We will also wrap our whole three-fold command in brackets so we run all three steps in the background.</p>
+<p>This will take around 60 minutes so we will use redirection and <code>&amp;</code> to print the output to a file and run the command in the background (just like in the previous lesson). We will also wrap our whole three-fold command in brackets so we run all three steps in the background.</p>
 <p>Add the pipes between these commands and run:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">bwa</span> mem <span class="at">-t</span> 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> results/pilon/short_read_alignment.bam<span class="kw">)</span> <span class="op">&amp;&gt;</span> alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">bwa</span> mem <span class="at">-t</span> 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> results/pilon/short_read_alignment.bam<span class="kw">)</span> <span class="op">&amp;&gt;</span> results/pilon/alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once the command is running, you can check the process of this job by looking at the <code>alignment.out</code> file.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb20" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> alignment.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">less</span> results/pilon/alignment.out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -896,7 +896,7 @@ Something to think about
 </div>
 </div>
 <p>This command will take around one or two minutes so we don’t need to run it in the background.</p>
-<p>Once your prompt has returned you should also have a file named <code>short_read_alignment.bam.bai</code> which is the index.</p>
+<p>Once your prompt has returned you should also have a file named <code>short_read_alignment.bam.bai</code> in your pilon directory, which is the index.</p>
 </section>
 <section id="running-pilon" class="level3">
 <h3 class="anchored" data-anchor-id="running-pilon">Running Pilon</h3>
