@@ -309,7 +309,7 @@ We will now do steps 3, 4 and 5 in one go by chaining them together with pipes.
 ::: callout-note
 ## Chaining together commands with a pipe
 
-It is possible to chain together commands in Linux (and Unix) using a command known as "pipe". This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy (and unfull). The pipe command is the character `|` which is obtained with <kbd>⇧ Shift</kbd> + <kbd>\\</kbd> on most keyboards.
+It is possible to chain together commands in Linux (and Unix) using a command known as "pipe". This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy. The pipe command is the character `|` which is obtained with <kbd>⇧ Shift</kbd> + <kbd>\\</kbd> on most keyboards.
 
 You can use multiple pipes in a single line of commands but data will only go from the left to the right:
 
@@ -601,7 +601,7 @@ alignment.out  pilon.fasta short_read_alignment.bam  short_read_alignment.bam.ba
 
 We can see pilon has produced a fasta file `pilon.fasta`, which is the newly polished assembly. This file is now our assembly.
 
-In the next episode we will assess the quality of this assembly and compare its quality to that of the unpolished assemly.
+In the next episode we will assess the quality of this assembly and compare its quality to that of the unpolished assembly.
 
 ::: callout-tip
 ## Recommended reading:
