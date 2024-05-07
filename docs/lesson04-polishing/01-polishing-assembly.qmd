@@ -91,7 +91,7 @@ To use Medaka we need to specify certain parameters in the command, like we did 
 Let's have a look at the flags and options we're going to use:
 
 | Flag/option | Meaning                                                                                                       | Our input                                      |
-|-------------|---------------------------------------------------------------------------------------------------------------|------------------------------------------------|
+|------------------|-----------------------------------|-------------------|
 | `-i`        | Input basecalls (i.e. what we are polishing with)                                                             | `-i data/nano_fastq/ERR5000342_sub12_filtered` |
 | `-d`        | Input assembly (i.e. what is being polished)                                                                  | `-d results/assembly/assembly.fasta`           |
 | `-m`        | Neural network model to use (described in [the documentation](https://github.com/nanoporetech/medaka#models)) | `-m r941_min_hac_g507`                         |
@@ -327,7 +327,7 @@ Here are the various flags/options used in these commands and what they mean:
 <!-- NB: below, the number of hyphens (---..) in the line below "|---|---...|" does help determine the length of each column. It's a matter of trying how many hyphens to use for each column -->
 
 | Command                                                    | Flag/option     | Meaning                                         |
-|------------------------------------------------------------|-----------------|-------------------------------------------------|
+|------------------------------|------------------|------------------------|
 | `bwa mem -t 8 [input assembly] [input short read file(s)]` | -t 8            | Number of threads (8)                           |
 | `samtools view - -Sb`                                      | \-              | Take piped output from `bwa mem` as input       |
 |                                                            | -Sb             | Convert from SAM to BAM format                  |
@@ -576,7 +576,7 @@ Corrected 234 snps; 40 ambiguous bases; corrected 22 small insertions totaling 3
 # fix break: contig_1057:9394-12244 0 -0 +0 NoSolution
 ```
 
-When Pilon finishes (aroud 1.5 hours) the end of the file will contain something like:
+When Pilon finishes (around 1.5 hours) the end of the file will contain something like:
 
 ``` {.default filename="Output"}
 Writing updated contig_1125_pilon to ./pilon.fasta
