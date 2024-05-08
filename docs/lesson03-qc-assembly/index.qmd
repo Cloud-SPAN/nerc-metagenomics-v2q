@@ -4,7 +4,7 @@ title: "QC & Assembly"
 # title-block-banner: true
 ---
 
-![](/images/03_short_analysis_flowchart_short_asm.png){fig-align="center" width="450" fig-alt="Analysis flow diagram that shows the steps:  Sequence reads, Quality control and assembly."}
+![](/images/metagenomics_flowchart_short.png){fig-align="center" width="300" fig-alt="Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy"}
 
 A metagenome is a collection of genomic sequences from various (micro) organisms coexisting in a sample. They are snapshots that tell us about the taxonomic, metabolic or functional composition of the communities that we study.
 
