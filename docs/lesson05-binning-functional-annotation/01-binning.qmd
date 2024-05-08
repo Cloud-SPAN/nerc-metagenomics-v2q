@@ -68,7 +68,7 @@ Now we can start to separate out the individual genomes using a process called b
 
 The assembled contigs that make up the metagenome will be assigned to different "bins" (FASTA files that contain certain contigs). Ideally, each bin will correspond to one original genome only (a MAG).
 
-As we covered in the [assembly section](/docs/lesson03-qc-assembly/02-assembly.qmd), assembling the pieces of a metagenome is more difficult compared to single genome assembly. Most assemblers are not able to reconstruct complete genomes for the organisms that are represented in the metagenome - even using our new bigger dataset. As a result each organism will be represented by multiple contigs following assembly and polishing. This means that we need to be able to separate these contigs so we can identify which belong to each organism in our metagenome. This is where binning comes in.
+As we covered in the [assembly section](/docs/lesson03-qc-assembly/03-assembly.qmd), assembling the pieces of a metagenome is more difficult compared to single genome assembly. Most assemblers are not able to reconstruct complete genomes for the organisms that are represented in the metagenome - even using our new bigger dataset. As a result each organism will be represented by multiple contigs following assembly and polishing. This means that we need to be able to separate these contigs so we can identify which belong to each organism in our metagenome. This is where binning comes in.
 
 ```{=html}
 <!-- <a href="{{ page.root }}/fig/03-05-01.png">
