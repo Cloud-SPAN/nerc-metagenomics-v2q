@@ -809,14 +809,14 @@ Chaining together commands with a pipe
 <td>Convert from SAM to BAM format</td>
 </tr>
 <tr class="even">
-<td><code>samtools sort - -@4 -o [filename]</code></td>
+<td><code>samtools sort - -@8 -o [filename]</code></td>
 <td>-</td>
 <td>Take piped output from <code>samtools view</code> as input</td>
 </tr>
 <tr class="odd">
 <td></td>
-<td>-<span class="citation" data-cites="4">@4</span></td>
-<td>Number of threads (4)</td>
+<td>-<span class="citation" data-cites="8">@8</span></td>
+<td>Number of threads (8)</td>
 </tr>
 <tr class="even">
 <td></td>
@@ -831,7 +831,7 @@ Chaining together commands with a pipe
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">bwa</span> mem <span class="at">-t</span> 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@4</span> <span class="at">-o</span> results/pilon/short_read_alignment.bam<span class="kw">)</span> <span class="op">&amp;&gt;</span> results/pilon/alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">bwa</span> mem <span class="at">-t</span> 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq <span class="kw">|</span> <span class="ex">samtools</span> view <span class="at">-</span> <span class="at">-Sb</span> <span class="kw">|</span> <span class="ex">samtools</span> sort <span class="at">-</span> <span class="at">-@8</span> <span class="at">-o</span> results/pilon/short_read_alignment.bam<span class="kw">)</span> <span class="op">&amp;&gt;</span> results/pilon/alignment.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once the command is running, you can check the process of this job by looking at the <code>alignment.out</code> file.</p>
 <div class="code-with-filename">

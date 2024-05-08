@@ -1067,14 +1067,14 @@ Output — NanoPlot Help Documentation
 <ul>
 <li><p><code>--fastq</code> to specify the filetype and file to analyse. The raw Nanopore data is in the location <code>/cs_course/p/data/nano_fastq/ERR5000342_sub12.fastq</code> and we will use this full absolute path in the NanoPlot command.</p></li>
 <li><p><code>--outdir</code> to specify the where the output files should be written. We are going to put our results in a directory called <code>nano_qc</code>, inside of <code>results/qc</code>. <strong>Note</strong>: with NanoPlot you <strong>don’t need to create this directory</strong> before running the command.</p></li>
-<li><p><code>--threads</code> specifies how many threads to run the program on (more threads = more compute power = faster). We will specify 4 to indicate that four threads should be used.</p></li>
+<li><p><code>--threads</code> specifies how many threads to run the program on (more threads = more compute power = faster). We will specify 8 to indicate that eight threads should be used, since our instance has eight cores.</p></li>
 <li><p><code>--loglength</code> specifies that we want plots with a log scale.</p></li>
 </ul>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb23" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NanoPlot</span> <span class="at">--fastq</span> data/nano_fastq/ERR5000342_sub12.fastq <span class="at">--outdir</span> results/qc/nano_qc <span class="at">--threads</span> 4 <span class="at">--loglength</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NanoPlot</span> <span class="at">--fastq</span> data/nano_fastq/ERR5000342_sub12.fastq <span class="at">--outdir</span> results/qc/nano_qc <span class="at">--threads</span> 8 <span class="at">--loglength</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now we have the command set up we can press enter and wait for NanoPlot to finish.</p>
 <p>This will take a couple of minutes. You will know it is finished once your terminal <strong>prompt</strong> has returned (i.e.&nbsp;you can type in the terminal again).</p>
@@ -1318,7 +1318,7 @@ Output — Seqkit seq help documentation
 </div>
 <div class="sourceCode" id="cb31" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~/cs_course</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="ex">NanoPlot</span> <span class="at">--fastq</span> data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="at">--outdir</span> results/qc/nano_qc_filt <span class="at">--threads</span> 4 <span class="at">--loglength</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="ex">NanoPlot</span> <span class="at">--fastq</span> data/nano_fastq/ERR5000342_sub12_filtered.fastq <span class="at">--outdir</span> results/qc/nano_qc_filt <span class="at">--threads</span> 8 <span class="at">--loglength</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once again, wait for the command to finish and then use <code>scp</code>to copy the report to your local computer. First, though, make sure you rename the file so you know which is the filtered report and which isn’t.</p>
 <div class="code-with-filename">
