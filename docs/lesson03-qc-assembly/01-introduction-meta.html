@@ -465,9 +465,9 @@ ul.task-list li input[type="checkbox"] {
 <p>However, for metagenome analysis, if you were to use only short read sequencing for the assembly you would end up with a much more fragmented assembly to work with.</p>
 <table class="table">
 <colgroup>
-<col style="width: 28%">
+<col style="width: 29%">
 <col style="width: 30%">
-<col style="width: 41%">
+<col style="width: 40%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -525,12 +525,6 @@ ul.task-list li input[type="checkbox"] {
 <!-- ORIGINAL <img align="right" width="325" height="506" src="{{ page.root }}/fig/metagenomics_flowchart_short.png" alt="Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy"/> -->
 <!-- <img align="right" width="325" height="506" src="/images/metagenomics_flowchart_short.png" alt="Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy"/> THIS WORKED ALONG THE HTML CODE COMMENTED BELOW -->
 <!-- ::: {layout-ncol=2} -->
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout="[ 60, 40 ]">
-<div class="quarto-layout-row">
-<div id="first-column" class="quarto-layout-cell" style="flex-basis: 60.0%;justify-content: flex-start;">
 <p>When working with high-throughput sequencing data, the raw reads you get off of the sequencer need to pass through a number of different tools in order to generate your final desired output.</p>
 <p>The use of this set of tools in a specified order is commonly referred to as a <em>workflow</em> or a <em>pipeline</em>.</p>
 <p>Here is an example of the workflow we will be using for our analysis with a brief description of each step.</p>
@@ -541,19 +535,8 @@ ul.task-list li input[type="checkbox"] {
 <li>Binning - separating out genomes into ‘bins’ containing related contigs</li>
 <li>Taxonomic assignment - assigning taxonomy and functional analysis to sequences/contigs</li>
 </ol>
-</div>
-<div id="second-column" class="quarto-layout-cell" style="flex-basis: 40.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-right">
-<figure class="figure">
-<p><img src="../../images/metagenomics_flowchart_short.png" alt="Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy" width="300" height="450" class="figure-img"></p>
-<figcaption>Flow diagram that shows the steps: Sequence reads, Quality control, Assembly, Binning and Taxonomy</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
 <p>Workflows in bioinformatics often adopt a plug-and-play approach so the output of one tool can be easily used as input to another tool. The use of standard data formats in bioinformatics (such as FASTA or FASTQ, which we will be using here) makes this possible. The tools that are used to analyze data at different stages of the workflow are therefore built under the assumption that the data will be provided in a specific format.</p>
-<p>You can find a <a href="../../docs/miscellanea/extras/workflow03.qmd">more detailed version of the workflow</a> we will be following by going to <code>Extras</code> and selecting <code>Workflow Reference</code>. This diagram contains all of the steps followed over the course alongside program names.</p>
+<p>You can find a <a href="../../docs/miscellanea/extras/workflow.html">more detailed version of the workflow</a> we will be following by going to <code>Extras</code> and selecting <code>Workflow Reference</code>. This diagram contains all of the steps followed over the course alongside program names.</p>
 <!-- <br clear="right"/> -->
 </section>
 <section id="next-steps" class="level2">

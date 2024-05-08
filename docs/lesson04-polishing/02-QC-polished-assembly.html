@@ -543,7 +543,7 @@ Solution
 <ol type="a">
 <li>We can see from the help documentation that the flag <code>-a</code> or <code>--all</code> will calculate <code>all statistics, including quartiles of seq length, sum_gap, N50</code>.<br>
 </li>
-<li>The new command would be <code>seqkit stats -a assembly/assembly.fasta</code> or <code>seqkit stats --all assembly/assembly.fasta</code></li>
+<li>The new command would be <code>seqkit stats -a results/assembly/assembly.fasta</code> or <code>seqkit stats --all results/assembly/assembly.fasta</code></li>
 </ol>
 <p>Bonus: The flag <code>-T</code> allows us to save it in a tabular output - this makes the table easier to use in other command line programs or programming languages such as R and Python. The command could be either <code>seqkit stats -a -T assembly/assembly.fasta</code> or we can combine the two flags <code>seqkit stats -aT assembly/assembly.fasta</code></p>
 </div>
@@ -612,6 +612,7 @@ Solution
 <div class="sourceCode" id="cb4" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>file            format  type  num_seqs     sum_len  min_len   avg_len  max_len     Q1      Q2      Q3  sum_gap     N50  Q20(%)  Q30(%)  GC(%)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>assembly.fasta  FASTA   DNA      1,161  18,872,828      528  16,255.7  118,427  7,513  11,854  19,634        0  20,921       0       0  66.26</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>(Your numbers will probably be slightly different to the solution given, as the assembly algorithm runs differently each time. As long as they are in the same ballpark there’s no need to worry!)</p>
 <ol start="2" type="a">
 <li>The N50 length for this assembly is 20,921 bp. This tells us that 50% of the assembly is in fragments that are nearly 21,000 bases long or longer!</li>
 </ol>
@@ -708,8 +709,8 @@ Text editors
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Text editors, like nano, “notepad” on Windows or “TextEdit” on Mac are used to edit any plain text files. Plain text files are those that contain only characters, not images or formatting.</p>
-<p>We are using nano because it is one of the least complex Unix text editors. However, many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Gedit.</p>
+<p>Text editors, like Nano, “notepad” on Windows or “TextEdit” on Mac are used to edit any plain text files. Plain text files are those that contain only characters, not images or formatting.</p>
+<p>We are using Nano because it is one of the least complex Unix text editors. However, many programmers use Emacs or Vim (both of which require more time to learn), or a graphical editor such as Gedit.</p>
 <p>No matter what editor you use, you will need to know where it searches for and saves files. If you start it from the shell, it will (probably) use your current working directory as its default location.</p>
 </div>
 </div>
@@ -725,21 +726,21 @@ Text editors
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> ref_genomes</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ref_genomes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>To open nano type the command <code>nano</code> followed by the name of the text file we want to generate.</p>
+<p>To open Nano type the command <code>nano</code> followed by the name of the text file we want to generate.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
 <div class="sourceCode" id="cb9" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> reference_genomes.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When you press enter your terminal should change. You should see a white bar at the top with <code>GNU nano 4.8</code> (instead of ‘GNU nano 2.5.3’ shown in the screenshot below) and some suggested commands at the bottom of the page. There should also be a white box which indicates where your cursor is. It should look something like this:</p>
+<p>When you press enter your terminal should change. You will see a white bar at the top with <code>GNU nano 4.8</code> and some suggested commands at the bottom of the page. There should also be a white box or cursor which indicates where your cursor is. It will look something like this:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="../../images/nano201711.png" class="img-fluid figure-img"></p>
-<figcaption>nano201711.png</figcaption>
+<p><img src="../../images/nano202405.png" class="img-fluid figure-img"></p>
+<figcaption>nano202405.png</figcaption>
 </figure>
 </div>
-<p>The text at the bottom of the screen shows the keyboard shortcuts for performing various tasks in <code>nano</code>. We will talk more about how to interpret this information soon.</p>
+<p>The text at the bottom of the screen shows the keyboard shortcuts for performing various tasks in <code>Nano</code>. We will talk more about how to interpret this information soon.</p>
 <p>Copy and paste the following list of organism names into this file (don’t forget that <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>v</kbd> won’t work in Linux (Unix). Try <kbd>Shift</kbd>+<kbd>Insert</kbd> instead, or right click and select paste from the drop-down menu - see the note below).</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -789,7 +790,7 @@ Control, Ctrl, or ^ Key
 </div>
 </div>
 <p>In <code>nano</code>, along the bottom of the screen you’ll see <code>^G Get Help ^O WriteOut</code>. This means that you can use <kbd>Ctrl</kbd>-<kbd>G</kbd> to get help and <kbd>Ctrl</kbd>-<kbd>O</kbd> to save your file.</p>
-<p>If you are using a Mac, you might be more familiar with the <code>Command</code> key, which is labelled with a <kbd>⌘</kbd> . But you will often use the the <code>Ctrl</code> key when working in a Terminal. :::</p>
+<p>If you are using a Mac, you might be more familiar with the <code>Command</code> key, which is labelled with a <kbd>⌘</kbd> . But you will often use the the <code>Ctrl</code> key when working in a Terminal. :</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -800,11 +801,10 @@ Copying and pasting in Git bash
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Most people will want to use <kbd>Ctrl</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>V</kbd> to copy and paste. However in GitBash these shortcuts have other functions. <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts the currently running command and <kbd>Ctrl</kbd>+<kbd>V</kbd> tells the terminal to treat every keystroke as a literal character, so will add shortcuts like <kbd>Ctrl</kbd>+<kbd>C</kbd> as characters. Instead you can copy and paste in two ways:</p>
-<ol type="1">
-<li>Keyboard: Use <kbd>Shift</kbd> and the left/right arrows to select text and press <kbd>Enter</kbd> to copy. You can paste the text by pressing <kbd>Insert</kbd>.</li>
-<li>Mouse: Left click and drag to highlight text, then right click to copy. Move the cursor to where you want to paste and right click to paste.</li>
-</ol>
+<p>Most people will want to use <kbd>Ctrl</kbd>+<kbd>C</kbd> and <kbd>Ctrl</kbd>+<kbd>V</kbd> to copy and paste. However in GitBash these shortcuts have other functions. <kbd>Ctrl</kbd>+<kbd>C</kbd> interrupts the currently running command and <kbd>Ctrl</kbd>+<kbd>V</kbd> tells the terminal to treat every keystroke as a literal character, so will add shortcuts like <kbd>Ctrl</kbd>+<kbd>C</kbd> as characters. Instead you can copy and paste using the mouse:</p>
+<ul>
+<li>Left click and drag to highlight text, then right click to copy. Move the cursor to where you want to paste and right click to paste.</li>
+</ul>
 </div>
 </div>
 <p>You should then be able to see this file when you <code>ls</code> and view it using <code>less</code>.</p>
@@ -1007,13 +1007,13 @@ Output — MetaQUAST help documentation
 <li>We can disregard the <code>python</code> portion of this</li>
 </ul>
 <p>The main “option” we want to include is <code>--references-list</code>, which supplies a text file containing our list of reference genomes (this is the file we just made).</p>
-<p>The <code>&lt;files_with_contigs&gt;</code> part just means that this is where we put the assemblies to be evaluated. We’ll list them all one after the other so we can compare their outputs easily.</p>
+<p>The <code>&lt;files_with_contigs&gt;</code> part just means that this is where we put the assemblies to be evaluated. We’ll list them all one after the other so we can compare their outputs easily. We’ll also use the <code>--output</code> or <code>-o</code> flag to specify where the output should be stored.</p>
 <p>Our command therefore looks like:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">--references-list</span> data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta <span class="op">&amp;&gt;</span> results/metaquast/metaquast.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="ex">metaquast.py</span> <span class="at">--references-list</span> data/ref_genomes/reference_genomes.txt results/assembly/assembly.fasta results/medaka/consensus.fasta results/pilon/pilon.fasta <span class="at">--output</span> results/metaquast <span class="op">&amp;&gt;</span> results/metaquast/metaquast.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note that once again we are running the command in the background using the <code>&amp;</code> symbol and redirecting the output to a file (<code>metaquast.out</code>) using <code>&gt;</code>. This is because it takes around 8-10 minutes to run.</p>
 <p>If you open up <code>metaquast.out</code> after running the command you should see something like this as MetaQUAST starts downloading the reference species we specified in our files:</p>

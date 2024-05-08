@@ -766,7 +766,7 @@ Chaining together commands with a pipe
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It is possible to chain together commands in Linux (and Unix) using a command known as “pipe”. This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy (and unfull). The pipe command is the character <code>|</code> which is obtained with <kbd>⇧ Shift</kbd> + <kbd>\</kbd> on most keyboards.</p>
+<p>It is possible to chain together commands in Linux (and Unix) using a command known as “pipe”. This allows the output from one command to be directly passed as input to other command without the need for using intermediate files. This is useful when the intermediate file is not needed and keeps your workspace tidy. The pipe command is the character <code>|</code> which is obtained with <kbd>⇧ Shift</kbd> + <kbd>\</kbd> on most keyboards.</p>
 <p>You can use multiple pipes in a single line of commands but data will only go from the left to the right:</p>
 <p><code>command1 | command2 | command3 | .... |</code></p>
 </div>
@@ -781,9 +781,9 @@ Chaining together commands with a pipe
 <!-- NB: below, the number of hyphens (---..) in the line below "|---|---...|" does help determine the length of each column. It's a matter of trying how many hyphens to use for each column -->
 <table class="table">
 <colgroup>
-<col style="width: 47%">
-<col style="width: 13%">
-<col style="width: 38%">
+<col style="width: 41%">
+<col style="width: 25%">
+<col style="width: 33%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -1085,7 +1085,7 @@ Output — Pilon help Documentation
 <span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:8886-9132 0 -0 +0 NoSolution</span>
 <span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a># fix break: contig_1057:9394-12244 0 -0 +0 NoSolution</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>When Pilon finishes (aroud 1.5 hours) the end of the file will contain something like:</p>
+<p>When Pilon finishes (around 1.5 hours) the end of the file will contain something like:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
@@ -1113,7 +1113,7 @@ Output — Pilon help Documentation
 <div class="sourceCode" id="cb31" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>alignment.out  pilon.fasta short_read_alignment.bam  short_read_alignment.bam.bai</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>We can see pilon has produced a fasta file <code>pilon.fasta</code>, which is the newly polished assembly. This file is now our assembly.</p>
-<p>In the next episode we will assess the quality of this assembly and compare its quality to that of the unpolished assemly.</p>
+<p>In the next episode we will assess the quality of this assembly and compare its quality to that of the unpolished assembly.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
