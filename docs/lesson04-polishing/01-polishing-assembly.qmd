@@ -331,8 +331,8 @@ Here are the various flags/options used in these commands and what they mean:
 | `bwa mem -t 8 [input assembly] [input short read file(s)]` | -t 8            | Number of threads (8)                           |
 | `samtools view - -Sb`                                      | \-              | Take piped output from `bwa mem` as input       |
 |                                                            | -Sb             | Convert from SAM to BAM format                  |
-| `samtools sort - -@4 -o [filename]`                        | \-              | Take piped output from `samtools view` as input |
-|                                                            | \-@4            | Number of threads (4)                           |
+| `samtools sort - -@8 -o [filename]`                        | \-              | Take piped output from `samtools view` as input |
+|                                                            | \-@8            | Number of threads (8)                           |
 |                                                            | -o \[filename\] | Output a file with name \[filename\]            |
 
 This will take around 60 minutes so we will use redirection and `&` to print the output to a file and run the command in the background (just like in the previous lesson). We will also wrap our whole three-fold command in brackets so we run all three steps in the background.
@@ -340,7 +340,7 @@ This will take around 60 minutes so we will use redirection and `&` to print the
 Add the pipes between these commands and run:
 
 ``` {.bash filename="Code"}
-(bwa mem -t 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq | samtools view - -Sb | samtools sort - -@4 -o results/pilon/short_read_alignment.bam) &> results/pilon/alignment.out &
+(bwa mem -t 8 results/medaka/consensus.fasta data/illumina_fastq/ERR4998593_1.fastq data/illumina_fastq/ERR4998593_2.fastq | samtools view - -Sb | samtools sort - -@8 -o results/pilon/short_read_alignment.bam) &> results/pilon/alignment.out &
 ```
 
 Once the command is running, you can check the process of this job by looking at the `alignment.out` file.

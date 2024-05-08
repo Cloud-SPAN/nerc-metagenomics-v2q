@@ -580,12 +580,12 @@ We will use four flags when we run the NanoPlot command:
 
 -   `--outdir` to specify the where the output files should be written. We are going to put our results in a directory called `nano_qc`, inside of `results/qc`. **Note**: with NanoPlot you **don't need to create this directory** before running the command.
 
--   `--threads` specifies how many threads to run the program on (more threads = more compute power = faster). We will specify 4 to indicate that four threads should be used.
+-   `--threads` specifies how many threads to run the program on (more threads = more compute power = faster). We will specify 8 to indicate that eight threads should be used, since our instance has eight cores.
 
 -   `--loglength` specifies that we want plots with a log scale.
 
 ``` {.bash filename="Code"}
-NanoPlot --fastq data/nano_fastq/ERR5000342_sub12.fastq --outdir results/qc/nano_qc --threads 4 --loglength
+NanoPlot --fastq data/nano_fastq/ERR5000342_sub12.fastq --outdir results/qc/nano_qc --threads 8 --loglength
 ```
 
 Now we have the command set up we can press enter and wait for NanoPlot to finish.
@@ -780,7 +780,7 @@ We can now re-run NanoPlot on the filtered file to see how it has changed.
 ``` {.bash filename="Code"}
 cd ~/cs_course
 
-NanoPlot --fastq data/nano_fastq/ERR5000342_sub12_filtered.fastq --outdir results/qc/nano_qc_filt --threads 4 --loglength
+NanoPlot --fastq data/nano_fastq/ERR5000342_sub12_filtered.fastq --outdir results/qc/nano_qc_filt --threads 8 --loglength
 ```
 
 Once again, wait for the command to finish and then use `scp`to copy the report to your local computer. First, though, make sure you rename the file so you know which is the filtered report and which isn't.
