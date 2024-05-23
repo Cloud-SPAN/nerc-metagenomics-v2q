@@ -642,7 +642,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>Finished metabat2 at Tue 14 Mar 2023 05:40:46 PM UTC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The penultimate line tells us that MetaBAT has produced 90 bins containing 212166000 bases (your number might vary slightly depending on how the algorithm has analysed your assembly).</p>
-<p>Using <code>ls</code> will show that MetaBAT2 has generated a depth file (<code>assembly_ERR5000342.fasta.depth.txt</code>) and a directory (<code>assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/</code>). Our bins are in this directory so we should navigate into it and have a look at what files have been generated.</p>
+<p>Using <code>ls</code> will show that MetaBAT2 has generated a depth file (<code>assembly_ERR5000342.fasta.depth.txt</code>) and a directory (<code>assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/</code>). Annoyingly, the “easy” way of running MetaBat2 (which we just used) doesn’t allow us to specify an output directory, so we’ll need to move our outputs into <code>results/binning</code> manually using <code>mv</code>.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> assembly<span class="pp">*</span> results/binning</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now let’s move into our new directory and take a look!</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -660,26 +662,26 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb19" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Output</strong></pre>
 </div>
-<div class="sourceCode" id="cb20" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>bin.10.fa  bin.22.fa  bin.34.fa  bin.46.fa  bin.58.fa  bin.6.fa   bin.81.fa</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>bin.11.fa  bin.23.fa  bin.35.fa  bin.47.fa  bin.59.fa  bin.70.fa  bin.82.fa</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>bin.12.fa  bin.24.fa  bin.36.fa  bin.48.fa  bin.5.fa   bin.71.fa  bin.83.fa</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>bin.13.fa  bin.25.fa  bin.37.fa  bin.49.fa  bin.60.fa  bin.72.fa  bin.84.fa</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>bin.14.fa  bin.26.fa  bin.38.fa  bin.4.fa   bin.61.fa  bin.73.fa  bin.85.fa</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>bin.15.fa  bin.27.fa  bin.39.fa  bin.50.fa  bin.62.fa  bin.74.fa  bin.86.fa</span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>bin.16.fa  bin.28.fa  bin.3.fa   bin.51.fa  bin.63.fa  bin.75.fa  bin.87.fa</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>bin.17.fa  bin.29.fa  bin.40.fa  bin.52.fa  bin.64.fa  bin.76.fa  bin.88.fa</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>bin.18.fa  bin.2.fa   bin.41.fa  bin.53.fa  bin.65.fa  bin.77.fa  bin.89.fa</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>bin.19.fa  bin.30.fa  bin.42.fa  bin.54.fa  bin.66.fa  bin.78.fa  bin.8.fa</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>bin.1.fa   bin.31.fa  bin.43.fa  bin.55.fa  bin.67.fa  bin.79.fa  bin.90.fa</span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>bin.20.fa  bin.32.fa  bin.44.fa  bin.56.fa  bin.68.fa  bin.7.fa   bin.9.fa</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>bin.21.fa  bin.33.fa  bin.45.fa  bin.57.fa  bin.69.fa  bin.80.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb21" data-filename="Output"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>bin.10.fa  bin.22.fa  bin.34.fa  bin.46.fa  bin.58.fa  bin.6.fa   bin.81.fa</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>bin.11.fa  bin.23.fa  bin.35.fa  bin.47.fa  bin.59.fa  bin.70.fa  bin.82.fa</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>bin.12.fa  bin.24.fa  bin.36.fa  bin.48.fa  bin.5.fa   bin.71.fa  bin.83.fa</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>bin.13.fa  bin.25.fa  bin.37.fa  bin.49.fa  bin.60.fa  bin.72.fa  bin.84.fa</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>bin.14.fa  bin.26.fa  bin.38.fa  bin.4.fa   bin.61.fa  bin.73.fa  bin.85.fa</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>bin.15.fa  bin.27.fa  bin.39.fa  bin.50.fa  bin.62.fa  bin.74.fa  bin.86.fa</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>bin.16.fa  bin.28.fa  bin.3.fa   bin.51.fa  bin.63.fa  bin.75.fa  bin.87.fa</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>bin.17.fa  bin.29.fa  bin.40.fa  bin.52.fa  bin.64.fa  bin.76.fa  bin.88.fa</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>bin.18.fa  bin.2.fa   bin.41.fa  bin.53.fa  bin.65.fa  bin.77.fa  bin.89.fa</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>bin.19.fa  bin.30.fa  bin.42.fa  bin.54.fa  bin.66.fa  bin.78.fa  bin.8.fa</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>bin.1.fa   bin.31.fa  bin.43.fa  bin.55.fa  bin.67.fa  bin.79.fa  bin.90.fa</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>bin.20.fa  bin.32.fa  bin.44.fa  bin.56.fa  bin.68.fa  bin.7.fa   bin.9.fa</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>bin.21.fa  bin.33.fa  bin.45.fa  bin.57.fa  bin.69.fa  bin.80.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Note these output files have the file extensions of <code>.fa</code>. This is exactly the same format as a <code>.fasta</code> file but with a shortened version of the extension. See the wikipedia page on <a href="https://en.wikipedia.org/wiki/FASTA_format#FASTA_file">FASTA format - file</a> for some other examples of file extensions.</p>
 <p>Ideally we would like only one contig per bin, with a length similar to the genome size of the corresponding taxa. This is challenging as this would require knowing what species are present in the mixed community, but all we have is “microbial dark matter”. Instead, other statistics can demonstrate how effective our assembly and binning were.</p>
@@ -688,7 +690,7 @@ Note
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb21" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="pp">*</span>.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">seqkit</span> stats <span class="at">-a</span> <span class="pp">*</span>.fa</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <table class="table">
 <colgroup>
