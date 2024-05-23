@@ -220,7 +220,13 @@ Finished metabat2 at Tue 14 Mar 2023 05:40:46 PM UTC
 
 The penultimate line tells us that MetaBAT has produced 90 bins containing 212166000 bases (your number might vary slightly depending on how the algorithm has analysed your assembly).
 
-Using `ls` will show that MetaBAT2 has generated a depth file (`assembly_ERR5000342.fasta.depth.txt`) and a directory (`assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/`). Our bins are in this directory so we should navigate into it and have a look at what files have been generated.
+Using `ls` will show that MetaBAT2 has generated a depth file (`assembly_ERR5000342.fasta.depth.txt`) and a directory (`assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/`). Annoyingly, the "easy" way of running MetaBat2 (which we just used) doesn't allow us to specify an output directory, so we'll need to move our outputs into `results/binning` manually using `mv`.
+
+``` {.bash}
+mv assembly* results/binning
+```
+
+Now let's move into our new directory and take a look!
 
 ::: callout-tip
 ### Note
