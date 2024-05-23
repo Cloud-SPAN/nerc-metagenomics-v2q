@@ -507,14 +507,14 @@ Output — CheckM help documentation
 <li>the <code>--reduced_tree</code> flag to limit the memory requirements</li>
 <li>the <code>-f</code> flag to specify an output file name/format</li>
 <li>the <code>--tab_table</code> flag so the output is in a tab-separated format</li>
-<li>the <code>-t</code> flag to set the number of threads used to four, which is the number we have on our instance</li>
+<li>the <code>-t</code> flag to set the number of threads used to eight, which is the number we have on our instance</li>
 </ul>
 <p>As a result our command looks like this:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>Code</strong></pre>
 </div>
-<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ results/checkm/ <span class="at">--reduced_tree</span> <span class="at">-t</span> 4 <span class="at">--tab_table</span> <span class="at">-f</span> MAGs_checkm.tsv <span class="op">&amp;&gt;</span> results/checkm/checkm.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4" data-filename="Code"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">checkm</span> lineage_wf <span class="at">-x</span> fa results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ results/checkm/ <span class="at">--reduced_tree</span> <span class="at">-t</span> 8 <span class="at">--tab_table</span> <span class="at">-f</span> results/checkm/MAGs_checkm.tsv <span class="op">&amp;&gt;</span> results/checkm/checkm.out <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>(Don’t forget to change <code>YYYYMMDD-HHMMSS</code> to match your directory’s name.)</p>
 <p>As always you can check the command’s progress by looking inside the <code>checkm.out</code> file or using <code>jobs</code> (as long as you haven’t logged out of your instance since starting the command running).</p>
@@ -588,10 +588,10 @@ Solution
 <p>See the table below for an overview of each category.</p>
 <table class="table">
 <colgroup>
-<col style="width: 21%">
-<col style="width: 21%">
-<col style="width: 21%">
-<col style="width: 34%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 22%">
+<col style="width: 31%">
 </colgroup>
 <thead>
 <tr class="header">
