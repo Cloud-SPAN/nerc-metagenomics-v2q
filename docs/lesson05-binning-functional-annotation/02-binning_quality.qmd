@@ -47,7 +47,6 @@ CheckM has been pre-installed on the instance so we can check the help documenta
 checkm lineage_wf -h
 ```
 
-
 ::: {.callout-note collapse="true"}
 ## Output --- CheckM help documentation
 
@@ -115,12 +114,12 @@ This readout tells us what we need to include in the command:
 -   the `--reduced_tree` flag to limit the memory requirements
 -   the `-f` flag to specify an output file name/format
 -   the `--tab_table` flag so the output is in a tab-separated format
--   the `-t` flag to set the number of threads used to four, which is the number we have on our instance
+-   the `-t` flag to set the number of threads used to eight, which is the number we have on our instance
 
 As a result our command looks like this:
 
 ``` {.bash filename="Code"}
-checkm lineage_wf -x fa results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ results/checkm/ --reduced_tree -t 4 --tab_table -f MAGs_checkm.tsv &> results/checkm/checkm.out &
+checkm lineage_wf -x fa results/binning/assembly_ERR5000342.fasta.metabat-bins1500-YYYYMMDD_HHMMSS/ results/checkm/ --reduced_tree -t 8 --tab_table -f results/checkm/MAGs_checkm.tsv &> results/checkm/checkm.out &
 ```
 
 (Don't forget to change `YYYYMMDD-HHMMSS` to match your directory's name.)
@@ -177,7 +176,7 @@ As part of the standard, a framework to determine MAG quality from statistics is
 See the table below for an overview of each category.
 
 | Quality Category | Completeness | Contamination | rRNA/tRNA encoded            |
-|----------------|----------------|----------------|-------------------------|
+|-----------------|-----------------|-----------------|-----------------------|
 | High             | \> 90%       | ≤ 5%          | Yes (≥ 18 tRNA and all rRNA) |
 | Medium           | ≥ 50%        | ≤ 10%         | No                           |
 | Low              | \< 50%       | ≤ 10%         | No                           |
