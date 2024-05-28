@@ -234,7 +234,7 @@ It is important to remember that the "completeness" metric relies on having well
 
 You will find that none of our bins satisfy the requirements for a "high quality" bin. That's okay! Binning is still quite an inexact science and while various tools exist to do the job of binning, all of them need to be taken with a pinch of salt.
 
-So how can you make your bin outputs more reliable? There are ways of combining outputs from different binning tools which can help crosscheck results and refine your bins.
+So how can you make your bin outputs more reliable? There are ways of combining outputs from different binning tools which can help crosscheck results and refine your bins. You can also try using different parameters, or go back and tweak parameters in the assembly and polishing steps.
 
 ::: callout-note
 ## Exercise 2: Explore the quality of the obtained MAGs
