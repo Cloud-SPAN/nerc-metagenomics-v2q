@@ -154,7 +154,7 @@ Loading database information... done.
 This command generates two outputs, a .kraken and a .report file. Let's look at the top of these files with the following command:
 
 ``` {.bash filename="Code"}
-head taxonomy/ERR4998593.kraken  
+head results/taxonomy/ERR4998593.kraken  
 ```
 
 ``` {.default filename="Output"}
@@ -173,7 +173,7 @@ U       ERR4998593.57807180     0       151     A:5 0:112
 This gives us information about every read in the raw reads. As we can see, the kraken file is not very readable. So let's look at the report file instead:
 
 ``` {.bash filename="Code"}
-less taxonomy/ERR4998593.report
+less results/taxonomy/ERR4998593.report
 ```
 
 ``` {.default filename="Output"}
