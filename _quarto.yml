@@ -7,6 +7,7 @@ project:
 
 website:
   google-analytics: "G-9HW51GYWMM"
+  cookie-consent: true
   title: "Cloud-SPAN Metagenomics"
   favicon: images/cloud-span-icon.png
   page-navigation: true         # prev and next options at the bottom of each page
