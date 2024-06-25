@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="keywords" content="metagenomics, cloud computing, AWS, command line tools, data analysis, environmental science, learning resource">
 
 <title>Cloud-SPAN Metagenomics - Polishing an assembly</title>
 <style>
@@ -414,26 +415,13 @@ cookieconsent.run({
 <!-- main -->
 <main class="content column-body" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/index.html">Polishing</a></li><li class="breadcrumb-item"><a href="../../docs/lesson04-polishing/01-polishing-assembly.html">Polishing an assembly</a></li></ol></nav>
-<div class="quarto-title">
-<h1 class="title">Polishing an assembly</h1>
-</div>
-
-
-
-<div class="quarto-title-meta column-body">
-
-    
-  
-    
-  </div>
-  
-
+<header id="title-block-header">
+<h1 class="title display-7">Polishing an assembly</h1>
 
 </header>
 
 
-<p>In the <a href="../../docs/lesson03-qc-assembly/02-assembly.qmd">previous episode</a> we generated a draft assembly using Flye from our long read Nanopore data.</p>
+<p>In the <a href="../../docs/lesson03-qc-assembly/03-assembly.html">previous episode</a> we generated a draft assembly using Flye from our long read Nanopore data.</p>
 <p>Long reads can span regions which make them difficult to assemble with short reads such as regions with large repeats. Despite this, some long reads will be misassembled. In addition, the base accuracy of long reads is lower than that of short reads and some bases will be incorrectly assigned. Consequently it is common to correct these errors by “polishing” an assembly. We will use two polishing strategies:</p>
 <ol type="1">
 <li>Polishing with long reads using <a href="https://github.com/nanoporetech/medaka">Medaka</a>. This maps the raw long reads to the assembly to identify contigs that have been incorrectly joined.</li>
@@ -811,8 +799,8 @@ Chaining together commands with a pipe
 <table class="caption-top table">
 <colgroup>
 <col style="width: 41%">
-<col style="width: 25%">
-<col style="width: 33%">
+<col style="width: 26%">
+<col style="width: 32%">
 </colgroup>
 <thead>
 <tr class="header">
