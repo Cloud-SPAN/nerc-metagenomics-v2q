@@ -139,7 +139,12 @@ format:
       body-width: 1040px      # 900px
       margin-width: 230px     # 300px
       gutter-width: 1.5rem    # 1.5rem
-
+    lang: en
+    keywords: metagenomics, cloud computing, AWS, command line tools, data analysis, environmental science, learning resource
+    license: CC BY
+    appendix-style: none
+    title-block-style: none
+    
 execute:
   freeze: auto
 
