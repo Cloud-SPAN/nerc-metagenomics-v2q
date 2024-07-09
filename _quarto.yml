@@ -142,6 +142,7 @@ format:
     lang: en
     keywords: metagenomics, cloud computing, AWS, command line tools, data analysis, environmental science, learning resource
     license: CC BY
+    doi: 10.5281/zenodo.12700160
     appendix-style: none
     title-block-style: none
     
