@@ -253,7 +253,7 @@ If you run a job in the foreground it will stop as soon as you log out of the in
 
 To run a command in the background, you follow it with an ampersand (`&`) symbol.
 
-But we're still not quite done! Flye is going to print a bunch of updates to the terminal while it runs. We need to tell it to send those updates to a file, otherwise the terminal will still be unusable despite using a `&`. We can do this with redirection: `> results/assembly/flye_output.txt` will send any output that would be sent to the terminal to a file called `flye_output.txt` (inside `results/assembly`) instead.
+But we're still not quite done! Flye is going to print a bunch of updates to the terminal while it runs. We need to tell it to send those updates to a file, otherwise the terminal will still be unusable despite using a `&`. We can do this with redirection: `&> results/assembly/flye_output.txt` will send any output that would be sent to the terminal to a file called `flye_output.txt` (inside `results/assembly`) instead.
 
 The complete command is:
 
@@ -265,7 +265,7 @@ flye --nano-raw data/nano_fastq/ERR5000342_sub12_filtered.fastq \
      --meta &> results/assembly/flye_output.txt &
 ```
 
-The first `&` sends the main command to the background. It is immediately followed by a `>` to redirect the logging and progress information to a file. Finally, the second `&` puts *that* command into the background too.
+`&>` redirects the output of the command to a file. `&` puts the whole command into the background.
 
 We can now press enter to run the command. Your prompt should immediately return. This doesn't mean that the code has finished already: it is now running in the background.
 
