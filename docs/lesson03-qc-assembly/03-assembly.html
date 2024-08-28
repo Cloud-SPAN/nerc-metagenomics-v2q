@@ -692,7 +692,7 @@ Warning
 </div>
 </div>
 <p>To run a command in the background, you follow it with an ampersand (<code>&amp;</code>) symbol.</p>
-<p>But we’re still not quite done! Flye is going to print a bunch of updates to the terminal while it runs. We need to tell it to send those updates to a file, otherwise the terminal will still be unusable despite using a <code>&amp;</code>. We can do this with redirection: <code>&gt; results/assembly/flye_output.txt</code> will send any output that would be sent to the terminal to a file called <code>flye_output.txt</code> (inside <code>results/assembly</code>) instead.</p>
+<p>But we’re still not quite done! Flye is going to print a bunch of updates to the terminal while it runs. We need to tell it to send those updates to a file, otherwise the terminal will still be unusable despite using a <code>&amp;</code>. We can do this with redirection: <code>&amp;&gt; results/assembly/flye_output.txt</code> will send any output that would be sent to the terminal to a file called <code>flye_output.txt</code> (inside <code>results/assembly</code>) instead.</p>
 <p>The complete command is:</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
@@ -704,7 +704,7 @@ Warning
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>     <span class="at">--iterations</span> 3 <span class="dt">\</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>     <span class="at">--meta</span> <span class="op">&amp;&gt;</span> results/assembly/flye_output.txt <span class="kw">&amp;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>The first <code>&amp;</code> sends the main command to the background. It is immediately followed by a <code>&gt;</code> to redirect the logging and progress information to a file. Finally, the second <code>&amp;</code> puts <em>that</em> command into the background too.</p>
+<p><code>&amp;&gt;</code> redirects the output of the command to a file. <code>&amp;</code> puts the whole command into the background.</p>
 <p>We can now press enter to run the command. Your prompt should immediately return. This doesn’t mean that the code has finished already: it is now running in the background.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
